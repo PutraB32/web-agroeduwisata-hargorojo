@@ -10,7 +10,7 @@
     <div class="absolute inset-0 w-full h-full">
         <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover opacity-100">
         <!-- Masking Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-r from-green-900 via-green-900/90 to-green-900/30"></div>
+        <div class="absolute inset-0 bg-linear-to-r from-green-900 via-green-900/90 to-green-900/30"></div>
     </div>
     
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-left gap-12 relative z-10 w-full">
