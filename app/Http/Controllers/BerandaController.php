@@ -9,11 +9,18 @@ class BerandaController extends Controller
 {
     public function index(Request $request)
     {
+        // Fetch 4 Menu Utama dari Agroeduwisata
+        $agroeduwisata = Agroeduwisata::where('kategori', 'Menu Utama')->take(4)->get();
+        
+        // Fetch 4 Produk Unggulan
+        $produkUnggulan = Produk::where('is_unggulan', true)->take(4)->get();
+
         // Fetch top 3 testimonies (prioritize high rating, then latest)
         $testimonis = Testimoni::orderByDesc('rating')->orderByDesc('created_at')->take(3)->get();
-        return view('pages.beranda', compact('testimonis'));
+        
+        return view('pages.beranda', compact('agroeduwisata', 'produkUnggulan', 'testimonis'));
     }
-
+ 
     public function storeTestimoni(Request $request)
     {
         $request->validate([

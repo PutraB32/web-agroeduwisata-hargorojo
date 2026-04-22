@@ -26,3 +26,6 @@ Route::get('/produk', [ProdukGulaKelapaController::class, 'index'])->name('produ
 Route::get('/ecommerce', [EcommerceController::class, 'index'])->name('ecommerce');
 Route::get('/katalog', [KatalogDesaController::class, 'index'])->name('katalog');
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
+
+// --- ROUTE PUBLIC FORM ---
+Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])->name('public.testimoni.store');
