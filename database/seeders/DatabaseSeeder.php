@@ -163,5 +163,21 @@ class DatabaseSeeder extends Seeder
                 'gambar' => null
             ]);
         }
+
+                // Super Admin
+        User::create([
+            'name' => 'Super Admin Hargorojo',
+            'email' => 'superadmin@gmail.com',
+            'password' => Hash::make('password123'),
+            'role' => 'super_admin',
+        ]);
+
+        // Admin Biasa
+        User::create([
+            'name' => 'Admin Desa',
+            'email' => 'admin@gmail.com',
+            'password' => Hash::make('password123'),
+            'role' => 'admin',
+        ]);
     }
 }
