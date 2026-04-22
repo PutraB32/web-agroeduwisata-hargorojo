@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimoni;
+use App\Models\Agroeduwisata;
+use App\Models\Produk;
 
 class BerandaController extends Controller  
 {
