@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('katalog_desa', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori')->index();
+            $table->foreignId('kategori_id')->constrained('kategori_katalogs')->cascadeOnDelete();
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('gambar')->nullable();

@@ -13,7 +13,10 @@ return new class extends Migration
     {
        Schema::create('agroeduwisata', function (Blueprint $table) {
             $table->id();
-            $table->string('kategori')->index();
+            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('agroeduwisata')->cascadeOnDelete();
+
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
             $table->string('judul');
             $table->text('deskripsi');
             $table->string('gambar')->nullable();
