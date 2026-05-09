@@ -9,10 +9,21 @@ class KatalogDesa extends Model
     protected $table = 'katalog_desa';
 
     protected $fillable = [
-        'kategori',
+        'kategori_id',
+        'user_id',
         'judul',
         'deskripsi',
         'gambar',
-        'url'
+        'Url'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function kategoriKatalog()
+    {
+        return $this->belongsTo(KategoriKatalog::class, 'kategori_id');
+    }
 }

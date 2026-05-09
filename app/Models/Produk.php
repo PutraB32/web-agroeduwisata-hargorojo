@@ -15,6 +15,17 @@ class Produk extends Model
         'manfaat',
         'gambar',
         'is_unggulan',
-        'stok'
+        'stok',
+        'user_id'
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'produk_id');
+    }
 }

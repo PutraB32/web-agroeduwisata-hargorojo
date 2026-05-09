@@ -15,10 +15,11 @@ class Order extends Model
         'no_hp',
         'alamat',
         'total',
-        'detail_pesanan'
+        'status'
     ];
 
-    protected $casts = [
-        'detail_pesanan' => 'array'
-    ];
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class, 'order_id');
+    }
 }

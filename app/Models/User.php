@@ -45,4 +45,19 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function produks()
+    {
+        return $this->hasMany(Produk::class, 'user_id');
+    }
+
+    public function katalogDesas()
+    {
+        return $this->hasMany(KatalogDesa::class, 'user_id');
+    }
+
+    public function agroeduwisatas()
+    {
+        return $this->hasMany(Agroeduwisata::class, 'user_id');
+    }
 }
