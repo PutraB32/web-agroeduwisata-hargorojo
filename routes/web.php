@@ -191,4 +191,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/admin/testimoni', [\App\Http\Controllers\AdminTestimoniController::class, 'store'])->name('admin.testimoni.store');
     Route::put('/admin/testimoni/{id}', [\App\Http\Controllers\AdminTestimoniController::class, 'update'])->name('admin.testimoni.update');
     Route::delete('/admin/testimoni/{id}', [\App\Http\Controllers\AdminTestimoniController::class, 'destroy'])->name('admin.testimoni.destroy');
+
+    // Rute Manajemen Pesanan
+    Route::put('/admin/order/{id}/status', [\App\Http\Controllers\AdminOrderController::class, 'updateStatus'])->name('admin.order.update_status');
+    Route::delete('/admin/order/{id}', [\App\Http\Controllers\AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
 });
+
