@@ -9,10 +9,15 @@ class KatalogDesaController extends Controller
 {
     public function index(Request $request)
     {
-        $katalogBerita = KatalogDesa::where('kategori', 'Berita')->get();
-        $katalogFoto = KatalogDesa::where('kategori', 'Foto')->get();
-        $katalogUMKM = KatalogDesa::where('kategori', 'UMKM')->get();
+        $semuaKatalog = KatalogDesa::with('kategoriKatalog')->latest()->get()->groupBy(function($item) {
+            return $item->kategoriKatalog->nama_kategori ?? 'Lainnya';
+        });
 
-        return view('pages.katalogdesa', compact('katalogBerita', 'katalogFoto', 'katalogUMKM'));
+        $pengumuman = $semuaKatalog->get('Pengumuman', collect());
+        $artikelBerita = $semuaKatalog->get('Artikel & Berita', collect());
+        $perpustakaan = $semuaKatalog->get('Perpustakaan', collect());
+        $galeri = $semuaKatalog->get('Galeri', collect());
+
+        return view('pages.katalogdesa', compact('pengumuman', 'artikelBerita', 'perpustakaan', 'galeri'));
     }
 }
