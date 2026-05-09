@@ -23,6 +23,14 @@ Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 // --- ROUTE PUBLIC FORM ---
 Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])->name('public.testimoni.store');
 
+// --- ROUTE E-COMMERCE CART ---
+Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
+Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
+Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout.process');
+
+
 // --- ROUTE AUTENTIKASI ---
 // 1. Menampilkan form login 
 Route::get('/login', function () {
@@ -45,18 +53,68 @@ Route::middleware(['auth'])->group(function () {
             abort(403, 'Akses Ditolak: Anda bukan Super Admin.');
         }
         
-        $search = $request->query('search');
-        $produks = \App\Models\Produk::when($search, function($query, $search) {
+        $searchProduk = $request->query('search_produk');
+        $produks = \App\Models\Produk::when($searchProduk, function($query, $search) {
             return $query->where('nama', 'like', "%{$search}%");
         })->paginate(5, ['*'], 'produk_page');
 
-        $agroeduwisatas = \App\Models\Agroeduwisata::paginate(5, ['*'], 'agro_page');
-        $katalogs = \App\Models\KatalogDesa::paginate(5, ['*'], 'katalog_page');
-        $users = \App\Models\User::paginate(5, ['*'], 'user_page');
-        $testimonis = \App\Models\Testimoni::paginate(5, ['*'], 'testimoni_page');
+        $searchAgro = $request->query('search_agro');
+        $filterAgro = $request->query('filter_kat_agro');
+        $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function($query, $search) {
+            return $query->where('Judul', 'like', "%{$search}%");
+        })->when($filterAgro, function($query, $filter) {
+            if ($filter === 'induk') {
+                return $query->whereNull('parent_id');
+            }
+            return $query->where('kategori_id', $filter);
+        })->paginate(5, ['*'], 'agro_page');
 
-        return view('Admin.superAdmin', compact('produks', 'agroeduwisatas', 'katalogs', 'users', 'testimonis')); 
+        $parentAgros = \App\Models\Agroeduwisata::whereNull('parent_id')->get();
+
+        $searchKatalog = $request->query('search_katalog');
+        $filterKatalog = $request->query('filter_kat_katalog');
+        $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function($query, $search) {
+            return $query->where('Judul', 'like', "%{$search}%");
+        })->when($filterKatalog, function($query, $filter) {
+            return $query->where('kategori_id', $filter);
+        })->paginate(5, ['*'], 'katalog_page');
+
+        $searchUser = $request->query('search_user');
+        $users = \App\Models\User::when($searchUser, function($query, $search) {
+            return $query->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
+        })->paginate(5, ['*'], 'user_page');
+
+        $searchTestimoni = $request->query('search_testimoni');
+        $testimonis = \App\Models\Testimoni::when($searchTestimoni, function($query, $search) {
+            return $query->where('nama', 'like', "%{$search}%")->orWhere('isi_testimoni', 'like', "%{$search}%");
+        })->paginate(5, ['*'], 'testimoni_page');
+
+        $searchOrder = $request->query('search_order');
+        $orders = \App\Models\Order::with('orderDetails.produk')->when($searchOrder, function($query, $search) {
+            return $query->where('nama_pemesan', 'like', "%{$search}%")
+                         ->orWhere('no_hp', 'like', "%{$search}%");
+        })->latest('created_at')->paginate(10, ['*'], 'order_page');
+
+        $kategoriKatalogs = \App\Models\KategoriKatalog::all();
+
+        // Data untuk Grafik Produk (Menampilkan Semua Produk)
+        $produksWithSales = \App\Models\Produk::withSum(['orderDetails as total_terjual' => function($query) {
+            $query->whereHas('order', function($q) {
+                $q->where('status', 'Selesai');
+            });
+        }], 'jumlah')->get();
+
+        $chartLabels = $produksWithSales->pluck('nama')->toArray();
+        $chartData = $produksWithSales->pluck('total_terjual')->map(function($val) {
+            return (int) $val; // Mengubah null (belum terjual) menjadi 0
+        })->toArray();
+
+        return view('Admin.superAdmin', compact('produks', 'agroeduwisatas', 'katalogs', 'users', 'testimonis', 'orders', 'kategoriKatalogs', 'chartLabels', 'chartData', 'parentAgros')); 
     })->name('superadmin.dashboard');
+
+
+
+
 
     // Rute Khusus Admin Biasa
     Route::get('/admin/admin', function (\Illuminate\Http\Request $request) {
@@ -64,13 +122,50 @@ Route::middleware(['auth'])->group(function () {
             return redirect()->route('superadmin.dashboard'); 
         }
         
-        $search = $request->query('search');
-        $produks = \App\Models\Produk::when($search, function($query, $search) {
+        $searchProduk = $request->query('search_produk');
+        $produks = \App\Models\Produk::when($searchProduk, function($query, $search) {
             return $query->where('nama', 'like', "%{$search}%");
-        })->paginate(5);
+        })->paginate(5, ['*'], 'produk_page');
+
+        $searchOrder = $request->query('search_order');
+        $orders = \App\Models\Order::with('orderDetails.produk')->when($searchOrder, function($query, $search) {
+            return $query->where('nama_pemesan', 'like', "%{$search}%")
+                         ->orWhere('no_hp', 'like', "%{$search}%");
+        })->latest('created_at')->paginate(10, ['*'], 'order_page');
+
+        // Data untuk Grafik Produk (Menampilkan Semua Produk)
+        $produksWithSales = \App\Models\Produk::withSum(['orderDetails as total_terjual' => function($query) {
+            $query->whereHas('order', function($q) {
+                $q->where('status', 'Selesai');
+            });
+        }], 'jumlah')->get();
+
+        $chartLabels = $produksWithSales->pluck('nama')->toArray();
+        $chartData = $produksWithSales->pluck('total_terjual')->map(function($val) {
+            return (int) $val; // Mengubah null (belum terjual) menjadi 0
+        })->toArray();
+        $searchKatalog = $request->query('search_katalog');
+        $filterKatalog = $request->query('filter_kat_katalog');
+        $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function($query, $search) {
+            return $query->where('Judul', 'like', "%{$search}%");
+        })->when($filterKatalog, function($query, $filter) {
+            return $query->where('kategori_id', $filter);
+        })->paginate(5, ['*'], 'katalog_page');
+
+        $kategoriKatalogs = \App\Models\KategoriKatalog::all();
+
+        $searchTestimoni = $request->query('search_testimoni');
+        $testimonis = \App\Models\Testimoni::when($searchTestimoni, function($query, $search) {
+            return $query->where('nama', 'like', "%{$search}%")->orWhere('isi_testimoni', 'like', "%{$search}%");
+        })->paginate(5, ['*'], 'testimoni_page');
         
-        return view('Admin.admin', compact('produks'));
+        return view('Admin.admin', compact('produks', 'orders', 'katalogs', 'kategoriKatalogs', 'chartLabels', 'chartData', 'testimonis'));
     })->name('admin.dashboard');
+
+
+
+
+
 
     // Rute Manajemen Produk (CRUD)
     Route::post('/admin/produk', [\App\Http\Controllers\AdminProdukController::class, 'store'])->name('admin.produk.store');
