@@ -11,15 +11,14 @@ class AgroeduwisataController extends Controller
 {
     public function index(Request $request)
     {
-        // Ambil 4 Menu Utama sebagai kartu utama di tampilan depan
-        $menusUtama = Agroeduwisata::where('kategori', 'Menu Utama')->get();
-        
-        // Ambil semua (yang bukan Menu Utama) dan kelompokkan berdasarkan nama kategorinya
-        $tahapan = Agroeduwisata::where('kategori', '!=', 'Menu Utama')->get()->groupBy('kategori');
+        // Ambil Menu Utama (parent_id is null) beserta tahapan anak-anaknya
+        $menusUtama = Agroeduwisata::whereNull('parent_id')->with('children')->get();
 
         $unggulan = Produk::where('is_unggulan', true)->take(4)->get();
-        $katalog = KatalogDesa::where('kategori', 'Berita')->latest()->take(3)->get();
+        $katalog = KatalogDesa::whereHas('kategoriKatalog', function($query) {
+            $query->where('nama_kategori', 'Artikel & Berita');
+        })->latest()->take(3)->get();
 
-        return view('pages.agroeduwisata', compact('menusUtama', 'tahapan', 'unggulan', 'katalog'));
+        return view('pages.agroeduwisata', compact('menusUtama', 'unggulan', 'katalog'));
     }   
 }
