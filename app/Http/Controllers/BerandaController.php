@@ -12,7 +12,7 @@ class BerandaController extends Controller
     public function index(Request $request)
     {
         // Fetch 4 Menu Utama dari Agroeduwisata
-        $agroeduwisata = Agroeduwisata::where('kategori', 'Menu Utama')->take(4)->get();
+        $agroeduwisata = Agroeduwisata::whereNull('parent_id')->take(4)->get();
         
         // Fetch 4 Produk Unggulan
         $produkUnggulan = Produk::where('is_unggulan', true)->take(4)->get();
