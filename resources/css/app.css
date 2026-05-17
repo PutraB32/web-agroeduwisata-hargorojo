@@ -1,11 +1,64 @@
-@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@import "tailwindcss";
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    /* Custom Colors */
+    --color-primary: #004D40;
+    --color-secondary: #D4AF37;
+    --color-tertiary: #FDFAF3;
+    --color-neutral: #2C2C2C;
+    --color-sidebar: #F5F1EF;
+    --color-sidebar-hover: #EADAE0;
+
+    --color-green-800: #006655;
+    --color-green-900: #004D40;
+
+    --color-yellow-400: #e5c04b;
+    --color-yellow-500: #D4AF37;
+
+    --color-gray-800: #3a3a3a;
+    --color-gray-900: #2C2C2C;
+
+    /* Custom Fonts */
+    --font-sans: 'Public Sans', sans-serif;
+    --font-serif: 'Noto Serif', serif;
+    --font-playfair: 'Playfair Display', serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+    --font-spartan: 'League Spartan', sans-serif;
+}
+
+/* Base Styles */
+@layer base {
+    body {
+        font-family: 'Public Sans', sans-serif;
+        background-color: #FDFAF3;
+    }
+}
+
+/* Custom Utilities (Moved from Blade files) */
+@layer utilities {
+    .premium-shadow {
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+    }
+    .image-hover-zoom {
+        transition: transform 0.4s ease;
+    }
+    .group:hover .image-hover-zoom {
+        transform: scale(1.02);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
+
+.font-hero {
+    font-family: 'League Spartan', sans-serif;
 }
