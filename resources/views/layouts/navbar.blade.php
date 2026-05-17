@@ -205,7 +205,7 @@
                 Katalog Desa
             </a>
 
-            <a href="#kontak"
+            <a href="{{ route('kontak') }}"
             class="
                 block
                 text-center
