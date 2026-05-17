@@ -201,7 +201,7 @@
                 E-Commerce
             </a>
 
-            <a href="#" class="block hover:text-yellow-300">
+            <a href="{{ route('katalog') }}" class="block hover:text-yellow-300">
                 Katalog Desa
             </a>
 
