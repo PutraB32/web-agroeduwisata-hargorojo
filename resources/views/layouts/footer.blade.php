@@ -11,7 +11,7 @@
             </div>
 
             <div class="md:col-span-1">
-                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm border-b border-green-800 pb-2 inline-block">INFORMASI DESA</h3>
+                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm inline-block">INFORMASI DESA</h3>
                 <div class="space-y-4">
                     <div>
                         <p class="text-xs font-bold text-gray-300 mb-1">Alamat</p>
@@ -26,7 +26,7 @@
             </div>
 
             <div class="md:col-span-1">
-                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm border-b border-green-800 pb-2 inline-block">KONTAK KAMI</h3>
+                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm inline-block">KONTAK KAMI</h3>
                 <div class="space-y-4">
                     <div>
                         <p class="text-xs font-bold text-gray-300 mb-0.5">Telepon</p>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="md:col-span-1 border-green-800">
-                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm border-b border-green-800 pb-2 inline-block">SOSIAL MEDIA</h3>
+                <h3 class="font-bold mb-5 text-yellow-500 tracking-wider text-sm inline-block">SOSIAL MEDIA</h3>
                 <div class="flex gap-4 items-center mt-2">
                     <a href="#" class="w-10 h-10 rounded-full bg-white text-green-900 flex items-center justify-center hover:bg-yellow-400 hover:text-black transition-all duration-300 hover:-translate-y-1 shadow-lg">
                         <i class="fab fa-instagram text-xl"></i>
