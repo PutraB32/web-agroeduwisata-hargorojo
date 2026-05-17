@@ -4,133 +4,1326 @@
 
 @section('content')
 
-<!-- 1. HERO SECTION -->
-<section class="w-full h-[620px] relative bg-green-50 overflow-hidden">
-    <!-- Full Background Image with Sharp Visibility -->
+<section class="relative w-full h-screen overflow-hidden">
+
+    {{-- Navbar --}}
+    @include('layouts.navbar')
+
+    {{-- Background --}}
     <div class="absolute inset-0 w-full h-full">
-        <img src="{{ asset('images/assets foto/hero section.png') }}" class="w-full h-full object-cover object-center opacity-100">
-        <!-- Gradient Overlay: solid green-50 on left for text readability, completely transparent on right for full image clarity -->
-        <div class="absolute inset-0 bg-gradient-to-r from-green-100 via-green-20/80 to-transparent"></div>
+
+        <!-- Background Image -->
+        <img 
+            src="{{ asset('images/assets foto/hero section.png') }}"alt="Hero Background"
+            class="w-full h-full object-cover object-center scale-100">
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/30"></div>
+
+        <!-- Left Gradient -->
+        <div class="absolute inset-0 bg-gradient-to-r  from-black/60 via-black/ to-transparent"> </div>
+
+        <!-- Bottom Shadow -->
+        <div class="absolute inset-0 
+            bg-gradient-to-t 
+            from-black/30 
+            via-transparent 
+            to-transparent">
+        </div>
+
+        <!-- Warm Tone -->
+        <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay"></div>
     </div>
 
-    <!-- Content Container -->
-    <div class="max-w-7xl mx-auto px-6 relative z-10 w-full pt-20 pb-16 md:pt-32 md:pb-24 flex flex-col md:flex-row justify-between items-end gap-12 md:gap-8">
-        
-        <!-- Top Left Text -->
-        <div class="max-w-4xl w-full">
-            <h1 class="text-4xl md:text-10xl lg:text-6xl font-black leading-none mb-7 text-gray-900 uppercase tracking-tight">
-                Desa Agroeduwisata <br> 
-                <span class="text-green-800">Gula Kelapa <br class="hidden md:block">Hargorojo</span>
-            </h1>
-            
-            <p class="text-base md:text-lg text-gray-600 mb-8 font-medium leading-relaxed max-w-3xl border-l-4 border-yellow-500 pl-4">
-                Menawarkan edukasi unik dan pengalaman natural wisata gula kelapa, didukung sistem monitoring terpadu desa pariwisata Hargorojo yang menghadirkan informasi real-time, pengelolaan destinasi yang lebih efektif, serta peningkatan kenyamanan dan kualitas layanan bagi wisatawan. 
-            </p>
+    {{-- HERO CONTENT --}}
+    <div class="relative z-20 h-full flex items-end">
 
-            <div class="flex gap-2.5 flex-wrap">
-                <span class="border-2 border-yellow-500 text-yellow-700 bg-white/20 backdrop-blur-sm text-[11px] px-5 py-2 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                    Budaya & Tradisi
-                </span>
-                <span class="border-2 border-green-500 text-green-800 bg-white/20 backdrop-blur-sm text-[11px] px-5 py-2 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                    Agroeduwisata
-                </span>
-                <span class="border-2 border-green-500 text-green-800 bg-white/20 backdrop-blur-sm text-[11px] px-5 py-2 rounded-full font-bold uppercase tracking-wider shadow-sm">
-                    Produk Gula Kelapa
-                </span>
+        <div class="max-w-7xl mx-auto px-3 w-full pb-1 md:pb-9 pl-3">
+
+            <div class="flex flex-col lg:flex-row justify-between items-end gap-12">
+
+                <!-- LEFT CONTENT -->
+                 <div class="max-w-5xl"> 
+                    <!-- TOP LABEL -->
+                    <div class="flex items-center gap-3 mb-4">
+                        <!-- Left Line -->
+                         <div class="w-15 h-[2px] bg-white/60"></div>
+                         <!-- Text -->
+                          <span class="text-yellow-400 uppercase tracking-[0.35em] text-sm md:text-base font-medium">Selamat Datang Di</span>
+                          <!-- Right Line -->
+                           <div class="w-15 h-[2px] bg-white/60"></div>
+                        </div>
+                        
+                        <!-- MAIN HEADING -->
+                         <h1 class=" font-hero font-[550] text-[52px] md:text-[72px] lg:text-[65px] leading-[0.9] tracking-[-0.03em] uppercase text-white drop-shadow-[0_5px_25px_rgba(0,0,0,0.5)]">
+                            Desa Agroeduwisata
+                            <br>
+                            <span class="text-yellow-500 leading-[] whitespace-nowrap drop-shadow-[0_0_25px_rgba(250,204,21,0.35)]">Gula Kelapa Hargorojo
+                        </span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="
+                        mt-3
+                        font-light
+                        md:text-lg
+                        text-gray-200
+                        leading-relaxed
+                        max-w-2xl
+                        pl-2
+                    ">
+                        Menawarkan edukasi unik dan pengalaman natural wisata gula kelapa, didukung sistem monitoring terpadu yang menghadirkan informasi real-time, pengelolaan destinasi
+                        yang efektif, dengan mengutamakan kenyamanan, pelayanan, dan pengalaman terbaik bagi wisatawan.
+                    </p>
+
+                    <!-- Tags -->
+                     <div class="flex flex-wrap gap-4 mt-8">
+                        <!-- Tag 1 -->
+                         <span class="
+                         flex items-center gap-2.5
+                         border border-white/25
+                         bg-white/5
+                         backdrop-blur-2xl
+                         text-white/90
+                         text-sm
+                         px-5 py-2.5
+                         rounded-full
+                         font-normal
+                         hover:bg-white/10
+                         transition-all duration-300
+                         ">Budaya & Tradisi
+                        </span>
+
+                        <!-- Tag 2 -->
+                         <span class="flex items-center gap-2.5
+                         border border-white/25
+                         bg-white/5
+                         backdrop-blur-xl
+                         text-white/90
+                         text-sm
+                         px-5 py-2.5
+                         rounded-full
+                         font-normal
+                         hover:bg-white/10
+                         transition-all duration-300">Agroeduwisata
+                        </span>
+                        
+                        <!-- Tag 3 -->
+                         <span class="
+                         flex items-center gap-2.5
+                         border border-white/25
+                         bg-white/5
+                         backdrop-blur-xl
+                         text-white/90
+                         text-sm
+                         px-5 py-2.5
+                         rounded-full
+                         font-normal
+                         hover:bg-white/10
+                         transition-all duration-300">Produk Gula Kelapa
+                        </span>
+                    </div>
+                    <!-- CIRCULAR IMAGE GROUP -->
+                     <div class="flex items-center mt-10">
+                        <!-- Image 1 -->
+                         <div class="
+                         w-18 h-18
+                         rounded-full
+                         border-2 border-white
+                         overflow-hidden
+                         shadow-2xl
+                         hover:scale-105
+                         transition-all duration-300
+                         z-10">
+                         <img src="{{ asset('images/agroeduwisata/menanam tanaman.jpg') }}"
+                         alt=""
+                         class="w-full h-full object-cover">
+
+                    </div>
+                    <!-- Image 2 -->
+                     <div class="
+                     w-18 h-18
+                     rounded-full
+                     border-2 border-white
+                     overflow-hidden
+                     shadow-2xl
+                     hover:scale-105
+                     transition-all duration-300
+                     -ml-7
+                     z-20
+                     ">
+                     <img src="{{ asset('images/agroeduwisata/1776929726.jpg') }}" alt=""
+                     class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Image 3 -->
+                    <div class="
+                    w-18 h-18
+                    rounded-full
+                    border-2 border-white
+                    overflow-hidden
+                    shadow-2xl
+                    hover:scale-105
+                    transition-all duration-300
+                    -ml-5
+                    z-30">
+                    <img src="{{ asset('images/agroeduwisata/1776929702.jpg') }}" alt=""
+                    class="w-full h-full object-cover">
+                </div>
+                <!-- Image 4 -->
+                <div class="
+                w-18 h-18
+                rounded-full
+                border-2 border-white
+                overflow-hidden
+                shadow-2xl
+                hover:scale-105
+                transition-all duration-300
+                -ml-5
+                z-40
+                ">
+                <img src="{{ asset('images/produk/Coconut sugar.jpg') }}" alt=""
+                class="w-full h-full object-cover">
             </div>
         </div>
+    </div>
+                <!-- RIGHT BUTTONS -->
+                <div class="flex flex-col sm:flex-row gap-5 w-full translate-x-20">
 
-        <!-- Bottom Right Buttons -->
-        <div class="absolute bottom-9 right-6 flex flex-col sm:flex-row gap-4 z-20">
-            <a href="{{ route('profil') }}" class="flex items-center justify-center gap-3 bg-gray-200 hover:bg-yellow-500 font-bold text-green-900 text-xs md:text-sm px-6 py-2 md:py-3 rounded-full transition-all shadow-md hover:shadow-xl">
-                Lihat Profil Desa
-                <span class="w-5 h-5 bg-black text-white rounded-full flex items-center justify-center text-[10px]">➤</span>
-            </a>
-            <a href="{{ route('kontak') }}" class="flex items-center justify-center gap-3 bg-green-500 border-green-200 font-bold text-gray-900 text-xs md:text-sm px-6 py-2 md:py-3 rounded-full hover:bg-yellow-500 hover:text-white hover:border-green-800 transition-all shadow-md hover:shadow-xl group">
-                Hubungi Kami
-                <span class="w-5 h-5 bg-black text-white rounded-full flex items-center justify-center text-[10px] group-hover:bg-white group-hover:text-black transition-colors">➤</span>
-            </a>
+                    <!-- Button 1 -->
+                    <a href="{{ route('profil') }}"
+                    class="
+                        flex items-center justify-center gap-1
+                        bg-white
+                        hover:bg-yellow-400
+                        text-black
+                        font-bold
+                        h-13
+                        text-sm
+                        px-1 
+                        lg:px-6 lg:py-1.5
+                        rounded-full
+                        transition-all duration-300
+                        shadow-2xl
+                        hover:scale-105
+                    "> Lihat Profil Desa
+                        <span class="
+                            w-10 h-10
+                            rounded-full
+                            bg-black
+                            text-white
+                            flex items-center justify-center
+                            text-lg
+                            translate-x-4
+                        ">
+                            ➜
+                        </span>
+                    </a>
+
+                    <!-- Button 2 -->
+                    <a href="{{ route('kontak') }}"
+                    class="
+                        flex items-center justify-center gap-1
+                        bg-white/10
+                        backdrop-blur-xl
+                        border border-white/20
+                        text-white
+                        font-bold
+                        h-13
+                        text-sm
+                        px-7
+                        rounded-full
+                        transition-all duration-300
+                        hover:bg-white
+                        hover:text-black
+                        shadow-xl
+                        group
+                    ">
+
+                        Hubungi Kami
+
+                        <span class="
+                            w-10 h-10
+                            rounded-full
+                            bg-white
+                            text-black
+                            flex items-center justify-center
+                            text-lg
+                            transition-all
+                            group-hover:bg-black
+                            group-hover:text-white
+                            translate-x-4
+                        ">
+                            ➜
+                        </span>
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
     </div>
-</section>
+</div>
 
+</section>
 
 <!-- 2. POTENSI AGROEDUWISATA KAMI -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-    <div class="text-center mb-16">
-        <h2 class="font-poppins text-3xl md:text-[35px] tracking-tight font-bold text-gray-900 tracking-normal">
-            POTENSI AGROEDUWISATA KAMI
-        </h2>
-        <br>
-        <p class="text-sm md:text-base text-gray-700 leading-loose">
-        Desa Hargorojo menghadirkan potensi agroeduwisata yang memadukan kekayaan alam, proses produksi gula kelapa tradisional, edukasi pertanian, serta budaya lokal yang tetap lestari. Setiap pengalaman dirancang untuk memberi nilai belajar, rekreasi, dan kedekatan dengan kehidupan desa.
-    </p>
+<section class="bg-gray-50 py-20 border-y border-gray-200 shadow-inner">
+    <!-- SECTION HEADER -->
+<div class="relative text-center mb-12">
+
+    <!-- Decorative Background -->
+    <div class="absolute -left-5 top- opacity-[0.10] hidden lg:block">
+        <i class="fa-solid fa-leaf text-[120px] text-green-900 rotate-[-20deg]"></i>
     </div>
 
-    <div class="space-y-16 md:space-y-20">
-        @foreach($agroeduwisata as $index => $agro)
-        <div class="flex flex-col {{ $index % 2 == 1 ? 'md:flex-row-reverse' : 'md:flex-row' }} gap-8 md:gap-12 items-center">
-            <div class="w-full md:w-5/12 aspect-[4/3] rounded-[2rem] overflow-hidden bg-gray-200 shadow-xl group border-4 border-yellow-500/30">
-                <img src="{{ $agro->gambar ? asset('images/agroeduwisata/' . $agro->gambar) : asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="{{ $agro->judul }}">
-            </div>
-            <div class="flex-1 text-center md:text-left {{ $index % 2 == 1 ? 'md:pr-10' : '' }}">
-                <h3 class="font-bold text-xl md:text-2xl text-green-900 mb-4 font-playfair">{{ $agro->judul }}</h3>
-                <p class="text-sm md:text-base text-gray-600 leading-relaxed font-medium">
-                    {{ $agro->deskripsi }}
-                </p>
-            </div>
-        </div>
-        @endforeach
+    <div class="absolute -right-1 bottom-0 opacity-[0.04] hidden lg:block">
+        <i class="fa-solid fa-leaf text-[140px] text-yellow-700 rotate-[25deg]"></i>
     </div>
     
-    <div class="mt-16 text-center">
-        <a href="{{ route('agro') }}" class="inline-flex items-center gap-3 bg-gray-200 hover:bg-yellow-400 font-bold text-gray-900 text-sm md:text-base px-8 py-3.5 rounded-full transition-all shadow-md">
-            Lihat Selengkapnya <i class="fas fa-arrow-right bg-black text-white p-1 rounded-full text-[10px]"></i>
-        </a>
+
+
+    <!-- Small Label -->
+    <div class="flex items-center justify-center gap-3 mb-3">
+
+        <!-- Left Line -->
+        <div class="w-14 h-[2px] bg-green-700 rounded-full"></div>
+
+        <!-- Text -->
+        <span class="
+            uppercase
+            tracking-[0.28em]
+            text-[15px]
+            font-semibold
+            text-green-800
+        ">
+            Potensi Unggulan Desa
+        </span>
+
+        <!-- Right Line -->
+        <div class="w-14 h-[2px] bg-green-700 rounded-full"></div>
+
     </div>
+
+    <!-- Main Title -->
+<h2 class="
+    font-display
+    text-[38px]
+    md:text-[56px]
+    lg:text-[50px]
+    font-medium
+    leading-[1]
+    tracking-[-0.02em]
+    text-gray-900
+    drop-shadow-sm
+">
+    Potensi Agroeduwisata Kami
+</h2>
+
+
+    <!-- Description -->
+    <p class="
+        mt-4
+        max-w-3xl
+        mx-auto
+        text-gray-600
+        text-base
+        md:text-xl
+        lg:text-[18px]
+        leading-[1.5]
+        font-thin
+    ">
+        Menggabungkan kekayaan alam, kearifan lokal, dan edukasi untuk
+        menciptakan pengalaman wisata yang berkesan, bermanfaat,
+        dan berkelanjutan.
+    </p>
+
+
+    <!-- Feature Pills -->
+    <div class="flex flex-wrap justify-center gap-4 mt-4">
+
+        <!-- Pill 1 -->
+        <span class="
+            flex items-center gap-2.5
+            border border-green-200
+            bg-white/80
+            backdrop-blur-md
+            px-6 py-3
+            rounded-full
+            text-sm
+            text-gray-700
+            shadow-sm
+            hover:shadow-md
+            transition-all duration-300
+        ">
+
+            <i class="fa-solid fa-hand-holding-heart text-green-700 text-xs"></i>
+
+            Berkelanjutan
+        </span>
+
+
+        <!-- Pill 2 -->
+        <span class="
+            flex items-center gap-2.5
+            border border-green-200
+            bg-white/80
+            backdrop-blur-md
+            px-6 py-3
+            rounded-full
+            text-sm
+            text-gray-700
+            shadow-sm
+            hover:shadow-md
+            transition-all duration-300
+        ">
+
+            <i class="fa-solid fa-users text-green-700 text-xs"></i>
+
+            Edukasi & Interaktif
+        </span>
+
+
+        <!-- Pill 3 -->
+        <span class="
+            flex items-center gap-2.5
+            border border-green-200
+            bg-white/80
+            backdrop-blur-md
+            px-6 py-3
+            rounded-full
+            text-sm
+            text-gray-700
+            shadow-sm
+            hover:shadow-md
+            transition-all duration-300
+        ">
+
+            <i class="fa-solid fa-shield-heart text-green-700 text-xs"></i>
+
+            Asli & Otentik
+        </span>
+
+    </div>
+
+</div>
+
+
+<!-- CONTENT SECTION -->
+<div class="max-w-[1250px] mx-auto mt-[20px] space-y-8 md:space-y-5">
+
+    @foreach($agroeduwisata as $index => $agro)
+
+    <div class="
+        grid lg:grid-cols-2
+        items-stretch
+        bg-[#fdfbf7]
+        rounded-[30px]
+        overflow-hidden
+        border border-[#ece7de]
+        shadow-[0_10px_30px_rgba(0,0,0,0.04)]
+    ">
+
+        <!-- IMAGE -->
+        <div class="
+            relative
+            group
+            overflow-hidden
+            min-h-[300px]
+            rounded-[30px]
+            {{ $index % 2 == 1 ? 'lg:order-2' : '' }}
+        ">
+
+            <img 
+                src="{{ $agro->gambar 
+                    ? asset('images/agroeduwisata/' . $agro->gambar) 
+                    : asset('images/beranda.bg.jpeg') }}"
+                alt="{{ $agro->judul }}"
+                class="
+                    w-full
+                    h-full
+                    object-cover
+                    
+                    transition-transform
+                    duration-700
+                    group-hover:scale-105
+                ">
+
+            <!-- Overlay -->
+            <div class="
+                absolute inset-0
+                bg-gradient-to-t
+                from-black/25
+                via-transparent
+                to-transparent
+            "></div>
+
+            <!-- Badge -->
+            <div class="
+                absolute top-5 left-5
+                bg-gradient-to-r
+                from-green-700
+                to-green-600
+                text-white
+                px-5 py-2.5
+                rounded-full
+                text-sm
+                font-medium
+                flex items-center gap-2
+                shadow-lg
+            ">
+
+                <i class="fa-solid fa-leaf text-xs"></i>
+
+                {{ $index == 0 ? 'Produk Unggulan' : ($index == 1 ? 'Edukasi Pertanian' : 'Wisata Alam') }}
+
+            </div>
+
+        </div>
+
+
+
+        <!-- CONTENT -->
+        <div class="
+            p-7 md:p-9
+            flex flex-col justify-center
+            {{ $index % 2 == 1 ? 'lg:order-1' : '' }}
+        ">
+
+            <!-- TOP META -->
+            <div class="flex items-center gap-4 mb-6">
+
+                <!-- Number -->
+                <div class="
+                    w-14 h-14
+                    rounded-2xl
+                    bg-green-700
+                    text-white
+                    flex items-center justify-center
+                    text-2xl
+                    font-bold
+                    shadow-md
+                ">
+                    {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                </div>
+
+                <!-- Label -->
+                <div class="
+                    flex items-center gap-2
+                    text-green-700
+                    font-semibold
+                    text-sm
+                ">
+
+                    <i class="fa-solid fa-seedling text-xs"></i>
+
+                    {{ $index == 0 ? 'Proses Produksi' : ($index == 1 ? 'Edukasi Pertanian' : 'Wisata Alam') }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TITLE -->
+            <h3 class="
+                font-display
+                text-[34px]
+                md:text-[38px]
+                leading-[1]
+                tracking-[-0.03em]
+                text-[#146432]
+                mb-5
+            ">
+                {{ $agro->judul }}
+            </h3>
+
+
+
+            <!-- DESCRIPTION -->
+            <p class="
+                text-gray-600
+                leading-[1.9]
+                text-[15px]
+                md:text-base
+                font-light
+                max-w-xl
+                mb-8
+            ">
+                {{ $agro->deskripsi }}
+            </p>
+
+
+
+            <!-- FEATURES -->
+            <div class="
+                grid
+                grid-cols-3
+                border-t border-[#ece7de]
+            ">
+
+                <!-- Feature -->
+                <div class="pt-5 pr-4">
+
+                    <div class="
+                        text-green-700
+                        text-xl
+                        mb-3
+                    ">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+
+                    <h4 class="
+                        text-sm
+                        font-semibold
+                        text-gray-900
+                        mb-1
+                    ">
+                        Alami & Sehat
+                    </h4>
+
+                    <p class="
+                        text-xs
+                        text-gray-500
+                        leading-relaxed
+                    ">
+                        Produk alami dan ramah lingkungan.
+                    </p>
+
+                </div>
+
+
+                <!-- Feature -->
+                <div class="
+                    pt-5
+                    px-4
+                    border-l border-[#ece7de]
+                ">
+
+                    <div class="
+                        text-yellow-500
+                        text-xl
+                        mb-3
+                    ">
+                        <i class="fa-solid fa-fire"></i>
+                    </div>
+
+                    <h4 class="
+                        text-sm
+                        font-semibold
+                        text-gray-900
+                        mb-1
+                    ">
+                        Tradisional
+                    </h4>
+
+                    <p class="
+                        text-xs
+                        text-gray-500
+                        leading-relaxed
+                    ">
+                        Budaya lokal tetap dilestarikan.
+                    </p>
+
+                </div>
+
+
+                <!-- Feature -->
+                <div class="
+                    pt-5
+                    pl-4
+                    border-l border-[#ece7de]
+                ">
+
+                    <div class="
+                        text-green-700
+                        text-xl
+                        mb-3
+                    ">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+
+                    <h4 class="
+                        text-sm
+                        font-semibold
+                        text-gray-900
+                        mb-1
+                    ">
+                        Edukatif
+                    </h4>
+
+                    <p class="
+                        text-xs
+                        text-gray-500
+                        leading-relaxed
+                    ">
+                        Pengalaman belajar interaktif.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    @endforeach
+
+</div>
+
+
+
+<!-- CTA SECTION -->
+<section class="relative mt-18 overflow-hidden">
+
+    <!-- BACKGROUND -->
+    <div class="absolute inset-0">
+
+        <!-- Background Image -->
+        <img 
+            src="{{ asset('images/assets foto/CTA_Potensi.png') }}"
+            alt="Agroeduwisata"
+            class="w-full h-full object-cover"
+        >
+
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-black/40"></div>
+
+        <!-- Green Gradient -->
+        <div class="
+            absolute inset-0
+            bg-gradient-to-r
+            from-green-950/90
+            via-green-900/60
+            to-black/40
+        "></div>
+
+    </div>
+
+
+
+    <!-- CONTENT -->
+    <div class="
+        relative z-8
+        max-w-[4000px]
+        mx-auto
+        px-6 lg:px-12
+        py-12 lg:py-14
+    ">
+
+        <div class="
+            rounded-[34px]
+            overflow-hidden
+            border border-white/5
+        ">
+
+            <div class="
+                grid
+                lg:grid-cols-[1fr_1.4fr_0.8fr]
+                items-center
+                gap-10
+                px-6
+                lg:px-10
+                py-1
+            ">
+
+                <!-- LEFT CONTENT -->
+                <div>
+
+                    <h3 class="
+                        font-display
+                        text-white/90
+                        text-[30px]
+                        leading-[1]
+                        tracking-[-0.02em]
+                        mb-5
+                    ">
+                        Agroeduwisata untuk Pengalaman yang Bermakna
+                    </h3>
+
+                    <p class="
+                        text-white/70
+                        text-sm
+                        leading-[1.8]
+                        font-thin
+                        max-w-sm
+                    ">
+                        Kami berkomitmen memberikan pengalaman wisata yang tidak hanya menyenangkan, tetapi juga
+                        edukatif, menginspirasi, dan memberi dampak positif bagi masyarakat desa.
+                    </p>
+
+                </div>
+
+                <!-- STATS -->
+                <div class="
+                    grid
+                    grid-cols-1
+                    lg:grid-cols-4
+                    gap-2
+                ">
+
+                    <!-- ITEM -->
+                    <div class="
+                        text-center
+                        lg:border-r
+                        border-white/15
+                        lg:pr-6
+                    ">
+
+                        <div class="
+                            text-white
+                            text-2xl
+                            mb-3
+                        ">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+
+                        <h4 
+                        x-data="counter(15)"
+                        x-init="init()"
+                        class="
+                            text-yellow-400
+                            text-[45px]
+                            font-bold
+                            leading-none
+                            mb-2
+                        ">
+                            <span x-text="count"></span>+
+                        </h4>
+
+                        <p class="
+                            text-white
+                            text-sm
+                        ">
+                            Potensi Wisata
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        text-center
+                        lg:border-r
+                        border-white/15
+                        lg:pr-6
+                    ">
+
+                        <div class="
+                            text-white
+                            text-2xl
+                            mb-3
+                        ">
+                            <i class="fa-solid fa-book-open"></i>
+                        </div>
+
+                        <h4 
+                        x-data="counter(10)"
+                        x-init="init()"
+                        class="
+                            text-yellow-400
+                            text-5xl
+                            font-bold
+                            leading-none
+                            mb-2
+                        ">
+                            <span x-text="count"></span>+
+                        </h4>
+
+                        <p class="
+                            text-white
+                            text-sm
+                        ">
+                            Aktivitas Edukasi
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        text-center
+                        lg:border-r
+                        border-white/15
+                        lg:pr-6
+                    ">
+
+                        <div class="
+                            text-white
+                            text-2xl
+                            mb-3
+                        ">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+
+                        <h4
+                        x-data="counter(100, 15)"
+                        x-init="init()"
+                        class="
+                            text-yellow-400
+                            text-[42px]
+                            font-bold
+                            leading-none
+                            mb-2
+                        ">
+                            <span x-text="count"></span>%
+                        </h4>
+
+                        <p class="
+                            text-white
+                            text-sm
+                        ">
+                            Alam Asri
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="text-center">
+
+                        <div class="
+                            text-white
+                            text-2xl
+                            mb-3
+                        ">
+                            <i class="fa-solid fa-basket-shopping"></i>
+                        </div>
+
+                        <h4 class="
+                            text-yellow-400
+                            text-[45px]
+                            font-bold
+                            leading-none
+                            mb-2
+                        ">
+                            10+
+                        </h4>
+
+                        <p class="
+                            text-white
+                            text-sm
+                        ">
+                            Produk Lokal
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CTA BUTTON -->
+                <div class="flex lg:justify-end">
+
+                    <div>
+
+                        <p class="
+                            text-white/80
+                            text-[20px]
+                            font-semibold
+                            leading-relaxed
+                            mb-6
+                            max-w-xs
+                        ">
+                            Jelajahi lebih banyak
+                            potensi desa kami
+                        </p>
+
+                        <a href="{{ route('agro') }}"
+                        class="
+                            inline-flex
+                            items-center
+                            gap-4
+                            bg-yellow-400
+                            hover:bg-yellow-300
+                            text-black
+                            px-6
+                            py-3
+                            rounded-full
+                            font-semibold
+                            transition-all
+                            duration-300
+                            hover:scale-105
+                            shadow-2xl
+                        ">
+
+                            Jelajahi Selengkapnya
+
+                            <span class="
+                                w-8 h-8
+                                rounded-full
+                                bg-black
+                                text-white
+                                flex items-center justify-center
+                                text-sm
+                            ">
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </section>
 
 
+<!-- ===================================================== -->
 <!-- 3. PRODUK UNGGULAN KAMI -->
-<section class="bg-gray-50 py-20 border-y border-gray-200 shadow-inner">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="text-center mb-16">
-            <h2 class="font-bold text-xl md:text-2xl font-sans uppercase tracking-widest text-gray-900">
+<!-- ===================================================== -->
+<section class="relative py-15 bg-[#f8f6f1] overflow-hidden border-y border-[#ece7de]">
+
+    <!-- Decorative Background -->
+    <div class="absolute left-0 top-0 opacity-[0.05] hidden lg:block pointer-events-none">
+        <i class="fa-solid fa-leaf text-[220px] text-green-900 rotate-[-15deg]"></i>
+    </div>
+
+    <div class="absolute right-10 top-30 opacity-[0.04] hidden lg:block pointer-events-none">
+        <i class="fa-solid fa-star text-[180px] text-yellow-700"></i>
+    </div>
+
+
+
+    <!-- CONTAINER -->
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
+
+        <!-- ===================================================== -->
+        <!-- SECTION HEADER -->
+        <!-- ===================================================== -->
+        <div class="text-center mb-12">
+
+            <!-- Small Label -->
+            <div class="flex items-center justify-center gap-3 mb-2">
+
+                <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+
+                <span class="
+                    uppercase
+                    tracking-[0.2em]
+                    text-sm
+                    font-semibold
+                    text-yellow-600
+                ">
+                    Produk Kami
+                </span>
+
+                <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+
+            </div>
+
+            <!-- Title -->
+            <h2 class="
+                font-display
+                text-[38px]
+                md:text-[58px]
+                lg:text-[55px]
+                leading-[0.95]
+                tracking-[-0.04em]
+                text-[#183322]
+                mb-3
+                drop-shadow-sm
+            ">
                 Produk Unggulan Kami
             </h2>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-            @foreach($produkUnggulan as $produk)
-            <div class="bg-white p-5 rounded-3xl text-center border border-gray-100 hover:border-green-500 shadow-lg hover:-translate-y-2 transition duration-300 group flex flex-col justify-between relative overflow-hidden">
-                 <div class="w-full aspect-square bg-gray-100 rounded-2xl mb-4 overflow-hidden relative shadow-inner">
-                     <img src="{{ $produk->gambar ? asset('images/produk/' . $produk->gambar) : asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="{{ $produk->nama }}">
-                     
-                     <!-- Stempel Hover Khusus Unggulan -->
-                     <div class="absolute inset-0 bg-green-900/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                         <span class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black text-[10px] px-3 py-1.5 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-1.5 transform scale-75 group-hover:scale-100 transition-transform duration-500 border border-yellow-300">
-                             <i class="fas fa-crown"></i> Unggulan
-                         </span>
-                     </div>
-                 </div>
-                 <div class="flex-grow flex flex-col justify-center">
-                     <h3 class="font-bold text-gray-900 text-[13px] sm:text-sm mb-1 leading-snug line-clamp-2">{{ strtoupper($produk->nama) }}</h3>
-                     <p class="text-green-700 font-bold text-sm mb-4">Rp{{ number_format($produk->harga, 0, ',', '.') }}</p>
-                 </div>
-                 <a href="{{ route('ecommerce') }}" class="inline-block w-full bg-gray-100 hover:bg-green-800 hover:text-white text-gray-900 text-xs font-bold px-4 py-2.5 rounded-full transition-all shadow-sm">
-                     Belanja Sekarang
-                 </a>
-            </div>
-            @endforeach
+
+
+
+            <!-- Description -->
+            <p class="
+                max-w-2xl
+                mx-auto
+                text-gray-600
+                text-base
+                md:text-[18px]
+                leading-[1.2]
+                font-thin
+            ">
+                Produk alami berkualitas hasil karya masyarakat desa,
+                dibuat dengan cita rasa khas dan kearifan lokal
+                Agroeduwisata Hargorojo.
+            </p>
+
         </div>
 
-        <div class="mt-12 text-center">
-            <a href="{{ route('produk') }}" class="inline-flex items-center gap-3 bg-white border-2 border-gray-200 hover:bg-yellow-400 font-bold text-gray-900 text-sm md:text-base px-8 py-3.5 rounded-full transition-all shadow-sm">
-                Lihat Detail <i class="fas fa-arrow-right bg-black text-white p-1 rounded-full text-[10px]"></i>
-            </a>
+        <!-- PRODUCT GRID -->
+        <div class="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            lg:grid-cols-4
+            gap-5
+        ">
+            @foreach($produkUnggulan as $produk)
+
+            <!-- PRODUCT CARD -->
+            <div class="
+                group
+                relative
+                bg-white/85
+                backdrop-blur-MD
+                rounded-[20px]
+                overflow-hidden
+                border border-[#ece7de]
+                shadow-[0_20px_60px_rgba(0,0,0,0.12)]
+                hover:-translate-y-3
+                hover:shadow-[0_25px_70px_rgba(0,0,0,0.12)]
+                transition-all
+                duration-700
+                flex flex-col
+            ">
+
+                <!-- IMAGE -->
+
+                <div class="
+                    relative
+                    overflow-hidden
+                    h-[280px]
+                
+                ">
+
+                    <img 
+                        src="{{ $produk->gambar 
+                            ? asset('images/produk/' . $produk->gambar) 
+                            : asset('images/beranda.bg.jpeg') }}"
+                        alt="{{ $produk->nama }}"
+                        class="
+                            w-full
+                            h-full
+                            object-cover
+                            transition-transform
+                            duration-700
+                            group-hover:scale-105
+                        "
+                    >
+
+                    <!-- Overlay -->
+                    <div class="
+                        absolute inset-0
+                        bg-gradient-to-t
+                        from-black/35
+                        via-transparent
+                        to-transparent
+                    "></div>
+
+                    <!-- Hover Stamp -->
+                    <div class="
+                        absolute inset-0
+                        bg-black/30
+                        backdrop-blur-[2px]
+                        opacity-0
+                        group-hover:opacity-100
+                        transition-all
+                        duration-300
+                        flex items-center justify-center
+                    ">
+
+                        <span class="
+                            bg-gradient-to-r
+                            from-yellow-400
+                            to-yellow-500
+                            text-black
+                            font-extrabold
+                            text-[12px]
+                            px-4 py-2
+                            rounded-full
+                            uppercase
+                            tracking-wider
+                            shadow-lg
+                            flex items-center gap-2
+                            scale-90
+                            group-hover:scale-100
+                            transition-transform
+                            duration-500
+                        ">
+                            <i class="fas fa-award text-[16px]"></i>
+                            Produk Unggulan
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="
+                    relative
+                    px-6
+                    pt-10
+                    pb-8
+                    flex flex-col flex-grow
+                    text-center
+                ">
+
+                    <!-- Floating Icon -->
+                    <div class="
+                        absolute
+                        -top-6
+                        left-1/2
+                        -translate-x-1/2
+                        w-14 h-14
+                        rounded-full
+                        bg-gradient-to-br
+                        from-[#1d4d3a]
+                        to-[#2f7a5d]
+                        border-2 border-white
+                        flex items-center justify-center
+                        text-white
+                        text-xl
+                        shadow-lg
+                    ">
+
+                        <i class="fa-solid fa-heart"></i>
+
+                    </div>
+
+                    <!-- Product Name -->
+                    <h3 class="
+                        font-bold
+                        text-[20px]
+                        leading-[1.1]
+                        tracking-[-0.02em]
+                        text-[#1b472b]
+                        mb-4
+                        line-clamp-2
+                    ">
+                        {{ strtoupper($produk->nama) }}
+                    </h3>
+
+
+                    <!-- Short Description -->
+                    <p class="
+                        text-gray-500
+                        text-[14px]
+                        leading-[1.4]
+                        font-light
+                        mb-2
+                        min-h-[50px]
+                    ">
+                        {{ Str::limit($produk->deskripsi, 60) }}
+                    </p>
+
+
+
+                    <!-- Price -->
+                    <div class="
+                        text-[#d4af37]
+                        text-[18px]
+                        font-bold
+                        leading-none
+                        mb-5
+                    ">
+                        Rp{{ number_format($produk->harga, 0, ',', '.') }}
+
+                        <span class="
+                            text-[14px]
+                            font-medium
+                            text-[#7a7a7a]
+                        ">
+                            / pack
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- BUTTON -->
+                    <a href="{{ route('ecommerce') }}"
+                    class="
+                        mt-auto
+                        inline-flex
+                        items-center
+                        justify-center
+                        gap-6
+                        w-full
+                        bg-gradient-to-r
+                        from-green-800
+                        to-green-700
+                        hover:from-green-700
+                        hover:to-green-600
+                        text-white
+                        max-w-[240px]
+                        mx-auto
+                        py-3
+                        px-2
+                        rounded-xl
+                        font-semibold
+                        shadow-md
+                        transition-all
+                        duration-500
+                    ">
+
+                        Pesan Sekarang
+
+                        <span class="
+                        
+                            rounded-full
+                            bg-white/15
+                            flex items-center justify-center
+                            text-md
+                        ">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            @endforeach
+
         </div>
+
+
+        <!-- ===================================================== -->
+        <!-- CTA BUTTON -->
+        <!-- ===================================================== -->
+        <div class="text-center mt-15">
+
+            <a href="{{ route('produk') }}"
+            class="
+                inline-flex
+                items-center
+                gap-5
+                bg-gradient-to-r
+                from-green-900
+                to-green-700
+                hover:scale-105
+                text-white
+                px-8 py-3
+                rounded-full
+                font-semibold
+                text-lg
+                shadow-lg
+                transition-all
+                duration-500
+            ">
+
+                Lihat Semua Produk
+
+                <span class="
+                    w-10 h-10
+                    rounded-full
+                    bg-white/70
+                    text-black
+                    flex items-center justify-center
+                    text-sm
+                ">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
     </div>
+
 </section>
 
 
