@@ -272,15 +272,15 @@
 <!-- 2. POTENSI AGROEDUWISATA KAMI -->
 <section class="bg-gray-50 py-20 border-y border-gray-200 shadow-inner">
     <!-- SECTION HEADER -->
-<div class="relative text-center mb-12">
+<div class="relative text-center mb-10">
 
     <!-- Decorative Background -->
     <div class="absolute -left-5 top- opacity-[0.10] hidden lg:block">
         <i class="fa-solid fa-leaf text-[120px] text-green-900 rotate-[-20deg]"></i>
     </div>
 
-    <div class="absolute -right-1 bottom-0 opacity-[0.04] hidden lg:block">
-        <i class="fa-solid fa-leaf text-[140px] text-yellow-700 rotate-[25deg]"></i>
+    <div class="absolute -right-1 bottom-0 opacity-[0.08] hidden lg:block">
+        <i class="fa-solid fa-leaf text-[140px] text-yellow-800 rotate-[25deg]"></i>
     </div>
     
 
@@ -460,26 +460,7 @@
                 to-transparent
             "></div>
 
-            <!-- Badge -->
-            <div class="
-                absolute top-5 left-5
-                bg-gradient-to-r
-                from-green-700
-                to-green-600
-                text-white
-                px-5 py-2.5
-                rounded-full
-                text-sm
-                font-medium
-                flex items-center gap-2
-                shadow-lg
-            ">
-
-                <i class="fa-solid fa-leaf text-xs"></i>
-
-                {{ $index == 0 ? 'Produk Unggulan' : ($index == 1 ? 'Edukasi Pertanian' : 'Wisata Alam') }}
-
-            </div>
+            
 
         </div>
 
@@ -514,12 +495,10 @@
                     flex items-center gap-2
                     text-green-700
                     font-semibold
-                    text-sm
+                    text-[17px]
                 ">
-
-                    <i class="fa-solid fa-seedling text-xs"></i>
-
-                    {{ $index == 0 ? 'Proses Produksi' : ($index == 1 ? 'Edukasi Pertanian' : 'Wisata Alam') }}
+                   {{ $index == 0 ? 'Proses Produksi' : ($index == 1 ? 'Cerita dari Perkebunan Desa' : ($index == 2 ? 'Jelajah Keindahan Alam Desa' : 'Budaya & Tradisi Desa')) 
+}}
 
                 </div>
 
@@ -530,16 +509,15 @@
             <!-- TITLE -->
             <h3 class="
                 font-display
-                text-[34px]
+                text-[35px]
                 md:text-[38px]
                 leading-[1]
-                tracking-[-0.03em]
+                tracking-[-0.02em]
                 text-[#146432]
-                mb-5
+                mb-4
             ">
                 {{ $agro->judul }}
             </h3>
-
 
 
             <!-- DESCRIPTION -->
@@ -555,120 +533,219 @@
                 {{ $agro->deskripsi }}
             </p>
 
-
-
             <!-- FEATURES -->
-            <div class="
-                grid
-                grid-cols-3
-                border-t border-[#ece7de]
-            ">
-
-                <!-- Feature -->
-                <div class="pt-5 pr-4">
-
-                    <div class="
-                        text-green-700
-                        text-xl
-                        mb-3
-                    ">
-                        <i class="fa-solid fa-leaf"></i>
+             <div class="
+             grid
+             grid-cols-3
+             border-t border-[#ece7de]
+             ">
+                    {{-- PRODUKSI GULA --}}
+                    @if($index == 0)
+                    <!-- Feature -->
+                     <div class="pt-5 pr-4">
+                        <div class="text-yellow-500 text-xl mb-3">
+                            <i class="fa-solid fa-fire"></i>
+                        
+                        </div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                            Tradisional
+                        </h4>
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Proses pembuatan gula dilakukan secara turun-temurun.
+                        </p>
+                    
+                    </div>
+                    
+                    <!-- Feature -->
+                     <div class="pt-5 px-4 border-l border-[#ece7de]">
+                        <div class="text-green-700 text-xl mb-3">
+                            <i class="fa-solid fa-leaf"></i>
+                        </div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                            Alami
+                        </h4>
+                        
+                        <p class="text-xs text-gray-500 leading-relaxed">
+                            Menggunakan bahan alami tanpa campuran kimia.
+                        </p>
                     </div>
 
-                    <h4 class="
-                        text-sm
-                        font-semibold
-                        text-gray-900
-                        mb-1
-                    ">
-                        Alami & Sehat
+                    <!-- Feature -->
+                    <div class="pt-5 pl-4 border-l border-[#ece7de]">
+                        <div class="text-orange-500 text-xl mb-3">
+                            <i class="fa-solid fa-hand"></i>
+                        </div>
+                        <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                        Handmade
                     </h4>
-
-                    <p class="
-                        text-xs
-                        text-gray-500
-                        leading-relaxed
-                    ">
-                        Produk alami dan ramah lingkungan.
-                    </p>
-
-                </div>
-
-
-                <!-- Feature -->
-                <div class="
-                    pt-5
-                    px-4
-                    border-l border-[#ece7de]
-                ">
-
-                    <div class="
-                        text-yellow-500
-                        text-xl
-                        mb-3
-                    ">
-                        <i class="fa-solid fa-fire"></i>
-                    </div>
-
-                    <h4 class="
-                        text-sm
-                        font-semibold
-                        text-gray-900
-                        mb-1
-                    ">
-                        Tradisional
-                    </h4>
-
-                    <p class="
-                        text-xs
-                        text-gray-500
-                        leading-relaxed
-                    ">
-                        Budaya lokal tetap dilestarikan.
-                    </p>
-
-                </div>
-
-
-                <!-- Feature -->
-                <div class="
-                    pt-5
-                    pl-4
-                    border-l border-[#ece7de]
-                ">
-
-                    <div class="
-                        text-green-700
-                        text-xl
-                        mb-3
-                    ">
-                        <i class="fa-solid fa-users"></i>
-                    </div>
-
-                    <h4 class="
-                        text-sm
-                        font-semibold
-                        text-gray-900
-                        mb-1
-                    ">
-                        Edukatif
-                    </h4>
-
-                    <p class="
-                        text-xs
-                        text-gray-500
-                        leading-relaxed
-                    ">
-                        Pengalaman belajar interaktif.
-                    </p>
-
-                </div>
-
-            </div>
+                    <p class="text-xs text-gray-500 leading-relaxed">
+                        Diproses langsung oleh perajin lokal desa.
+        </p>
 
         </div>
 
+    {{-- EDUKASI --}}
+    @elseif($index == 1)
+
+        <div class="pt-5 pr-4">
+
+            <div class="text-green-700 text-xl mb-3">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Edukatif
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Pengunjung belajar langsung dari alam dan perkebunan.
+            </p>
+
+        </div>
+
+        <div class="pt-5 px-4 border-l border-[#ece7de]">
+
+            <div class="text-yellow-500 text-xl mb-3">
+                <i class="fa-solid fa-book-open"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Interaktif
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Aktivitas wisata dirancang menarik dan partisipatif.
+            </p>
+
+        </div>
+
+        <div class="pt-5 pl-4 border-l border-[#ece7de]">
+
+            <div class="text-emerald-600 text-xl mb-3">
+                <i class="fa-solid fa-tree"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Perkebunan
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Mengenal berbagai tanaman khas pedesaan.
+            </p>
+
+        </div>
+
+    {{-- WISATA ALAM --}}
+    @elseif($index == 2)
+
+        <div class="pt-5 pr-4">
+
+            <div class="text-blue-500 text-xl mb-3">
+                <i class="fa-solid fa-mountain-sun"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Panorama Alam
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Menyuguhkan pemandangan alam desa yang memukau.
+            </p>
+
+        </div>
+
+
+        <div class="pt-5 px-4 border-l border-[#ece7de]">
+
+            <div class="text-cyan-500 text-xl mb-3">
+                <i class="fa-solid fa-wind"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Udara Segar
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Suasana pedesaan yang sejuk dan menenangkan.
+            </p>
+
+        </div>
+
+
+        <div class="pt-5 pl-4 border-l border-[#ece7de]">
+
+            <div class="text-green-700 text-xl mb-3">
+                <i class="fa-solid fa-route"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Jelajah Desa
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Menyusuri alam dan sudut indah Desa Hargorojo.
+            </p>
+
+        </div>
+
+
+    {{-- BUDAYA DESA --}}
+    @else
+
+        <div class="pt-5 pr-4">
+
+            <div class="text-red-500 text-xl mb-3">
+                <i class="fa-solid fa-landmark"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Budaya Lokal
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Tradisi masyarakat tetap dijaga dan dilestarikan.
+            </p>
+
+        </div>
+
+
+        <div class="pt-5 px-4 border-l border-[#ece7de]">
+
+            <div class="text-yellow-500 text-xl mb-3">
+                <i class="fa-solid fa-masks-theater"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Tradisi Desa
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Mengenal kehidupan dan budaya masyarakat lokal.
+            </p>
+
+        </div>
+
+
+        <div class="pt-5 pl-4 border-l border-[#ece7de]">
+
+            <div class="text-orange-500 text-xl mb-3">
+                <i class="fa-solid fa-people-group"></i>
+            </div>
+
+            <h4 class="text-sm font-semibold text-gray-900 mb-1">
+                Gotong Royong
+            </h4>
+
+            <p class="text-xs text-gray-500 leading-relaxed">
+                Semangat kebersamaan masih terjaga hingga kini.
+            </p>
+
+        </div>
+        @endif
     </div>
+</div>
+
+</div>
 
     @endforeach
 
@@ -782,7 +859,7 @@
                         </div>
 
                         <h4 
-                        x-data="counter(15)"
+                        x-data="counter(15, 15)"
                         x-init="init()"
                         class="
                             text-yellow-400
@@ -820,7 +897,7 @@
                         </div>
 
                         <h4 
-                        x-data="counter(10)"
+                        x-data="counter(10, 70)"
                         x-init="init()"
                         class="
                             text-yellow-400
@@ -890,14 +967,17 @@
                             <i class="fa-solid fa-basket-shopping"></i>
                         </div>
 
-                        <h4 class="
+                        <h4 
+                        x-data="counter(10, 95)"
+                        x-init="init()"
+                        class="
                             text-yellow-400
                             text-[45px]
                             font-bold
                             leading-none
                             mb-2
                         ">
-                            10+
+                            <span x-text="count"></span>+
                         </h4>
 
                         <p class="
@@ -1025,7 +1105,7 @@
                 md:text-[58px]
                 lg:text-[55px]
                 leading-[0.95]
-                tracking-[-0.04em]
+                tracking-[-0.03em]
                 text-[#183322]
                 mb-3
                 drop-shadow-sm
@@ -1326,84 +1406,626 @@
 
 </section>
 
-
+<!-- ===================================================== -->
 <!-- 4. KATALOG DESA -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-    <div class="text-center mb-16">
-        <h2 class="font-bold text-xl md:text-2xl font-sans uppercase tracking-widest text-gray-900">
-            Katalog Desa
-        </h2>
+<!-- ===================================================== -->
+<section class="relative py-15 bg-[#f8f6f1] overflow-hidden">
+
+    <!-- Background -->
+    <div class="absolute top-0 left-0 opacity-[0.06] hidden lg:block">
+        <img src="{{ asset('images/ornament-daun.png') }}"
+            class="w-[300px]"
+            alt="">
     </div>
 
-    <div class="space-y-6 max-w-4xl mx-auto">
-        <!-- News 1 -->
-        <div class="flex flex-col sm:flex-row gap-6 bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 items-center">
-            <div class="w-full sm:w-48 aspect-square sm:aspect-auto sm:h-48 bg-gray-200 rounded-2xl overflow-hidden shrink-0 group hover:shadow-lg transition">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+    <div class="max-w-[1200px] mx-auto px-6 lg:px-8 relative z-10">
+
+        <!-- ===================================================== -->
+        <!-- HEADER -->
+        <!-- ===================================================== -->
+        <div class="text-center mb-14">
+
+            <!-- LABEL -->
+            <div class="
+                inline-flex
+                items-center
+                gap-2
+                px-6 py-3
+                rounded-full
+                bg-[#eef3ea]
+                border border-[#dde7d7]
+                mb-2
+            ">
+
+                <i class="fa-solid fa-book-open text-green-800"></i>
+
+                <span class="
+                    text-green-900
+                    text-sm
+                    font-semibold
+                    tracking-wide
+                ">
+                    Informasi & Dokumentasi Desa Hargorojo
+                </span>
+
             </div>
-            <div class="flex-1 text-center sm:text-left py-2 px-2">
-                <h3 class="font-bold text-xl text-green-900 mb-2 line-clamp-2">Mahasiswa Amikom Luncurkan Buku Profil Desa Hargorojo Purworejo, Kades: Beri Apresiasi</h3>
-                <p class="text-sm text-gray-600 line-clamp-2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest drop-shadow-sm">INFORMASI TERBARU</span>
-            </div>
+
+            <!-- TITLE -->
+            <h2 class="
+                font-display
+                text-[38px]
+                md:text-[58px]
+                lg:text-[55px]
+                leading-[0.95]
+                tracking-[-0.03em]
+                text-[#000000]
+                mb-3
+                drop-shadow-sm
+            ">
+                Katalog Desa
+            </h2>
+
+            <!-- DESCRIPTION -->
+            <p class="
+                mt-3
+                max-w-3xl
+                mx-auto
+                text-[#1f211f]
+                text-[18px]
+                leading-[1.3]
+                font-thin
+            ">
+                Temukan berbagai informasi, berita, artikel, dan dokumentasi kegiatan yang mencerminkan
+                semangat serta perkembangan Desa Hargorojo
+            </p>
+
         </div>
 
-        <!-- News 2 -->
-        <div class="flex flex-col sm:flex-row gap-6 bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 items-center">
-            <div class="w-full sm:w-48 aspect-square sm:aspect-auto sm:h-48 bg-gray-200 rounded-2xl overflow-hidden shrink-0 group hover:shadow-lg transition">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        <!-- ===================================================== -->
+        <!-- CATEGORY MENU -->
+        <!-- ===================================================== -->
+        <div class="
+            max-w-[1000px] mx-auto
+            bg-white/90
+            backdrop-blur-xl
+            border border-[#ebe7de]
+            rounded-[25px]
+            shadow-[0_10px_40px_rgba(0,0,0,0.05)]
+            mt-5
+            lg:mt-10
+            mb-8
+        ">
+
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+
+                <!-- ITEM -->
+                <div class="
+                    flex items-center gap-4
+                    px-5 py-5
+                    rounded-2xl
+                    bg-[#e4eddf]
+                    
+                ">
+
+                    <div class="
+                        w-12 h-12
+                        rounded-2xl
+                        bg-green-100
+                        text-green-800
+                        flex items-center justify-center
+                        text-lg
+                    ">
+                        <i class="fa-solid fa-bullhorn"></i>
+                    </div>
+
+                    <div>
+
+                        <h4 class="
+                            font-bold
+                            text-[#1b3b2b]
+                            text-[16px]
+                        ">
+                            Pengumuman
+                        </h4>
+
+                        <p class="
+                            text-sm
+                            text-gray-500
+                        ">
+                            Info terbaru desa
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="
+                    flex items-center gap-4
+                    px-5 py-5
+                    rounded-2xl
+                    bg-white
+                ">
+
+                    <div class="
+                        w-12 h-12
+                        rounded-2xl
+                        bg-gray-100
+                        text-gray-700
+                        flex items-center justify-center
+                        text-lg
+                    ">
+                        <i class="fa-regular fa-newspaper"></i>
+                    </div>
+
+                    <div>
+
+                        <h4 class="
+                            font-bold
+                            text-[#1b3b2b]
+                            text-[16px]
+                        ">
+                            Artikel & Berita
+                        </h4>
+
+                        <p class="
+                            text-sm
+                            text-gray-500
+                        ">
+                            Informasi kegiatan
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="
+                    flex items-center gap-4
+                    px-5 py-5
+                    rounded-2xl
+                    bg-white
+                ">
+
+                    <div class="
+                        w-12 h-12
+                        rounded-2xl
+                        bg-gray-100
+                        text-gray-700
+                        flex items-center justify-center
+                        text-lg
+                    ">
+                        <i class="fa-regular fa-file-lines"></i>
+                    </div>
+
+                    <div>
+
+                        <h4 class="
+                            font-bold
+                            text-[#1b3b2b]
+                            text-[16px]
+                        ">
+                            Perpustakaan
+                        </h4>
+
+                        <p class="
+                            text-sm
+                            text-gray-500
+                        ">
+                            Arsip & dokumen
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- ITEM -->
+                <div class="
+                    flex items-center gap-4
+                    px-5 py-5
+                    rounded-2xl
+                    bg-white
+                ">
+
+                    <div class="
+                        w-12 h-12
+                        rounded-2xl
+                        bg-gray-100
+                        text-gray-700
+                        flex items-center justify-center
+                        text-lg
+                    ">
+                        <i class="fa-regular fa-image"></i>
+                    </div>
+
+                    <div>
+
+                        <h4 class="
+                            font-bold
+                            text-[#1b3b2b]
+                            text-[16px]
+                        ">
+                            Galeri Desa
+                        </h4>
+
+                        <p class="
+                            text-sm
+                            text-gray-500
+                        ">
+                            Foto & dokumentasi
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
-            <div class="flex-1 text-center sm:text-left py-2 px-2">
-                <h3 class="font-bold text-xl text-green-900 mb-2 line-clamp-2">Pengelolaan Informasi Dan Arsip Desa Hargorojo Untuk Meningkatkan Pelayanan Publik</h3>
-                <p class="text-sm text-gray-600 line-clamp-2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest drop-shadow-sm">PUSTAKA DIGITAL & DOKUMEN DESA</span>
-            </div>
+
         </div>
 
-        <!-- News 3 -->
-        <div class="flex flex-col sm:flex-row gap-6 bg-white p-5 rounded-[2rem] shadow-sm border border-gray-100 items-center">
-            <div class="w-full sm:w-48 aspect-square sm:aspect-auto sm:h-48 bg-gray-200 rounded-2xl overflow-hidden shrink-0 group hover:shadow-lg transition">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        <!-- ===================================================== -->
+        <!-- CONTENT -->
+        <!-- ===================================================== -->
+        <div class="space-y-5">
+
+            @foreach(
+                collect()
+                ->merge($pengumuman)
+                ->merge($artikelBerita)
+                ->merge($perpustakaan)
+                ->merge($galeri)
+                ->sortByDesc('created_at')
+                ->take(3)
+                as $item
+            )
+
+            @php
+
+                $fotoUrl = asset('images/beranda.bg.jpeg');
+
+                if ($item->gambar) {
+
+                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists('katalog/' . $item->gambar)) {
+
+                        $fotoUrl = asset('storage/katalog/' . $item->gambar);
+
+                    } else {
+
+                        $fotoUrl = file_exists(public_path('images/katalog/' . $item->gambar))
+                            ? asset('images/katalog/' . $item->gambar)
+                            : asset('images/' . $item->gambar);
+                    }
+                }
+
+                $kategori = $item->kategoriKatalog->nama_kategori ?? 'Informasi Desa';
+
+            @endphp
+
+            <div class="
+                max-w-[1100px] mx-auto
+                grid lg:grid-cols-[0.8fr_1.2fr]
+                h-[300px]
+                bg-white
+                rounded-[20px]
+                overflow-hidden
+                border border-[#ece7de]
+                shadow-[0_10px_35px_rgba(0,0,0,0.05)]
+                hover:-translate-y-1
+                hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
+                transition-all
+                duration-500
+            ">
+
+                <!-- IMAGE -->
+                <div class="relative overflow-hidden group">
+
+                    <img
+                        src="{{ $fotoUrl }}"
+                        alt="{{ $item->judul }}"
+                        class="
+                            w-full
+                            h-full
+            
+                            object-cover
+                            group-hover:scale-105
+                            transition-transform
+                            duration-700
+                        "
+
+                        onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'"
+                    >
+
+                    <!-- Overlay -->
+                    <div class="
+                        absolute inset-0
+                        bg-gradient-to-t
+                        from-black/35
+                        via-transparent
+                        to-transparent
+                    "></div>
+
+                    <!-- Badge -->
+                    <div class="
+                        absolute top-6 left-6
+                        bg-green-800
+                        text-white
+                        px-5 py-3
+                        rounded-full
+                        text-sm
+                        font-semibold
+                        flex items-center gap-3
+                        shadow-xl
+                    ">
+
+                        <i class="
+                            {{
+                                $kategori == 'Pengumuman'
+                                ? 'fa-solid fa-bullhorn'
+                                : ($kategori == 'Artikel & Berita'
+                                ? 'fa-regular fa-newspaper'
+                                : ($kategori == 'Perpustakaan'
+                                ? 'fa-regular fa-file-lines'
+                                : 'fa-regular fa-image'))
+                            }}
+                        "></i>
+
+                        {{ $kategori }}
+
+                    </div>
+
+                </div>
+
+                <!-- CONTENT -->
+                <div class="
+                    p-8 lg:p-10
+                    flex flex-col
+                    justify-center
+                ">
+
+                    <!-- DATE -->
+                    <div class="
+                        flex items-center gap-3
+                        text-sm
+                        text-gray-500
+                        mb-4
+                    ">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        {{ $item->created_at->format('d M Y') }}
+
+                    </div>
+
+                    <!-- TITLE -->
+                    <h3 class="
+                        font-display
+                        font-reguler
+                        text-[25px]
+                        md:text-[22px]
+                        leading-[1.2]
+                        tracking-[-0.01em]
+                        text-[#000000]
+                        mb-5
+                        line-clamp-2
+                    ">
+                        {{ $item->judul }}
+                    </h3>
+
+                    <!-- DESC -->
+                    <p class="
+                        font-lora
+                        italic
+                        text-[#5f6d63]
+                        text-[14px]
+                        leading-[1.9]
+                        font-thin
+                        mb-3
+                        line-clamp-5
+                    ">
+                        {{ Str::limit($item->deskripsi, 300) }}
+                    </p>
+
+                    <!-- BUTTON -->
+                    <a href="{{ $item->Url ?? route('katalog') }}"
+                    class="
+                        inline-flex
+                        items-center
+                        gap-3
+                        text-[#2b4238]
+                        font-semibold
+                        text-lg
+                        hover:gap-5
+                        transition-all
+                        duration-300
+                    ">
+                        Baca Selengkapnya
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
             </div>
-            <div class="flex-1 text-center sm:text-left py-2 px-2">
-                <h3 class="font-bold text-xl text-green-900 mb-2 line-clamp-2">Sejarah Desa Hargorojo Serta Perkembangannya Menjadi Desa Wisata</h3>
-                <p class="text-sm text-gray-600 line-clamp-2 mb-3">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                <span class="text-xs font-bold text-yellow-600 uppercase tracking-widest drop-shadow-sm">ARSIP & SEJARAH DESA</span>
-            </div>
+
+            @endforeach
+
         </div>
+
+        <!-- CTA -->
+        <div class="text-center mt-16">
+
+            <a href="{{ route('katalog') }}"
+            class="
+                inline-flex
+                items-center
+                gap-5
+                bg-gradient-to-r
+                from-[#1d4d3a]
+                to-[#2f7a5d]
+                hover:scale-[1.03]
+                text-white
+                px-8 py-3
+                rounded-full
+                font-semibold
+                text-lg
+                shadow-[0_15px_40px_rgba(29,77,58,0.25)]
+                transition-all
+                duration-500
+            ">
+
+                <i class="fa-solid fa-book-open"></i>
+
+                Lihat Selengkapnya di Katalog Desa
+
+                <span class="
+                    w-8 h-8
+                    rounded-full
+                    bg-white
+                    text-black
+                    flex items-center justify-center
+                    text-sm
+                ">
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
+
+            </a>
+
+        </div>
+
     </div>
 
-    <div class="mt-12 text-center">
-         <a href="{{ route('katalog') }}" class="inline-flex items-center gap-3 bg-gray-200 hover:bg-yellow-400 font-bold text-gray-900 text-sm md:text-base px-8 py-3.5 rounded-full transition-all shadow-md">
-            Baca lebih banyak berita desa <i class="fas fa-arrow-right bg-black text-white p-1 rounded-full text-[10px]"></i>
-        </a>
-    </div>
 </section>
 
 
+
+<!-- ===================================================== -->
 <!-- TESTIMONI PENGUNJUNG -->
-<section class="max-w-6xl mx-auto px-6 py-16 bg-green-50 rounded-[3rem] shadow-sm mb-16 relative">
-    <div class="flex flex-col md:flex-row justify-between items-center mb-12 gap-4">
-        <div class="text-center md:text-left">
-            <h2 class="font-bold text-xl md:text-2xl font-sans uppercase tracking-widest text-gray-900">
-                Ulasan Pengunjung
+<!-- ===================================================== -->
+<section class="
+    max-w-7xl
+    mx-auto
+    px-6
+    py-20
+">
+
+    <!-- HEADER -->
+    <div class="
+        flex flex-col
+        lg:flex-row
+        items-center
+        justify-between
+        gap-6
+        mb-14
+    ">
+
+        <!-- LEFT -->
+        <div class="text-center lg:text-left">
+
+            <!-- SMALL LABEL -->
+            <div class="
+                inline-flex
+                items-center
+                gap-3
+                mb-4
+            ">
+
+                <div class="w-10 h-[2px] bg-yellow-500"></div>
+
+                <span class="
+                    uppercase
+                    tracking-[0.25em]
+                    text-[12px]
+                    font-semibold
+                    text-yellow-600
+                ">
+                    Testimoni
+                </span>
+
+                <div class="w-10 h-[2px] bg-yellow-500"></div>
+
+            </div>
+
+            <!-- TITLE -->
+            <h2 class="
+                font-bold
+                text-[30px]
+                lg:text-[42px]
+                leading-[1.1]
+                tracking-[-0.03em]
+                text-[#1c3528]
+                mb-3
+            ">
+                Apa Kata Pengunjung Kami?
             </h2>
-            <p class="text-gray-600 mt-2">Apa kata mereka tentang Desa Hargorojo?</p>
+
+            <!-- DESCRIPTION -->
+            <p class="
+                text-[#66736b]
+                text-[15px]
+                lg:text-[17px]
+                leading-[1.7]
+                max-w-2xl
+            ">
+                Pengalaman, cerita, dan kesan dari para pengunjung
+                yang telah menikmati suasana Desa Hargorojo.
+            </p>
+
         </div>
-        <button onclick="document.getElementById('modal-testimoni-public').classList.remove('hidden')" class="bg-yellow-500 hover:bg-yellow-600 outline-none text-white font-bold py-3 px-6 rounded-full shadow-md transition-transform hover:-translate-y-1">
+
+        <!-- BUTTON -->
+<button
+    onclick="document.getElementById('modal-testimoni-public').classList.remove('hidden')"
+    class="
+        inline-flex
+        items-center
+        gap-4
+        bg-white
+        border
+        border-[#dfe7dc]
+        hover:bg-[#f7faf5]
+        text-[#000000]
+        px-8
+        py-4
+        rounded-full
+        font-semibold
+        shadow-sm
+        hover:shadow-md
+        transition-all
+        duration-300
+        ">
+
             Berikan Ulasan
+                <i class="fa-solid fa-pen"></i>
+            </span>
+
         </button>
+
     </div>
 
+    <!-- SUCCESS -->
     @if(session('success_testimoni'))
-        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-8" role="alert">
-            <span class="block sm:inline">{{ session('success_testimoni') }}</span>
+        <div class="
+            bg-green-100
+            border border-green-300
+            text-green-800
+            px-5 py-4
+            rounded-2xl
+            mb-10
+        ">
+            {{ session('success_testimoni') }}
         </div>
     @endif
+
+    <!-- ERROR -->
     @if ($errors->any())
-        <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-8" role="alert">
-            <span class="block sm:inline">Gagal mengirim ulasan:</span>
-            <ul class="list-disc ml-5 mt-1">
+        <div class="
+            bg-red-100
+            border border-red-300
+            text-red-700
+            px-5 py-4
+            rounded-2xl
+            mb-10
+        ">
+            <ul class="list-disc ml-5 space-y-1 text-sm">
                 @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
                 @endforeach
@@ -1411,84 +2033,682 @@
         </div>
     @endif
 
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- TESTIMONI GRID -->
+    <div class="
+        grid
+        grid-cols-1
+        md:grid-cols-2
+        lg:grid-cols-3
+        gap-8
+    ">
+
         @forelse($testimonis as $testi)
-        <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-100 hover:shadow-lg transition duration-300">
-            <div class="flex items-center gap-4 mb-4">
-                @if($testi->foto)
-                    <img src="{{ asset('images/testimoni/' . $testi->foto) }}" class="w-14 h-14 rounded-full object-cover border-2 border-gray-100">
-                @else
-                    <div class="w-14 h-14 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 font-bold text-xl">{{ strtoupper(substr($testi->nama, 0, 1)) }}</div>
-                @endif
+
+        <!-- CARD -->
+        <div class="
+            h-full
+
+            bg-white
+
+            rounded-[32px]
+
+            border border-[#ece7de]
+
+            p-8
+
+            text-center
+
+            shadow-[0_10px_35px_rgba(0,0,0,0.04)]
+
+            hover:-translate-y-2
+            hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
+
+            transition-all
+            duration-500
+        ">
+
+            <!-- FOTO -->
+            @if($testi->foto)
+
+                <img
+                    src="{{ asset('images/testimoni/' . $testi->foto) }}"
+                    alt="{{ $testi->nama }}"
+                    class="
+                        w-20 h-20
+
+                        mb-7
+
+                        object-cover
+                        object-center
+
+                        rounded-full
+
+                        inline-block
+
+                        border-[3px]
+                        border-[#edf3ea]
+
+                        shadow-md
+                    "
+                >
+
+            @else
+
+                <div class="
+                    w-20 h-20
+
+                    mb-7
+
+                    rounded-full
+
+                    inline-flex
+                    items-center justify-center
+
+                    bg-[#eef5eb]
+
+                    border-[3px]
+                    border-[#edf3ea]
+
+                    text-[#1d4d3a]
+
+                    font-bold
+                    text-2xl
+                ">
+                    {{ strtoupper(substr($testi->nama, 0, 1)) }}
+                </div>
+
+            @endif
+
+            <!-- TESTIMONI -->
+            <p class="
+                text-[#5f6d63]
+
+                text-[15px]
+
+                leading-[1.9]
+
+                italic
+
+                mb-7
+            ">
+                “{{ Str::limit($testi->isi_testimoni, 180) }}”
+            </p>
+
+            <!-- LINE -->
+            <span class="
+                inline-block
+
+                h-[3px]
+                w-12
+
+                rounded-full
+
+                bg-gradient-to-r
+                from-yellow-500
+                to-yellow-400
+
+                mb-5
+            "></span>
+
+            <!-- NAMA -->
+            <h3 class="
+                text-[#1c3528]
+
+                font-bold
+
+                tracking-[0.08em]
+
+                text-sm
+
+                uppercase
+
+                mb-2
+            ">
+                {{ $testi->nama }}
+            </h3>
+
+            <!-- RATING -->
+            <div class="
+                text-yellow-400
+                text-sm
+                tracking-[0.15em]
+            ">
+                {{ str_repeat('★', $testi->rating ?: 5) }}{{ str_repeat('☆', 5 - ($testi->rating ?: 5)) }}
+            </div>
+
+        </div>
+
+        @empty
+
+        <div class="
+            col-span-full
+
+            text-center
+
+            py-14
+
+            bg-[#f8faf7]
+
+            rounded-[30px]
+
+            border border-dashed border-[#d9e2d3]
+        ">
+
+            <div class="
+                w-20 h-20
+
+                mx-auto mb-5
+
+                rounded-full
+
+                bg-[#eef5eb]
+
+                flex items-center justify-center
+
+                text-[#1d4d3a]
+                text-3xl
+            ">
+                <i class="fa-regular fa-comments"></i>
+            </div>
+
+            <h3 class="
+                text-[#1d3528]
+
+                font-bold
+
+                text-xl
+
+                mb-2
+            ">
+                Belum Ada Ulasan
+            </h3>
+
+            <p class="
+                text-[#6b776f]
+
+                text-sm
+            ">
+                Jadilah pengunjung pertama yang memberikan testimoni.
+            </p>
+
+        </div>
+
+        @endforelse
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- MANFAAT SISTEM -->
+<!-- ===================================================== -->
+<section class="
+    relative
+    overflow-hidden
+    py-1
+    px-6
+">
+    <!-- BACKGROUND ORNAMENT -->
+    <div class="
+        absolute
+        -left-20
+        top-20
+        w-62 h-75
+        bg-green-100/40
+        blur-3xl
+        rounded-full
+    "></div>
+
+    <div class="
+        absolute
+        -right-20
+        bottom-1
+        w-62 h-62
+        bg-yellow-100/40
+        blur-3xl
+        rounded-full
+    "></div>
+     
+<section class="
+    relative
+    overflow-hidden
+    pt-1
+    pb-15
+    px-6
+">
+
+    <!-- BACKGROUND ORNAMENT -->
+    <div class="
+        absolute
+        top-0
+        left-1/2
+        -translate-x-1/2
+        w-[700px]
+        h-[700px]
+        bg-green-100/30
+        blur-3xl
+        rounded-full
+    "></div>
+
+    <!-- CONTAINER -->
+    <div class="
+        max-w-[1400px]
+        mx-auto
+        relative
+        z-10
+    ">
+        <!-- MAIN BOX -->
+        <div class="
+            relative
+            overflow-hidden
+            rounded-[40px]
+            border border-[#e3eadf]
+            bg-gradient-to-br
+            from-[#f7faf5]
+            via-white
+            to-[#f3f8ef]
+            shadow-[0_20px_60px_rgba(0,0,0,0.05)]
+            px-8
+            py-12
+            lg:px-14
+            lg:py-10
+        ">
+
+            <!-- DECOR -->
+            <div class="
+                absolute
+                -top-24
+                -right-24
+                w-72 h-72
+                bg-green-100/40
+                rounded-full
+                blur-3xl
+            "></div>
+
+            <div class="
+                absolute
+                -bottom-24
+                -left-24
+                w-72 h-72
+                bg-yellow-100/40
+                rounded-full
+                blur-3xl
+            "></div>
+
+            <!-- CONTENT -->
+            <div class="
+                relative
+                z-10
+                grid
+                grid-cols-1
+                lg:grid-cols-[1fr_1.1fr]
+                gap-15
+                items-center
+            ">
+
+                <!-- ===================================================== -->
+                <!-- LEFT -->
+                <!-- ===================================================== -->
                 <div>
-                    <h4 class="font-bold text-gray-900">{{ $testi->nama }}</h4>
-                    <div class="text-yellow-400 text-sm">
-                        {{ str_repeat('★', $testi->rating ?: 5) }}{{ str_repeat('☆', 5 - ($testi->rating ?: 5)) }}
+
+                    <!-- SMALL LABEL -->
+                    <div class="
+                        inline-flex
+                        items-center
+                        gap-3
+                        px-4 py-2
+                        rounded-full
+                        bg-white
+                        border border-[#dce6d7]
+                        mb-1
+                    ">
+                        <i class="fa-solid fa-leaf text-[#4b8b60]"></i>
+                        <span class="
+                            uppercase
+                            tracking-[0.2em]
+                            text-[11px]
+                            font-semibold
+                            text-[#2f5c44]
+                        "> Desa Agroeduwisata Hargorojo
+                        </span>
+                    </div>
+
+                    <h2 class="
+                        text-[#183322]
+                        text-[34px]
+                        lg:text-[42px]
+                        leading-[1.1]
+                        tracking-[-0.05em]
+                        font-bold
+                        mb-2
+                    ">
+                        Temukan Cerita, Tradisi, dan Keindahan Desa Hargorojo
+                    </h2>
+
+                    <!-- DESCRIPTION -->
+                    <p class="
+                        text-[#617066]
+                        text-[16px]
+                        lg:text-[16px]
+                        leading-[1.9]
+                        mb-10
+                        max-w-xl
+                    ">
+                        Lebih dari sekadar destinasi wisata, Desa Agroeduwisata Hargorojo menghadirkan pengalaman yang menghubungkan pengunjung dengan alam, budaya, serta kehidupan masyarakat lokal yang penuh kehangatan dan kearifan tradisional.
+                    </p>
+
+                    <!-- BUTTON -->
+                    <a href="#"
+                    class="
+                        inline-flex
+                        items-center
+                        gap-5
+                        bg-[#1d4d3a]
+                        hover:bg-[#173c2d]
+                        hover:-translate-y-[2px]
+                        text-white
+                        px-8 py-3
+                        rounded-full
+                        font-semibold
+                        shadow-[0_12px_30px_rgba(29,77,58,0.20)]
+                        transition-all
+                        duration-300
+                    ">
+
+                        Jelajahi Desa
+                        <span class="
+                            w-9 h-9
+                            rounded-full
+                            bg-white/15
+
+                            flex items-center justify-center
+
+                            text-sm
+                        ">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+
+                    </a>
+
+                </div>
+
+                <!-- ===================================================== -->
+                <!-- RIGHT STATS -->
+                <!-- ===================================================== -->
+                <div class="
+                    grid
+                    grid-cols-2
+                    lg:grid-cols-2
+
+                    gap-5
+                ">
+
+                    <!-- ITEM -->
+                    <div class="
+                        bg-white/80
+
+                        backdrop-blur-xl
+
+                        border border-[#e3eadf]
+
+                        rounded-[28px]
+
+                        px-6
+                        py-7
+
+                        text-center
+
+                        hover:-translate-y-1
+                        hover:shadow-lg
+
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="
+                            w-14 h-14
+
+                            mx-auto mb-5
+
+                            rounded-full
+
+                            bg-[#edf5e9]
+
+                            flex items-center justify-center
+
+                            text-[#4f8c64]
+                            text-xl
+                        ">
+                            <i class="fa-solid fa-users"></i>
+                        </div>
+
+                        <div class="
+                            text-[#2e6b4d]
+
+                            text-[36px]
+
+                            font-bold
+
+                            leading-none
+
+                            mb-3
+                        ">
+                            1.250+
+                        </div>
+
+                        <p class="
+                            text-[#607066]
+
+                            text-sm
+
+                            leading-[1.6]
+                        ">
+                            Pengguna Aktif
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        bg-white/80
+
+                        backdrop-blur-xl
+
+                        border border-[#e3eadf]
+
+                        rounded-[28px]
+
+                        px-6
+                        py-7
+
+                        text-center
+
+                        hover:-translate-y-1
+                        hover:shadow-lg
+
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="
+                            w-14 h-14
+
+                            mx-auto mb-5
+
+                            rounded-full
+
+                            bg-[#edf5e9]
+
+                            flex items-center justify-center
+
+                            text-[#4f8c64]
+                            text-xl
+                        ">
+                            <i class="fa-solid fa-file-circle-check"></i>
+                        </div>
+
+                        <div class="
+                            text-[#2e6b4d]
+
+                            text-[36px]
+
+                            font-bold
+
+                            leading-none
+
+                            mb-3
+                        ">
+                            3.480+
+                        </div>
+
+                        <p class="
+                            text-[#607066]
+
+                            text-sm
+
+                            leading-[1.6]
+                        ">
+                            Layanan Selesai
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        bg-white/80
+
+                        backdrop-blur-xl
+
+                        border border-[#e3eadf]
+
+                        rounded-[28px]
+
+                        px-6
+                        py-7
+
+                        text-center
+
+                        hover:-translate-y-1
+                        hover:shadow-lg
+
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="
+                            w-14 h-14
+
+                            mx-auto mb-5
+
+                            rounded-full
+
+                            bg-[#edf5e9]
+
+                            flex items-center justify-center
+
+                            text-[#4f8c64]
+                            text-xl
+                        ">
+                            <i class="fa-solid fa-bullhorn"></i>
+                        </div>
+
+                        <div class="
+                            text-[#2e6b4d]
+
+                            text-[36px]
+
+                            font-bold
+
+                            leading-none
+
+                            mb-3
+                        ">
+                            120+
+                        </div>
+
+                        <p class="
+                            text-[#607066]
+
+                            text-sm
+
+                            leading-[1.6]
+                        ">
+                            Informasi Terupdate
+                        </p>
+
+                    </div>
+
+                    <!-- ITEM -->
+                    <div class="
+                        bg-white/80
+
+                        backdrop-blur-xl
+
+                        border border-[#e3eadf]
+
+                        rounded-[28px]
+
+                        px-6
+                        py-7
+
+                        text-center
+
+                        hover:-translate-y-1
+                        hover:shadow-lg
+
+                        transition-all
+                        duration-300
+                    ">
+
+                        <div class="
+                            w-14 h-14
+
+                            mx-auto mb-5
+
+                            rounded-full
+
+                            bg-[#edf5e9]
+
+                            flex items-center justify-center
+
+                            text-[#4f8c64]
+                            text-xl
+                        ">
+                            <i class="fa-solid fa-heart"></i>
+                        </div>
+
+                        <div class="
+                            text-[#2e6b4d]
+
+                            text-[36px]
+
+                            font-bold
+
+                            leading-none
+
+                            mb-3
+                        ">
+                            98%
+                        </div>
+
+                        <p class="
+                            text-[#607066]
+
+                            text-sm
+
+                            leading-[1.6]
+                        ">
+                            Kepuasan Warga
+                       </p>
+
                     </div>
                 </div>
             </div>
-            <p class="text-gray-600 text-sm italic leading-relaxed">"{{ $testi->isi_testimoni }}"</p>
-        </div>
-        @empty
-        <div class="col-span-3 text-center text-gray-500 py-8">Belum ada ulasan. Jadilah yang pertama!</div>
-        @endforelse
-    </div>
-</section>
-
-<!-- 5. MANFAAT SISTEM KAMI -->
-<section class="max-w-6xl mx-auto px-6 py-16 mb-12">
-    <div class="mb-10 text-center md:text-left">
-        <h2 class="font-bold text-xl md:text-2xl font-sans uppercase tracking-widest text-gray-900">
-            Manfaat Sistem Kami
-        </h2>
-    </div>
-
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-        <!-- Box 1 -->
-        <div class="bg-gray-100 rounded-[2rem] overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition duration-300 p-4">
-            <div class="aspect-square bg-gray-300 w-full rounded-2xl relative overflow-hidden mb-4 group hover:shadow-md">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition">
-                <div class="absolute inset-0 bg-green-900/10"></div>
-            </div>
-            <div class="text-center font-bold text-[10px] md:text-sm text-gray-900 tracking-wide">
-                MUDAH TANPA<br>RIBET
-            </div>
-        </div>
-
-        <!-- Box 2 -->
-        <div class="bg-gray-100 rounded-[2rem] overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition duration-300 p-4">
-            <div class="aspect-square bg-gray-300 w-full rounded-2xl relative overflow-hidden mb-4 group hover:shadow-md">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition">
-                <div class="absolute inset-0 bg-green-900/10"></div>
-            </div>
-            <div class="text-center font-bold text-[10px] md:text-sm text-gray-900 tracking-wide">
-                AMAN & TERJAMIN<br>TRANSAKSI
-            </div>
-        </div>
-
-        <!-- Box 3 -->
-        <div class="bg-gray-100 rounded-[2rem] overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition duration-300 p-4">
-            <div class="aspect-square bg-gray-300 w-full rounded-2xl relative overflow-hidden mb-4 group hover:shadow-md">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition">
-                <div class="absolute inset-0 bg-green-900/10"></div>
-            </div>
-            <div class="text-center font-bold text-[10px] md:text-sm text-gray-900 tracking-wide">
-                UPDATE INFORMASI<br>TERBARU UMKM
-            </div>
-        </div>
-
-        <!-- Box 4 -->
-        <div class="bg-gray-100 rounded-[2rem] overflow-hidden shadow-sm border border-gray-200 hover:shadow-lg hover:-translate-y-1 transition duration-300 p-4">
-            <div class="aspect-square bg-gray-300 w-full rounded-2xl relative overflow-hidden mb-4 group hover:shadow-md">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition">
-                <div class="absolute inset-0 bg-green-900/10"></div>
-            </div>
-            <div class="text-center font-bold text-[10px] md:text-sm text-gray-900 tracking-wide">
-                MEMBANGUN<br>EKOSISTEM DIGITAL
-            </div>
         </div>
     </div>
 </section>
+
 
 <!-- Modal Create Testimoni Public -->
 <div id="modal-testimoni-public" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
