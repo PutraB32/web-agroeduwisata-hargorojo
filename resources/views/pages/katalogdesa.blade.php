@@ -4,6 +4,9 @@
 
 @section('content')
 
+{{-- NAVBAR --}}
+@include('layouts.navbar')
+
 <!-- Hero Berita Utama -->
 <section class="relative py-16 px-4 shadow-sm overflow-hidden border-b border-green-900" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-r from-green-900/95 to-black/80"></div>

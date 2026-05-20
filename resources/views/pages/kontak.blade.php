@@ -4,6 +4,9 @@
 
 @section('content')
 
+{{-- NAVBAR --}}
+@include('layouts.navbar')
+
 <section class="relative py-24 px-4 text-center border-b border-green-900 overflow-hidden" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-green-900/80 to-black/70"></div>
     

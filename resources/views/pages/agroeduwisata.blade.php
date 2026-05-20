@@ -4,33 +4,201 @@
 
 @section('content')
 
+{{-- NAVBAR --}}
+@include('layouts.navbar')
+
 <!-- Hero Section -->
-<section class="relative w-full min-h-[500px] flex md:items-center py-20 px-4 shadow-sm overflow-hidden bg-green-900 text-center md:text-left">
+<section class="
+    relative
+    w-full
+    min-h-[500px]
+
+    flex
+    md:items-center
+
+    py-20
+    px-4
+
+    shadow-sm
+    overflow-hidden
+
+    bg-green-900
+
+    text-center
+    md:text-left
+">
+
     <!-- Background Image -->
     <div class="absolute inset-0 w-full h-full">
-        <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover opacity-100">
+
+        <img
+            src="{{ asset('images/beranda.bg.jpeg') }}"
+            class="w-full h-full object-cover opacity-100"
+        >
+
         <!-- Masking Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-r from-green-900 via-green-900/90 to-green-900/30"></div>
+        <div class="
+            absolute inset-0
+
+            bg-gradient-to-r
+            from-green-900
+            via-green-900/90
+            to-green-900/30
+        "></div>
+
     </div>
-    
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between text-left gap-12 relative z-10 w-full">
+
+    <div class="
+        max-w-7xl
+        mx-auto
+
+        flex
+        flex-col
+        md:flex-row
+
+        items-center
+        justify-between
+
+        text-left
+
+        gap-12
+
+        relative
+        z-10
+
+        w-full
+    ">
+
         <!-- Content Left -->
-        <div class="md:w-1/2 w-full text-center md:text-left">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-black mb-6 leading-tight text-white uppercase tracking-tight">
-                AGROEDUWISATA<br><span class="text-yellow-400">DESA HARGOROJO</span>
+        <div class="
+            md:w-1/2
+            w-full
+
+            text-center
+            md:text-left
+        ">
+
+            <h1 class="
+                text-4xl
+                md:text-5xl
+                lg:text-6xl
+
+                font-black
+
+                mb-6
+
+                leading-tight
+
+                text-white
+
+                uppercase
+
+                tracking-tight
+            ">
+
+                AGROEDUWISATA
+
+                <br>
+
+                <span class="text-yellow-400">
+                    DESA HARGOROJO
+                </span>
+
             </h1>
-            <p class="text-base md:text-lg text-green-50 mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 border-l-4 border-yellow-500 pl-4 font-medium">
-                Menengok sisi edukatif pariwisata yang tak terlupakan. Dapatkan pengalaman tak terlupakan melalui kunjungan wisata lokal di Hargorojo.
+
+            <p class="
+                text-base
+                md:text-lg
+
+                text-green-50
+
+                mb-8
+
+                leading-relaxed
+
+                max-w-lg
+                mx-auto
+                md:mx-0
+
+                border-l-4
+                border-yellow-500
+
+                pl-4
+
+                font-medium
+            ">
+
+                Menengok sisi edukatif pariwisata yang tak terlupakan.
+                Dapatkan pengalaman tak terlupakan melalui kunjungan
+                wisata lokal di Hargorojo.
+
             </p>
+
         </div>
+
         <!-- Right Image Decoration -->
-        <div class="md:w-1/2 flex justify-center w-full">
-            <div class="w-72 h-72 lg:w-96 lg:h-96 bg-green-800 rounded-full overflow-hidden shadow-2xl relative group border-4 border-yellow-500">
-                <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt="Hero Agroeduwisata">
-                <div class="absolute inset-0 border-[1rem] border-green-900/40 rounded-full z-10 pointer-events-none"></div>
+        <div class="
+            md:w-1/2
+            flex
+            justify-center
+            w-full
+        ">
+
+            <div class="
+                w-72 h-72
+                lg:w-96 lg:h-96
+
+                bg-green-800
+
+                rounded-full
+
+                overflow-hidden
+
+                shadow-2xl
+
+                relative
+                group
+
+                border-4
+                border-yellow-500
+            ">
+
+                <img
+                    src="{{ asset('images/beranda.bg.jpeg') }}"
+                    class="
+                        w-full
+                        h-full
+
+                        object-cover
+
+                        group-hover:scale-110
+
+                        transition
+                        duration-700
+                    "
+
+                    alt="Hero Agroeduwisata"
+                >
+
+                <div class="
+                    absolute inset-0
+
+                    border-[1rem]
+                    border-green-900/40
+
+                    rounded-full
+
+                    z-10
+
+                    pointer-events-none
+                "></div>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
 <!-- Fasilitas Wisata Edukasi -->

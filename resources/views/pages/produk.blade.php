@@ -3,6 +3,8 @@
 @section('title', 'Cerita & Fakta - Produk Gula Kelapa')
 
 @section('content')
+{{-- NAVBAR --}}
+@include('layouts.navbar')
 
 <!-- Hero Section -->
 <section class="max-w-7xl mx-auto px-4 py-24 text-center relative">

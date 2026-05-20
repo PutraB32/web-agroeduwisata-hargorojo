@@ -3,6 +3,9 @@
 @section('title', 'Belanja Produk - Desa Hargorojo')
 
 @section('content')
+{{-- NAVBAR --}}
+@include('layouts.navbar')
+
 <!-- Hero Section -->
 <div class="relative text-center py-20 px-4 shadow-sm border-b border-green-900" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 to-black/80"></div>

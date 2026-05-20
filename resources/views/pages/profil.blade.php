@@ -4,22 +4,412 @@
 
 @section('content')
 
-<!-- Hero Section -->
-<section class="relative pt-32 pb-24 px-4 text-center flex flex-col items-center justify-center min-h-[400px] border-b border-green-900" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-green-900/80 to-black/60 z-0"></div>
-    <h1 class="font-bold text-3xl md:text-5xl text-yellow-400 tracking-widest uppercase relative z-10 mb-4 drop-shadow-2xl">
-        PROFIL DESA HARGOROJO
-    </h1>
-    <p class="text-white text-sm md:text-base max-w-2xl mx-auto relative z-10 drop-shadow-md font-medium leading-relaxed">
-        Menelusuri jejak alam, tradisi, dan inovasi yang membangun kemandirian sejati dari lereng bukit Menoreh.
-    </p>
-    <div class="absolute inset-0 flex justify-center items-center opacity-10 text-yellow-500 z-0 mix-blend-overlay">
-         <svg class="w-48 h-48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+{{-- NAVBAR --}}
+@include('layouts.navbar')
+
+<!-- ===================================================== -->
+<!-- HERO SECTION -->
+<!-- ===================================================== -->
+<section class="
+    relative
+    h-[600px]
+    overflow-hidden
+">
+    <!-- NAVBAR -->
+    @include('layouts.navbar')
+
+    <!-- BACKGROUND IMAGE -->
+    <div class="absolute inset-0">
+        <!-- IMAGE -->
+        <img
+            src="{{ asset('images/assets foto/hero_profil desa.png') }}"
+            alt="Hero Desa"
+
+            class="
+                w-full
+                h-full
+                object-cover
+                object-center
+                scale-105
+            "
+        >
+        <!-- DARK OVERLAY -->
+        <div class="
+            absolute inset-0
+            bg-black/20
+        "></div>
+
+        <!-- CINEMATIC GRADIENT -->
+        <div class="
+            absolute inset-0
+            bg-gradient-to-b
+            from-black/80
+            via-black/15
+            to-black/20
+        "></div>
+
+        <!-- LEFT SHADOW -->
+        <div class="
+            absolute inset-0
+            bg-gradient-to-r
+            from-[#0d1f17]/10
+            via-transparent
+            to-[#0d1f17]/70
+        "></div>
+
     </div>
+
+    <!-- ===================================================== -->
+    <!-- CONTENT -->
+    <!-- ===================================================== -->
+    <div class="
+        relative
+        z-20
+        h-[850px]
+        flex
+        items-center
+        justify-center
+        px-6
+        py-32
+    ">
+
+        <div class="
+            max-w-6xl
+            mx-auto
+            text-center
+        ">
+
+            <!-- ===================================================== -->
+            <!-- TITLE -->
+            <!-- ===================================================== -->
+            <h1 class="
+                font-lora
+                text-[55px]
+                md:text-[60px]
+                lg:text-[60px]
+                leading-[0.9]
+                tracking-[-0.03em]
+                font-bold
+                text-white
+                drop-shadow-[0_10px_40px_rgba(0,0,0,0.45)]
+            ">
+                PROFIL DESA HARGOROJO
+            </h1>
+
+            <!-- ===================================================== -->
+            <!-- DESCRIPTION -->
+            <!-- ===================================================== -->
+            <p class="
+                mt-5
+                max-w-2xl
+                mx-auto
+                text-white/90
+                text-base
+                md:text-xl
+                leading-[1.5]
+                font-thin
+                italic
+            ">
+
+                Desa agroeduwisata yang memadukan
+                kearifan lokal, potensi alam,
+                dan inovasi untuk mewujudkan masyarakat
+                yang mandiri, sejahtera,
+                dan berkelanjutan.
+
+            </p>
+
+
+            <!-- ===================================================== -->
+            <!-- POTENSI CARD -->
+            <!-- ===================================================== -->
+            <div class="
+                mt-10
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-5
+
+                gap-5
+            ">
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/10
+
+                    backdrop-blur-xl
+
+                    border
+                    border-white/15
+
+                    rounded-[28px]
+
+                    p-6
+
+                    hover:-translate-y-2
+                    hover:bg-white/15
+
+                    transition-all
+                    duration-500
+                ">
+
+                    <!-- ICON -->
+                    <div class="
+                        w-16
+                        h-16
+
+                        rounded-full
+
+                        bg-white/10
+
+                        border
+                        border-white/10
+
+                        mx-auto
+
+                        flex
+                        items-center
+                        justify-center
+
+                        text-yellow-400
+                        text-2xl
+
+                        mb-5
+                    ">
+
+                        <i class="fa-solid fa-mountain-sun"></i>
+
+                    </div>
+
+                    <!-- TITLE -->
+                    <h3 class="
+                        text-white
+
+                        text-xl
+
+                        font-semibold
+
+                        mb-3
+                    ">
+                        Alam Asri
+                    </h3>
+
+                    <!-- DESC -->
+                    <p class="
+                        text-white/75
+
+                        text-sm
+
+                        leading-[1.8]
+                    ">
+                        Dikelilingi pegunungan hijau
+                        yang sejuk dan alami.
+                    </p>
+
+                </div>
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/10
+                    backdrop-blur-xl
+                    border border-white/15
+                    rounded-[28px]
+                    p-6
+                    hover:-translate-y-2
+                    hover:bg-white/15
+                    transition-all
+                    duration-500
+                ">
+
+                    <div class="
+                        w-16 h-16
+                        rounded-full
+                        bg-white/10
+                        border border-white/10
+                        mx-auto
+                        flex items-center justify-center
+                        text-yellow-400
+                        text-2xl
+                        mb-5
+                    ">
+                        <i class="fa-solid fa-seedling"></i>
+                    </div>
+
+                    <h3 class="
+                        text-white
+                        text-xl
+                        font-semibold
+                        mb-3
+                    ">
+                        Agroeduwisata
+                    </h3>
+
+                    <p class="
+                        text-white/75
+                        text-sm
+                        leading-[1.8]
+                    ">
+                        Wisata edukasi berbasis
+                        alam dan budaya lokal.
+                    </p>
+
+                </div>
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/10
+                    backdrop-blur-xl
+                    border border-white/15
+                    rounded-[28px]
+                    p-6
+                    hover:-translate-y-2
+                    hover:bg-white/15
+                    transition-all
+                    duration-500
+                ">
+
+                    <div class="
+                        w-16 h-16
+                        rounded-full
+                        bg-white/10
+                        border border-white/10
+                        mx-auto
+                        flex items-center justify-center
+                        text-yellow-400
+                        text-2xl
+                        mb-5
+                    ">
+                        <i class="fa-solid fa-leaf"></i>
+                    </div>
+
+                    <h3 class="
+                        text-white
+                        text-xl
+                        font-semibold
+                        mb-3
+                    ">
+                        Tradisi Lokal
+                    </h3>
+
+                    <p class="
+                        text-white/75
+                        text-sm
+                        leading-[1.8]
+                    ">
+                        Budaya dan tradisi desa
+                        yang masih terjaga.
+                    </p>
+
+                </div>
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/10
+                    backdrop-blur-xl
+                    border border-white/15
+                    rounded-[28px]
+                    p-6
+                    hover:-translate-y-2
+                    hover:bg-white/15
+                    transition-all
+                    duration-500
+                ">
+
+                    <div class="
+                        w-16 h-16
+                        rounded-full
+                        bg-white/10
+                        border border-white/10
+                        mx-auto
+                        flex items-center justify-center
+                        text-yellow-400
+                        text-2xl
+                        mb-5
+                    ">
+                        <i class="fa-solid fa-store"></i>
+                    </div>
+
+                    <h3 class="
+                        text-white
+                        text-xl
+                        font-semibold
+                        mb-3
+                    ">
+                        UMKM Lokal
+                    </h3>
+
+                    <p class="
+                        text-white/75
+                        text-sm
+                        leading-[1.8]
+                    ">
+                        Produk lokal kreatif
+                        hasil karya masyarakat.
+                    </p>
+
+                </div>
+
+                <!-- CARD -->
+                <div class="
+                    bg-white/10
+                    backdrop-blur-xl
+                    border border-white/15
+                    rounded-[28px]
+                    p-6
+                    hover:-translate-y-2
+                    hover:bg-white/15
+                    transition-all
+                    duration-500
+                ">
+
+                    <div class="
+                        w-16 h-16
+                        rounded-full
+                        bg-white/10
+                        border border-white/10
+                        mx-auto
+                        flex items-center justify-center
+                        text-yellow-400
+                        text-2xl
+                        mb-5
+                    ">
+                        <i class="fa-solid fa-people-group"></i>
+                    </div>
+
+                    <h3 class="
+                        text-white
+                        text-xl
+                        font-semibold
+                        mb-3
+                    ">
+                        Masyarakat
+                    </h3>
+
+                    <p class="
+                        text-white/75
+                        text-sm
+                        leading-[1.8]
+                    ">
+                        Gotong royong dan
+                        kolaborasi yang kuat.
+                    </p>
+
+                </div>
+
+            </div>
+
+            
+
+        </div>
+
+    </div>
+
 </section>
 
 <!-- Sejarah Kami -->
-<section class="max-w-4xl mx-auto px-4 py-16 text-center">
+<section 
+class="bg-gray-50 py-20 border-y border-gray-200 shadow-inner"
+class="max-w-4xl mx-auto px-4 py-16 text-center">
     <span class="inline-block border border-yellow-500 bg-yellow-50 rounded-full px-4 py-1 text-xs font-bold uppercase tracking-widest mb-4 text-yellow-700 shadow-sm">
         Sejarah Kami
     </span>
