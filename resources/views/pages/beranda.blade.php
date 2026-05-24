@@ -1952,13 +1952,14 @@
                 leading-[1.1]
                 tracking-[-0.03em]
                 text-[#1c3528]
-                mb-3
+                mb-2
             ">
                 Apa Kata Pengunjung Kami?
             </h2>
 
             <!-- DESCRIPTION -->
             <p class="
+                
                 text-[#66736b]
                 text-[15px]
                 lg:text-[17px]
@@ -2039,7 +2040,7 @@
         grid-cols-1
         md:grid-cols-2
         lg:grid-cols-3
-        gap-8
+        gap-6
     ">
 
         @forelse($testimonis as $testi)
@@ -2047,22 +2048,14 @@
         <!-- CARD -->
         <div class="
             h-full
-
             bg-white
-
-            rounded-[32px]
-
+            rounded-[30px]
             border border-[#ece7de]
-
             p-8
-
             text-center
-
             shadow-[0_10px_35px_rgba(0,0,0,0.04)]
-
             hover:-translate-y-2
             hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
-
             transition-all
             duration-500
         ">
@@ -2075,19 +2068,13 @@
                     alt="{{ $testi->nama }}"
                     class="
                         w-20 h-20
-
                         mb-7
-
                         object-cover
                         object-center
-
                         rounded-full
-
                         inline-block
-
                         border-[3px]
                         border-[#edf3ea]
-
                         shadow-md
                     "
                 >
@@ -2121,9 +2108,10 @@
 
             <!-- TESTIMONI -->
             <p class="
+                font-lora
                 text-[#5f6d63]
 
-                text-[15px]
+                text-[16px]
 
                 leading-[1.9]
 
@@ -2139,7 +2127,7 @@
                 inline-block
 
                 h-[3px]
-                w-12
+                w-15
 
                 rounded-full
 
@@ -2153,16 +2141,11 @@
             <!-- NAMA -->
             <h3 class="
                 text-[#1c3528]
-
                 font-bold
-
                 tracking-[0.08em]
-
                 text-sm
-
                 uppercase
-
-                mb-2
+                mb-1
             ">
                 {{ $testi->nama }}
             </h3>
@@ -2170,7 +2153,7 @@
             <!-- RATING -->
             <div class="
                 text-yellow-400
-                text-sm
+                text-base
                 tracking-[0.15em]
             ">
                 {{ str_repeat('★', $testi->rating ?: 5) }}{{ str_repeat('☆', 5 - ($testi->rating ?: 5)) }}
@@ -2269,7 +2252,9 @@
         blur-3xl
         rounded-full
     "></div>
-     
+
+</section>
+
 <section class="
     relative
     overflow-hidden
@@ -2713,9 +2698,13 @@
 <!-- Modal Create Testimoni Public -->
 <div id="modal-testimoni-public" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
   <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity backdrop-blur-sm" aria-hidden="true" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')"></div>
+    <!-- Latar Belakang Hitam Transparan & Efek Blur -->
+    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')"></div>
+    
     <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+    
+    <!-- Kontainer Putih Form (Sudah ditambahkan relative z-10) -->
+    <div class="relative z-10 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
       <form action="{{ route('public.testimoni.store') }}" method="POST" enctype="multipart/form-data">
           @csrf
           <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
@@ -2756,5 +2745,6 @@
     </div>
   </div>
 </div>
+
 
 @endsection
