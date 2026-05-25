@@ -57,6 +57,7 @@ class BerandaController extends Controller
     public function storeTestimoni(Request $request)
     {
         $request->validate([
+            'produk_id' => 'nullable|exists:produk,id',
             'nama' => 'required|string|max:255',
             'isi_testimoni' => 'required|string',
             'rating' => 'nullable|integer|min:1|max:5',
