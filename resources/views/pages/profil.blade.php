@@ -53,12 +53,11 @@
                 absolute
                 inset-0
                 bg-gradient-to-b
-                from-black/50
+                from-black/20
                 via-black/20
                 to-black/40
             "
         ></div>
-
         <!-- SIDE SHADOW -->
         <div
             class="
@@ -67,7 +66,7 @@
                 bg-gradient-to-r
                 from-[#0d1f17]/20
                 via-transparent
-                to-[#0d1f17]/70
+                to-[#0d1f17]/40
             "
         ></div>
 
@@ -103,7 +102,6 @@
                     mb-1
                 "
             >
-
                 <!-- LEFT LINE -->
                 <div
                     class="
@@ -135,7 +133,6 @@
                         bg-white/60
                     "
                 ></div>
-
             </div>
 
             <!-- ===================================================== -->
