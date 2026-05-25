@@ -10,7 +10,7 @@
 <section class="relative py-24 px-4 text-center border-b border-green-900 overflow-hidden" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
     <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-green-900/80 to-black/70"></div>
     
-    <div class="absolute top-4 right-4 md:top-6 md:right-8 z-20">
+    <div class="absolute top-4 right-4 md:top-25 md:right-8 z-20">
         <a href="{{ route('login') }}" class="flex items-center gap-2.5 bg-black/40 backdrop-blur-md border border-yellow-500/30 hover:bg-green-800 hover:border-yellow-400 text-white font-bold text-xs md:text-sm px-5 py-2.5 md:py-3 rounded-full transition-all duration-300 shadow-lg hover:shadow-[0_4px_20px_rgba(234,179,8,0.3)] group overflow-hidden">
             <i class="fas fa-user-shield text-yellow-400 group-hover:scale-110 transition-transform duration-300 z-10"></i> 
             <span class="tracking-wide uppercase z-10">Login Admin</span>
