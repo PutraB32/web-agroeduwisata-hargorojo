@@ -8,14 +8,17 @@ class Order extends Model
 {
     protected $table = 'orders';
 
-    public $timestamps = false;
-
     protected $fillable = [
         'nama_pemesan',
         'no_hp',
         'alamat',
         'total',
         'status'
+    ];
+
+        protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     public function orderDetails()

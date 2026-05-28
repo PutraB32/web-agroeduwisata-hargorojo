@@ -9,7 +9,7 @@ class Agroeduwisata extends Model
     protected $table = 'agroeduwisata';
 
     protected $fillable = [
-        'kategori_id',
+        'parent_id',
         'user_id',
         'judul',
         'deskripsi',
