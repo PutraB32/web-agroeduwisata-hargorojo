@@ -482,7 +482,8 @@
             grid
             lg:grid-cols-2
             gap-10
-            items-start
+            
+            
         ">
 
             <!-- ===================================================== -->
@@ -528,14 +529,22 @@
             <!-- CONTENT -->
              <div class="
              px-8
-             py-10
+             py-25
+
+             min-h-(500px)
+             flex
+             flex-col
+             items-center
+             justify-center
+             text-center
+             
              ">
                     <!-- TEXT -->
                     <p class="
                     font-lora
                     italic
                         text-[#3f4a43]
-                        text-[17px]
+                        text-[18px]
                         leading-[2]
                     ">
 
@@ -549,14 +558,14 @@
 
                     <!-- ACCENT -->
                     <div class="
-                        w-16
+                        w-30
                         h-[3px]
 
                         rounded-full
 
                         bg-[#c8ab6d]
 
-                        mt-8
+                        mt-4
                     "></div>
 
                 </div>
@@ -608,14 +617,14 @@
             
             <!-- CONTENT -->
              <div class="
-             px-12
+             px-10
              py-12
              ">
                     <!-- LIST -->
                     <ul class="
                         space-y-3.5
                         font-lora
-                        text-[17px]
+                        text-[18px]
                     ">
                         <!-- ITEM -->
                         <li class="
