@@ -339,12 +339,13 @@
 
         </div>
 
+        @foreach($produkUnggulan as $index => $produk)
         <!-- ===================================================== -->
         <!-- PRODUCT LAYOUT -->
         <!-- ===================================================== -->
         <div class="
             mt-20
-            lg:w-5/6
+            lg:w-6xl
             mx-auto
             grid
             lg:grid-cols-[1fr_1fr]
@@ -357,7 +358,7 @@
             <!-- ===================================================== -->
             <div class="
                 order-2
-                lg:order-1
+                {{ $index % 2 == 1 ? 'lg:order-1' : 'lg:order-2' }}
             ">
 
                 <!-- MINI LABEL -->
@@ -396,15 +397,14 @@
                     font-lora
                     text-[#173121]
                     text-[40px]
-                    md:text-[38px]
+                    md:text-[35px]
                     leading-[1.05]
-                    tracking-[-0.04em]
+                    tracking-[-0.03em]
                     font-bold
                     mb-1
                 ">
 
-                    Gula Kelapa
-                    Cetak Asli
+                    {{ $produk->nama }}
 
                 </h1>
 
@@ -413,7 +413,6 @@
                 <!-- ===================================================== -->
                 <div
                     x-data="{ tab: 'description' }"
-
                     class="
                         mb-5
                     "
@@ -498,11 +497,7 @@
                             mb-4
                         ">
 
-                            Gula kelapa cetak khas Desa Hargorojo
-                            dibuat dari nira pilihan yang dimasak
-                            secara tradisional tanpa bahan pengawet,
-                            menghasilkan rasa manis alami
-                            dengan aroma khas kelapa asli.
+                            {{ $produk->deskripsi }}
 
                         </p>
 
@@ -789,7 +784,7 @@
                         <span class="
                             font-medium
                         ">
-                            Lihat Detail
+                            Beli Sekarang Juga
                         </span>
 
                         <!-- ICON -->
@@ -813,7 +808,7 @@
                                 fa-solid fa-arrow-right
 
                                 text-[#173121]
-                                text-sm
+                                text-md
                             "></i>
 
                         </div>
@@ -832,7 +827,7 @@
                 group
 
                 order-1
-                lg:order-2
+                
             ">
 
                 <!-- GLOW -->
@@ -894,7 +889,7 @@
             </div>
 
         </div>
-
+    @endforeach
     </div>
 
 </section>
