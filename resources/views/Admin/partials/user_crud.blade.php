@@ -44,11 +44,15 @@
                         {{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                        <button onclick="openEditModalUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ addslashes($user->email) }}', '{{ $user->role }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">Edit</button>
+                        <button onclick="openEditModalUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ addslashes($user->email) }}', '{{ $user->role }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                            <i class="fas fa-pen mr-1"></i> Edit
+                        </button>
                         @if(auth()->id() !== $user->id)
                         <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus user ini?');">
                             @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">Hapus</button>
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
                         </form>
                         @endif
                     </td>
@@ -56,19 +60,21 @@
                 @endforeach
             </tbody>
         </table>
-        <div class="px-5 py-5 bg-white border-t">
-            {{ $users->appends(request()->query())->links() }}
-        </div>
     </div>
 </div>
 
 <!-- MODAL CREATE USER -->
 <div id="modal-create-user" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-user')"></div>
-    <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border-t-4 border-green-800 flex flex-col">
+    <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
+            <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah User Baru</h3>
+            <button type="button" onclick="closeModal('modal-create-user')" class="text-white hover:text-yellow-400 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
         <form action="{{ route('admin.user.store') }}" method="POST" class="p-6">
             @csrf
-            <h3 class="text-xl font-bold text-gray-900 mb-6 font-serif">Tambah User Baru</h3>
             <div class="space-y-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap</label>
@@ -101,10 +107,15 @@
 <!-- MODAL EDIT USER -->
 <div id="modal-edit-user" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-user')"></div>
-    <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border-t-4 border-yellow-500 flex flex-col">
+    <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col">
+        <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Profile User</h3>
+            <button type="button" onclick="closeModal('modal-edit-user')" class="text-gray-900 hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
         <form id="form-edit-user" action="" method="POST" class="p-6">
             @csrf @method('PUT')
-            <h3 class="text-xl font-bold text-gray-900 mb-6 font-serif">Edit Profile User</h3>
             <div class="space-y-4">
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap</label>

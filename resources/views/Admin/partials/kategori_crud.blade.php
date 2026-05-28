@@ -42,10 +42,10 @@
                         <tr class="hover:bg-gray-50 transition-colors">
                             <td class="px-5 py-3 border-b border-gray-200 text-sm font-medium text-gray-900">{{ $kat->nama_kategori }}</td>
                             <td class="px-5 py-3 border-b border-gray-200 text-sm text-center">
-                                <button onclick="openEditKatKatalog({{ $kat->id }}, '{{ addslashes($kat->nama_kategori) }}')" class="text-yellow-600 hover:text-yellow-700 mx-1"><i class="fas fa-edit"></i></button>
+                                <button onclick="openEditKatKatalog({{ $kat->id }}, '{{ addslashes($kat->nama_kategori) }}')" class="text-yellow-600 hover:text-yellow-700 mx-1" title="Edit kategori"><i class="fas fa-edit"></i></button>
                                 <form action="{{ route('admin.kategori_katalog.destroy', $kat->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus kategori ini?');">
                                     @csrf @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 mx-1"><i class="fas fa-trash"></i></button>
+                                    <button type="submit" class="text-red-500 hover:text-red-700 mx-1" title="Hapus kategori"><i class="fas fa-trash"></i></button>
                                 </form>
                             </td>
                         </tr>
@@ -56,6 +56,7 @@
         </div>
 
 
+    </div>
 </div>
 
 <!-- ========================================== -->
@@ -63,10 +64,15 @@
 <!-- ========================================== -->
 <div id="modal-create-kat-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog">
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-kat-katalog')"></div>
-    <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border-t-4 border-green-800">
+    <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-green-800 px-6 py-4 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-white tracking-wide">Tambah Kategori Katalog</h3>
+            <button type="button" onclick="closeModal('modal-create-kat-katalog')" class="text-white hover:text-yellow-400 transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
         <form action="{{ route('admin.kategori_katalog.store') }}" method="POST" class="p-6">
             @csrf
-            <h3 class="text-xl font-bold text-gray-900 mb-4 font-serif">Tambah Kategori Katalog</h3>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Nama Kategori</label>
                 <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" type="text" name="nama_kategori" required placeholder="Contoh: Dokumen Publik">
@@ -84,10 +90,15 @@
 <!-- ========================================== -->
 <div id="modal-edit-kat-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog">
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-kat-katalog')"></div>
-    <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden border-t-4 border-yellow-500">
+    <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
+        <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center">
+            <h3 class="text-lg font-bold text-gray-900 tracking-wide">Edit Kategori Katalog</h3>
+            <button type="button" onclick="closeModal('modal-edit-kat-katalog')" class="text-gray-900 hover:text-white transition-colors">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
         <form id="form-edit-kat-katalog" method="POST" class="p-6">
             @csrf @method('PUT')
-            <h3 class="text-xl font-bold text-gray-900 mb-4 font-serif">Edit Kategori Katalog</h3>
             <div class="mb-6">
                 <label class="block text-gray-700 text-sm font-bold mb-2">Nama Kategori</label>
                 <input id="edit-nama-katalog" class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" type="text" name="nama_kategori" required>

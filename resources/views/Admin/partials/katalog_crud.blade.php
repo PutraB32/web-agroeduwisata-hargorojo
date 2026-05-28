@@ -82,10 +82,14 @@
                         <p class="text-green-600 text-xs truncate max-w-[100px]">{{ $katalog->Url ?: '-' }}</p>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModalKatalog({{ $katalog->id }}, '{{ $katalog->kategori_id }}', '{{ addslashes($katalog->judul) }}', '{{ addslashes($katalog->deskripsi) }}', '{{ addslashes($katalog->Url) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">Edit</button>
+                        <button onclick="openEditModalKatalog({{ $katalog->id }}, '{{ $katalog->kategori_id }}', '{{ addslashes($katalog->judul) }}', '{{ addslashes($katalog->deskripsi) }}', '{{ addslashes($katalog->Url) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                            <i class="fas fa-pen mr-1"></i> Edit
+                        </button>
                         <form action="{{ route('admin.katalog.destroy', $katalog->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
                             @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">Hapus</button>
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -95,9 +99,6 @@
                 @endif
             </tbody>
         </table>
-        <div class="px-5 py-5 bg-white border-t">
-            {{ $katalogs->appends(request()->query())->links() }}
-        </div>
     </div>
 </div>
 
@@ -108,7 +109,7 @@
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-katalog')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
-            <h3 class="text-xl font-bold text-white uppercase tracking-wider">Tambah Katalog Desa</h3>
+            <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah Katalog Desa</h3>
             <button type="button" onclick="closeModal('modal-create-katalog')" class="text-white hover:text-yellow-400 transition-colors">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -157,7 +158,7 @@
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-katalog')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
-            <h3 class="text-xl font-bold text-gray-900 uppercase tracking-wider">Edit Katalog Desa</h3>
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Katalog Desa</h3>
             <button type="button" onclick="closeModal('modal-edit-katalog')" class="text-gray-900 hover:text-white transition-colors">
                 <i class="fas fa-times text-2xl"></i>
             </button>

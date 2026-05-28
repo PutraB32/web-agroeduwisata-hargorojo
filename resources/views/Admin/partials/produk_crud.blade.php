@@ -81,10 +81,14 @@
                         @endif
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->is_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">Edit</button>
+                        <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->is_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">
+                            <i class="fas fa-pen mr-1"></i> Edit
+                        </button>
                         <form action="{{ route('admin.produk.destroy', $produk->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
                             @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">Hapus</button>
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -96,12 +100,6 @@
                 @endif
             </tbody>
         </table>
-        <!-- PAGINATION -->
-        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
-            <div class="w-full">
-                {{ $produks->appends(request()->query())->links() }}
-            </div>
-        </div>
     </div>
 </div>
 
@@ -118,7 +116,7 @@
         
         <!-- Header Pop-up -->
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
-            <h3 class="text-xl font-bold text-white uppercase tracking-wider">Tambah Produk Baru</h3>
+            <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah Produk Baru</h3>
             <button type="button" onclick="closeModal('modal-create-produk')" class="text-white hover:text-yellow-400 transition-colors">
                 <i class="fas fa-times text-2xl"></i>
             </button>
@@ -180,7 +178,7 @@
     <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm transition-opacity" onclick="closeModal('modal-edit-produk')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
-            <h3 class="text-xl font-bold text-gray-900 uppercase tracking-wider">Edit Produk</h3>
+            <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Produk</h3>
             <button type="button" onclick="closeModal('modal-edit-produk')" class="text-gray-900 hover:text-white transition-colors">
                 <i class="fas fa-times text-2xl"></i>
             </button>

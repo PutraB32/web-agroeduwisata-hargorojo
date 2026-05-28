@@ -60,7 +60,7 @@
                         @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                        <button onclick="bukaModalDetailOrder({{ $order->id }})" class="text-blue-600 hover:text-blue-900 bg-blue-50 border border-blue-200 hover:bg-blue-100 p-2 rounded mr-2 transition-colors" title="Lihat Detail & Update Status">
+                        <button onclick="bukaModalDetailOrder({{ $order->id }})" class="text-primary hover:text-green-900 bg-green-50 border border-green-200 hover:bg-green-100 p-2 rounded mr-2 transition-colors" title="Lihat Detail & Update Status">
                             <i class="fas fa-eye"></i> Detail
                         </button>
                         
@@ -81,10 +81,6 @@
             </tbody>
         </table>
     </div>
-    <div class="mt-4">
-        {{ $orders->appends(['search_order' => request('search_order')])->links('vendor.pagination.tailwind') }}
-    </div>
-
     <!-- Modals Detail Pesanan akan digenerate secara dinamis -->
     @foreach ($orders as $order)
     <div id="modal-detail-order-{{ $order->id }}"
@@ -157,16 +153,16 @@
                 </div>
 
                 <!-- Update Status Form -->
-                <form action="{{ route('admin.order.update_status', $order->id) }}" method="POST" class="bg-blue-50 p-4 rounded-xl border border-blue-100">
+                <form action="{{ route('admin.order.update_status', $order->id) }}" method="POST" class="bg-green-50 p-4 rounded-xl border border-green-100">
                     @csrf
                     @method('PUT')
-                    <p class="text-blue-800 font-bold text-sm mb-3"><i class="fas fa-edit mr-1"></i> Update Status Pesanan</p>
+                    <p class="text-primary font-bold text-sm mb-3"><i class="fas fa-edit mr-1"></i> Update Status Pesanan</p>
                     <div class="flex flex-col sm:flex-row gap-3">
-                        <select name="status" class="flex-1 bg-white text-gray-800 border border-blue-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                            <option value="Selesai" {{ $order->status == 'Selesai' ? 'selected' : '' }}>✅ Selesai (Diterima)</option>
-                            <option value="Dibatalkan" {{ $order->status == 'Dibatalkan' ? 'selected' : '' }}>❌ Dibatalkan</option>
+                        <select name="status" class="flex-1 bg-white text-gray-800 border border-green-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-green-800">
+                            <option value="Selesai" {{ $order->status == 'Selesai' ? 'selected' : '' }}>Selesai (Diterima)</option>
+                            <option value="Dibatalkan" {{ $order->status == 'Dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
                         </select>
-                        <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-5 rounded-lg shadow transition-colors text-sm whitespace-nowrap">
+                        <button type="submit" class="bg-green-800 hover:bg-green-900 text-white font-bold py-2 px-5 rounded-lg shadow transition-colors text-sm whitespace-nowrap">
                             <i class="fas fa-save mr-1"></i> Simpan
                         </button>
                     </div>

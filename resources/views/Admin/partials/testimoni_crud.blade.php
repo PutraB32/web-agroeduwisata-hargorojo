@@ -51,14 +51,20 @@
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $testimoni->nama }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-yellow-500 font-bold">
-                        {{ str_repeat('★', $testimoni->rating) }}{{ str_repeat('☆', 5 - $testimoni->rating) }}
+                        @for ($i = 1; $i <= 5; $i++)
+                            <i class="{{ $i <= $testimoni->rating ? 'fas' : 'far' }} fa-star"></i>
+                        @endfor
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs truncate">{{ $testimoni->isi_testimoni }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModalTestimoni({{ $testimoni->id }}, '{{ addslashes($testimoni->nama) }}', '{{ addslashes($testimoni->isi_testimoni) }}', '{{ $testimoni->rating }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">Edit</button>
+                        <button onclick="openEditModalTestimoni({{ $testimoni->id }}, '{{ addslashes($testimoni->nama) }}', '{{ addslashes($testimoni->isi_testimoni) }}', '{{ $testimoni->rating }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                            <i class="fas fa-pen mr-1"></i> Edit
+                        </button>
                         <form action="{{ route('admin.testimoni.destroy', $testimoni->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus testimoni ini?');">
                             @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">Hapus</button>
+                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                                <i class="fas fa-trash mr-1"></i> Hapus
+                            </button>
                         </form>
                     </td>
                 </tr>
@@ -73,8 +79,8 @@
     <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-testimoni')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden z-10">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center text-white">
-            <h3 class="font-bold uppercase tracking-wider">Tambah Testimoni</h3>
-            <button onclick="closeModal('modal-create-testimoni')"><i class="fas fa-times text-xl"></i></button>
+            <h3 class="text-lg font-bold tracking-wide">Tambah Testimoni</h3>
+            <button type="button" onclick="closeModal('modal-create-testimoni')"><i class="fas fa-times text-xl"></i></button>
         </div>
         <form action="{{ route('admin.testimoni.store') }}" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
             @csrf
@@ -106,9 +112,9 @@
 <div id="modal-edit-testimoni" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 overflow-y-auto" role="dialog">
     <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-testimoni')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border-t-4 border-yellow-500 z-10">
-        <div class="bg-gray-50 px-6 py-4 flex justify-between items-center border-b">
-             <h3 class="text-xl font-bold text-gray-900">Edit Testimoni</h3>
-             <button onclick="closeModal('modal-edit-testimoni')"><i class="fas fa-times text-gray-500 hover:text-red-500"></i></button>
+        <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center border-b">
+             <h3 class="text-lg font-bold text-gray-900 tracking-wide">Edit Testimoni</h3>
+             <button type="button" onclick="closeModal('modal-edit-testimoni')"><i class="fas fa-times text-gray-900 hover:text-white"></i></button>
         </div>
         <form id="form-edit-testimoni" action="" method="POST" enctype="multipart/form-data" class="p-6 space-y-4">
             @csrf @method('PUT')
