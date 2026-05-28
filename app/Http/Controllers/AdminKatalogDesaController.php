@@ -4,20 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\KatalogDesa;
+use Illuminate\Support\Facades\Auth;
 
 class AdminKatalogDesaController extends Controller
 {
     public function store(Request $request)
     {
         $request->validate([
-            'kategori' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategori_katalogs,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
             'url' => 'nullable|string',
         ]);
 
-        $data = $request->all();
+        $data = $request->only(['kategori_id', 'judul', 'deskripsi']);
+        $data['Url'] = $request->input('url');
+        $data['user_id'] = Auth::id();
 
         if ($request->hasFile('gambar')) {
             $imageName = time() . '.' . $request->gambar->extension();
@@ -32,7 +35,7 @@ class AdminKatalogDesaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'kategori' => 'required|string|max:255',
+            'kategori_id' => 'required|exists:kategori_katalogs,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
@@ -40,7 +43,8 @@ class AdminKatalogDesaController extends Controller
         ]);
 
         $katalog = KatalogDesa::findOrFail($id);
-        $data = $request->except('gambar');
+        $data = $request->only(['kategori_id', 'judul', 'deskripsi']);
+        $data['Url'] = $request->input('url');
 
         if ($request->hasFile('gambar')) {
             if ($katalog->gambar && file_exists(public_path('images/katalog/' . $katalog->gambar))) {
