@@ -65,3 +65,271 @@
 .font-hero {
     font-family: 'League Spartan', sans-serif;
 }
+
+/* Admin dashboard system */
+.admin-dashboard {
+    background:
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.12), transparent 32rem),
+        linear-gradient(180deg, #FDFAF3 0%, #F7FAF6 45%, #F4F7F2 100%);
+    color: #2C2C2C;
+}
+
+.admin-dashboard .admin-sidebar {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 77, 64, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 77, 64, 0.08);
+}
+
+.admin-dashboard .admin-main {
+    background: transparent;
+}
+
+.admin-dashboard .menu-link {
+    border-radius: 0.65rem;
+    border-left-width: 0;
+    min-height: 2.65rem;
+    font-weight: 700;
+}
+
+.admin-dashboard .menu-link:hover {
+    background: #F1F7F1;
+    color: #004D40;
+}
+
+.admin-dashboard .menu-link.bg-green-50 {
+    background: linear-gradient(90deg, rgba(0, 77, 64, 0.12), rgba(212, 175, 55, 0.10));
+    color: #004D40;
+    box-shadow: inset 3px 0 0 #004D40;
+}
+
+.admin-page-header,
+.admin-hero,
+.admin-stat-card,
+.admin-chart-card,
+.admin-dashboard .crud-panel > .flex:first-child,
+.admin-dashboard .crud-panel .overflow-x-auto.bg-white {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 77, 64, 0.10);
+    border-radius: 0.85rem;
+    box-shadow: 0 18px 40px rgba(0, 77, 64, 0.08);
+}
+
+.admin-page-header {
+    padding: 1.1rem 1.25rem;
+}
+
+.admin-hero {
+    background:
+        linear-gradient(135deg, rgba(0, 77, 64, 0.96), rgba(0, 102, 85, 0.92)),
+        url('/images/beranda.bg.jpeg') center/cover;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.admin-stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 50px rgba(0, 77, 64, 0.12);
+}
+
+.admin-stat-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3px;
+    background: linear-gradient(90deg, #004D40, #D4AF37);
+}
+
+.admin-stat-icon {
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 77, 64, 0.12);
+}
+
+.admin-dashboard .crud-panel > .flex:first-child {
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    align-items: stretch;
+    justify-content: flex-end;
+}
+
+.admin-dashboard .crud-panel h2 {
+    font-family: 'Noto Serif', serif;
+    font-size: clamp(1.3rem, 2vw, 1.75rem);
+    color: #004D40;
+    letter-spacing: 0;
+}
+
+.admin-dashboard .crud-panel > .flex:first-child h2 {
+    display: none;
+}
+
+.admin-dashboard .crud-panel > .flex:first-child > div {
+    margin-left: auto;
+}
+
+.admin-dashboard input:not([type="checkbox"]):not([type="file"]),
+.admin-dashboard textarea,
+.admin-dashboard select {
+    min-height: 2.55rem;
+    border: 1px solid #D7E1D7;
+    border-radius: 0.65rem;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    font-size: 0.9rem;
+}
+
+.admin-dashboard input:focus,
+.admin-dashboard textarea:focus,
+.admin-dashboard select:focus {
+    border-color: #006655;
+    box-shadow: 0 0 0 3px rgba(0, 102, 85, 0.13);
+}
+
+.admin-dashboard .crud-panel .overflow-x-auto.bg-white {
+    overflow: hidden;
+}
+
+.admin-dashboard table {
+    font-size: 0.88rem;
+}
+
+.admin-dashboard table th {
+    background: #F6F2E8 !important;
+    color: #536056 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+}
+
+.admin-dashboard table td {
+    color: #2C2C2C;
+    vertical-align: middle;
+}
+
+.admin-dashboard tbody tr:hover {
+    background: #FBF8EE;
+}
+
+.admin-dashboard button.bg-green-800,
+.admin-dashboard button.bg-green-900 {
+    background: #006655 !important;
+    border: 1px solid rgba(0, 77, 64, 0.18);
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.16);
+}
+
+.admin-dashboard button.bg-green-800:hover,
+.admin-dashboard button.bg-green-900:hover {
+    background: #004D40 !important;
+}
+
+.admin-dashboard button.bg-yellow-500 {
+    background: #D4AF37 !important;
+    color: #2C2C2C !important;
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(212, 175, 55, 0.18);
+}
+
+.admin-dashboard button.bg-red-600 {
+    background: #B43B3B !important;
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(180, 59, 59, 0.14);
+}
+
+.admin-dashboard button.bg-gray-200 {
+    background: #F1EFE6 !important;
+    color: #3A3A3A !important;
+    border-radius: 0.65rem !important;
+    border: 1px solid rgba(0, 77, 64, 0.10);
+}
+
+.admin-dashboard button.bg-gray-200:hover {
+    background: #E9E4D6 !important;
+    color: #004D40 !important;
+}
+
+.admin-dashboard .crud-panel > .flex:first-child form.flex button.bg-gray-200 {
+    border-radius: 0 0.65rem 0.65rem 0 !important;
+}
+
+.admin-dashboard [id^="modal-"] form button.bg-gray-200 {
+    border-radius: 0.65rem !important;
+}
+
+.admin-dashboard .crud-panel button.bg-yellow-500,
+.admin-dashboard .crud-panel button.bg-red-600 {
+    min-height: 2rem;
+    padding: 0.45rem 0.72rem !important;
+    min-width: 5rem;
+}
+
+.admin-dashboard .crud-panel td > button,
+.admin-dashboard .crud-panel td > form.inline-block {
+    margin: 0.25rem;
+    vertical-align: middle;
+}
+
+.admin-dashboard .crud-panel td > form.inline-block button {
+    margin: 0;
+}
+
+.admin-dashboard .crud-panel td.text-center {
+    white-space: normal;
+}
+
+.admin-dashboard .crud-panel button.text-yellow-600,
+.admin-dashboard .crud-panel button.text-red-500 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-dashboard .crud-panel button.text-yellow-600 {
+    background: #FFF7D8;
+    border: 1px solid #EBD38A;
+}
+
+.admin-dashboard .crud-panel button.text-red-500 {
+    background: #FFF1F1;
+    border: 1px solid #F1B6B6;
+}
+
+.admin-dashboard [id^="modal-"] .relative.bg-white {
+    border-radius: 0.9rem !important;
+    border: 1px solid rgba(0, 77, 64, 0.12);
+    box-shadow: 0 28px 80px rgba(20, 32, 24, 0.26);
+}
+
+.admin-dashboard [id^="modal-create-"] .bg-green-800 {
+    background: linear-gradient(135deg, #004D40, #006655) !important;
+}
+
+.admin-dashboard [id^="modal-edit-"] .bg-yellow-500 {
+    background: linear-gradient(135deg, #D4AF37, #E5C04B) !important;
+}
+
+.admin-dashboard [id^="modal-"] h3 {
+    letter-spacing: 0.01em;
+}
+
+.admin-dashboard [id^="modal-"] label {
+    color: #3A3A3A;
+    font-size: 0.82rem;
+}
+
+.admin-dashboard [id^="modal-"] form button[type="submit"],
+.admin-dashboard [id^="modal-"] form button[type="button"] {
+    min-height: 2.45rem;
+}
