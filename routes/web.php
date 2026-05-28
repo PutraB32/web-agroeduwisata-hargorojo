@@ -16,7 +16,8 @@ use App\Http\Controllers\AdminKatalogDesaController;
 use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminTestimoniController;
 use App\Http\Controllers\AdminOrderController;
-use Illuminate\Support\Facades\Auth; 
+use App\Http\Controllers\AdminKategoriKatalogController;
+use Illuminate\Support\Facades\Auth;
 
 
 //============================================
@@ -35,176 +36,267 @@ Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])->name('public.testimoni.store');
 
 // --- ROUTE E-COMMERCE CART ---
-Route::get('/cart', [\App\Http\Controllers\CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [\App\Http\Controllers\CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/remove', [\App\Http\Controllers\CartController::class, 'remove'])->name('cart.remove');
-Route::put('/cart/update', [\App\Http\Controllers\CartController::class, 'update'])->name('cart.update');
-Route::post('/checkout', [\App\Http\Controllers\CartController::class, 'checkout'])->name('checkout.process');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
+Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
+Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout.process');
 
 
-///============================================
+//============================================
 // ROUTE AUTHENTIKASI (Login & Logout)
 //============================================
 Route::get('/login', function () {
-    return view('pages.login'); 
+    return view('pages.login');
 })->name('login');
 
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-///=====================================================
+//=====================================================
 // ROUTE DASHBOARD (Hanya bisa diakses jika sudah login)
-//======================================================
+//=====================================================
 Route::middleware(['auth'])->group(function () {
-    
+
+    Route::get('/admin/dashboard', function () {
+        if (Auth::user()->role === 'super_admin') {
+            return redirect()->route('superadmin.dashboard');
+        }
+
+        return redirect()->route('admin.dashboard');
+    })->name('dashboard');
+
     // =============================================
     // Rute Khusus Super Admin
     // =============================================
     Route::middleware(['role:super_admin'])->group(function () {
-        
+
         Route::get('/admin/superAdmin', function (\Illuminate\Http\Request $request) {
+
             $searchProduk = $request->query('search_produk');
-            $produks = \App\Models\Produk::when($searchProduk, function($query, $search) {
+
+            $produks = \App\Models\Produk::when($searchProduk, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%");
-            })->paginate(5, ['*'], 'produk_page');
+            })->get();
+
 
             $searchAgro = $request->query('search_agro');
             $filterAgro = $request->query('filter_kat_agro');
-            $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function($query, $search) {
+
+            $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function ($query, $search) {
                 return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterAgro, function($query, $filter) {
-                if ($filter === 'induk') {
-                    return $query->whereNull('parent_id');
-                }
-                return $query->where('kategori_id', $filter);
-            })->paginate(5, ['*'], 'agro_page');
+            })->when($filterAgro === 'induk', function ($query) {
+                return $query->whereNull('parent_id');
+            })->get();
+
 
             $parentAgros = \App\Models\Agroeduwisata::whereNull('parent_id')->get();
 
+
             $searchKatalog = $request->query('search_katalog');
             $filterKatalog = $request->query('filter_kat_katalog');
-            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function($query, $search) {
+
+            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function ($query, $search) {
                 return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterKatalog, function($query, $filter) {
+            })->when($filterKatalog, function ($query, $filter) {
                 return $query->where('kategori_id', $filter);
-            })->paginate(5, ['*'], 'katalog_page');
+            })->get();
+
 
             $searchUser = $request->query('search_user');
-            $users = \App\Models\User::when($searchUser, function($query, $search) {
-                return $query->where('name', 'like', "%{$search}%")->orWhere('email', 'like', "%{$search}%");
-            })->paginate(5, ['*'], 'user_page');
+
+            $users = \App\Models\User::when($searchUser, function ($query, $search) {
+                return $query->where('name', 'like', "%{$search}%")
+                             ->orWhere('email', 'like', "%{$search}%");
+            })->get();
+
 
             $searchTestimoni = $request->query('search_testimoni');
-            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")->orWhere('isi_testimoni', 'like', "%{$search}%");
-            })->paginate(5, ['*'], 'testimoni_page');
+
+            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
+                return $query->where('nama', 'like', "%{$search}%")
+                             ->orWhere('isi_testimoni', 'like', "%{$search}%");
+            })->get();
+
 
             $searchOrder = $request->query('search_order');
-            $orders = \App\Models\Order::with('orderDetails.produk')->when($searchOrder, function($query, $search) {
-                return $query->where('nama_pemesan', 'like', "%{$search}%")
-                             ->orWhere('no_hp', 'like', "%{$search}%");
-            })->latest('created_at')->paginate(10, ['*'], 'order_page');
+
+            $orders = \App\Models\Order::with('orderDetails.produk')
+                ->when($searchOrder, function ($query, $search) {
+                    return $query->where('nama_pemesan', 'like', "%{$search}%")
+                                 ->orWhere('no_hp', 'like', "%{$search}%");
+                })
+                ->latest('created_at')
+                ->get();
+
 
             $kategoriKatalogs = \App\Models\KategoriKatalog::all();
 
-            $produksWithSales = \App\Models\Produk::withSum(['orderDetails as total_terjual' => function($query) {
-                $query->whereHas('order', function($q) {
-                    $q->where('status', 'Selesai');
-                });
-            }], 'jumlah')->get();
+
+            $produksWithSales = \App\Models\Produk::withSum([
+                'orderDetails as total_terjual' => function ($query) {
+                    $query->whereHas('order', function ($q) {
+                        $q->where('status', 'Selesai');
+                    });
+                }
+            ], 'jumlah')->get();
+
 
             $chartLabels = $produksWithSales->pluck('nama')->toArray();
-            $chartData = $produksWithSales->pluck('total_terjual')->map(function($val) {
-                return (int) $val; 
-            })->toArray();
 
-            return view('Admin.superAdmin', compact
-            ('produks', 'agroeduwisatas', 'katalogs', 'users', 
-            'testimonis', 'orders', 'kategoriKatalogs', 'chartLabels', 
-            'chartData', 'parentAgros')); 
-            
+            $chartData = $produksWithSales->pluck('total_terjual')
+                ->map(function ($val) {
+                    return (int) $val;
+                })->toArray();
+
+
+            return view('Admin.superAdmin', compact(
+                'produks',
+                'agroeduwisatas',
+                'katalogs',
+                'users',
+                'testimonis',
+                'orders',
+                'kategoriKatalogs',
+                'chartLabels',
+                'chartData',
+                'parentAgros'
+            ));
+
         })->name('superadmin.dashboard');
 
-        // Proteksi CRUD User: Hanya boleh dieksekusi oleh Super Admin
+
+        // CRUD USER
         Route::post('/admin/user', [AdminUserController::class, 'store'])->name('admin.user.store');
         Route::put('/admin/user/{id}', [AdminUserController::class, 'update'])->name('admin.user.update');
         Route::delete('/admin/user/{id}', [AdminUserController::class, 'destroy'])->name('admin.user.destroy');
+
+        // CRUD KATEGORI KATALOG
+        Route::post('/admin/kategori-katalog', [AdminKategoriKatalogController::class, 'store'])->name('admin.kategori_katalog.store');
+        Route::put('/admin/kategori-katalog/{id}', [AdminKategoriKatalogController::class, 'update'])->name('admin.kategori_katalog.update');
+        Route::delete('/admin/kategori-katalog/{id}', [AdminKategoriKatalogController::class, 'destroy'])->name('admin.kategori_katalog.destroy');
     });
 
-    // ------------------------------------------
+
+    // =============================================
     // KHUSUS PERAN: ADMIN BIASA
-    // ------------------------------------------
+    // =============================================
     Route::middleware(['role:admin'])->group(function () {
-        
+
         Route::get('/admin/admin', function (\Illuminate\Http\Request $request) {
+
             $searchProduk = $request->query('search_produk');
-            $produks = \App\Models\Produk::when($searchProduk, function($query, $search) {
+
+            $produks = \App\Models\Produk::when($searchProduk, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%");
-            })->paginate(5, ['*'], 'produk_page');
+            })->get();
+
+
+            $searchAgro = $request->query('search_agro');
+            $filterAgro = $request->query('filter_kat_agro');
+
+            $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function ($query, $search) {
+                return $query->where('Judul', 'like', "%{$search}%");
+            })->when($filterAgro === 'induk', function ($query) {
+                return $query->whereNull('parent_id');
+            })->get();
+
+
+            $parentAgros = \App\Models\Agroeduwisata::whereNull('parent_id')->get();
+
 
             $searchOrder = $request->query('search_order');
-            $orders = \App\Models\Order::with('orderDetails.produk')->when($searchOrder, function($query, $search) {
-                return $query->where('nama_pemesan', 'like', "%{$search}%")
-                             ->orWhere('no_hp', 'like', "%{$search}%");
-            })->latest('created_at')->paginate(10, ['*'], 'order_page');
 
-            $produksWithSales = \App\Models\Produk::withSum(['orderDetails as total_terjual' => function($query) {
-                $query->whereHas('order', function($q) {
-                    $q->where('status', 'Selesai');
-                });
-            }], 'jumlah')->get();
+            $orders = \App\Models\Order::with('orderDetails.produk')
+                ->when($searchOrder, function ($query, $search) {
+                    return $query->where('nama_pemesan', 'like', "%{$search}%")
+                                 ->orWhere('no_hp', 'like', "%{$search}%");
+                })
+                ->latest('created_at')
+                ->get();
+
+
+            $produksWithSales = \App\Models\Produk::withSum([
+                'orderDetails as total_terjual' => function ($query) {
+                    $query->whereHas('order', function ($q) {
+                        $q->where('status', 'Selesai');
+                    });
+                }
+            ], 'jumlah')->get();
+
 
             $chartLabels = $produksWithSales->pluck('nama')->toArray();
-            $chartData = $produksWithSales->pluck('total_terjual')->map(function($val) {
-                return (int) $val; 
-            })->toArray();
-            
+
+            $chartData = $produksWithSales->pluck('total_terjual')
+                ->map(function ($val) {
+                    return (int) $val;
+                })->toArray();
+
+
             $searchKatalog = $request->query('search_katalog');
             $filterKatalog = $request->query('filter_kat_katalog');
-            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function($query, $search) {
+
+            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function ($query, $search) {
                 return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterKatalog, function($query, $filter) {
+            })->when($filterKatalog, function ($query, $filter) {
                 return $query->where('kategori_id', $filter);
-            })->paginate(5, ['*'], 'katalog_page');
+            })->get();
+
 
             $kategoriKatalogs = \App\Models\KategoriKatalog::all();
 
+
             $searchTestimoni = $request->query('search_testimoni');
-            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")->orWhere('isi_testimoni', 'like', "%{$search}%");
-            })->paginate(5, ['*'], 'testimoni_page');
-            
-            return view('Admin.admin', compact('produks', 'orders', 'katalogs', 'kategoriKatalogs', 'chartLabels', 'chartData', 'testimonis'));
+
+            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
+                return $query->where('nama', 'like', "%{$search}%")
+                             ->orWhere('isi_testimoni', 'like', "%{$search}%");
+            })->get();
+
+
+            return view('Admin.admin', compact(
+                'produks',
+                'agroeduwisatas',
+                'orders',
+                'katalogs',
+                'kategoriKatalogs',
+                'chartLabels',
+                'chartData',
+                'testimonis',
+                'parentAgros'
+            ));
+
         })->name('admin.dashboard');
     });
 
 
     //============================================
-    // AKSES BERSAMA (Bisa Dieksekusi Super Admin & Admin)
+    // AKSES BERSAMA (SUPER ADMIN & ADMIN)
     //============================================
     Route::middleware(['role:super_admin,admin'])->group(function () {
-        // Rute Manajemen Produk
+
+        // Produk
         Route::post('/admin/produk', [AdminProdukController::class, 'store'])->name('admin.produk.store');
         Route::put('/admin/produk/{id}', [AdminProdukController::class, 'update'])->name('admin.produk.update');
         Route::delete('/admin/produk/{id}', [AdminProdukController::class, 'destroy'])->name('admin.produk.destroy');
 
-        // Rute Manajemen Agroeduwisata
+        // Agroeduwisata
         Route::post('/admin/agroeduwisata', [AdminAgroeduwisataController::class, 'store'])->name('admin.agro.store');
         Route::put('/admin/agroeduwisata/{id}', [AdminAgroeduwisataController::class, 'update'])->name('admin.agro.update');
         Route::delete('/admin/agroeduwisata/{id}', [AdminAgroeduwisataController::class, 'destroy'])->name('admin.agro.destroy');
 
-        // Rute Manajemen Katalog Desa
+        // Katalog
         Route::post('/admin/katalog', [AdminKatalogDesaController::class, 'store'])->name('admin.katalog.store');
         Route::put('/admin/katalog/{id}', [AdminKatalogDesaController::class, 'update'])->name('admin.katalog.update');
         Route::delete('/admin/katalog/{id}', [AdminKatalogDesaController::class, 'destroy'])->name('admin.katalog.destroy');
 
-        // Rute Manajemen Testimoni
+        // Testimoni
         Route::post('/admin/testimoni', [AdminTestimoniController::class, 'store'])->name('admin.testimoni.store');
         Route::put('/admin/testimoni/{id}', [AdminTestimoniController::class, 'update'])->name('admin.testimoni.update');
         Route::delete('/admin/testimoni/{id}', [AdminTestimoniController::class, 'destroy'])->name('admin.testimoni.destroy');
 
-        // Rute Manajemen Pesanan
+        // Order
         Route::put('/admin/order/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.order.update_status');
         Route::delete('/admin/order/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
     });
