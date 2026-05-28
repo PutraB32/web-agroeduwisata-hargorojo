@@ -11,7 +11,7 @@ class ProdukGulaKelapaController extends Controller
     {
         // Fetch Produk Unggulan
          $produkUnggulan = Produk::where('is_unggulan', true)
-                                ->with('testimonis')
+                                ->with('testimoni')
                                 ->get();
 
                                 

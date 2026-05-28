@@ -29,7 +29,7 @@ class Produk extends Model
         return $this->hasMany(OrderDetail::class, 'produk_id');
     }
 
-    public function testimonis()
+    public function testimoni()
     {
         return $this->hasMany(Testimoni::class, 'produk_id');
     }

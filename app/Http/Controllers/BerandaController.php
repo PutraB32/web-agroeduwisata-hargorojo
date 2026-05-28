@@ -23,7 +23,7 @@ class BerandaController extends Controller
             ->get();
 
         // Fetch top testimonies
-        $testimonis = Testimoni::orderByDesc('rating')
+        $testimoni = Testimoni::orderByDesc('rating')
             ->orderByDesc('created_at')
             ->take(3)
             ->get();
@@ -46,7 +46,7 @@ class BerandaController extends Controller
         return view('pages.beranda', compact(
             'agroeduwisata',
             'produkUnggulan',
-            'testimonis',
+            'testimoni',
             'pengumuman',
             'artikelBerita',
             'perpustakaan',

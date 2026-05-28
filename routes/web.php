@@ -114,7 +114,7 @@ Route::middleware(['auth'])->group(function () {
 
             $searchTestimoni = $request->query('search_testimoni');
 
-            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
+            $testimoni = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%")
                              ->orWhere('isi_testimoni', 'like', "%{$search}%");
             })->get();
@@ -156,7 +156,7 @@ Route::middleware(['auth'])->group(function () {
                 'agroeduwisatas',
                 'katalogs',
                 'users',
-                'testimonis',
+                'testimoni',
                 'orders',
                 'kategoriKatalogs',
                 'chartLabels',
@@ -249,7 +249,7 @@ Route::middleware(['auth'])->group(function () {
 
             $searchTestimoni = $request->query('search_testimoni');
 
-            $testimonis = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
+            $testimoni = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
                 return $query->where('nama', 'like', "%{$search}%")
                              ->orWhere('isi_testimoni', 'like', "%{$search}%");
             })->get();
@@ -263,7 +263,7 @@ Route::middleware(['auth'])->group(function () {
                 'kategoriKatalogs',
                 'chartLabels',
                 'chartData',
-                'testimonis',
+                'testimoni',
                 'parentAgros'
             ));
 
