@@ -14,10 +14,15 @@ class KatalogDesaController extends Controller
         });
 
         $pengumuman = $semuaKatalog->get('Pengumuman', collect());
-        $artikelBerita = $semuaKatalog->get('Artikel & Berita', collect());
+        $artikelBerita = $semuaKatalog->get('Artikel', collect());
         $perpustakaan = $semuaKatalog->get('Perpustakaan', collect());
         $galeri = $semuaKatalog->get('Galeri', collect());
 
-        return view('pages.katalogdesa', compact('pengumuman', 'artikelBerita', 'perpustakaan', 'galeri'));
+        return view('pages.katalogdesa', compact(
+            'pengumuman', 
+            'artikelBerita', 
+            'perpustakaan', 
+            'galeri'
+        ));
     }
 }
