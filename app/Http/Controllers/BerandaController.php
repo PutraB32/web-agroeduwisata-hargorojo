@@ -23,12 +23,12 @@ class BerandaController extends Controller
             ->take(4)
             ->get();
 
-        // Fetch top testimonies
-        $testimoni = Testimoni::orderByDesc('rating')
+        $testimoni = Testimoni::whereNull('produk_id')
+            ->orderByDesc('rating')
             ->orderByDesc('created_at')
             ->take(3)
             ->get();
-
+            
         $semuaKatalog = KatalogDesa::with('kategoriKatalog')
             ->latest()
             ->get()
