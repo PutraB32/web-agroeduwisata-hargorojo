@@ -9,6 +9,8 @@ use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\KatalogDesaController;
 use App\Http\Controllers\KontakController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\AdminProdukController;
 use App\Http\Controllers\AdminAgroeduwisataController;
@@ -33,14 +35,16 @@ Route::get('/katalog', [KatalogDesaController::class, 'index'])->name('katalog')
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
 // --- ROUTE PUBLIC FORM ---
-Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])->name('public.testimoni.store');
+Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])
+    ->middleware('throttle:public-form')
+    ->name('public.testimoni.store');
 
 // --- ROUTE E-COMMERCE CART ---
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/remove', [CartController::class, 'remove'])->name('cart.remove');
-Route::put('/cart/update', [CartController::class, 'update'])->name('cart.update');
-Route::post('/checkout', [CartController::class, 'checkout'])->name('checkout.process');
+Route::post('/cart/add', [CartController::class, 'add'])->middleware('throttle:cart')->name('cart.add');
+Route::delete('/cart/remove', [CartController::class, 'remove'])->middleware('throttle:cart')->name('cart.remove');
+Route::put('/cart/update', [CartController::class, 'update'])->middleware('throttle:cart')->name('cart.update');
+Route::post('/checkout', [CartController::class, 'checkout'])->middleware('throttle:checkout')->name('checkout.process');
 
 
 //============================================
@@ -50,8 +54,18 @@ Route::get('/login', function () {
     return view('pages.login');
 })->name('login');
 
-Route::post('/login', [AuthController::class, 'authenticate'])->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('/login', [AuthController::class, 'authenticate'])->middleware('throttle:login')->name('login.post');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+// Rute Lupa Password & Reset Password
+Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail'])
+    ->middleware('throttle:password-reset')
+    ->name('password.email');
+Route::get('/reset-password/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
+    ->middleware('throttle:password-reset')
+    ->name('password.update');
 
 
 //=====================================================
