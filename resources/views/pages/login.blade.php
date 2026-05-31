@@ -31,8 +31,13 @@
 
             <form action="{{ route('login.post') }}" method="POST" class="space-y-6">
                 @csrf
+                @if (session('status'))
+                    <div class="bg-green-50 text-green-700 p-3 rounded-2xl text-sm mb-4 border border-green-200 text-center font-medium">
+                        {{ session('status') }}
+                    </div>
+                @endif
                 @if ($errors->any())
-                    <div class="bg-red-50 text-red-500 p-3 rounded-lg text-sm mb-4 border border-red-200 text-center">
+                    <div class="bg-red-50 text-red-500 p-3 rounded-2xl text-sm mb-4 border border-red-200 text-center font-medium">
                         {{ $errors->first() }}
                     </div>
                 @endif
@@ -55,9 +60,12 @@
                         <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
                             <i class="fas fa-lock"></i>
                         </span>
-                        <input type="password" name="password" required
-                            class="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all"
+                        <input type="password" name="password" id="password" required
+                            class="w-full pl-11 pr-12 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all"
                             placeholder="••••••••">
+                        <button type="button" onclick="togglePasswordVisibility('password', 'password-eye')" class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 transition">
+                            <i class="fas fa-eye" id="password-eye"></i>
+                        </button>
                     </div>
                 </div>
 
@@ -65,7 +73,7 @@
                     <label class="flex items-center text-xs text-gray-600 cursor-pointer">
                         <input type="checkbox" class="rounded text-green-600 focus:ring-green-500 mr-2"> Ingat Saya
                     </label>
-                    <a href="#" class="text-xs font-bold text-green-700 hover:text-yellow-600 transition">Lupa Password?</a>
+                    <a href="{{ route('password.request') }}" class="text-xs font-bold text-green-700 hover:text-yellow-600 transition">Lupa Password?</a>
                 </div>
 
                 <button type="submit" 
@@ -88,5 +96,21 @@
         </div>
     </div>
 
+    <script>
+        function togglePasswordVisibility(inputId, eyeId) {
+            const passwordInput = document.getElementById(inputId);
+            const eyeIcon = document.getElementById(eyeId);
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.remove('fa-eye');
+                eyeIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('fa-eye-slash');
+                eyeIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
 </body>
 </html>

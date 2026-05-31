@@ -24,7 +24,7 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #000;
+            background-color: #f8f6f1;
         }
 
         .font-playfair {

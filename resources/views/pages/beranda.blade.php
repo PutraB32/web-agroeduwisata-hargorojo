@@ -2487,7 +2487,7 @@
 
                             leading-[1.6]
                         ">
-                            Pengguna Aktif
+                            Pengunjung Web Aktif
                         </p>
 
                     </div>
@@ -2542,7 +2542,7 @@
 
                             mb-3
                         ">
-                            3.480+
+                            1.480+
                         </div>
 
                         <p class="
@@ -2682,7 +2682,7 @@
 
                             leading-[1.6]
                         ">
-                            Kepuasan Warga
+                            Kepuasan Pengunjung
                        </p>
 
                     </div>

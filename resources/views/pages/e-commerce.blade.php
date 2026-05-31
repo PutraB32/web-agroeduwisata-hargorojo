@@ -6,85 +6,1655 @@
 {{-- NAVBAR --}}
 @include('layouts.navbar')
 
-<!-- Hero Section -->
-<div class="relative text-center py-20 px-4 shadow-sm border-b border-green-900" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-gradient-to-b from-green-900/80 to-black/80"></div>
-    <div class="relative z-10">
-        <div class="inline-block border border-yellow-500 text-yellow-400 rounded-full px-5 py-1.5 text-xs font-bold mb-4 tracking-widest uppercase">
-            KEARIFAN LOKAL
-        </div>
-        <h1 class="font-playfair text-3xl md:text-5xl font-bold text-white mb-4 tracking-tight drop-shadow-lg">Belanja Produk Desa</h1>
-        <p class="text-gray-200 text-sm md:text-md max-w-lg mx-auto leading-relaxed drop-shadow-md">
-            Jelajahi kekayaan alam dan kreativitas masyarakat Desa Hargorojo.<br>
-            Dari manisnya gula kelapa hingga kerajinan tangan yang memikat hati.
+<section class="
+    relative
+    h-[550px]
+    overflow-hidden
+">
+    <!-- BACKGROUND IMAGE -->
+    <div class="absolute inset-0">
+
+        <img
+            src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
+            alt="Produk Desa Hargorojo"
+            class="
+                w-full
+                h-full
+                object-cover
+            "
+        >
+        <!-- DARK OVERLAY -->
+        <div class="
+            absolute inset-0
+            bg-[#07150f]/45
+        "></div>
+
+        <!-- LIGHT CENTER GLOW -->
+        <div class="
+            absolute inset-0
+            bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.90)_0%,rgba(255,255,255,0.78)_30%,rgba(255,255,255,0.35)_60%,rgba(255,255,255,0)_100%)]
+        "></div>
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="
+        relative
+        z-20
+        max-w-6xl
+        mx-auto
+        px-6
+        min-h-[550px]
+        flex
+        flex-col
+        items-center
+        justify-center
+        text-center
+    ">
+
+        <!-- TITLE -->
+        <h1 class="
+            font-lora
+            text-[#1b3726]
+            text-[56px]
+            leading-[0.95]
+            tracking-[-0.04em]
+            font-bold
+            drop-shadow-[0_3px_8px_rgba(0,0,0,0.20)]
+        ">
+
+            Belanja Produk Desa
+
+        </h1>
+
+        <!-- SUBTITLE -->
+        <h2 class="
+            font-lobster
+            text-[#c89a44]
+            text-[70px]
+            leading-none
+            mt-1
+            mb-3
+            drop-shadow-[0_4px_12px_rgba(0,0,0,0.15)]
+        ">
+            Asli Hargorojo
+        </h2>
+
+        <!-- DESCRIPTION -->
+        <p class="
+            max-w-4xl text-[#201b1b] text-[20px] leading-[1.3] font-light 
+        ">
+            Temukan produk-produk pilihan yang lahir dari kekayaan alam dan kearifan lokal Desa Hargorojo, 
+            dibuat dengan ketelitian untuk menghadirkan kualitas terbaik.
         </p>
-    </div>
-</div>
 
-<div class="max-w-7xl mx-auto px-4 py-12 bg-white rounded-t-3xl -mt-6 relative z-20 shadow-xl">
-    <!-- Search Bar & Cart -->
-    <div class="mb-12 flex justify-center items-center gap-4 max-w-2xl mx-auto">
-        <div class="relative w-full">
-            <span class="absolute inset-y-0 left-0 pl-4 flex items-center">
-                <svg class="h-5 w-5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                </svg>
-            </span>
-            <input type="text" class="w-full pl-12 pr-4 py-3 bg-gray-50 border border-green-200 rounded-full shadow-sm text-sm focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent transition-all" placeholder="Temukan produk pilihan Anda...">
-        </div>
-        <button class="flex items-center justify-center p-3.5 bg-yellow-500 hover:bg-yellow-600 text-black rounded-full shadow-md hover:shadow-lg transition-all relative">
-            <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
-            <span class="absolute top-0 right-0 bg-red-600 text-white text-[10px] font-bold w-4 h-4 flex items-center justify-center rounded-full -mt-1 -mr-1 border border-white">0</span>
-        </button>
-    </div>
 
-    <!-- Product Grid -->
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
-        @foreach($produks as $produk)
-        <div class="bg-white rounded-2xl p-5 flex flex-col items-center shadow-lg border border-gray-100 hover:-translate-y-1 hover:shadow-2xl transition duration-300 relative group cursor-pointer z-10 hover:border-green-500">
-            <div class="w-full aspect-square bg-gray-50 rounded-xl mb-5 overflow-hidden shadow-inner relative">
-                <img src="{{ $produk->gambar ? asset('images/produk/' . $produk->gambar) : asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700" alt="{{ $produk->nama }}">
-                
-                <!-- Efek Kaca Hover Khusus untuk Produk Unggulan -->
-                @if($produk->is_unggulan)
-                <div class="absolute inset-0 bg-green-900/40 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center pointer-events-none">
-                    <span class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-black font-black text-[10px] sm:text-xs px-4 py-2 rounded-full uppercase tracking-widest shadow-2xl flex items-center gap-2 transform scale-75 group-hover:scale-100 transition-transform duration-500 border border-yellow-300">
-                        <i class="fas fa-crown"></i> Produk Unggulan
-                    </span>
+        <!-- STATS -->
+        <div class="
+            mt-3
+            flex
+            items-center
+            justify-center
+            gap-18
+        ">
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-center
+                gap-4
+            ">
+
+                <div class="
+                    w-15
+                    h-15
+                    rounded-full
+                    bg-white/40
+
+                    flex
+                    items-center
+                    justify-center
+                ">
+                    <i class="
+                        fa-solid fa-bag-shopping
+                        z-20
+                        text-[#173121]
+                        text-2xl
+                    "></i>
+
                 </div>
-                @endif
+
+                <div class="text-left">
+
+                    <div class="
+                        text-[40px]
+                        font-bold
+                        text-[#173121]
+                    ">
+                        50+
+                    </div>
+
+                    <div class="
+                        text-[#59645c]
+                    ">
+                        Produk Terjual
+                    </div>
+
+                </div>
+
             </div>
-            <h3 class="font-bold text-gray-900 text-sm md:text-base mb-1 text-center {{ strlen($produk->nama) > 20 ? 'line-clamp-2 leading-tight' : '' }}">{{ $produk->nama }}</h3>
-            <p class="text-sm font-semibold text-green-700 mb-4">Rp{{ number_format($produk->harga, 0, ',', '.') }} <span class="text-xs font-normal text-gray-500">/ pack</span></p>
-            <button class="bg-black hover:bg-green-800 text-white text-xs font-bold py-2.5 px-6 rounded-full w-full transition-all shadow-md hover:shadow-lg flex justify-center items-center gap-2">
-                <i class="fas fa-shopping-cart"></i> Masukkan Keranjang
-            </button>
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-center
+                gap-4
+            ">
+
+                <div class="
+                    w-15
+                    h-15
+                    rounded-full
+                    bg-white/40
+                    flex
+                    items-center
+                    justify-center
+                ">
+
+                    <i class="
+                        fa-solid fa-star
+                        z-20
+                        text-[#c8ab6d]
+                        text-2xl
+                    "></i>
+
+                </div>
+
+                <div class="text-left">
+
+                    <div class="
+                        text-[40px]
+                        font-bold
+                        text-[#173121]
+                    ">
+                        4.9
+                    </div>
+
+                    <div class="
+                        text-[#59645c]
+                    ">
+                        Rating Pelanggan
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-center
+                gap-4
+            ">
+
+                <div class="
+                    w-15
+                    h-15
+                    rounded-full
+                    bg-white/40
+                    flex
+                    items-center
+                    justify-center
+                ">
+
+                    <i class="
+                        fa-solid fa-leaf
+                        z-20
+                        text-[#173121]
+                        text-2xl
+                    "></i>
+
+                </div>
+
+                <div class="text-left">
+
+                    <div class="
+                        text-[40px]
+                        font-bold
+                        text-[#173121]
+                    ">
+                        100%
+                    </div>
+
+                    <div class="
+                        text-[#59645c]
+                    ">
+                        Produk Lokal
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-        @endforeach
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- KATALOG PRODUK -->
+<!-- ===================================================== -->
+<section class="
+    relative
+    py-20
+    bg-[#f8f6f1]
+">
+    <!-- CONTAINER -->
+    <div class="
+    relative
+    z-20
+    max-w-[1350px]
+    mx-auto
+    pb-20
+    px-6
+    lg:px-10
+    -mt-45
+    bg-white
+    rounded-[40px]
+    shadow-[0_30px_80px_rgba(0,0,0,0.08)]
+    border
+    border-[#ece6da]
+    ">
+    
+    
+<!-- ===================================================== -->
+<!-- SEARCH + CART -->
+<!-- ===================================================== -->
+<div class="
+    flex
+    justify-center
+    mt-10
+    mb-3
+">
+
+    <div class="
+        flex
+        items-center
+        gap-4
+
+        w-full
+        max-w-3xl
+    ">
+
+        <!-- SEARCH -->
+        <div class="
+            relative
+            flex-1
+        ">
+
+            <input
+                type="text"
+                placeholder="Cari produk..."
+                class="
+                    w-full
+                    h-14
+                    pl-14
+                    pr-5
+                    rounded-2xl
+                    border
+                    border-[#e6dece]
+                    bg-white
+                    shadow-md
+
+                    focus:outline-none
+                    focus:ring-1
+                    focus:ring-[#173121]
+                "
+            >
+
+            <i class="
+                fa-solid fa-magnifying-glass
+                absolute
+                left-5
+                top-1/2
+                -translate-y-1/2
+                text-[#173121]
+            "></i>
+
+            <!-- BUTTON -->
+             <button
+             class="
+             absolute
+             right-2
+             top-1/2
+             -translate-y-1/2
+             h-11
+             px-6
+             rounded-2xl
+             bg-[#173121]
+             text-white
+             font-medium
+            hover:bg-[#234632]
+            transition-all
+            duration-300
+            ">
+            Cari
+        </button>
+    
+    </div>
+
+        <!-- CART -->
+        <button class="
+            relative
+            w-14
+            h-14
+            flex
+            items-center
+            justify-center
+            rounded-full
+            bg-[#173121]
+            text-white
+            shadow-[0_10px_25px_rgba(23,49,33,0.25)]
+            hover:bg-[#204732]
+            hover:-translate-y-1
+            transition-all
+            duration-300
+        ">
+
+            <i class="
+                fa-solid fa-cart-shopping
+                text-lg
+            "></i>
+
+            <!-- BADGE -->
+            <span class="
+                absolute
+                -top-2
+                -right-2
+                w-6
+                h-6
+                rounded-full
+                bg-[#d8b15a]
+                text-[#173121]
+                text-[11px]
+                font-bold
+                flex
+                items-center
+                justify-center
+                border-2
+                border-white
+            ">
+                3
+            </span>
+
+        </button>
+
+    </div>
+
+</div>
+
+        @php
+            $unggulan = $produks->where('is_unggulan', true);
+        @endphp
+
+        <!-- ===================================================== -->
+<!-- PRODUK UNGGULAN -->
+<!-- ===================================================== -->
+@if($unggulan->count())
+
+<div class="mb-5">
+
+    <!-- HEADER -->
+    <div class="
+        flex
+        items-center
+        justify-between
+        mb-5
+    ">
+
+        <div>
+
+            <h2 class="
+                font-lora
+                text-[30px]
+                font-bold
+                text-[#173121]
+            ">
+                Produk Unggulan
+            </h2>
+
+            <p class="
+                font-light
+                text-[#6b736d]
+                text-[15px]
+                italic
+            ">
+                Geser untuk melihat produk unggulan lainnya
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- SLIDER WRAPPER -->
+    <!-- ===================================================== -->
+    <div class="
+    relative
+    px-8
+    ">
+
+        <!-- PANAH KIRI -->
+        <button
+            onclick="scrollProduk(-400)"
+            class="
+                absolute
+                left-[-24px]
+                top-1/2
+                -translate-y-1/2
+                z-20
+                w-12
+                h-12
+                rounded-full
+                bg-white/80
+                shadow-[0_10px_30px_rgba(0,0,0,0.12)]
+                flex
+                items-center
+                justify-center
+                hover:bg-[#173121]
+                hover:text-white
+                transition-all
+                duration-300
+            "
+        >
+
+            <i class="fa-solid fa-chevron-left text-lg"></i>
+
+        </button>
+
+        <!-- PANAH KANAN -->
+        <button
+            onclick="scrollProduk(400)"
+            class="
+                absolute
+                right-[-24px]
+                top-1/2
+
+                -translate-y-1/2
+
+                z-20
+
+                w-12
+                h-12
+
+                rounded-full
+
+                bg-white
+
+                shadow-[0_10px_30px_rgba(0,0,0,0.12)]
+
+                flex
+                items-center
+                justify-center
+
+                hover:bg-[#173121]
+                hover:text-white
+
+                transition-all
+                duration-300
+            "
+        >
+
+            <i class="fa-solid fa-chevron-right text-lg"></i>
+
+        </button>
+
+        <!-- ===================================================== -->
+        <!-- SCROLL CONTAINER -->
+        <!-- ===================================================== -->
+        <div
+            id="produkUnggulanSlider"
+            class="
+                flex
+                gap-6
+                overflow-x-auto
+                scrollbar-hide
+                pb-6
+                pt-4
+                snap-x
+                snap-mandatory
+            "
+        >
+
+            @foreach($unggulan as $produk)
+
+            <!-- CARD -->
+            <div class="
+                group
+                relative
+                flex-shrink-0
+                w-[380px]
+                overflow-hidden
+                rounded-[25px]
+                hover:-translate-y-1
+                duration-500
+                
+                snap-start
+            ">
+
+                <!-- IMAGE -->
+                <img
+                    src="{{ $produk->gambar ? asset('images/produk/' . $produk->gambar) : asset('images/beranda.bg.jpeg') }}"
+                    alt="{{ $produk->nama }}"
+                    class="
+                        w-full
+                        h-[280px]
+
+                        object-cover
+
+                        group-hover:scale-105
+
+                        transition-transform
+                        duration-700
+                    "
+                >
+
+                <!-- OVERLAY -->
+                <div class="
+                    absolute
+                    inset-0
+
+                    bg-gradient-to-t
+                    from-black/90
+                    via-black/20
+                    to-transparent
+                "></div>
+
+                <!-- BADGE -->
+                <div class="
+                    absolute
+                    top-4
+                    left-4
+
+                    px-3
+                    py-1
+
+                    rounded-full
+
+                    bg-[#D4AF37]
+
+                    text-[#173121]
+                    text-[13px]
+                    font-bold
+                ">
+                    BEST SELLER
+                </div>
+
+                <!-- CONTENT -->
+                <div class="
+                    absolute
+                    bottom-0
+                    left-0
+                    right-0
+
+                    p-5
+                ">
+
+                    <h3 class="
+                        font-lora
+                        text-white
+                        font-bold
+                        text-[20px]
+                        mb-1
+                    ">
+                        {{ $produk->nama }}
+                    </h3>
+
+                    <p class="
+                        text-white/80
+                        text-[14px]
+                        mb-4
+                    ">
+                        {{ Str::limit(explode('|', $produk->manfaat)[0], 45) }}
+                    </p>
+
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                    ">
+
+                        <div>
+
+                            <div class="
+                                text-white
+                                font-bold
+                                text-xl
+                            ">
+                                Rp{{ number_format($produk->harga,0,',','.') }}
+                            </div>
+
+                        </div>
+
+                        <a href="#"
+                            class="
+                                px-4
+                                py-2
+
+                                rounded-xl
+
+                                bg-[#d8b15a]
+
+                                text-[#173121]
+                                text-sm
+                                font-semibold
+                            "
+                        >
+                            Tambah ke Keranjang
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            @endforeach
+
+        </div>
+
+    </div>
+
+</div>
+
+@endif
+
+        <!-- ===================================================== -->
+        <!-- SEMUA PRODUK -->
+        <!-- ===================================================== -->
+        <div>
+
+            <h2 class="
+                font-lora
+                text-[30px]
+                font-bold
+                text-[#173121]
+                
+            ">
+                Semua Produk
+            </h2>
+
+            <p class="
+                font-light
+                text-[#6b736d]
+                text-[15px]
+                italic
+                mb-8
+            ">
+                Pilihan lengkap produk berkualitas Desa Hargorojo
+            </p>
+
+            <!-- GRID -->
+            <div class="
+                grid
+                grid-cols-1
+                sm:grid-cols-2
+                lg:grid-cols-3
+                xl:grid-cols-4
+                gap-6
+            ">
+
+                @foreach($produks as $produk)
+
+                <div class="
+                    group
+
+                    bg-white
+
+                    rounded-[24px]
+
+                    overflow-hidden
+
+                    border
+                    border-[#ece6da]
+
+                    shadow-[0_15px_40px_rgba(0,0,0,0.05)]
+
+                    hover:-translate-y-2
+                    hover:shadow-[0_25px_60px_rgba(0,0,0,0.10)]
+
+                    transition-all
+                    duration-500
+                ">
+
+                    <!-- IMAGE -->
+                    <div class="
+                        relative
+                        overflow-hidden
+                    ">
+
+                        <img
+                            src="{{ $produk->gambar ? asset('images/produk/' . $produk->gambar) : asset('images/beranda.bg.jpeg') }}"
+                            alt="{{ $produk->nama }}"
+                            class="
+                                w-full
+                                h-[220px]
+
+                                object-cover
+
+                                group-hover:scale-105
+
+                                transition-transform
+                                duration-700
+                            "
+                        >
+
+                        @if($produk->is_unggulan)
+
+                        <div class="
+                            absolute
+                            top-3
+                            left-3
+
+                            px-3
+                            py-1
+
+                            rounded-full
+
+                            bg-[#d8b15a]
+
+                            text-[#173121]
+                            text-[11px]
+                            font-bold
+                        ">
+                            BEST SELLER
+                        </div>
+
+                        @endif
+
+                    </div>
+
+                    <!-- CONTENT -->
+                    <div class="p-5 text-center">
+
+                        <h3 class="
+                        font-lora
+                            text-[18px]
+                            font-bold
+                            text-[#173121]
+                            line-clamp-2
+                            min-h-[52px]
+                            mb-2
+                            
+                        ">
+                            {{ $produk->nama }}
+                        </h3>
+
+                        <!-- HARGA -->
+                        <div class="
+                            text-[17px]
+                            font-bold
+                            text-[#c6a949]
+                            mb-2
+                        ">
+                            Rp{{ number_format($produk->harga,0,',','.') }}
+                        </div>
+
+                        <!-- STOK -->
+                        @if($produk->stok > 0)
+
+                        <div class="
+                            text-green-600
+                            text-sm
+                            mb-4
+                        ">
+                            ● Stok Tersedia
+                        </div>
+
+                        @else
+
+                        <div class="
+                            text-red-500
+                            text-sm
+                            mb-4
+                        ">
+                            ● Stok Habis
+                        </div>
+
+                        @endif
+
+                        <!-- BUTTON -->
+                        <button
+                        class="
+                        w-full
+                        h-11
+                        rounded-xl
+                        bg-[#173121]     
+                        text-white   
+                        flex
+                        items-center
+                        justify-center
+                        gap-2
+                        text-sm
+                        font-medium
+                        hover:bg-[#204732]
+                        transition-all
+                        ">
+                        
+                        <i class="fa-solid fa-cart-plus"></i>
+                         Tambah ke Keranjang
+                        
+                        </button>
+                    </div>
+                </div>             
+            @endforeach
+        </div>
     </div>
 </div>
 
-<!-- CTA Besar -->
-<div class="bg-gradient-to-r from-green-900 to-black py-16 mt-12 bg-opacity-30 border-t border-green-800 relative overflow-hidden">
-    <!-- Decorative background element -->
-    <div class="absolute top-0 left-0 w-full h-full bg-[url('{{ asset('images/beranda.bg.jpeg') }}')] opacity-10 bg-cover bg-center mix-blend-overlay"></div>
-    
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between bg-white relative z-10 rounded-3xl p-8 md:p-12 shadow-2xl border-l-4 border-yellow-500">
-        <div class="mb-6 md:mb-0 text-center md:text-left flex-1 border-r-0 md:border-r border-gray-200 pr-0 md:pr-8">
-            <div class="inline-flex items-center gap-2 mb-2">
-                <span class="w-8 h-px bg-yellow-500"></span>
-                <span class="text-xs font-bold tracking-widest text-green-800 uppercase">Kemitraan Eduwisata</span>
-            </div>
-            <h3 class="font-playfair text-2xl md:text-3xl font-bold text-gray-900 mb-3">Pemesanan Dalam Jumlah Grosir?</h3>
-            <p class="text-sm text-gray-600 max-w-lg leading-relaxed">Dapatkan penawaran khusus dan harga spesial. Kami melayani pemesanan dalam jumlah besar untuk kebutuhan bisnis, institusi liburan rutin anda.</p>
-        </div>
-        <div class="md:pl-8 text-center md:text-left w-full md:w-auto mt-6 md:mt-0">
-            <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-3.5 px-8 rounded-full transition-all shadow-xl hover:shadow-2xl hover:-translate-y-1 whitespace-nowrap flex items-center justify-center gap-3 w-full md:w-auto">
-                <i class="fab fa-whatsapp text-lg"></i> Hubungi Admin
-            </button>
-            <p class="text-[10px] text-gray-400 mt-3 text-center">*Respon sangat cepat via WhatsApp</p>
-        </div>
-    </div>
+</section>
+
+
+<!-- ===================================================== -->
+<!-- CTA GROSIR -->
+<!-- ===================================================== -->
+<section class="
+    relative
+    overflow-hidden
+    mb-2
+">
+
+    <!-- BACKGROUND IMAGE -->
+    <img
+        src="{{ asset('images/assets foto/CTA_ecommerceee.png') }}"
+        alt="Produk Desa Hargorojo"
+        class="
+            absolute
+            inset-0
+            w-full
+            h-full
+            object-cover
+        "
+    >
+
+    <!-- DARK OVERLAY -->
+    <div class="
+        absolute
+        inset-0
+
+        bg-gradient-to-r
+        from-[#07150f]/95
+        via-[#173121]/85
+        to-[#173121]/40
+    "></div>
+
+    <!-- CONTENT -->
+    <div class="
+        relative
+        z-10
+        max-w-[1400px]
+        mx-auto
+        px-6
+        lg:px-10
+
+        py-16
+        lg:py-8
+    ">
+
+    <!-- TRUST BADGE -->
+     <div class="
+    hidden
+    lg:block
+    absolute
+    top-8
+    right-10
+    xl:top-1
+    xl:right-2
+    z-20
+">
+
+    <img
+        src="{{ asset('/images/assets foto/label_produk.png') }}"
+        alt="Produk Alami Desa Hargorojo"
+        class="
+            w-[140px]
+            xl:w-[180px]
+
+            drop-shadow-[0_20px_40px_rgba(0,0,0,0.30)]
+
+            hover:scale-105
+
+            transition-all
+            duration-700
+        "
+    >
+
 </div>
+
+    
+        <!-- TITLE -->
+        <h2 class="
+            max-w-2xl
+            font-lora
+            text-white
+            text-[42px]
+            md:text-[48px]
+
+            leading-[1.05]
+
+            font-bold
+
+            mb-2
+        ">
+
+            Butuh Produk Kelapa
+            <span class="text-[#d8b15a]">
+                dalam Jumlah Besar?
+            </span>
+
+        </h2>
+
+        <!-- DESCRIPTION -->
+        <p class="
+            max-w-4xl
+            text-white/80
+            text-[17px]
+            italic
+            leading-[1.3]
+            mb-6
+            font-thin
+        ">
+
+            Kami melayani pemesanan grosir untuk UMKM,
+            reseller, toko oleh-oleh, dan distributor dari
+            seluruh Indonesia dengan harga khusus dan
+            kualitas terbaik langsung dari Desa Hargorojo.
+
+        </p>
+
+        <!-- FEATURES -->
+        <div class="
+            grid
+            md:grid-cols-3
+
+            
+
+            max-w-4xl
+
+            mb-5
+        ">
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-start
+                gap-4
+            ">
+
+                <div class="
+                    w-14
+                    h-14
+
+                    rounded-full
+
+                    bg-[#d8b15a]/10
+
+                    border
+                    border-[#d8b15a]/20
+
+                    flex
+                    items-center
+                    justify-center
+
+                    text-[#d8b15a]
+                ">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+
+                <div>
+
+                    <h4 class="
+                        text-white
+                        font-semibold
+                        
+                    ">
+                        Harga Grosir
+                    </h4>
+
+                    <p class="
+                        text-white/70
+                        text-sm
+                    ">
+                        Harga terbaik untuk <br>
+                        pembelian dalam jumlah besar.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-start
+                gap-4
+            ">
+
+                <div class="
+                    w-14
+                    h-14
+
+                    rounded-full
+
+                    bg-[#d8b15a]/10
+
+                    border
+                    border-[#d8b15a]/20
+
+                    flex
+                    items-center
+                    justify-center
+
+                    text-[#d8b15a]
+                ">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+
+                <div>
+
+                    <h4 class="
+                        text-white
+                        font-semibold
+                        mb-1
+                    ">
+                        Produk Berkualitas
+                    </h4>
+
+                    <p class="
+                        text-white/70
+                        text-sm
+                    ">
+                        Diproduksi langsung oleh <br>
+                        masyarakat Desa Hargorojo.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM -->
+            <div class="
+                flex
+                items-start
+                gap-4
+            ">
+
+                <div class="
+                    w-14
+                    h-14
+
+                    rounded-full
+
+                    bg-[#d8b15a]/10
+
+                    border
+                    border-[#d8b15a]/20
+
+                    flex
+                    items-center
+                    justify-center
+
+                    text-[#d8b15a]
+                ">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+
+                <div>
+
+                    <h4 class="
+                        text-white
+                        font-semibold
+                        mb-1
+                    ">
+                        Pengiriman Nasional
+                    </h4>
+
+                    <p class="
+                        text-white/70
+                        text-sm
+                    ">
+                        Melayani pengiriman ke <br>
+                        seluruh wilayah Indonesia.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BUTTON AREA -->
+        <div class="
+            flex
+            flex-col
+            lg:flex-row
+
+            items-start
+            lg:items-center
+            justify-end
+
+            gap-6
+        ">
+
+            <!-- BUTTON -->
+            <a href="https://wa.me/6280000000000"
+                target="_blank"
+                class="
+                    group
+
+                    inline-flex
+                    items-center
+                    gap-4
+
+                    px-6
+                    py-3
+
+                    rounded-4xl
+
+                    bg-[#d8b15a]
+
+                    text-[#173121]
+
+                    font-semibold
+
+                    shadow-[0_20px_50px_rgba(216,177,90,0.30)]
+
+                    hover:scale-[1.02]
+
+                    transition-all
+                    duration-500
+                "
+            >
+
+                <i class="
+                    fa-brands fa-whatsapp
+                    text-xl
+                "></i>
+
+                Hubungi Admin
+
+                <i class="
+                    fa-solid fa-arrow-right
+
+                    group-hover:translate-x-1
+
+                    transition-all
+                "></i>
+
+            </a>
+
+            
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- FAQ -->
+<!-- ===================================================== -->
+<section class="
+    relative
+    py-20
+    bg-[#f8f6f1]
+">
+
+    <!-- CONTAINER -->
+    <div class="
+        max-w-4xl
+        mx-auto
+        px-6
+        lg:px-10
+    ">
+    
+    {{-- Small Label --}}
+    <div class="
+    flex 
+    items-center 
+    justify-center 
+    gap-3 
+    
+    ">
+        <div class="
+        w-14 h-[2px] 
+        bg-yellow-500 
+        rounded-full">
+    </div>
+        <span class="
+        uppercase 
+        tracking-[0.2em] 
+        text-[14px] 
+        font-semibold 
+        text-[#b89b5e]">
+            Informasi Tambahan
+        </span>
+
+        <div class="
+        w-14 h-[2px] 
+        bg-yellow-500 
+        rounded-full">
+    </div>
+    
+    </div>
+
+        <!-- TITLE -->
+        <h2 class="
+            text-center
+
+            font-lora
+
+            text-[40px]
+            md:text-[45px]
+
+            leading-[1]
+
+            font-bold
+
+            text-[#173121]
+
+            mb-2
+        ">
+
+            Pertanyaan yang Sering diajukan
+
+        </h2>
+
+        <!-- DESC -->
+        <p class="
+            max-w-2xl
+            mx-auto
+            text-[#52605a]
+            text-[15px]
+            md:text-[18px]
+            text-center
+            leading-[1.4]
+            font-light
+            mb-10
+        ">
+            Berikut adalah beberapa pertanyaan yang sering diajukan
+            oleh pelanggan kami. Temukan jawabannya di bawah ini.
+        </p>
+
+        <!-- FAQ LIST -->
+        <div class="space-y-3">
+
+            <!-- FAQ ITEM -->
+            <div
+                x-data="{ open: true }"
+                class="
+                    bg-white
+
+                    rounded-[20px]
+
+                    border
+                    border-[#ece6da]
+
+                    overflow-hidden
+
+                    shadow-[0_10px_30px_rgba(0,0,0,0.04)]
+                "
+            >
+
+                <!-- QUESTION -->
+                <button
+                    @click="open = !open"
+                    class="
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+                        px-6
+                        py-5
+                        text-left
+                    "
+                >
+
+                    <div class="
+                        flex
+                        items-center
+                        gap-2
+                    ">
+
+                        <span class="
+                            text-[#173121]
+                            font-semibold
+                            text-[18px]
+                            font-lora
+                        ">
+                            Bagaimana cara melakukan pemesanan?
+                        </span>
+
+                    </div>
+
+                    <i
+                        class="fa-solid fa-chevron-down transition duration-300"
+                        :class="open ? 'rotate-180' : ''"
+                    ></i>
+
+                </button>
+
+                <!-- ANSWER -->
+                <div
+                    x-show="open"
+                    x-transition
+                    class="
+                        font-lora
+                        px-6
+                        pb-6
+                        text-[17px]
+                        text-[#5d675f]
+                        leading-[1.5]
+                    "
+                >
+                    Pilih produk yang diinginkan, masukkan ke keranjang,
+                    lalu lanjutkan pemesanan melalui WhatsApp untuk
+                    menghubungi admin. 
+
+                    <img
+                    src="{{ asset('images/assets foto/alur_pemesanan_FAQ.png') }}"
+                    alt="Alur Pemesanan"
+                    class="
+                    w-full
+                    max-w-4xl
+                    mx-auto
+                    rounded-2xl
+                    border
+                    border-[#ece8df]
+                    ">
+                </div>
+            </div>
+
+            <!-- FAQ ITEM -->
+            <div
+                x-data="{ open: false }"
+                class="
+                    bg-white
+                    rounded-[24px]
+                    border
+                    border-[#ece6da]
+                    overflow-hidden
+                "
+            >
+
+                <button
+                    @click="open = !open"
+                    class="
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+
+                        px-6
+                        py-5
+                    "
+                >
+
+                    <span class="
+                        text-[#173121]
+                        font-semibold
+                        text-[18px]
+                        font-lora
+                    ">
+                        Berapa minimal pemesanan untuk pembelian grosir?
+                    </span>
+
+                    <i
+                        class="fa-solid fa-chevron-down transition duration-300"
+                        :class="open ? 'rotate-180' : ''"
+                    ></i>
+
+                </button>
+
+                <div
+                    x-show="open"
+                    x-transition
+                    class="
+                        font-lora
+                        px-6
+                        pb-6
+                        text-[17px]
+                        text-[#5d675f]
+                        leading-[1.5]
+                    "
+                >
+
+                    Minimal pemesanan grosir dapat disesuaikan dengan
+                    jenis produk yang dipilih. Silakan hubungi admin
+                    untuk informasi lebih lanjut.
+
+                </div>
+
+            </div>
+
+            <!-- FAQ ITEM -->
+            <div
+                x-data="{ open: false }"
+                class="
+                    bg-white
+                    rounded-[24px]
+                    border
+                    border-[#ece6da]
+                    overflow-hidden
+                "
+            >
+
+                <button
+                    @click="open = !open"
+                    class="
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+
+                        px-6
+                        py-5
+                    "
+                >
+
+                    <span class="
+                        text-[#173121]
+                        font-semibold
+                        text-[18px]
+                        font-lora
+                    ">
+                        Apakah produk dibuat langsung oleh masyarakat Desa Hargorojo?
+                    </span>
+
+                    <i
+                        class="fa-solid fa-chevron-down transition duration-300"
+                        :class="open ? 'rotate-180' : ''"
+                    ></i>
+
+                </button>
+
+                <div
+                    x-show="open"
+                    x-transition
+                    class="
+                        font-lora
+                        px-6
+                        pb-6
+                        text-[17px]
+                        text-[#5d675f]
+                        leading-[1.5]
+                    "
+                >
+
+                    Ya. Produk yang kami tawarkan merupakan hasil
+                    olahan dan kerajinan masyarakat Desa Hargorojo.
+
+                </div>
+
+            </div>
+
+            <!-- FAQ ITEM -->
+            <div
+                x-data="{ open: false }"
+                class="
+                    bg-white
+                    rounded-[24px]
+                    border
+                    border-[#ece6da]
+                    overflow-hidden
+                "
+            >
+
+                <button
+                    @click="open = !open"
+                    class="
+                        w-full
+                        flex
+                        items-center
+                        justify-between
+
+                        px-6
+                        py-5
+                    "
+                >
+
+                    <span class="
+                        text-[#173121]
+                        font-semibold
+                        text-[18px]
+                        font-lora
+                    ">
+                        Apakah produk dapat dikirim ke luar daerah?
+                    </span>
+
+                    <i
+                        class="fa-solid fa-chevron-down transition duration-300"
+                        :class="open ? 'rotate-180' : ''"
+                    ></i>
+
+                </button>
+
+                <div
+                    x-show="open"
+                    x-transition
+                    class="
+                        font-lora
+                        px-6
+                        pb-6
+                        text-[17px]
+                        text-[#5d675f]
+                        leading-[1.5]
+                    ">
+
+                    Ya, Kami melayani pengiriman ke berbagai wilayah
+                    Indonesia menggunakan jasa ekspedisi terpercaya.
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="
+            mt-12
+
+            bg-white
+
+            rounded-[28px]
+
+            border
+            border-[#ece6da]
+
+            p-6
+            lg:p-8
+
+            flex
+            flex-col
+            lg:flex-row
+
+            items-center
+            justify-between
+
+            gap-6
+        ">
+
+            <div>
+
+                <h3 class="
+                    font-lora
+                    text-[#173121]
+                    font-bold
+                    text-2xl
+                    mb-2
+                ">
+                    Masih ada pertanyaan lain?
+                </h3>
+
+                <p class="
+                    text-[#6b736d]
+                    font-lora
+                    text-light
+                    italic
+                ">
+                    Jangan ragu untuk menghubungi admin kami.
+                </p>
+
+            </div>
+
+            <a href="#"
+                class="
+                    inline-flex
+                    items-center
+                    gap-3
+
+                    px-7
+                    py-4
+
+                    rounded-2xl
+
+                    bg-[#173121]
+
+                    text-white
+
+                    font-medium
+
+                    hover:bg-[#204732]
+
+                    transition-all
+                "
+            >
+
+                <i class="fa-brands fa-whatsapp"></i>
+
+                Hubungi Admin via WhatsApp
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+    function scrollProduk(amount)
+    {
+        document
+            .getElementById('produkUnggulanSlider')
+            .scrollBy({
+                left: amount,
+                behavior: 'smooth'
+            });
+    }
+</script>
+
 @endsection
