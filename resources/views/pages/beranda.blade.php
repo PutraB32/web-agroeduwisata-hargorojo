@@ -2713,42 +2713,126 @@
                 <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" type="text" name="nama" required placeholder="Contoh: Budi Santoso">
             </div>
 
-            <!-- ===================================================== -->
-                    <!-- INPUT 1: PILIH PRODUK (DROPDOWN KHUSUS PRODUK UNGGULAN) -->
-                    <!-- Fitur opsional untuk menautkan ulasan dengan produk -->
-                    <!-- ===================================================== -->
-                    <div class="mb-4">
-                        <label class="
-                            block 
-                            text-gray-700 
-                            text-sm 
-                            font-bold 
-                            mb-2
-                        ">
-                            Pilih Produk yang Diulas <span class="text-xs text-gray-500">(Opsional - Biarkan kosong jika ini ulasan umum)</span>
-                        </label>
-                        <select 
-                            name="produk_id" 
-                            class="
-                                w-full 
-                                px-4 
-                                py-3 
-                                rounded-lg 
-                                bg-gray-50 
-                                border 
-                                border-gray-300 
-                                focus:border-green-500 
-                                focus:bg-white 
-                                focus:outline-none 
-                                transition
-                            "
-                        >
-                            <option value="">-- Bukan Ulasan Produk --</option>
-                            @foreach($produkUnggulan as $p)
-                                <option value="{{ $p->id }}">{{ $p->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+<!-- ===================================================== -->
+<!-- JENIS ULASAN -->
+<!-- ===================================================== -->
+<div
+    x-data="{ jenis: 'wisata' }"
+    class="mb-4"
+>
+
+    <label class="
+        block
+        text-gray-700
+        text-sm
+        font-bold
+        mb-3
+    ">
+        Jenis Ulasan
+    </label>
+
+    <div class="
+        flex
+        gap-5
+        mb-4
+    ">
+
+        <!-- WISATA -->
+        <label class="
+            flex
+            items-center
+            gap-2
+            cursor-pointer
+        ">
+            <input
+                type="radio"
+                name="jenis_ulasan"
+                value="wisata"
+                x-model="jenis"
+                checked
+            >
+
+            <span>
+                Ulasan Umum
+            </span>
+        </label>
+
+        <!-- PRODUK -->
+        <label class="
+            flex
+            items-center
+            gap-2
+            cursor-pointer
+        ">
+            <input
+                type="radio"
+                name="jenis_ulasan"
+                value="produk"
+                x-model="jenis"
+            >
+
+            <span>
+                Produk Desa
+            </span>
+        </label>
+
+    </div>
+
+    <!-- DROPDOWN PRODUK -->
+    <div
+        x-show="jenis === 'produk'"
+        x-transition
+    >
+
+        <label class="
+            block
+            text-gray-700
+            text-sm
+            font-bold
+            mb-2
+        ">
+            Pilih Produk
+        </label>
+
+        <select
+            name="produk_id"
+            class="
+                w-full
+                px-4
+                py-3
+
+                rounded-lg
+
+                bg-gray-50
+
+                border
+                border-gray-300
+
+                focus:border-green-500
+                focus:bg-white
+                focus:outline-none
+
+                transition
+            "
+        >
+
+            <option value="">
+                -- Pilih Produk --
+            </option>
+
+            @foreach($produkUnggulan as $p)
+
+                <option value="{{ $p->id }}">
+                    {{ $p->nama }}
+                </option>
+
+            @endforeach
+
+        </select>
+
+    </div>
+
+</div>
 
             
             <div class="mb-4">
