@@ -17,12 +17,12 @@ return new class extends Migration
             $table->string('nama');
             $table->text('deskripsi')->nullable();
             $table->decimal('harga', 10, 2);
+            $table->string('satuan', 30)->default('pcs');
             $table->text('manfaat')->nullable();
             $table->string('gambar')->nullable();
-            $table->boolean('is_unggulan')->default(false); // penanda produk unggulan
+            $table->boolean('is_unggulan')->default(false);
             $table->integer('stok')->default(0);
             $table->timestamps();
-
         });
     }
 

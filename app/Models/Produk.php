@@ -12,6 +12,7 @@ class Produk extends Model
         'nama',
         'deskripsi',
         'harga',
+        'satuan',
         'manfaat',
         'gambar',
         'is_unggulan',
