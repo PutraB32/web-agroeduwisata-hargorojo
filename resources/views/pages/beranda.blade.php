@@ -2117,7 +2117,7 @@
 
                 mb-7
             ">
-                “{{ Str::limit($testi->isi_testimoni, 180) }}”
+                “{{ Str::limit($testi->isi_testimoni, 250) }}”
             </p>
 
             <!-- LINE -->
