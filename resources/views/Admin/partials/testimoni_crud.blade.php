@@ -31,7 +31,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($testimonis as $testimoni)
+                @foreach($testimoni as $testimoni)
                 <tr>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                         @php 
