@@ -185,8 +185,9 @@
     <div
         class="
             absolute
-            bottom-0
+            -bottom-[2px]
             left-0
+            z-80
             w-full
             overflow-hidden
             leading-none
