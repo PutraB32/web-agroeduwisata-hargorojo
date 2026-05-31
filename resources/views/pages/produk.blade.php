@@ -261,7 +261,7 @@
                                                 </div>
 
                                                 {{-- Review Comment --}}
-                                                <p class="text-[#5d675f] leading-[1.9]">
+                                                <p class="text-[#5d675f] leading-[1.5]">
                                                     {{ $testimoni->isi_testimoni }}
                                                 </p>
 
