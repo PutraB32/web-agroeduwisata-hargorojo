@@ -341,8 +341,7 @@
             ">
             Cari
         </button>
-    
-    </div>
+        </div>
 
         <!-- CART -->
         <button class="
@@ -1293,7 +1292,7 @@
 
             <!-- FAQ ITEM -->
             <div
-                x-data="{ open: true }"
+                x-data="{ open: false }"
                 class="
                     bg-white
 
