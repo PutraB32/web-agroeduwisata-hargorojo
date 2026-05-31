@@ -12,7 +12,7 @@ class ForgotPasswordController extends Controller
      */
     public function showLinkRequestForm()
     {
-        return view('pages.forgot-password');
+        return view('Admin.forgot-password');
     }
 
     /**
