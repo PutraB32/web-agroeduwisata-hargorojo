@@ -2041,7 +2041,7 @@
         gap-6
     ">
 
-        @forelse($testimonis as $testi)
+        @forelse($testimoni as $testi)
 
         <!-- CARD -->
         <div class="
