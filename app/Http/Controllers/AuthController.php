@@ -13,12 +13,12 @@ class AuthController extends Controller
     {
         // 1. Validasi inputan form
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'max:255'],
             'password' => ['required'],
         ]);
 
         // 2. Cek kecocokan di database
-        if (Auth::attempt($credentials)) {
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
             // 3. Cek ROLE dan arahkan ke dashboard yang sesuai

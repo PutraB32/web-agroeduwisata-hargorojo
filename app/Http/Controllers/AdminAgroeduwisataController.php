@@ -5,24 +5,29 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Agroeduwisata;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminAgroeduwisataController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'parent_id' => 'nullable|exists:agroeduwisata,id',
             'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'nullable|string|max:5000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
-        $data = $request->only(['parent_id', 'judul', 'deskripsi']);
+        $data = [
+            'parent_id' => $validated['parent_id'] ?? null,
+            'judul' => $validated['judul'],
+            'deskripsi' => $validated['deskripsi'] ?? null,
+        ];
         $data['user_id'] = Auth::id();
 
         if ($request->hasFile('gambar')) {
-            $imageName = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('images/agroeduwisata'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('images/agroeduwisata'), $imageName);
             $data['gambar'] = $imageName;
         }
 
@@ -32,22 +37,33 @@ class AdminAgroeduwisataController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $validated = $request->validate([
             'parent_id' => 'nullable|exists:agroeduwisata,id',
             'judul' => 'required|string|max:255',
-            'deskripsi' => 'nullable|string',
+            'deskripsi' => 'nullable|string|max:5000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         $agro = Agroeduwisata::findOrFail($id);
-        $data = $request->only(['parent_id', 'judul', 'deskripsi']);
+
+        if ((string) ($validated['parent_id'] ?? '') === (string) $agro->id) {
+            return redirect()->back()->withErrors([
+                'parent_id' => 'Data agroeduwisata tidak dapat menjadi parent untuk dirinya sendiri.',
+            ]);
+        }
+
+        $data = [
+            'parent_id' => $validated['parent_id'] ?? null,
+            'judul' => $validated['judul'],
+            'deskripsi' => $validated['deskripsi'] ?? null,
+        ];
 
         if ($request->hasFile('gambar')) {
             if ($agro->gambar && file_exists(public_path('images/agroeduwisata/' . $agro->gambar))) {
                 unlink(public_path('images/agroeduwisata/' . $agro->gambar));
             }
-            $imageName = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('images/agroeduwisata'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('images/agroeduwisata'), $imageName);
             $data['gambar'] = $imageName;
         }
 

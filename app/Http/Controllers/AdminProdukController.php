@@ -5,34 +5,43 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Produk;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class AdminProdukController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        if (! $request->exists('satuan')) {
+            $request->merge(['satuan' => 'pcs']);
+        }
+
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'harga' => 'required|numeric|min:0',
+            'satuan' => 'required|string|max:30',
             'stok' => 'required|integer|min:0',
-            'deskripsi' => 'nullable|string',
-            'manfaat' => 'nullable|string',
+            'deskripsi' => 'nullable|string|max:5000',
+            'manfaat' => 'nullable|string|max:5000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         $imageName = null;
         if ($request->hasFile('gambar')) {
-            $imageName = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('images/produk'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('images/produk'), $imageName);
         }
 
         Produk::create([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'deskripsi' => $request->deskripsi,
-            'manfaat' => $request->manfaat,
+            'nama' => $validated['nama'],
+            'harga' => $validated['harga'],
+            'satuan' => $validated['satuan'],
+            'stok' => $validated['stok'],
+            'deskripsi' => $validated['deskripsi'] ?? null,
+            'manfaat' => $validated['manfaat'] ?? null,
             'is_unggulan' => $request->has('is_unggulan') ? true : false,
             'gambar' => $imageName,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan!');
@@ -40,16 +49,21 @@ class AdminProdukController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $produk = Produk::findOrFail($id);
+
+        if (! $request->exists('satuan')) {
+            $request->merge(['satuan' => $produk->satuan ?? 'pcs']);
+        }
+
+        $validated = $request->validate([
             'nama' => 'required|string|max:255',
             'harga' => 'required|numeric|min:0',
+            'satuan' => 'required|string|max:30',
             'stok' => 'required|integer|min:0',
-            'deskripsi' => 'nullable|string',
-            'manfaat' => 'nullable|string',
+            'deskripsi' => 'nullable|string|max:5000',
+            'manfaat' => 'nullable|string|max:5000',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
-
-        $produk = Produk::findOrFail($id);
         
         $imageName = $produk->gambar;
         if ($request->hasFile('gambar')) {
@@ -57,16 +71,17 @@ class AdminProdukController extends Controller
             if ($produk->gambar && File::exists(public_path('images/produk/' . $produk->gambar))) {
                 File::delete(public_path('images/produk/' . $produk->gambar));
             }
-            $imageName = time() . '.' . $request->gambar->extension();
-            $request->gambar->move(public_path('images/produk'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
+            $request->file('gambar')->move(public_path('images/produk'), $imageName);
         }
 
         $produk->update([
-            'nama' => $request->nama,
-            'harga' => $request->harga,
-            'stok' => $request->stok,
-            'deskripsi' => $request->deskripsi,
-            'manfaat' => $request->manfaat,
+            'nama' => $validated['nama'],
+            'harga' => $validated['harga'],
+            'satuan' => $validated['satuan'],
+            'stok' => $validated['stok'],
+            'deskripsi' => $validated['deskripsi'] ?? null,
+            'manfaat' => $validated['manfaat'] ?? null,
             'is_unggulan' => $request->has('is_unggulan') ? true : false,
             'gambar' => $imageName,
         ]);

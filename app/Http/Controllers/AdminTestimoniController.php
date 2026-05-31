@@ -4,23 +4,22 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Testimoni;
+use Illuminate\Support\Str;
 
 class AdminTestimoniController extends Controller
 {
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'isi_testimoni' => 'required|string',
+            'isi_testimoni' => 'required|string|max:2000',
             'rating' => 'nullable|integer|min:1|max:5',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
-        $data = $request->all();
-
         if ($request->hasFile('foto')) {
-            $imageName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('images/testimoni'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('foto')->extension();
+            $request->file('foto')->move(public_path('images/testimoni'), $imageName);
             $data['foto'] = $imageName;
         }
 
@@ -30,22 +29,22 @@ class AdminTestimoniController extends Controller
 
     public function update(Request $request, $id)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama' => 'required|string|max:255',
-            'isi_testimoni' => 'required|string',
+            'isi_testimoni' => 'required|string|max:2000',
             'rating' => 'nullable|integer|min:1|max:5',
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
 
         $testimoni = Testimoni::findOrFail($id);
-        $data = $request->except('foto');
+        unset($data['foto']);
 
         if ($request->hasFile('foto')) {
             if ($testimoni->foto && file_exists(public_path('images/testimoni/' . $testimoni->foto))) {
                 unlink(public_path('images/testimoni/' . $testimoni->foto));
             }
-            $imageName = time() . '.' . $request->foto->extension();
-            $request->foto->move(public_path('images/testimoni'), $imageName);
+            $imageName = Str::uuid().'.'.$request->file('foto')->extension();
+            $request->file('foto')->move(public_path('images/testimoni'), $imageName);
             $data['foto'] = $imageName;
         }
 

@@ -7,6 +7,7 @@ use App\Models\Testimoni;
 use App\Models\Agroeduwisata;
 use App\Models\Produk;
 use App\Models\KatalogDesa;
+use Illuminate\Support\Str;
 
 class BerandaController extends Controller  
 {
@@ -56,21 +57,19 @@ class BerandaController extends Controller
 
     public function storeTestimoni(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'produk_id' => 'nullable|exists:produk,id',
             'nama' => 'required|string|max:255',
-            'isi_testimoni' => 'required|string',
+            'isi_testimoni' => 'required|string|max:2000',
             'rating' => 'nullable|integer|min:1|max:5',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:10240',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
         ]);
-
-        $data = $request->all();
 
         if ($request->hasFile('foto')) {
 
-            $imageName = time() . '.' . $request->foto->extension();
+            $imageName = Str::uuid().'.'.$request->file('foto')->extension();
 
-            $request->foto->move(
+            $request->file('foto')->move(
                 public_path('images/testimoni'),
                 $imageName
             );

@@ -10,7 +10,7 @@ class AdminOrderController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|string|max:50',
+            'status' => 'required|in:Pending,Sedang Diproses,Selesai,Dibatalkan',
         ]);
 
         $order = Order::findOrFail($id);
