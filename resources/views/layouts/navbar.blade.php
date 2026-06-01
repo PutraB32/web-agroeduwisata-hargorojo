@@ -52,9 +52,7 @@
                         Beranda
                     </a>
 
-                    @if(request()->routeIs('beranda'))
-                        <span class="absolute -bottom-2 left-0 w-full h-[2px] rounded-full bg-yellow-600"></span>
-                    @endif
+                    
                 </li>
 
                 <!-- Profil Desa -->
@@ -67,9 +65,7 @@
                         Profil Desa
                     </a>
 
-                    @if(request()->routeIs('profil'))
-                        <span class="absolute -bottom-3 left-0 w-full h-[3px] rounded-full bg-yellow-300"></span>
-                    @endif
+                    
                 </li>
 
                 <!-- Agroeduwisata -->
@@ -82,9 +78,7 @@
                         Agroeduwisata
                     </a>
 
-                    @if(request()->routeIs('agro'))
-                        <span class="absolute -bottom-3 left-0 w-full h-[3px] rounded-full bg-yellow-300"></span>
-                    @endif
+                    
                 </li>
 
                 <!-- Produk -->
@@ -97,9 +91,7 @@
                         Produk
                     </a>
 
-                    @if(request()->routeIs('produk'))
-                        <span class="absolute -bottom-3 left-0 w-full h-[3px] rounded-full bg-yellow-300"></span>
-                    @endif
+                    
                 </li>
 
                 <!-- E-Commerce -->
@@ -112,15 +104,16 @@
                         E-Commerce
                     </a>
 
-                    @if(request()->routeIs('ecommerce'))
-                        <span class="absolute -bottom-3 left-0 w-full h-[3px] rounded-full bg-yellow-300"></span>
-                    @endif
+                   
                 </li>
 
                 <!-- Katalog Desa -->
                 <li class="relative">
                     <a href="{{ route('katalog') }}"
-                    class="text-white/90 hover:text-white transition-all duration-300">
+                    class="{{ request()->routeIs('katalog') 
+                        ? 'text-white font-semibold' 
+                        : 'text-white/90 hover:text-white' }}
+                        transition-all duration-300">
                         Katalog Desa
                     </a>
                 </li>

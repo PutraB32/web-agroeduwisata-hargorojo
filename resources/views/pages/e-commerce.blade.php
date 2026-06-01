@@ -245,7 +245,9 @@
 <!-- ===================================================== -->
 <!-- KATALOG PRODUK -->
 <!-- ===================================================== -->
-<section class="
+<section 
+    x-data="cartApp()"
+    class="
     relative
     py-20
     bg-[#f8f6f1]
@@ -344,7 +346,9 @@
         </div>
 
         <!-- CART -->
-        <button class="
+        <button 
+            @click="cartOpen = true"    
+            class="
             relative
             w-14
             h-14
@@ -367,16 +371,23 @@
             "></i>
 
             <!-- BADGE -->
-            <span class="
+            <span 
+                 x-text="
+        cart.reduce(
+            (total,item)=>total+item.qty,
+            0
+        )
+    "
+                class="
                 absolute
                 -top-2
                 -right-2
-                w-6
-                h-6
+                w-7
+                h-7
                 rounded-full
                 bg-[#d8b15a]
                 text-[#173121]
-                text-[11px]
+                text-[13px]
                 font-bold
                 flex
                 items-center
@@ -384,7 +395,7 @@
                 border-2
                 border-white
             ">
-                3
+                
             </span>
 
         </button>
@@ -798,6 +809,14 @@
                             mb-2
                         ">
                             Rp{{ number_format($produk->harga,0,',','.') }}
+
+                            <span class="
+                            text-[14px]
+                            font-normal
+                            text-[#8d8d8d]
+                            "> / {{ $produk->satuan }}
+                        
+                        </span>
                         </div>
 
                         <!-- STOK -->
@@ -825,6 +844,17 @@
 
                         <!-- BUTTON -->
                         <button
+                        @click="addToCart({
+                        id: {{ $produk->id }},
+                        nama: '{{ addslashes($produk->nama) }}',
+                        harga: {{ $produk->harga }},
+                        satuan: '{{ $produk->satuan }}',
+                        gambar: '{{ $produk->gambar
+                        ? asset('images/produk/'.$produk->gambar)
+                        : asset('images/beranda.bg.jpeg')
+                        }}'
+                        })"
+
                         class="
                         w-full
                         h-11
@@ -852,6 +882,517 @@
     </div>
 </div>
 
+<!-- ===================================================== -->
+<!-- BACKDROP -->
+<!-- ===================================================== -->
+<div
+    x-show="cartOpen"
+    x-transition.opacity
+    @click="cartOpen = false"
+    class="
+        fixed
+        inset-0
+
+        bg-black/40
+        backdrop-blur-sm
+
+        z-[90]
+    "
+></div>
+
+<!-- ===================================================== -->
+<!-- CART SIDE PANEL -->
+<!-- ===================================================== -->
+<div
+    x-show="cartOpen"
+
+    x-transition:enter="
+        transition
+        ease-out
+        duration-300
+    "
+
+    x-transition:enter-start="
+        translate-x-full
+    "
+
+    x-transition:enter-end="
+        translate-x-0
+    "
+
+    x-transition:leave="
+        transition
+        ease-in
+        duration-200
+    "
+
+    x-transition:leave-start="
+        translate-x-0
+    "
+
+    x-transition:leave-end="
+        translate-x-full
+    "
+
+    class="
+        fixed
+        top-0
+        right-0
+
+        h-screen
+        w-full
+        max-w-[500px]
+
+        bg-white
+
+        shadow-[-20px_0_60px_rgba(0,0,0,0.15)]
+
+        z-[100]
+
+        flex
+        flex-col
+    "
+>
+
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
+    <div class="
+        flex
+        items-center
+        justify-between
+
+        px-6
+        py-5
+
+        border-b
+        border-[#ece6da]
+    ">
+
+        <div>
+
+            <h3 class="
+                font-lora
+                text-[26px]
+                font-bold
+                text-[#173121]
+            ">
+                Keranjang
+            </h3>
+
+            <p class="
+                text-sm
+                text-[#6b736d]
+            ">
+                Produk yang akan dibeli
+            </p>
+
+        </div>
+
+        <button
+            @click="cartOpen = false"
+            class="
+                h-10
+                w-10
+
+                rounded-full
+
+                bg-[#f8f6f1]
+
+                hover:bg-[#ece6da]
+
+                transition-all
+            "
+        >
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- PRODUCT LIST -->
+    <!-- ===================================================== -->
+    <div class="
+        flex-1
+        overflow-y-auto
+
+        p-5
+    ">
+
+        <!-- PRODUCT LIST -->
+<div class="
+    flex-1
+    overflow-y-auto
+    p-5
+">
+
+    <template
+        x-for="item in cart"
+        :key="item.id"
+    >
+
+        <div class="
+            border
+            border-[#ece6da]
+
+            rounded-[20px]
+
+            p-4
+
+            mb-4
+        ">
+
+            <div class="
+                flex
+                gap-4
+            ">
+
+                <img
+                    :src="item.gambar"
+                    class="
+                        w-20
+                        h-20
+
+                        rounded-xl
+
+                        object-cover
+                    "
+                >
+
+                <div class="flex-1">
+
+                    <h4
+                        x-text="item.nama"
+                        class="
+                            font-semibold
+                            text-[#173121]
+                            mb-1
+                        "
+                    ></h4>
+
+                    <p class="
+                        text-[#c6a949]
+                        font-bold
+                        mb-3
+                    ">
+
+                        Rp
+
+                        <span
+                            x-text="
+                                Number(item.harga)
+                                .toLocaleString('id-ID')
+                            "
+                        ></span>
+
+                        /
+
+                        <span
+                            x-text="item.satuan"
+                        ></span>
+
+                    </p>
+
+                    <div class="
+                        flex
+                        items-center
+                        justify-between
+                    ">
+
+                        <!-- QTY -->
+                        <div class="
+                            flex
+                            items-center
+                            gap-3
+                        ">
+
+                            <button 
+                                @click="decreaseQty(item.id)"
+                                class="
+                                w-8
+                                h-8
+
+                                rounded-lg
+
+                                bg-[#f8f6f1]
+                            ">
+                                -
+                            </button>
+
+                            <span
+                                x-text="item.qty"
+                                class="
+                                    font-semibold
+                                "
+                            ></span>
+
+                            <button 
+                                @click="increaseQty(item.id)"
+                                class="
+                                w-8
+                                h-8
+
+                                rounded-lg
+
+                                bg-[#173121]
+
+                                text-white
+                            ">
+                                +
+                            </button>
+
+                        </div>
+
+                        <!-- DELETE -->
+                        <button 
+                            @click="removeItem(item.id)"
+                            class="
+                            text-red-500
+                        ">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </template>
+
+</div>
+
+    <!-- ===================================================== -->
+    <!-- CUSTOMER FORM -->
+    <!-- ===================================================== -->
+    <div class="
+        px-5
+        pt-4
+
+        border-t
+        border-[#ece6da]
+    ">
+
+        <h4 class="
+            font-semibold
+            text-[#173121]
+            mb-4
+        ">
+            Data Pengiriman
+        </h4>
+
+        <div class="space-y-3">
+
+            <input
+                type="text"
+                placeholder="Nama Lengkap"
+                class="
+                    w-full
+                    h-11
+
+                    px-4
+
+                    rounded-xl
+
+                    border
+                    border-[#ece6da]
+
+                    focus:outline-none
+                "
+            >
+
+            <input
+                type="text"
+                placeholder="Nomor WhatsApp"
+                class="
+                    w-full
+                    h-11
+
+                    px-4
+
+                    rounded-xl
+
+                    border
+                    border-[#ece6da]
+
+                    focus:outline-none
+                "
+            >
+
+            <textarea
+                rows="3"
+                placeholder="Alamat Lengkap"
+                class="
+                    w-full
+
+                    px-4
+                    py-3
+
+                    rounded-xl
+
+                    border
+                    border-[#ece6da]
+
+                    focus:outline-none
+                "
+            ></textarea>
+
+        </div>
+
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================================== -->
+    <div class="
+        p-5
+
+        bg-white
+
+        border-t
+        border-[#ece6da]
+    ">
+
+        <div class="
+            flex
+            items-center
+            justify-between
+
+            mb-4
+        ">
+
+            <span class="
+                text-[#6b736d]
+            ">
+                Total
+            </span>
+
+            <span class="
+                text-[24px]
+                font-bold
+                text-[#173121]
+            ">
+                Rp25.000
+            </span>
+
+        </div>
+
+        <button
+            class="
+                w-full
+                h-12
+
+                rounded-xl
+
+                bg-[#173121]
+
+                text-white
+                font-semibold
+
+                hover:bg-[#21412f]
+
+                transition-all
+            "
+        >
+            Lanjutkan ke WhatsApp
+        </button>
+    </div>
+</div>
+</div>
+
+    <!-- ===================================================== -->
+<!-- TOAST NOTIFICATION -->
+<!-- ===================================================== -->
+<div
+    x-show="showToast"
+    x-transition:enter="
+        transition
+        ease-out
+        duration-300
+    "
+    x-transition:enter-start="
+        opacity-0
+        translate-y-2
+    "
+    x-transition:enter-end="
+        opacity-100
+        translate-y-0
+    "
+    x-transition:leave="
+        transition
+        ease-in
+        duration-200
+    "
+    x-transition:leave-start="
+        opacity-100
+    "
+    x-transition:leave-end="
+        opacity-0
+    "
+    class="
+        fixed
+        top-24
+        right-6
+
+        z-[9999]
+
+        bg-[#173121]
+        text-white
+
+        px-5
+        py-4
+
+        rounded-2xl
+
+        shadow-[0_15px_40px_rgba(0,0,0,0.15)]
+
+        flex
+        items-center
+        gap-3
+    "
+>
+
+    <div
+        class="
+            w-8
+            h-8
+
+            rounded-full
+
+            bg-green-500
+
+            flex
+            items-center
+            justify-center
+        "
+    >
+        <i class="fa-solid fa-check"></i>
+    </div>
+
+    <div>
+
+        <div class="
+            text-sm
+            font-semibold
+        ">
+            Berhasil
+        </div>
+
+        <div
+            x-text="toastMessage"
+            class="
+                text-xs
+                text-white/80
+            "
+        ></div>
+
+    </div>
+
+</div>
+
+</div>
 </section>
 
 
@@ -1654,6 +2195,130 @@
                 behavior: 'smooth'
             });
     }
+</script>
+
+<script>
+function cartApp() {
+    return {
+
+        showToast: false,
+        toastMessage: '',
+
+        cartOpen: false,
+
+        cart: JSON.parse(
+            localStorage.getItem('cart')
+        ) || [],
+
+        // =========================================
+        // TAMBAH KE KERANJANG
+        // =========================================
+        addToCart(product) {
+
+            let existing = this.cart.find(
+                item => item.id === product.id
+            );
+
+            if (existing) {
+
+                existing.qty++;
+
+                this.toastMessage =
+                    `Jumlah ${product.nama} ditambahkan`;
+
+            } else {
+
+                this.cart.push({
+                    ...product,
+                    qty: 1
+                });
+
+                this.toastMessage =
+                    `${product.nama} berhasil ditambahkan ke keranjang`;
+
+            }
+
+            localStorage.setItem(
+                'cart',
+                JSON.stringify(this.cart)
+            );
+
+            this.showToast = true;
+
+            setTimeout(() => {
+                this.showToast = false;
+            }, 2500);
+
+        },
+
+        // =========================================
+        // TAMBAH QTY
+        // =========================================
+        increaseQty(id) {
+
+            let item = this.cart.find(
+                item => item.id === id
+            );
+
+            if (!item) return;
+
+            item.qty++;
+
+            localStorage.setItem(
+                'cart',
+                JSON.stringify(this.cart)
+            );
+
+        },
+
+        // =========================================
+        // KURANGI QTY
+        // =========================================
+        decreaseQty(id) {
+
+            let item = this.cart.find(
+                item => item.id === id
+            );
+
+            if (!item) return;
+
+            if (item.qty > 1) {
+
+                item.qty--;
+
+            } else {
+
+                this.cart = this.cart.filter(
+                    item => item.id !== id
+                );
+
+            }
+
+            localStorage.setItem(
+                'cart',
+                JSON.stringify(this.cart)
+            );
+
+        },
+
+        // =========================================
+        // HAPUS PRODUK
+        // =========================================
+        removeItem(id) {
+
+            this.cart = this.cart.filter(
+                item => item.id !== id
+            );
+
+            localStorage.setItem(
+                'cart',
+                JSON.stringify(this.cart)
+            );
+
+        }
+
+    }
+}
 </script>
 
 @endsection

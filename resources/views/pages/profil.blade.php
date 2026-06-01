@@ -187,7 +187,7 @@
             absolute
             -bottom-[2px]
             left-0
-            z-80
+            z-50
             w-full
             overflow-hidden
             leading-none
