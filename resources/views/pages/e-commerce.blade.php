@@ -647,7 +647,23 @@
 
                         </div>
 
-                        <a href="#"
+                        <button
+                            @click="addToCart({
+
+                            id: {{ $produk->id }},
+
+                            nama: '{{ addslashes($produk->nama) }}',
+
+                            harga: {{ $produk->harga }},
+
+                            satuan: '{{ $produk->satuan }}',
+
+                            gambar: '{{ $produk->gambar
+                            ? asset('images/produk/' . $produk->gambar)
+                            : asset('images/beranda.bg.jpeg')
+                            }}'
+
+                            })"
                             class="
                                 px-4
                                 py-2
@@ -662,7 +678,7 @@
                             "
                         >
                             Tambah ke Keranjang
-                        </a>
+                        </button>
 
                     </div>
 
@@ -1094,6 +1110,39 @@
                     </p>
 
                     <div class="
+                    flex
+                    items-center
+                    justify-between
+                    text-sm
+                    mb-2
+                    ">
+                    
+                    <span class="text-[#6b736d]">
+                        <span x-text="item.qty"></span>x
+                        Rp
+                        <span
+                        x-text="
+                        Number(item.harga)
+                        .toLocaleString('id-ID')
+                        "
+                        ></span>
+                    </span>
+                    
+                    <span
+                    x-text="
+                    'Rp ' +
+                    (item.harga * item.qty)
+                    .toLocaleString('id-ID')
+                    "
+                    class="
+                    font-semibold
+                    text-[#173121]
+                    "
+                    ></span>
+                
+                </div>
+
+                    <div class="
                         flex
                         items-center
                         justify-between
@@ -1145,7 +1194,9 @@
 
                         <!-- DELETE -->
                         <button 
-                            @click="removeItem(item.id)"
+                            @click="
+                            productToDelete = item;
+                            confirmDeleteOpen = true;"
                             class="
                             text-red-500
                         ">
@@ -1169,14 +1220,16 @@
     <!-- ===================================================== -->
     <div class="
         px-5
-        pt-4
+        pt-5
 
         border-t
         border-[#ece6da]
     ">
 
         <h4 class="
-            font-semibold
+            font-lora
+            font-bold
+            text-[18px]
             text-[#173121]
             mb-4
         ">
@@ -1242,10 +1295,164 @@
         </div>
 
     </div>
+    <!-- ===================================================== -->
+<!-- DELETE MODAL INSIDE DRAWER -->
+<!-- ===================================================== -->
+<div
+    x-show="confirmDeleteOpen"
+    x-transition
+    class="
+        absolute
+        inset-0
+
+        bg-white/80
+        backdrop-blur-sm
+
+        z-[200]
+
+        flex
+        items-center
+        justify-center
+
+        p-6
+    "
+>
+
+    <div
+        @click.stop
+        class="
+            bg-white
+
+            w-full
+
+            rounded-[24px]
+
+            border
+            border-[#ece6da]
+
+            shadow-[0_20px_50px_rgba(0,0,0,0.12)]
+
+            p-6
+
+            text-center
+        "
+    >
+
+        <!-- ICON -->
+        <div class="
+            w-16
+            h-16
+
+            mx-auto
+            mb-4
+
+            rounded-full
+
+            bg-red-100
+
+            flex
+            items-center
+            justify-center
+        ">
+            <i class="
+                fa-solid
+                fa-trash
+
+                text-red-500
+                text-xl
+            "></i>
+        </div>
+
+        <!-- TITLE -->
+        <h3 class="
+            font-lora
+            text-xl
+            font-bold
+            text-[#173121]
+            mb-2
+        ">
+            Hapus Produk?
+        </h3>
+
+        <!-- DESC -->
+        <p class="
+            text-sm
+            text-[#6b736d]
+            leading-relaxed
+            mb-6
+        ">
+
+            <span
+                class="font-semibold"
+                x-text="
+                    productToDelete
+                    ? productToDelete.nama
+                    : ''
+                "
+            ></span>
+
+            akan dihapus dari keranjang.
+
+        </p>
+
+        <!-- BUTTON -->
+        <div class="
+            flex
+            gap-3
+        ">
+
+            <button
+                @click="
+                    confirmDeleteOpen = false
+                "
+                class="
+                    flex-1
+
+                    py-3
+
+                    rounded-xl
+
+                    bg-[#f8f6f1]
+
+                    text-[#173121]
+                    font-semibold
+                "
+            >
+                Batal
+            </button>
+
+            <button
+                @click="
+                    removeItem(productToDelete.id);
+                    confirmDeleteOpen = false;
+                "
+                class="
+                    flex-1
+
+                    py-3
+
+                    rounded-xl
+
+                    bg-red-500
+
+                    text-white
+                    font-semibold
+                "
+            >
+                Hapus
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
     <!-- ===================================================== -->
     <!-- FOOTER -->
     <!-- ===================================================== -->
+     
+     
     <div class="
         p-5
 
@@ -1254,6 +1461,25 @@
         border-t
         border-[#ece6da]
     ">
+
+        <div class="
+    text-sm
+    text-[#151515]
+    mb-1
+">
+
+    <span
+        x-text="
+            cart.reduce(
+                (total, item) => total + item.qty,
+                0
+            )
+        "
+    ></span>
+
+    Item
+
+</div>
 
         <div class="
             flex
@@ -1269,15 +1495,21 @@
                 Total
             </span>
 
-            <span class="
-                text-[24px]
-                font-bold
-                text-[#173121]
-            ">
-                Rp25.000
-            </span>
+            <span
+            x-text="
+            'Rp' + subtotal().toLocaleString('id-ID')
+            "
+            class="
+            text-[24px]
+            font-bold
+            text-[#173121]
+            "
+            ></span>
 
         </div>
+
+        
+
 
         <button
             class="
@@ -1393,6 +1625,8 @@
 </div>
 
 </div>
+
+
 </section>
 
 
@@ -2206,9 +2440,24 @@ function cartApp() {
 
         cartOpen: false,
 
+        confirmDeleteOpen: false,
+        productToDelete: null,
+
         cart: JSON.parse(
             localStorage.getItem('cart')
         ) || [],
+
+        // =========================================
+        // HITUNG TOTAL HARGA
+        // =========================================
+        subtotal() {
+            return this.cart.reduce(
+                (total, item) => {
+                    return total + (item.harga * item.qty)
+                },
+                0
+            );
+        },
 
         // =========================================
         // TAMBAH KE KERANJANG
@@ -2288,6 +2537,14 @@ function cartApp() {
 
             } else {
 
+                this.toastMessage =
+                `${item.nama} dihapus dari keranjang`;
+                
+                this.showToast = true;
+                
+                setTimeout(() => {
+                    this.showToast = false;}, 2500);
+
                 this.cart = this.cart.filter(
                     item => item.id !== id
                 );
@@ -2316,6 +2573,8 @@ function cartApp() {
             );
 
         }
+
+        
 
     }
 }
