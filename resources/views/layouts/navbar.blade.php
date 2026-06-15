@@ -16,7 +16,7 @@
     <!-- Container -->
      <div
     :class="scrolled || open
-        ? 'max-w-full rounded-none bg-[#243024]/90 backdrop-blur-2xl h-20'
+        ? 'max-w-full rounded-none bg-[#243024]/30 backdrop-blur-2xl h-20'
         : 'max-w-[98%] rounded-[25px] bg-white/10 backdrop-blur-2xl h-20'"
         class="
         mx-auto
