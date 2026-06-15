@@ -863,7 +863,7 @@
                     </div>
 
                     <h3 class="
-                        font-lora font-medium italic
+                        font-display font-regular
                         text-[25px] md:text-[22px]
                         leading-[1.2] tracking-[-0.01em]
                         text-[#000000] mb-5 line-clamp-2
@@ -871,8 +871,8 @@
                         {{ $item->judul }}
                     </h3>
 
-                    <p class="font-sans text-[#5f6d63] text-[14px] leading-[1.9] font-thin mb-3 line-clamp-5">
-                        {{ Str::limit($item->deskripsi, 250) }}
+                    <p class="font-lora italic text-[#5f6d63] text-[14px] leading-[1.9] font-thin mb-3 line-clamp-5">
+                        {{ Str::limit($item->deskripsi, 300) }}
                     </p>
 
                     {{-- Read more — tambah read-more-link --}}
