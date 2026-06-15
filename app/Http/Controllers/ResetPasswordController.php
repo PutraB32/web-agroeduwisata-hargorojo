@@ -23,6 +23,17 @@ class ResetPasswordController extends Controller
     }
 
     /**
+     * Tampilkan form password baru untuk customer.
+     */
+    public function showCustomerResetForm(Request $request, $token = null)
+    {
+        return view('customer.reset-password')->with([
+            'token' => $token,
+            'email' => $request->email,
+        ]);
+    }
+
+    /**
      * Lakukan reset password di database.
      */
     public function reset(Request $request)
@@ -56,5 +67,43 @@ class ResetPasswordController extends Controller
         return $status === Password::PASSWORD_RESET
             ? redirect()->route('login')->with('status', 'Password Anda berhasil diperbarui! Silakan masuk dengan password baru.')
             : back()->withErrors(['email' => ['Token reset tidak valid atau sudah kedaluwarsa.']]);
+    }
+
+    /**
+     * Lakukan reset password khusus akun customer.
+     */
+    public function resetCustomer(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email|max:255',
+            'password' => ['required', 'confirmed', PasswordRule::min(8)->letters()->numbers()],
+        ], [
+            'token.required' => 'Token reset tidak valid.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'password.required' => 'Password baru wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok dengan password baru.',
+        ]);
+
+        $credentials = $request->only('email', 'password', 'password_confirmation', 'token');
+        $credentials['role'] = 'customer';
+
+        $status = Password::reset(
+            $credentials,
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password),
+                ])->setRememberToken(Str::random(60));
+
+                $user->save();
+
+                event(new PasswordReset($user));
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('customer.login')->with('status', 'Password customer berhasil diperbarui. Silakan masuk dengan password baru.')
+            : back()->withErrors(['email' => ['Token reset tidak valid, sudah kedaluwarsa, atau bukan akun customer.']]);
     }
 }

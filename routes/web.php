@@ -8,10 +8,13 @@ use App\Http\Controllers\ProdukGulaKelapaController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\KatalogDesaController;
 use App\Http\Controllers\KontakController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\CustomerAuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\MidtransNotificationController;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\AdminProdukController;
 use App\Http\Controllers\AdminAgroeduwisataController;
 use App\Http\Controllers\AdminKatalogDesaController;
@@ -19,7 +22,6 @@ use App\Http\Controllers\AdminUserController;
 use App\Http\Controllers\AdminTestimoniController;
 use App\Http\Controllers\AdminOrderController;
 use App\Http\Controllers\AdminKategoriKatalogController;
-use Illuminate\Support\Facades\Auth;
 
 
 //============================================
@@ -46,6 +48,9 @@ Route::delete('/cart/remove', [CartController::class, 'remove'])->middleware('th
 Route::put('/cart/update', [CartController::class, 'update'])->middleware('throttle:cart')->name('cart.update');
 Route::post('/checkout', [CartController::class, 'checkout'])->middleware('throttle:checkout')->name('checkout.process');
 
+Route::post('/payment/midtrans/notification', MidtransNotificationController::class)
+    ->name('payment.midtrans.notification');
+
 
 //============================================
 // ROUTE AUTHENTIKASI (Login & Logout)
@@ -54,8 +59,24 @@ Route::get('/login', function () {
     return view('pages.login');
 })->name('login');
 
-Route::post('/login', [AuthController::class, 'authenticate'])->middleware('throttle:login')->name('login.post');
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+Route::post('/login', [AdminAuthController::class, 'authenticate'])->middleware('throttle:login')->name('login.post');
+Route::post('/logout', [AdminAuthController::class, 'logout'])->middleware('auth')->name('logout');
+
+Route::get('/customer/login', [CustomerAuthController::class, 'showLogin'])->name('customer.login');
+Route::post('/customer/login', [CustomerAuthController::class, 'login'])->middleware('throttle:login')->name('customer.login.post');
+Route::get('/customer/register', [CustomerAuthController::class, 'showRegister'])->name('customer.register');
+Route::post('/customer/register', [CustomerAuthController::class, 'register'])->middleware('throttle:login')->name('customer.register.post');
+Route::get('/customer/forgot-password', [ForgotPasswordController::class, 'showCustomerLinkRequestForm'])->name('customer.password.request');
+Route::post('/customer/forgot-password', [ForgotPasswordController::class, 'sendCustomerResetLinkEmail'])
+    ->middleware('throttle:password-reset')
+    ->name('customer.password.email');
+Route::get('/customer/reset-password/{token}', [ResetPasswordController::class, 'showCustomerResetForm'])->name('customer.password.reset');
+Route::post('/customer/reset-password', [ResetPasswordController::class, 'resetCustomer'])
+    ->middleware('throttle:password-reset')
+    ->name('customer.password.update');
+Route::get('/customer/profile', [CustomerAuthController::class, 'profile'])->name('customer.profile');
+Route::put('/customer/profile', [CustomerAuthController::class, 'updateProfile'])->name('customer.profile.update');
+Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->middleware('auth')->name('customer.logout');
 
 // Rute Lupa Password & Reset Password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
@@ -73,112 +94,15 @@ Route::post('/reset-password', [ResetPasswordController::class, 'reset'])
 //=====================================================
 Route::middleware(['auth'])->group(function () {
 
-    Route::get('/admin/dashboard', function () {
-        if (Auth::user()->role === 'super_admin') {
-            return redirect()->route('superadmin.dashboard');
-        }
-
-        return redirect()->route('admin.dashboard');
-    })->name('dashboard');
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'redirectByRole'])->name('dashboard');
 
     // =============================================
     // Rute Khusus Super Admin
     // =============================================
     Route::middleware(['role:super_admin'])->group(function () {
 
-        Route::get('/admin/superAdmin', function (\Illuminate\Http\Request $request) {
-
-            $searchProduk = $request->query('search_produk');
-
-            $produks = \App\Models\Produk::when($searchProduk, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%");
-            })->get();
-
-
-            $searchAgro = $request->query('search_agro');
-            $filterAgro = $request->query('filter_kat_agro');
-
-            $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function ($query, $search) {
-                return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterAgro === 'induk', function ($query) {
-                return $query->whereNull('parent_id');
-            })->get();
-
-
-            $parentAgros = \App\Models\Agroeduwisata::whereNull('parent_id')->get();
-
-
-            $searchKatalog = $request->query('search_katalog');
-            $filterKatalog = $request->query('filter_kat_katalog');
-
-            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function ($query, $search) {
-                return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterKatalog, function ($query, $filter) {
-                return $query->where('kategori_id', $filter);
-            })->get();
-
-
-            $searchUser = $request->query('search_user');
-
-            $users = \App\Models\User::when($searchUser, function ($query, $search) {
-                return $query->where('name', 'like', "%{$search}%")
-                             ->orWhere('email', 'like', "%{$search}%");
-            })->get();
-
-
-            $searchTestimoni = $request->query('search_testimoni');
-
-            $testimoni = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")
-                             ->orWhere('isi_testimoni', 'like', "%{$search}%");
-            })->get();
-
-
-            $searchOrder = $request->query('search_order');
-
-            $orders = \App\Models\Order::with('orderDetails.produk')
-                ->when($searchOrder, function ($query, $search) {
-                    return $query->where('nama_pemesan', 'like', "%{$search}%")
-                                 ->orWhere('no_hp', 'like', "%{$search}%");
-                })
-                ->latest('created_at')
-                ->get();
-
-
-            $kategoriKatalogs = \App\Models\KategoriKatalog::all();
-
-
-            $produksWithSales = \App\Models\Produk::withSum([
-                'orderDetails as total_terjual' => function ($query) {
-                    $query->whereHas('order', function ($q) {
-                        $q->where('status', 'Selesai');
-                    });
-                }
-            ], 'jumlah')->get();
-
-
-            $chartLabels = $produksWithSales->pluck('nama')->toArray();
-
-            $chartData = $produksWithSales->pluck('total_terjual')
-                ->map(function ($val) {
-                    return (int) $val;
-                })->toArray();
-
-
-            return view('Admin.superAdmin', compact(
-                'produks',
-                'agroeduwisatas',
-                'katalogs',
-                'users',
-                'testimoni',
-                'orders',
-                'kategoriKatalogs',
-                'chartLabels',
-                'chartData',
-                'parentAgros'
-            ));
-
-        })->name('superadmin.dashboard');
+        Route::get('/admin/superAdmin', [AdminDashboardController::class, 'superAdmin'])
+            ->name('superadmin.dashboard');
 
 
         // CRUD USER
@@ -198,90 +122,8 @@ Route::middleware(['auth'])->group(function () {
     // =============================================
     Route::middleware(['role:admin'])->group(function () {
 
-        Route::get('/admin/admin', function (\Illuminate\Http\Request $request) {
-
-            $searchProduk = $request->query('search_produk');
-
-            $produks = \App\Models\Produk::when($searchProduk, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%");
-            })->get();
-
-
-            $searchAgro = $request->query('search_agro');
-            $filterAgro = $request->query('filter_kat_agro');
-
-            $agroeduwisatas = \App\Models\Agroeduwisata::when($searchAgro, function ($query, $search) {
-                return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterAgro === 'induk', function ($query) {
-                return $query->whereNull('parent_id');
-            })->get();
-
-
-            $parentAgros = \App\Models\Agroeduwisata::whereNull('parent_id')->get();
-
-
-            $searchOrder = $request->query('search_order');
-
-            $orders = \App\Models\Order::with('orderDetails.produk')
-                ->when($searchOrder, function ($query, $search) {
-                    return $query->where('nama_pemesan', 'like', "%{$search}%")
-                                 ->orWhere('no_hp', 'like', "%{$search}%");
-                })
-                ->latest('created_at')
-                ->get();
-
-
-            $produksWithSales = \App\Models\Produk::withSum([
-                'orderDetails as total_terjual' => function ($query) {
-                    $query->whereHas('order', function ($q) {
-                        $q->where('status', 'Selesai');
-                    });
-                }
-            ], 'jumlah')->get();
-
-
-            $chartLabels = $produksWithSales->pluck('nama')->toArray();
-
-            $chartData = $produksWithSales->pluck('total_terjual')
-                ->map(function ($val) {
-                    return (int) $val;
-                })->toArray();
-
-
-            $searchKatalog = $request->query('search_katalog');
-            $filterKatalog = $request->query('filter_kat_katalog');
-
-            $katalogs = \App\Models\KatalogDesa::when($searchKatalog, function ($query, $search) {
-                return $query->where('Judul', 'like', "%{$search}%");
-            })->when($filterKatalog, function ($query, $filter) {
-                return $query->where('kategori_id', $filter);
-            })->get();
-
-
-            $kategoriKatalogs = \App\Models\KategoriKatalog::all();
-
-
-            $searchTestimoni = $request->query('search_testimoni');
-
-            $testimoni = \App\Models\Testimoni::when($searchTestimoni, function ($query, $search) {
-                return $query->where('nama', 'like', "%{$search}%")
-                             ->orWhere('isi_testimoni', 'like', "%{$search}%");
-            })->get();
-
-
-            return view('Admin.admin', compact(
-                'produks',
-                'agroeduwisatas',
-                'orders',
-                'katalogs',
-                'kategoriKatalogs',
-                'chartLabels',
-                'chartData',
-                'testimoni',
-                'parentAgros'
-            ));
-
-        })->name('admin.dashboard');
+        Route::get('/admin/admin', [AdminDashboardController::class, 'admin'])
+            ->name('admin.dashboard');
     });
 
 
@@ -312,6 +154,7 @@ Route::middleware(['auth'])->group(function () {
 
         // Order
         Route::put('/admin/order/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.order.update_status');
+        Route::put('/admin/order/{id}/pengiriman', [AdminOrderController::class, 'updatePengiriman'])->name('admin.order.update_pengiriman');
         Route::delete('/admin/order/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
     });
 });
