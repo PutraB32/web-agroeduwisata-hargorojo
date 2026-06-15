@@ -1,9 +1,17 @@
+/* ===================================================== */
+/* MERGED app.css (Gabungan 2 file tanpa menghilangkan isi) */
+/* ===================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+
+/* ===== FILE 1 ===== */
+
+
 
 @theme {
     /* Custom Colors */
@@ -74,6 +82,10 @@
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
+}
+
+[x-cloak] {
+    display: none !important;
 }
 
 /* Admin dashboard system */
@@ -342,4 +354,2535 @@
 .admin-dashboard [id^="modal-"] form button[type="submit"],
 .admin-dashboard [id^="modal-"] form button[type="button"] {
     min-height: 2.45rem;
+}
+
+
+
+/* ===================================================== */
+/* HERO ANIMATIONS */
+/* ===================================================== */
+
+/* 1. Ken Burns — zoom perlahan saat load */
+@keyframes kenburns {
+    0%   { transform: scale(1.12); }
+    100% { transform: scale(1.0);  }
+}
+.animate-kenburns {
+    animation: kenburns 2s ease-out forwards;
+}
+
+/* 2. Vignette — dark overlay fade saat load */
+@keyframes vignette-open {
+    0%   { opacity: 1;   }
+    100% { opacity: 0.3; }
+}
+.animate-vignette {
+    animation: vignette-open 1.8s ease-out forwards;
+}
+
+/* 3. Left gradient slide in saat load */
+@keyframes slide-gradient {
+    0%   { transform: translateX(-100%); opacity: 0; }
+    100% { transform: translateX(0);     opacity: 1; }
+}
+.animate-slide-gradient {
+    animation: slide-gradient 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* 4. Warm tone pulse loop */
+@keyframes pulse-warm {
+    0%, 100% { opacity: 0.10; }
+    50%       { opacity: 0.20; }
+}
+.animate-pulse-warm {
+    animation: pulse-warm 5s ease-in-out infinite;
+}
+
+/* ===================================================== */
+/* HERO CONTENT ANIMATIONS */
+/* ===================================================== */
+
+/* Fade Up — dasar untuk stagger */
+@keyframes fade-up {
+    0%   { opacity: 0; transform: translateY(28px); }
+    100% { opacity: 1; transform: translateY(0);    }
+}
+
+.hero-fade-up {
+    opacity: 0;
+    animation: fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Delay utilities untuk stagger */
+.delay-100 { animation-delay: 0.1s; }
+.delay-200 { animation-delay: 0.2s; }
+.delay-300 { animation-delay: 0.3s; }
+.delay-450 { animation-delay: 0.45s; }
+.delay-600 { animation-delay: 0.6s; }
+.delay-750 { animation-delay: 0.75s; }
+.delay-700 { animation-delay: 0.7s; }
+.delay-800 { animation-delay: 0.8s; }
+.delay-900 { animation-delay: 0.9s; }
+
+/* Tag shimmer saat hover */
+@keyframes shimmer {
+    0%   { background-position: -200% center; }
+    100% { background-position:  200% center; }
+}
+
+.tag-shimmer:hover {
+    background: linear-gradient(
+        90deg,
+        rgba(255,255,255,0.05) 0%,
+        rgba(255,255,255,0.15) 50%,
+        rgba(255,255,255,0.05) 100%
+    );
+    background-size: 200% auto;
+    animation: shimmer 1.2s linear infinite;
+}
+
+/* Circular images — scale in berurutan */
+@keyframes scale-in {
+    0%   { opacity: 0; transform: scale(0.6); }
+    100% { opacity: 1; transform: scale(1);   }
+}
+
+.avatar-in {
+    opacity: 0;
+    animation: scale-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Button pulse halus */
+@keyframes pulse-soft {
+    0%, 100% { box-shadow: 0 0 0 0   rgba(255,255,255,0.25); }
+    50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0);    }
+}
+
+.btn-pulse {
+    animation: pulse-soft 2.5s ease-in-out infinite;
+}
+
+/* ===================================================== */
+/* SCROLL REVEAL — section masuk viewport */
+/* ===================================================== */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.35s; }
+.reveal-delay-4 { transition-delay: 0.5s; }
+
+/* ===================================================== */
+/* LINE EXPAND — garis label melebar dari tengah */
+/* ===================================================== */
+.line-expand {
+    width: 0;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.line-expand.visible {
+    width: 3.5rem; /* w-14 */
+}
+
+/* ===================================================== */
+/* LEAF FLOAT — dekoratif naik turun halus */
+/* ===================================================== */
+@keyframes leaf-float {
+    0%, 100% { transform: translateY(0)    rotate(-20deg); }
+    50%       { transform: translateY(-12px) rotate(-20deg); }
+}
+
+@keyframes leaf-float-right {
+    0%, 100% { transform: translateY(0)    rotate(25deg); }
+    50%       { transform: translateY(-10px) rotate(25deg); }
+}
+
+.leaf-float-left {
+    animation: leaf-float 6s ease-in-out infinite;
+}
+
+.leaf-float-right {
+    animation: leaf-float-right 7s ease-in-out infinite;
+}
+
+/* ===================================================== */
+/* CARD SLIDE IN — bergantian kiri & kanan */
+/* ===================================================== */
+.card-slide-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-slide-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-slide-left.visible,
+.card-slide-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* NUMBER BADGE POP */
+/* ===================================================== */
+.badge-pop {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.3s;
+}
+
+.badge-pop.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* IMAGE OVERLAY REVEAL — tirai slide naik */
+/* ===================================================== */
+.img-reveal-overlay {
+    position: absolute;
+    inset: 0;
+    background: #fdfbf7;
+    transform: translateY(0);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    z-index: 10;
+}
+
+.img-reveal-overlay.visible {
+    transform: translateY(100%);
+}
+
+/* ===================================================== */
+/* FEATURE ICON — bounce halus saat visible */
+/* ===================================================== */
+@keyframes icon-bounce {
+    0%   { transform: translateY(0);    }
+    40%  { transform: translateY(-6px); }
+    70%  { transform: translateY(-2px); }
+    100% { transform: translateY(0);    }
+}
+
+.icon-bounce {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.icon-bounce.visible {
+    opacity: 1;
+    animation: icon-bounce 0.6s ease forwards;
+}
+
+.icon-bounce-delay-1 { transition-delay: 0.4s; animation-delay: 0.4s; }
+.icon-bounce-delay-2 { transition-delay: 0.55s; animation-delay: 0.55s; }
+.icon-bounce-delay-3 { transition-delay: 0.7s; animation-delay: 0.7s; }
+
+/* ===================================================== */
+/* CTA SECTION ANIMATIONS */
+/* ===================================================== */
+
+/* Stats icon float */
+@keyframes stat-float {
+    0%, 100% { transform: translateY(0);   }
+    50%       { transform: translateY(-5px); }
+}
+
+.stat-icon-float {
+    animation: stat-float 3s ease-in-out infinite;
+}
+
+.stat-icon-float-2 { animation-duration: 3.5s; animation-delay: 0.3s; }
+.stat-icon-float-3 { animation-duration: 4s;   animation-delay: 0.6s; }
+.stat-icon-float-4 { animation-duration: 3.8s; animation-delay: 0.9s; }
+
+/* CTA button glow pulse */
+@keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0   rgba(234, 179, 8, 0.4); }
+    50%       { box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);  }
+}
+
+.btn-glow {
+    animation: glow-pulse 2.5s ease-in-out infinite;
+}
+
+/* Stat separator grow */
+.stat-border-grow {
+    position: relative;
+}
+
+.stat-border-grow::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 0;
+    background: rgba(255, 255, 255, 0.15);
+    transition: height 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.4s;
+}
+
+.stat-border-grow.visible::after {
+    height: 100%;
+}
+
+/* ===================================================== */
+/* PRODUCT CARD STAGGER */
+/* ===================================================== */
+.product-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.product-card-delay-1 { transition-delay: 0.05s; }
+.product-card-delay-2 { transition-delay: 0.15s; }
+.product-card-delay-3 { transition-delay: 0.25s; }
+.product-card-delay-4 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* FLOATING ICON DROP-IN */
+/* ===================================================== */
+.float-icon-drop {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.7);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.35s;
+}
+
+.product-card.visible .float-icon-drop {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ===================================================== */
+/* DECORATIVE STAR SPIN */
+/* ===================================================== */
+@keyframes spin-slow {
+    0%   { transform: rotate(0deg);   }
+    100% { transform: rotate(360deg); }
+}
+
+.star-spin {
+    animation: spin-slow 30s linear infinite;
+    transform-origin: center;
+}
+
+/* ===================================================== */
+/* CATEGORY MENU STAGGER */
+/* ===================================================== */
+.cat-item {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.cat-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.cat-item-delay-1 { transition-delay: 0.05s; }
+.cat-item-delay-2 { transition-delay: 0.15s; }
+.cat-item-delay-3 { transition-delay: 0.25s; }
+.cat-item-delay-4 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* KATALOG CARD SLIDE-UP */
+/* ===================================================== */
+.katalog-card {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.katalog-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.katalog-card-delay-1 { transition-delay: 0.0s;  }
+.katalog-card-delay-2 { transition-delay: 0.15s; }
+.katalog-card-delay-3 { transition-delay: 0.30s; }
+
+/* ===================================================== */
+/* BADGE POP-IN */
+/* ===================================================== */
+.badge-reveal {
+    opacity: 0;
+    transform: scale(0.75) translateY(-6px);
+    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.4s;
+}
+
+.katalog-card.visible .badge-reveal {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* ===================================================== */
+/* READ MORE — arrow slide smooth */
+/* ===================================================== */
+.read-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: gap 0.3s ease;
+}
+
+.read-more-link:hover {
+    gap: 1.25rem;
+}
+
+.read-more-link i {
+    transition: transform 0.3s ease;
+}
+
+.read-more-link:hover i {
+    transform: translateX(4px);
+}
+
+/* ===================================================== */
+/* TESTIMONI CARD STAGGER */
+/* ===================================================== */
+.testi-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.testi-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.testi-card-delay-1 { transition-delay: 0.05s; }
+.testi-card-delay-2 { transition-delay: 0.20s; }
+.testi-card-delay-3 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* AVATAR SCALE-IN */
+/* ===================================================== */
+.avatar-scale {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.2s;
+}
+
+.testi-card.visible .avatar-scale {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* SEPARATOR LINE GROW */
+/* ===================================================== */
+.testi-line {
+    width: 0;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.45s;
+}
+
+.testi-card.visible .testi-line {
+    width: 3.75rem; /* w-15 */
+}
+
+/* ===================================================== */
+/* STAR RATING — muncul satu per satu */
+/* ===================================================== */
+.star-item {
+    opacity: 0;
+    transform: scale(0.5);
+    display: inline-block;
+    transition: opacity 0.3s ease,
+                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.testi-card.visible .star-item:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.50s; }
+.testi-card.visible .star-item:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.58s; }
+.testi-card.visible .star-item:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.66s; }
+.testi-card.visible .star-item:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.74s; }
+.testi-card.visible .star-item:nth-child(5) { opacity: 1; transform: scale(1); transition-delay: 0.82s; }
+
+/* ===================================================== */
+/* MAIN BOX SCALE-IN */
+/* ===================================================== */
+.box-scale-in {
+    opacity: 0;
+    transform: scale(0.97) translateY(20px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.box-scale-in.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* ===================================================== */
+/* STAT CARD STAGGER */
+/* ===================================================== */
+.stat-card {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.stat-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.stat-card-delay-1 { transition-delay: 0.10s; }
+.stat-card-delay-2 { transition-delay: 0.22s; }
+.stat-card-delay-3 { transition-delay: 0.34s; }
+.stat-card-delay-4 { transition-delay: 0.46s; }
+
+/* ===================================================== */
+/* STAT ICON BOUNCE */
+/* ===================================================== */
+@keyframes stat-icon-pop {
+    0%   { transform: scale(0.5); opacity: 0; }
+    60%  { transform: scale(1.15); opacity: 1; }
+    100% { transform: scale(1);   opacity: 1; }
+}
+
+.stat-icon-pop {
+    opacity: 0;
+}
+
+.stat-card.visible .stat-icon-pop {
+    animation: stat-icon-pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    animation-delay: 0.3s;
+}
+
+
+/* ===================================================== */
+/* TYPEWRITER — mengetik dari tengah - HERO PROFIL DESA */
+/* ===================================================== */
+@keyframes typing {
+    0%   { width: 0; }
+    100% { width: 100%; }
+}
+
+@keyframes blink-caret {
+    0%, 100% { border-color: transparent; }
+    50%       { border-color: rgba(255,255,255,0.7); }
+}
+
+.typewriter {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 0;
+    border-right: 2px solid rgba(255,255,255,0.7);
+    animation:
+        typing      2.0s steps(22, end)  0.8s forwards,
+        blink-caret 0.75s step-end       infinite;
+}
+
+/* Setelah selesai mengetik, cursor berhenti berkedip */
+.typewriter.done {
+    border-color: transparent !important;
+    animation: none !important;
+}
+
+/* ===================================================== */
+/* SEJARAH — LEFT SLIDE IN */
+/* ===================================================== */
+.slide-left {
+    opacity: 0;
+    transform: translateX(-35px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.slide-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-left-delay-1 { transition-delay: 0.05s; }
+.slide-left-delay-2 { transition-delay: 0.20s; }
+.slide-left-delay-3 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* FLOATING CARD POP-IN */
+/* ===================================================== */
+.float-card-pop {
+    opacity: 0;
+    transform: scale(0.88) translateY(16px);
+    transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.7s;
+}
+
+.float-card-pop.visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* ===================================================== */
+/* DOT DECOR FLOAT */
+/* ===================================================== */
+@keyframes dot-float {
+    0%, 100% { transform: translateY(0);    }
+    60%       { transform: translateY(-8px); }
+}
+
+.dot-float {
+    animation: dot-float 7s ease-in-out infinite;
+}
+
+.img-slide-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.2s;
+}
+
+.img-slide-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* VISI MISI — CARD SLIDE BERGANTIAN */
+/* ===================================================== */
+.visi-card {
+    opacity: 0;
+    transform: translateX(-45px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.misi-card {
+    opacity: 0;
+    transform: translateX(45px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.visi-card.visible,
+.misi-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* TOP BAR EXPAND */
+/* ===================================================== */
+.bar-expand {
+    width: 0;
+    transition: width 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.4s;
+}
+
+.visi-card.visible .bar-expand,
+.misi-card.visible .bar-expand {
+    width: 100%;
+}
+
+/* ===================================================== */
+/* VISI LINE GROW — dari tengah */
+/* ===================================================== */
+.visi-line {
+    width: 0;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.6s;
+}
+
+.visi-card.visible .visi-line {
+    width: 7.5rem; /* w-30 */
+}
+
+/* ===================================================== */
+/* MISI LIST STAGGER */
+/* ===================================================== */
+.misi-item {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.misi-card.visible .misi-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.35s; }
+.misi-card.visible .misi-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.48s; }
+.misi-card.visible .misi-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.61s; }
+.misi-card.visible .misi-item:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.74s; }
+.misi-card.visible .misi-item:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.87s; }
+
+/* ===================================================== */
+/* FONDASI CARD STAGGER */
+/* ===================================================== */
+.fondasi-card {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fondasi-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.fondasi-card-delay-1 { transition-delay: 0.05s; }
+.fondasi-card-delay-2 { transition-delay: 0.20s; }
+.fondasi-card-delay-3 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* FONDASI FLOATING ICON DROP-IN */
+/* ===================================================== */
+.fondasi-icon {
+    opacity: 0;
+    transform: translateY(-18px) scale(0.7);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.45s;
+}
+
+.fondasi-card.visible .fondasi-icon {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* ===================================================== */
+/* FONDASI IMAGE CLIP-UP */
+/* ===================================================== */
+.fondasi-img {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.fondasi-card.visible .fondasi-img {
+    clip-path: inset(0% 0 0 0);
+}
+
+/* ===================================================== */
+/* FONDASI ARROW ANIMATE */
+/* ===================================================== */
+.fondasi-arrow {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.group:hover .fondasi-arrow {
+    transform: translateX(5px);
+}
+
+/* ===================================================== */
+/* MAP SLIDE-IN DARI KANAN */
+/* ===================================================== */
+.map-slide {
+    opacity: 0;
+    transform: translateX(45px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.3s;
+}
+
+.map-slide.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* MAP FRAME GLOW */
+/* ===================================================== */
+.map-glow {
+    box-shadow: 0 30px 100px rgba(0,0,0,0.08);
+    transition: box-shadow 1s ease;
+    transition-delay: 0.8s;
+}
+
+.map-glow.visible {
+    box-shadow:
+        0 30px 100px rgba(0,0,0,0.08),
+        0 0 0 2px rgba(200,176,109,0.25),
+        0 0 40px rgba(200,176,109,0.12);
+}
+
+/* ===================================================== */
+/* LOCATION DOT PULSE */
+/* ===================================================== */
+@keyframes location-pulse {
+    0%, 100% { color: #d8c08a; transform: scale(1);    }
+    50%       { color: #f0d878; transform: scale(1.2);  }
+}
+
+.location-pulse {
+    animation: location-pulse 2s ease-in-out infinite;
+}
+
+
+/* ===================================================== */
+/* GALERI — LARGE IMAGE SCALE-IN */
+/* ===================================================== */
+.galeri-large {
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.galeri-large.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* GALERI — SMALL IMAGE STAGGER */
+/* ===================================================== */
+.galeri-item {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.galeri-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.galeri-item-delay-1 { transition-delay: 0.20s; }
+.galeri-item-delay-2 { transition-delay: 0.35s; }
+.galeri-item-delay-3 { transition-delay: 0.50s; }
+
+/* ===================================================== */
+/* GALERI — HOVER OVERLAY TINT */
+/* ===================================================== */
+.galeri-tint::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(23, 49, 33, 0);
+    transition: background 0.5s ease;
+    pointer-events: none;
+}
+
+.galeri-tint:hover::after {
+    background: rgba(23, 49, 33, 0.18);
+}
+
+/* ===================================================== */
+/* GALERI — IMAGE ZOOM SMOOTH */
+/* ===================================================== */
+.galeri-zoom {
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+/* ===================================================== */
+/* PRODUCT ROW — SLIDE BERGANTIAN */
+/* ===================================================== */
+.produk-content-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.produk-content-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.produk-content-left.visible,
+.produk-content-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* TAB SLIDE — kanan ke kiri & sebaliknya */
+/* ===================================================== */
+.tab-slide-enter-right {
+    animation: slideInRight 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.tab-slide-enter-left {
+    animation: slideInLeft 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes slideInRight {
+    0%   { opacity: 0; transform: translateX(30px); }
+    100% { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes slideInLeft {
+    0%   { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0);     }
+}
+
+/* ===================================================== */
+/* TAB CONTENT WRAPPER */
+/* ===================================================== */
+.tab-content-wrapper {
+    min-height: 285px;
+    max-height: 350px;
+    position: relative;
+    overflow: hidden;
+}
+
+.tab-content-wrapper .benefit-item {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+}
+
+/* ===================================================== */
+/* REVIEWS SCROLLBAR */
+/* ===================================================== */
+.scrollbar-thin::-webkit-scrollbar {
+    width: 4px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: #f1ede4;
+    border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #d8b15a;
+    border-radius: 10px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #b89b5e;
+}
+
+.scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: #110e08 #f1ede4;
+}
+
+/* ===================================================== */
+/* PRODUCT IMAGE FADE SCALE */
+/* ===================================================== */
+.produk-img-reveal {
+    opacity: 0;
+    transform: scale(1.03);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.25s;
+}
+
+.produk-img-reveal.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* ORGANIC BADGE POP */
+/* ===================================================== */
+.badge-organic {
+    opacity: 0;
+    transform: scale(0.7);
+    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.4s;
+}
+
+.produk-content-left.visible .badge-organic,
+.produk-content-right.visible .badge-organic {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* BENEFITS LIST STAGGER */
+/* ===================================================== */
+.benefit-item {
+    opacity: 0;
+    transform: translateX(16px);
+    transition: opacity 0.4s ease,
+                transform 0.4s ease;
+}
+
+.produk-content-left.visible .benefit-item,
+.produk-content-right.visible .benefit-item {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.benefit-item:nth-child(1) { transition-delay: 0.5s; }
+.benefit-item:nth-child(2) { transition-delay: 0.62s; }
+.benefit-item:nth-child(3) { transition-delay: 0.74s; }
+.benefit-item:nth-child(4) { transition-delay: 0.86s; }
+.benefit-item:nth-child(5) { transition-delay: 0.98s; }
+
+/* ===================================================== */
+/* GLOW PULSE — belakang gambar */
+/* ===================================================== */
+@keyframes glow-green {
+    0%, 100% { opacity: 0.10; transform: scale(0.90); }
+    50%       { opacity: 0.18; transform: scale(0.95); }
+}
+
+.produk-glow {
+    animation: glow-green 4s ease-in-out infinite;
+}
+
+/* ===================================================== */
+/* KEUNGGULAN CARD STAGGER */
+/* ===================================================== */
+.keunggulan-card {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.keunggulan-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.keunggulan-card-delay-1 { transition-delay: 0.05s; }
+.keunggulan-card-delay-2 { transition-delay: 0.18s; }
+.keunggulan-card-delay-3 { transition-delay: 0.31s; }
+.keunggulan-card-delay-4 { transition-delay: 0.44s; }
+
+/* ===================================================== */
+/* ICON CIRCLE POP-IN */
+/* ===================================================== */
+.icon-pop {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.35s;
+}
+
+.keunggulan-card.visible .icon-pop {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* DIVIDER LINE GROW */
+/* ===================================================== */
+.divider-grow {
+    width: 0;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.5s;
+}
+
+.keunggulan-card.visible .divider-grow {
+    width: 7.5rem; /* w-30 */
+}
+
+/* ===================================================== */
+/* SIDEBAR ITEM STAGGER */
+/* ===================================================== */
+.sidebar-item {
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sidebar-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.sidebar-item:nth-child(1) { transition-delay: 0.7s; }
+.sidebar-item:nth-child(2) { transition-delay: 0.85s; }
+.sidebar-item:nth-child(3) { transition-delay: 1.0s; }
+
+/* ===================================================== */
+/* HERO KATALOG — BERITA UTAMA & SIDEBAR ENTRANCE */
+/* ===================================================== */
+.hero-slide-left {
+    opacity: 0;
+    transform: translateX(-45px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.2s;
+}
+
+.hero-slide-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Button naik saat hover — sudah via Tailwind, tambah glow */
+@keyframes btn-rise {
+    0%, 100% { box-shadow: 0 4px 15px rgba(23,49,33,0.2); }
+    50%       { box-shadow: 0 8px 25px rgba(23,49,33,0.35); }
+}
+
+.btn-rise {
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.4s ease;
+}
+
+.btn-rise:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(23,49,33,0.3);
+}
+
+.sidebar-slide {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.5s;
+}
+
+.sidebar-slide.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* PENGUMUMAN CARD STAGGER */
+/* ===================================================== */
+.pengumuman-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.pengumuman-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.pengumuman-card:nth-child(1) { transition-delay: 0.05s; }
+.pengumuman-card:nth-child(2) { transition-delay: 0.15s; }
+.pengumuman-card:nth-child(3) { transition-delay: 0.25s; }
+.pengumuman-card:nth-child(4) { transition-delay: 0.35s; }
+.pengumuman-card:nth-child(5) { transition-delay: 0.45s; }
+
+/* ===================================================== */
+/* DATE BADGE POP */
+/* ===================================================== */
+.date-badge-pop {
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.3s;
+}
+
+.pengumuman-card.visible .date-badge-pop {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* ICON CIRCLE BOUNCE */
+/* ===================================================== */
+.pengumuman-icon {
+    opacity: 0;
+    transform: scale(0.5) translateY(-8px);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.35s;
+}
+
+.pengumuman-card.visible .pengumuman-icon {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+}
+
+/* ===================================================== */
+/* NAV BUTTON REVEAL */
+/* ===================================================== */
+.nav-btn-reveal {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    transition-delay: 0.6s;
+}
+
+.nav-btn-reveal.visible {
+    opacity: 1;
+}
+
+
+/* ===================================================== */
+/* ARTIKEL CARD STAGGER */
+/* ===================================================== */
+.artikel-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.artikel-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.artikel-card:nth-child(1) { transition-delay: 0.05s; }
+.artikel-card:nth-child(2) { transition-delay: 0.18s; }
+.artikel-card:nth-child(3) { transition-delay: 0.31s; }
+.artikel-card:nth-child(4) { transition-delay: 0.44s; }
+.artikel-card:nth-child(5) { transition-delay: 0.57s; }
+.artikel-card:nth-child(6) { transition-delay: 0.90s; }
+
+/* ===================================================== */
+/* ARTIKEL IMAGE CLIP-UP */
+/* ===================================================== */
+.artikel-img {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.artikel-card.visible .artikel-img {
+    clip-path: inset(0% 0 0 0);
+}
+
+/* ===================================================== */
+/* ARTIKEL DATE FADE */
+/* ===================================================== */
+.artikel-date {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    transition-delay: 0.5s;
+}
+
+.artikel-card.visible .artikel-date {
+    opacity: 1;
+}
+
+/* ===================================================== */
+/* ARTIKEL HOVER BORDER TOP */
+/* ===================================================== */
+.artikel-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #2563EB;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.artikel-card:hover::before {
+    transform: scaleX(1);
+}
+
+/* ===================================================== */
+/* PERPUSTAKAAN CARD STAGGER */
+/* ===================================================== */
+.perpus-card {
+    opacity: 0;
+    transform: translateY(26px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.perpus-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.perpus-card-delay-1 { transition-delay: 0.05s; }
+.perpus-card-delay-2 { transition-delay: 0.18s; }
+.perpus-card-delay-3 { transition-delay: 0.31s; }
+.perpus-card-delay-4 { transition-delay: 0.44s; }
+
+/* ===================================================== */
+/* ICON BOX POP-IN */
+/* ===================================================== */
+.perpus-icon {
+    opacity: 0;
+    transform: scale(0.6) rotate(-10deg);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition-delay: 0.35s;
+}
+
+.perpus-card.visible .perpus-icon {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+/* ===================================================== */
+/* LABEL FADE-IN */
+/* ===================================================== */
+.perpus-label {
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    transition-delay: 0.5s;
+}
+
+.perpus-card.visible .perpus-label {
+    opacity: 1;
+}
+
+/* ===================================================== */
+/* BUTTON ARROW ANIMATE */
+/* ===================================================== */
+.perpus-arrow {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.perpus-card:hover .perpus-arrow {
+    transform: translateX(4px);
+}
+
+/* ===================================================== */
+/* GALERI KATALOG — HERO IMAGE SCALE-IN */
+/* ===================================================== */
+.galeri-katalog-hero {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.1s;
+}
+
+.galeri-katalog-hero.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* GALERI KATALOG — SMALL GRID STAGGER */
+/* ===================================================== */
+.galeri-katalog-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.galeri-katalog-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.galeri-katalog-item:nth-child(1) { transition-delay: 0.20s; }
+.galeri-katalog-item:nth-child(2) { transition-delay: 0.32s; }
+.galeri-katalog-item:nth-child(3) { transition-delay: 0.44s; }
+.galeri-katalog-item:nth-child(4) { transition-delay: 0.56s; }
+
+/* ===================================================== */
+/* CAPTION SLIDE-UP */
+/* ===================================================== */
+.galeri-caption {
+    transform: translateY(12px);
+    opacity: 0;
+    transition: opacity 0.5s ease,
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.4s;
+}
+
+.galeri-katalog-hero.visible .galeri-caption,
+.galeri-katalog-item.visible .galeri-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ===================================================== */
+/* TIMELINE ROW — SLIDE BERGANTIAN */
+/* ===================================================== */
+.timeline-row-left {
+    opacity: 0;
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline-row-right {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.25s;
+}
+
+.timeline-row-left.visible,
+.timeline-row-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* TIMELINE DOT POP-IN */
+/* ===================================================== */
+.timeline-dot {
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-dot.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* ===================================================== */
+/* TIMELINE LINE GROW */
+/* ===================================================== */
+.timeline-line {
+    transform-origin: top;
+    transform: scaleY(0);
+    transition: transform 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.timeline-line.visible {
+    transform: scaleY(1);
+}
+
+
+/* ===================================================== */
+/* WORD BY WORD FADE — quote */
+/* ===================================================== */
+.word-fade {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.4s ease,
+                transform 20s ease;
+    display: inline;
+}
+
+.word-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================================== */
+/* QUOTE FADE-UP — wrapper */
+/* ===================================================== */
+.quote-fade {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.quote-fade.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================================== */
+/* EDUKASI PERTANIAN */
+/* ===================================================== */
+.edukasi-left {
+    opacity: 0;
+    transform: translateX(-45px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.edukasi-left.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.edukasi-right {
+    opacity: 0;
+    transform: translateX(45px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.3s;
+}
+
+.edukasi-right.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Tips item stagger */
+.tips-item {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease,
+                transform 0.5s ease;
+}
+
+.edukasi-left.visible .tips-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.5s; }
+.edukasi-left.visible .tips-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.65s; }
+.edukasi-left.visible .tips-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.80s; }
+
+
+/* ===================================================== */
+/* WISATA ALAM CARDS */
+/* ===================================================== */
+.wisata-card-left {
+    opacity: 0;
+    transform: translateX(-35px) scale(0.97);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wisata-card-left.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.wisata-card-right {
+    opacity: 0;
+    transform: translateX(35px) scale(0.97);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.2s;
+}
+
+.wisata-card-right.visible {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+}
+
+.wisata-card-full {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.3s;
+}
+
+.wisata-card-full.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================================== */
+/* CAPTION SLIDE-UP */
+/* ===================================================== */
+.wisata-caption {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease,
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.5s;
+}
+
+.wisata-card-left.visible .wisata-caption,
+.wisata-card-right.visible .wisata-caption,
+.wisata-card-full.visible .wisata-caption {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* ===================================================== */
+/* BUDAYA DESA — TIMELINE ITEM STAGGER */
+/* ===================================================== */
+.budaya-item {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.budaya-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.budaya-item-delay-1 { transition-delay: 0.05s; }
+.budaya-item-delay-2 { transition-delay: 0.25s; }
+.budaya-item-delay-3 { transition-delay: 0.45s; }
+
+/* ===================================================== */
+/* BUDAYA DESA — KOLASE IMAGE STAGGER */
+/* ===================================================== */
+.kolase-hero {
+    opacity: 0;
+    transform: scale(0.96);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kolase-hero.visible {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.kolase-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.kolase-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.kolase-item-delay-1 { transition-delay: 0.2s; }
+.kolase-item-delay-2 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* BUDAYA DESA — NILAI CARD STAGGER */
+/* ===================================================== */
+.nilai-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nilai-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.nilai-card-delay-1 { transition-delay: 0.05s; }
+.nilai-card-delay-2 { transition-delay: 0.18s; }
+.nilai-card-delay-3 { transition-delay: 0.31s; }
+.nilai-card-delay-4 { transition-delay: 0.44s; }
+
+/* ===================================================== */
+/* MENGAPA TRADISIONAL — LEFT CARD STAGGER */
+/* ===================================================== */
+.tradisi-card {
+    opacity: 0;
+    transform: translateX(-30px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tradisi-card.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.tradisi-card-delay-1 { transition-delay: 0.05s; }
+.tradisi-card-delay-2 { transition-delay: 0.20s; }
+.tradisi-card-delay-3 { transition-delay: 0.35s; }
+
+/* ===================================================== */
+/* MENGAPA TRADISIONAL — QUOTE PANEL SLIDE KANAN */
+/* ===================================================== */
+.tradisi-quote-panel {
+    opacity: 0;
+    transform: translateX(40px);
+    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.3s;
+}
+
+.tradisi-quote-panel.visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* ===================================================== */
+/* FOOTNOTE FADE-UP */
+/* ===================================================== */
+.tradisi-footnote {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 4s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.tradisi-footnote.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== FILE 2 ===== */
+
+
+
+@theme {
+    /* Custom Colors */
+    --color-primary: #004D40;
+    --color-secondary: #D4AF37;
+    --color-tertiary: #FDFAF3;
+    --color-neutral: #2C2C2C;
+    --color-sidebar: #F5F1EF;
+    --color-sidebar-hover: #EADAE0;
+
+    --color-green-800: #006655;
+    --color-green-900: #004D40;
+
+    --color-yellow-400: #e5c04b;
+    --color-yellow-500: #D4AF37;
+
+    --color-gray-800: #3a3a3a;
+    --color-gray-900: #2C2C2C;
+
+    /* Custom Fonts */
+    --font-sans: 'Public Sans', sans-serif;
+    --font-serif: 'Noto Serif', serif;
+    --font-playfair: 'Playfair Display', serif;
+    --font-inter: 'Inter', sans-serif;
+    --font-display: 'DM Serif Display', serif;
+    --font-spartan: 'League Spartan', sans-serif;
+    --font-lora: 'Lora', serif;
+    --font-lobster: 'Lobster', cursive;
+}
+
+/* Base Styles */
+@layer base {
+    body {
+        font-family: 'Public Sans', sans-serif;
+        background-color: #FDFAF3;
+    }
+}
+
+/* Custom Utilities (Moved from Blade files) */
+@layer utilities {
+    .premium-shadow {
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+    }
+    .image-hover-zoom {
+        transition: transform 0.4s ease;
+    }
+    .group:hover .image-hover-zoom {
+        transform: scale(1.02);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+    .cart-panel-scroll {
+        scroll-behavior: smooth;
+        scrollbar-color: #d8b15a #f8f6f1;
+        scrollbar-gutter: stable;
+        scrollbar-width: thin;
+    }
+    .cart-panel-scroll::-webkit-scrollbar {
+        width: 0.55rem;
+    }
+    .cart-panel-scroll::-webkit-scrollbar-track {
+        background: #f8f6f1;
+    }
+    .cart-panel-scroll::-webkit-scrollbar-thumb {
+        background: #d8b15a;
+        border: 2px solid #f8f6f1;
+        border-radius: 999px;
+    }
+}
+
+.font-hero {
+    font-family: 'League Spartan', sans-serif;
+}
+
+.admin-auth-page {
+    font-family: 'Inter', sans-serif;
+}
+
+.admin-auth-page input:-webkit-autofill,
+.admin-auth-page input:-webkit-autofill:hover,
+.admin-auth-page input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 1000px rgba(255, 255, 255, 0.78) inset !important;
+    -webkit-text-fill-color: #052e20 !important;
+    caret-color: #052e20;
+    transition: background-color 9999s ease-in-out 0s;
+}
+
+.modal-aktif {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    z-index: 2147483647 !important;
+    overflow-y: auto !important;
+    pointer-events: auto !important;
+}
+
+/* Hide Scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Admin dashboard system */
+.admin-dashboard {
+    background:
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.12), transparent 32rem),
+        linear-gradient(180deg, #FDFAF3 0%, #F7FAF6 45%, #F4F7F2 100%);
+    color: #2C2C2C;
+}
+
+.admin-dashboard .admin-sidebar {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(0, 77, 64, 0.12);
+    box-shadow: 0 16px 40px rgba(0, 77, 64, 0.08);
+}
+
+.admin-sidebar-overlay {
+    background: rgba(0, 0, 0, 0.18);
+    backdrop-filter: blur(1px);
+}
+
+.admin-dashboard .admin-main {
+    background: transparent;
+    min-width: 0;
+}
+
+.admin-dashboard .admin-main main,
+.admin-dashboard .admin-main main > div,
+.admin-dashboard .crud-panel {
+    min-width: 0;
+}
+
+.admin-dashboard .menu-link {
+    border-radius: 0.65rem;
+    border-left-width: 0;
+    min-height: 2.65rem;
+    font-weight: 700;
+}
+
+.admin-dashboard .menu-link:hover {
+    background: #F1F7F1;
+    color: #004D40;
+}
+
+.admin-dashboard .menu-link.bg-green-50 {
+    background: linear-gradient(90deg, rgba(0, 77, 64, 0.12), rgba(212, 175, 55, 0.10));
+    color: #004D40;
+    box-shadow: inset 3px 0 0 #004D40;
+}
+
+.admin-page-header,
+.admin-hero,
+.admin-stat-card,
+.admin-chart-card,
+.admin-toolbar,
+.admin-table-scroll {
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(0, 77, 64, 0.10);
+    border-radius: 0.85rem;
+    box-shadow: 0 18px 40px rgba(0, 77, 64, 0.08);
+}
+
+.admin-page-header {
+    padding: 1.15rem 1.25rem;
+    align-items: center;
+}
+
+.admin-role-card {
+    min-width: 11rem;
+    justify-content: flex-start;
+}
+
+.admin-hero {
+    background:
+        linear-gradient(135deg, rgba(0, 77, 64, 0.96), rgba(0, 102, 85, 0.92)),
+        url('/images/beranda.bg.jpeg') center/cover;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.admin-stat-card {
+    position: relative;
+    overflow: hidden;
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 22px 50px rgba(0, 77, 64, 0.12);
+}
+
+.admin-stat-card::after {
+    content: "";
+    position: absolute;
+    inset: auto 0 0 0;
+    height: 3px;
+    background: linear-gradient(90deg, #004D40, #D4AF37);
+}
+
+.admin-stat-icon {
+    width: 2.85rem;
+    height: 2.85rem;
+    border-radius: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(0, 77, 64, 0.12);
+}
+
+.admin-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.admin-toolbar-summary {
+    min-width: 0;
+    display: flex;
+    flex: 1 1 auto;
+    align-items: center;
+    gap: 0.85rem;
+}
+
+.admin-toolbar-icon {
+    width: 2.65rem;
+    height: 2.65rem;
+    border-radius: 0.75rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #004D40;
+    background: rgba(0, 77, 64, 0.08);
+    border: 1px solid rgba(0, 77, 64, 0.12);
+}
+
+.admin-toolbar-label {
+    color: #6B7280;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.admin-toolbar-count {
+    color: #004D40;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.35;
+}
+
+.admin-toolbar-meta {
+    color: #6B7280;
+    font-size: 0.78rem;
+    line-height: 1.35;
+    margin-top: 0.1rem;
+}
+
+.admin-toolbar-actions {
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+}
+
+.admin-toolbar-actions input[type="text"],
+.admin-toolbar-actions select {
+    min-height: 2.65rem;
+}
+
+.admin-toolbar-actions > button {
+    min-height: 2.65rem;
+    align-items: center;
+    justify-content: center;
+}
+
+@media (max-width: 767px) {
+    .admin-dashboard .admin-main main {
+        padding: 1rem !important;
+    }
+
+    .admin-page-header {
+        margin-bottom: 1.1rem;
+    }
+
+    .admin-page-header h1 {
+        font-size: 1.85rem;
+    }
+
+    .admin-page-header,
+    .admin-toolbar {
+        align-items: stretch;
+    }
+
+    .admin-toolbar {
+        flex-direction: column;
+    }
+
+    .admin-toolbar-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+
+    .admin-toolbar-actions > *,
+    .admin-toolbar-actions form {
+        width: 100%;
+    }
+
+    .admin-toolbar-actions button {
+        justify-content: center;
+    }
+
+    .admin-table-scroll {
+        border-radius: 0.8rem;
+        margin-inline: -0.25rem;
+    }
+
+    .admin-table-scroll::after {
+        left: 0.75rem;
+        bottom: 0.5rem;
+        font-size: 0.68rem;
+    }
+
+    .admin-data-table th,
+    .admin-data-table td {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+    }
+}
+
+.admin-dashboard input:not([type="checkbox"]):not([type="file"]),
+.admin-dashboard textarea,
+.admin-dashboard select {
+    min-height: 2.55rem;
+    border: 1px solid #D7E1D7;
+    border-radius: 0.65rem;
+    background-color: #FFFFFF;
+    color: #2C2C2C;
+    font-size: 0.9rem;
+}
+
+.admin-dashboard input:focus,
+.admin-dashboard textarea:focus,
+.admin-dashboard select:focus {
+    border-color: #006655;
+    box-shadow: 0 0 0 3px rgba(0, 102, 85, 0.13);
+}
+
+.admin-table-scroll {
+    position: relative;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: #D4AF37 #F7F1E2;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-width: thin;
+}
+
+.admin-table-scroll::-webkit-scrollbar {
+    height: 0.72rem;
+}
+
+.admin-table-scroll::-webkit-scrollbar-track {
+    background: #F7F1E2;
+    border-radius: 999px;
+}
+
+.admin-table-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #004D40, #D4AF37);
+    border: 2px solid #F7F1E2;
+    border-radius: 999px;
+}
+
+.admin-table-scroll::after {
+    content: "Geser tabel ke kiri / kanan";
+    position: sticky;
+    left: 1rem;
+    bottom: 0.65rem;
+    z-index: 2;
+    display: none;
+    width: max-content;
+    margin: 0.75rem 1rem 0.75rem 0;
+    border: 1px solid rgba(0, 77, 64, 0.12);
+    border-radius: 999px;
+    background: rgba(253, 250, 243, 0.94);
+    color: #536056;
+    padding: 0.36rem 0.72rem;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.08);
+}
+
+@media (max-width: 1023px) {
+    .admin-table-scroll::after {
+        display: inline-flex;
+    }
+}
+
+.admin-data-table {
+    width: 100%;
+    min-width: 58rem;
+}
+
+.admin-table-produk {
+    min-width: 76rem;
+}
+
+.admin-table-order {
+    min-width: 78rem;
+}
+
+.admin-table-agro {
+    min-width: 68rem;
+}
+
+.admin-table-katalog {
+    min-width: 72rem;
+}
+
+.admin-table-testimoni,
+.admin-table-user {
+    min-width: 62rem;
+}
+
+.admin-table-kategori {
+    min-width: 40rem;
+}
+
+.admin-table-order-detail {
+    min-width: 36rem;
+}
+
+.admin-dashboard-overview,
+.admin-dashboard-overview section,
+.admin-dashboard-overview article {
+    min-width: 0;
+}
+
+.admin-chart-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-color: #D4AF37 #F7F1E2;
+    scrollbar-gutter: stable both-edges;
+    scrollbar-width: thin;
+}
+
+.admin-chart-scroll::-webkit-scrollbar {
+    height: 0.65rem;
+}
+
+.admin-chart-scroll::-webkit-scrollbar-track {
+    background: #F7F1E2;
+    border-radius: 999px;
+}
+
+.admin-chart-scroll::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #004D40, #D4AF37);
+    border: 2px solid #F7F1E2;
+    border-radius: 999px;
+}
+
+.admin-chart-panel {
+    min-width: 42rem;
+}
+
+.admin-dashboard table {
+    font-size: 0.88rem;
+}
+
+.admin-dashboard table th {
+    background: #F6F2E8 !important;
+    color: #536056 !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.04em !important;
+}
+
+.admin-dashboard table td {
+    color: #2C2C2C;
+    vertical-align: middle;
+}
+
+.admin-data-table th,
+.admin-data-table td {
+    white-space: nowrap;
+}
+
+.admin-data-table td .line-clamp-2 {
+    white-space: normal;
+}
+
+.admin-dashboard tbody tr:hover {
+    background: #FBF8EE;
+}
+
+.admin-dashboard button.bg-green-800,
+.admin-dashboard button.bg-green-900 {
+    background: #006655 !important;
+    border: 1px solid rgba(0, 77, 64, 0.18);
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.16);
+}
+
+.admin-dashboard button.bg-green-800:hover,
+.admin-dashboard button.bg-green-900:hover {
+    background: #004D40 !important;
+}
+
+.admin-dashboard button.bg-yellow-500 {
+    background: #D4AF37 !important;
+    color: #2C2C2C !important;
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(212, 175, 55, 0.18);
+}
+
+.admin-dashboard button.bg-red-600 {
+    background: #B43B3B !important;
+    border-radius: 0.65rem !important;
+    box-shadow: 0 8px 18px rgba(180, 59, 59, 0.14);
+}
+
+.admin-dashboard button.bg-gray-200 {
+    background: #F1EFE6 !important;
+    color: #3A3A3A !important;
+    border-radius: 0.65rem !important;
+    border: 1px solid rgba(0, 77, 64, 0.10);
+}
+
+.admin-dashboard button.bg-gray-200:hover {
+    background: #E9E4D6 !important;
+    color: #004D40 !important;
+}
+
+.admin-search-control {
+    display: flex;
+    align-items: stretch;
+    min-height: 2.7rem;
+    overflow: hidden;
+    border: 1px solid #D7E1D7;
+    border-radius: 0.75rem;
+    background: #FFFFFF;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.06);
+}
+
+.admin-search-control:focus-within {
+    border-color: #006655;
+    box-shadow: 0 0 0 3px rgba(0, 102, 85, 0.12);
+}
+
+.admin-search-control input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    min-height: 2.7rem;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent;
+    box-shadow: none !important;
+    padding: 0 0.9rem;
+}
+
+.admin-search-control button.bg-gray-200 {
+    width: 2.8rem;
+    min-width: 2.8rem;
+    min-height: 2.7rem;
+    border: 0 !important;
+    border-left: 1px solid #D7E1D7 !important;
+    border-radius: 0 !important;
+    background: #F4F0E6 !important;
+    box-shadow: none !important;
+    color: #173121 !important;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-search-control button.bg-gray-200:hover {
+    background: #E9E4D6 !important;
+    color: #004D40 !important;
+}
+
+.admin-dashboard [id^="modal-"] form button.bg-gray-200 {
+    border-radius: 0.65rem !important;
+}
+
+.admin-dashboard .crud-panel button.bg-yellow-500,
+.admin-dashboard .crud-panel button.bg-red-600 {
+    min-height: 2rem;
+    padding: 0.45rem 0.72rem !important;
+    min-width: 5rem;
+}
+
+.admin-dashboard .crud-panel td > button,
+.admin-dashboard .crud-panel td > form.inline-block {
+    margin: 0.25rem;
+    vertical-align: middle;
+}
+
+.admin-dashboard .crud-panel td > form.inline-block button {
+    margin: 0;
+}
+
+.admin-dashboard .crud-panel td.text-center {
+    white-space: normal;
+}
+
+.admin-dashboard .crud-panel button.text-yellow-600,
+.admin-dashboard .crud-panel button.text-red-500 {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 0.6rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-dashboard .crud-panel button.text-yellow-600 {
+    background: #FFF7D8;
+    border: 1px solid #EBD38A;
+}
+
+.admin-dashboard .crud-panel button.text-red-500 {
+    background: #FFF1F1;
+    border: 1px solid #F1B6B6;
+}
+
+.admin-sales-chart {
+    height: 21.25rem;
+}
+
+@media (max-width: 767px) {
+    .admin-sales-chart {
+        height: 18rem;
+    }
+
+    .admin-chart-panel {
+        min-width: 38rem;
+    }
+}
+
+.admin-progress {
+    --admin-progress-color: #004D40;
+    appearance: none;
+    display: block;
+    width: 100%;
+    height: 0.625rem;
+    overflow: hidden;
+    border: 0;
+    border-radius: 999px;
+    background: #F3F4F6;
+}
+
+.admin-progress::-webkit-progress-bar {
+    border-radius: 999px;
+    background: #F3F4F6;
+}
+
+.admin-progress::-webkit-progress-value {
+    border-radius: 999px;
+    background: var(--admin-progress-color);
+}
+
+.admin-progress::-moz-progress-bar {
+    border-radius: 999px;
+    background: var(--admin-progress-color);
+}
+
+.admin-progress-pending {
+    --admin-progress-color: #F59E0B;
+}
+
+.admin-progress-diproses {
+    --admin-progress-color: #3B82F6;
+}
+
+.admin-progress-dikirim {
+    --admin-progress-color: #0EA5E9;
+}
+
+.admin-progress-selesai {
+    --admin-progress-color: #16A34A;
+}
+
+.admin-progress-dibatalkan {
+    --admin-progress-color: #EF4444;
+}
+
+.admin-order-detail-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.admin-dashboard [id^="modal-"] .relative.bg-white {
+    border-radius: 0.9rem !important;
+    border: 1px solid rgba(0, 77, 64, 0.12);
+    box-shadow: 0 28px 80px rgba(20, 32, 24, 0.26);
+}
+
+.admin-dashboard [id^="modal-"] {
+    align-items: flex-start !important;
+    overflow-y: auto;
+    padding: 1rem;
+}
+
+.admin-dashboard [id^="modal-"] > .relative.bg-white {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100dvh - 2rem);
+    min-height: 0;
+}
+
+.admin-dashboard [id^="modal-"] > .relative.bg-white > form,
+.admin-dashboard [id^="modal-"] > .relative.bg-white > .p-6,
+.admin-dashboard [id^="modal-"] > .relative.bg-white > .px-6 {
+    min-height: 0;
+    overflow-y: auto;
+}
+
+.admin-dashboard [id^="modal-"] form .flex.justify-end {
+    flex-wrap: wrap;
+}
+
+@media (min-width: 640px) {
+    .admin-dashboard [id^="modal-"] {
+        align-items: center !important;
+        padding: 1.5rem;
+    }
+
+    .admin-dashboard [id^="modal-"] > .relative.bg-white {
+        max-height: calc(100dvh - 3rem);
+    }
+}
+
+@media (max-width: 639px) {
+    .admin-dashboard [id^="modal-"] .relative.bg-white {
+        border-radius: 1rem !important;
+    }
+
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > .bg-green-800,
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > .bg-yellow-500,
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > .sticky {
+        padding: 1rem !important;
+    }
+
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > form,
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > .p-6,
+    .admin-dashboard [id^="modal-"] > .relative.bg-white > .px-6 {
+        padding: 1rem !important;
+    }
+
+    .admin-dashboard [id^="modal-"] form .flex.justify-end {
+        flex-direction: column-reverse;
+    }
+
+    .admin-dashboard [id^="modal-"] form button[type="submit"],
+    .admin-dashboard [id^="modal-"] form button[type="button"] {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+.admin-dashboard [id^="modal-create-"] .bg-green-800 {
+    background: linear-gradient(135deg, #004D40, #006655) !important;
+}
+
+.admin-dashboard [id^="modal-edit-"] .bg-yellow-500 {
+    background: linear-gradient(135deg, #D4AF37, #E5C04B) !important;
+}
+
+.admin-dashboard [id^="modal-"] h3 {
+    letter-spacing: 0.01em;
+}
+
+.admin-dashboard [id^="modal-"] label {
+    color: #3A3A3A;
+    font-size: 0.82rem;
+}
+
+.admin-dashboard [id^="modal-"] form button[type="submit"],
+.admin-dashboard [id^="modal-"] form button[type="button"] {
+    min-height: 2.45rem;
+}
+
+[x-cloak] {
+    display: none !important;
+}
+
+.customer-order-card {
+    scroll-margin-top: 7rem;
+}
+
+.admin-return-button {
+    position: fixed;
+    left: 1rem;
+    bottom: 1rem;
+    z-index: 120;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    border-radius: 999px;
+    border: 1px solid rgba(212, 175, 55, 0.55);
+    background: #173121;
+    color: #ffffff;
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    box-shadow: 0 18px 45px rgba(23, 49, 33, 0.25);
+    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-return-button:hover {
+    background: #004D40;
+    box-shadow: 0 22px 55px rgba(23, 49, 33, 0.32);
+    transform: translateY(-2px);
+}
+
+.admin-return-button i {
+    color: #D4AF37;
+}
+
+@media (min-width: 768px) {
+    .admin-return-button {
+        left: 1.5rem;
+        bottom: 1.5rem;
+        padding-inline: 1.1rem;
+    }
 }
