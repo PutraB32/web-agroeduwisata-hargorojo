@@ -6,10 +6,17 @@ use Illuminate\Http\Request;
 use App\Models\Produk;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Services\MidtransService;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CartController extends Controller
 {
+    public function __construct(private MidtransService $midtransService)
+    {
+    }
+
     public function index()
     {
         return redirect()->route('ecommerce');
@@ -17,6 +24,10 @@ class CartController extends Controller
 
     public function add(Request $request)
     {
+        if ($redirect = $this->redirectIfNotCustomer($request)) {
+            return $redirect;
+        }
+
         $this->normalizeProductInput($request);
 
         $validated = $request->validate([
@@ -53,6 +64,10 @@ class CartController extends Controller
 
     public function remove(Request $request)
     {
+        if ($redirect = $this->redirectIfNotCustomer($request)) {
+            return $redirect;
+        }
+
         $this->normalizeProductInput($request);
 
         $validated = $request->validate([
@@ -68,6 +83,10 @@ class CartController extends Controller
 
     public function update(Request $request)
     {
+        if ($redirect = $this->redirectIfNotCustomer($request)) {
+            return $redirect;
+        }
+
         $this->normalizeProductInput($request);
 
         $validated = $request->validate([
@@ -95,32 +114,47 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Keranjang berhasil diperbarui.');
     }
 
-    // Proses Checkout ke Database & Redirect WA
+    // Simpan metode penerimaan, lalu arahkan customer ke pembayaran Midtrans.
     public function checkout(Request $request)
     {
+        if ($redirect = $this->redirectIfNotCustomer($request)) {
+            return $redirect;
+        }
+
         $request->validate([
             'nama' => 'required|string|max:255',
             'no_telepon' => ['required', 'string', 'max:20', 'regex:/^[0-9+\-\s()]+$/'],
-            'alamat' => 'required|string|max:1000'
+            'alamat' => 'required|string|max:1000',
+            'metode_penerimaan' => 'required|in:ambil_di_tempat,cod_bayar_di_tempat',
         ]);
 
         $cart = session()->get('cart', []);
         if(count($cart) == 0) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Keranjang belanja Anda kosong.',
+                ], 422);
+            }
+
             return redirect()->back()->with('error', 'Keranjang belanja Anda kosong.');
         }
 
         try {
-            [$order, $totalHarga, $pesanBarang] = DB::transaction(function () use ($request, $cart) {
+            [$order, $payload] = DB::transaction(function () use ($request, $cart) {
                 $order = Order::create([
+                    'user_id' => Auth::id(),
                     'nama_pemesan' => $request->nama,
                     'no_hp' => $request->no_telepon,
                     'alamat' => $request->alamat,
+                    'metode_penerimaan' => $request->metode_penerimaan,
                     'total' => 0,
-                    'status' => 'Pending'
+                    'status_order' => 'pending',
+                    'payment_status' => 'pending',
+                    'payment_type' => null,
                 ]);
 
                 $totalHarga = 0;
-                $pesanBarang = "";
+                $itemDetails = [];
 
                 foreach ($cart as $item) {
                     $produk = Produk::whereKey($item['id'] ?? null)->lockForUpdate()->firstOrFail();
@@ -147,36 +181,87 @@ class CartController extends Controller
                     $produk->decrement('stok', $quantity);
 
                     $totalHarga += $subtotal;
-                    $pesanBarang .= "- " . $produk->nama . " (" . $quantity . "x) = Rp" . number_format($subtotal, 0, ',', '.') . "\n";
+                    $itemDetails[] = [
+                        'id' => 'produk-'.$produk->id,
+                        'price' => (int) round($hargaSatuan),
+                        'quantity' => $quantity,
+                        'name' => Str::limit($produk->nama, 45, ''),
+                    ];
                 }
 
-                $order->update(['total' => $totalHarga]);
+                $midtransOrderId = 'HARGOROJO-'.$order->id.'-'.now()->timestamp;
 
-                return [$order, $totalHarga, $pesanBarang];
+                $order->update([
+                    'total' => $totalHarga,
+                    'midtrans_order_id' => $midtransOrderId,
+                ]);
+
+                $payload = [
+                    'transaction_details' => [
+                        'order_id' => $midtransOrderId,
+                        'gross_amount' => (int) round($totalHarga),
+                    ],
+                    'item_details' => $itemDetails,
+                    'customer_details' => [
+                        'first_name' => $request->nama,
+                        'email' => Auth::user()->email,
+                        'phone' => $request->no_telepon,
+                        'shipping_address' => [
+                            'first_name' => $request->nama,
+                            'phone' => $request->no_telepon,
+                            'address' => $request->alamat,
+                        ],
+                    ],
+                    'callbacks' => [
+                        'finish' => route('ecommerce'),
+                    ],
+                ];
+
+                return [$order, $payload];
             });
 
-            // 3. Hapus session keranjang
+            $snap = $this->midtransService->createSnapTransaction($payload);
+
+            $profileOrdersUrl = route('customer.profile', [
+                'panel' => 'orders',
+                'order' => $order->id,
+            ]);
+
+            if (empty($snap['redirect_url'])) {
+                throw new \RuntimeException('Redirect pembayaran Midtrans tidak tersedia.');
+            }
+
+            $order->update([
+                'midtrans_snap_token' => $snap['token'] ?? null,
+                'midtrans_redirect_url' => $snap['redirect_url'],
+            ]);
+
             session()->forget('cart');
 
-            // 4. Generate Link WhatsApp
-            $nomorWA = config('services.whatsapp.admin_number', '6281234567890');
-            $teksWA = "Halo Admin Desa Hargorojo, saya ingin memesan barang:\n\n";
-            $teksWA .= "*Nomor Pesanan:* #" . $order->id . "\n";
-            $teksWA .= "*Nama:* " . $order->nama_pemesan . "\n";
-            $teksWA .= "*Alamat:* " . $order->alamat . "\n\n";
-            $teksWA .= "*Rincian Pesanan:*\n" . $pesanBarang . "\n";
-            $teksWA .= "*Total Pembayaran:* Rp " . number_format($totalHarga, 0, ',', '.') . "\n\n";
-            $teksWA .= "Mohon info selanjutnya untuk proses pembayaran. Terima kasih.";
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Transaksi berhasil dibuat. Silakan lanjutkan pembayaran di Midtrans.',
+                    'snap_token' => $snap['token'] ?? null,
+                    'redirect_url' => $snap['redirect_url'],
+                    'order_id' => $order->id,
+                    'midtrans_order_id' => $order->midtrans_order_id,
+                    'ecommerce_url' => route('ecommerce'),
+                    'profile_orders_url' => $profileOrdersUrl,
+                ]);
+            }
 
-            $urlWA = "https://wa.me/" . $nomorWA . "?text=" . urlencode($teksWA);
-
-            // Redirect user ke WhatsApp
-            return redirect()->away($urlWA);
+            return redirect()->away($snap['redirect_url']);
 
         } catch (\Throwable $e) {
             $message = $e instanceof \RuntimeException
                 ? $e->getMessage()
                 : 'Checkout gagal diproses. Silakan coba lagi.';
+
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => $message,
+                ], 422);
+            }
 
             return redirect()->back()->with('error', $message);
         }
@@ -188,5 +273,36 @@ class CartController extends Controller
             'produk_id' => $request->input('produk_id', $request->input('id')),
             'quantity' => $request->input('quantity', $request->input('qty', 1)),
         ]);
+    }
+
+    private function redirectIfNotCustomer(Request $request)
+    {
+        if (! Auth::check()) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Silakan login sebagai customer sebelum berbelanja.',
+                    'redirect_url' => route('customer.login'),
+                ], 401);
+            }
+
+            $request->session()->put('url.intended', url()->previous() ?: route('ecommerce'));
+
+            return redirect()->route('customer.login')
+                ->with('error', 'Silakan login sebagai customer sebelum berbelanja.');
+        }
+
+        if (Auth::user()->role !== 'customer') {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Gunakan akun customer untuk berbelanja di e-commerce.',
+                    'redirect_url' => route('ecommerce'),
+                ], 403);
+            }
+
+            return redirect()->route('ecommerce')
+                ->with('error', 'Gunakan akun customer untuk berbelanja di e-commerce.');
+        }
+
+        return null;
     }
 }
