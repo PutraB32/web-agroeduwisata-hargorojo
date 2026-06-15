@@ -2030,7 +2030,57 @@
     transform: translateY(0);
 }
 
-/* ===== FILE 2 ===== */
+
+/* ===================================================== */
+/* AGRO TESTIMONI CARD STAGGER */
+/* ===================================================== */
+.agro-testi-card {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.agro-testi-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===================================================== */
+/* FAQ ITEM STAGGER */
+/* ===================================================== */
+.faq-item {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.faq-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.faq-item:nth-child(1) { transition-delay: 0.05s; }
+.faq-item:nth-child(2) { transition-delay: 0.18s; }
+.faq-item:nth-child(3) { transition-delay: 0.31s; }
+.faq-item:nth-child(4) { transition-delay: 0.44s; }
+
+/* ===================================================== */
+/* FAQ CTA FADE-UP */
+/* ===================================================== */
+.faq-cta {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: 0.5s;
+}
+
+.faq-cta.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
 
 
 
@@ -2886,3 +2936,4 @@
         padding-inline: 1.1rem;
     }
 }
+
