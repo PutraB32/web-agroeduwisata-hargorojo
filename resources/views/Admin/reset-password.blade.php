@@ -4,28 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ganti Password Baru - Desa Hargorojo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .font-playfair { font-family: 'Playfair+Display', serif; }
-    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
+<body class="admin-auth-page bg-gray-100 min-h-dvh flex items-start justify-center px-3 py-6 sm:items-center sm:p-6 relative overflow-x-hidden overflow-y-auto">
     
     <div class="absolute inset-0 z-0">
         <div class="absolute inset-0 bg-green-900/90 z-10"></div>
         <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover" alt="Background">
     </div>
 
-    <div class="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden relative z-20 border border-white/20">
-        <div class="p-8 md:p-12">
-            <div class="text-center mb-10">
-                <div class="w-20 h-20 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
+    <div class="bg-white w-full max-w-md rounded-[1.5rem] sm:rounded-[2.5rem] shadow-2xl overflow-hidden relative z-20 border border-white/20">
+        <div class="p-6 sm:p-8 md:p-12">
+            <div class="text-center mb-8 sm:mb-10">
+                <div class="w-16 h-16 sm:w-20 sm:h-20 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-2xl sm:text-3xl mx-auto mb-4 shadow-inner">
                     <i class="fas fa-lock-open"></i>
                 </div>
-                <h1 class="font-playfair text-3xl font-bold text-gray-900">Password <span class="text-green-700">Baru</span></h1>
+                <h1 class="font-playfair text-2xl sm:text-3xl font-bold text-gray-900">Password <span class="text-green-700">Baru</span></h1>
                 <p class="text-gray-500 text-sm mt-2">Buat password baru yang aman untuk akun Anda</p>
             </div>
 
@@ -85,7 +80,7 @@
 
                 <button type="submit" 
                     class="w-full bg-gradient-to-r from-green-800 to-green-600 hover:from-green-700 hover:to-green-500 text-yellow-400 hover:text-white font-bold py-4 rounded-2xl transition-all duration-300 shadow-[0_8px_30px_rgb(21,128,61,0.3)] hover:shadow-[0_8px_30px_rgb(21,128,61,0.5)] flex justify-center items-center gap-3 group relative overflow-hidden">
-                    <span class="relative z-10 tracking-widest text-sm">PERBARUI PASSWORD</span>
+                    <span class="relative z-10 tracking-widest text-xs sm:text-sm">PERBARUI PASSWORD</span>
                     <i class="fas fa-check relative z-10 group-hover:scale-110 transition-transform duration-300"></i>
                     <div class="absolute inset-0 h-full w-full bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out rounded-2xl"></div>
                 </button>
@@ -98,7 +93,7 @@
             </div>
         </div>
         
-        <div class="bg-gray-50 py-4 px-8 text-center border-t border-gray-100">
+        <div class="bg-gray-50 py-4 px-4 sm:px-8 text-center border-t border-gray-100">
             <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]">&copy; 2024 Desa Digital Hargorojo</p>
         </div>
     </div>

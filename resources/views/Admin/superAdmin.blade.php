@@ -8,28 +8,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&family=Public+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body { font-family: 'Public Sans', sans-serif; }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        /* Modal override - memastikan modal selalu di atas dan di tengah */
-        .modal-aktif {
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            position: fixed !important;
-            top: 0 !important;
-            left: 0 !important;
-            width: 100vw !important;
-            height: 100vh !important;
-            z-index: 2147483647 !important;
-            overflow-y: auto !important;
-            pointer-events: auto !important;
-        }
-    </style>
 </head>
 <body class="admin-dashboard flex h-screen overflow-hidden text-neutral font-sans">
 
@@ -43,16 +21,16 @@
         </button>
     </div>
 
-    <div id="sidebarOverlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 z-40 hidden transition-opacity"></div>
+    <div id="sidebarOverlay" class="admin-sidebar-overlay fixed inset-0 z-40 hidden transition-opacity"></div>
 
     <aside id="sidebar" class="admin-sidebar fixed inset-y-0 left-0 w-64 bg-white flex flex-col shadow-2xl md:shadow-lg border-r border-gray-200 z-50 transform -translate-x-full md:relative md:translate-x-0 transition-transform duration-300 ease-in-out shrink-0">
-        @include('Admin.partials.dashboard_sidebar', ['isSuperAdmin' => true])
+        @include('Admin.dashboard.sidebar', ['isSuperAdmin' => true])
     </aside>
 
-    <div class="admin-main flex-1 flex flex-col overflow-hidden bg-transparent pt-16 md:pt-0 w-full relative z-0">
-        <main class="flex-1 overflow-x-hidden overflow-y-auto p-6 md:p-10">
-            <div class="max-w-7xl mx-auto">
-                @include('Admin.partials.dashboard_header', [
+    <div class="admin-main min-w-0 flex-1 flex flex-col overflow-hidden bg-transparent pt-16 md:pt-0 w-full relative z-0">
+        <main class="min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-6 md:p-10">
+            <div class="mx-auto w-full min-w-0 max-w-7xl">
+                @include('Admin.dashboard.header', [
                     'eyebrow' => 'Panel Kendali Penuh',
                     'description' => 'Kelola data operasional, testimoni, serta akun pengguna sistem.',
                     'roleLabel' => 'Super Admin',
@@ -62,52 +40,15 @@
                 ])
                 
                 <div id="panel-dashboard" class="crud-panel">
-                    <div class="admin-hero rounded-lg p-6 md:p-8 text-white shadow-lg relative overflow-hidden mb-8 border border-green-700">
-                        <div class="absolute right-0 top-0 opacity-10 text-9xl -mt-10 -mr-10"><i class="fas fa-leaf"></i></div>
-                        <h2 class="text-3xl font-bold mb-2 relative z-10 font-serif">Selamat Datang, {{ auth()->user()->name }}!</h2>
-                        <p class="text-green-100 relative z-10 font-medium">Anda login sebagai <span class="bg-secondary text-primary font-bold px-2 py-0.5 rounded text-xs ml-1 shadow-sm">Super Admin</span></p>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-                        <div class="admin-stat-card bg-white border border-gray-200 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div class="admin-stat-icon bg-green-50 text-primary text-xl mb-4"><i class="fas fa-box"></i></div>
-                            <h3 class="text-2xl font-black text-gray-800">{{ $produks->count() }}</h3>
-                            <p class="text-gray-500 text-sm font-medium mt-1">Total Produk E-Commerce</p>
-                        </div>
-                        <div class="admin-stat-card bg-white border border-gray-200 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div class="admin-stat-icon bg-yellow-50 text-secondary text-xl mb-4"><i class="fas fa-book-open"></i></div>
-                            <h3 class="text-2xl font-black text-gray-800">{{ $katalogs->count() }}</h3>
-                            <p class="text-gray-500 text-sm font-medium mt-1">Total Data Katalog Desa</p>
-                        </div>
-                        <div class="admin-stat-card bg-white border border-gray-200 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div class="admin-stat-icon bg-blue-50 text-blue-600 text-xl mb-4"><i class="fas fa-users"></i></div>
-                            <h3 class="text-2xl font-black text-gray-800">{{ $users->count() }}</h3>
-                            <p class="text-gray-500 text-sm font-medium mt-1">Total Pengguna Terdaftar</p>
-                        </div>
-                        <div class="admin-stat-card bg-white border border-gray-200 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            <div class="admin-stat-icon bg-red-50 text-red-600 text-xl mb-4"><i class="fas fa-shopping-bag"></i></div>
-                            <h3 class="text-2xl font-black text-gray-800">{{ $orders->count() }}</h3>
-                            <p class="text-gray-500 text-sm font-medium mt-1">Total Pesanan Masuk</p>
-                        </div>
-                    </div>
-
-                    <div class="admin-chart-card mt-8 bg-white border border-gray-200 p-6 rounded-lg shadow-sm">
-                        <h3 class="text-xl font-bold text-gray-800 mb-1 font-serif flex items-center gap-2">
-                            <i class="fas fa-chart-bar text-green-600"></i> Statistik Penjualan Produk
-                        </h3>
-                        <p class="text-sm text-gray-500 mb-6">Grafik ini membandingkan seluruh produk yang ada di E-Commerce. Angka pada batang grafik menunjukkan total unit yang terjual berdasarkan pesanan yang berstatus <strong>"Selesai"</strong>. Produk dengan angka 0 berarti belum pernah dibeli.</p>
-                        <div class="w-full relative" style="height: 350px;">
-                            <canvas id="salesChart"></canvas>
-                        </div>
-                    </div>
+                    @include('Admin.dashboard.overview', ['isSuperAdmin' => true])
                 </div>
 
-                @include('Admin.partials.produk_crud')
-                @include('Admin.partials.order_crud')
-                @include('Admin.partials.agroeduwisata_crud')
-                @include('Admin.partials.katalog_crud')
-                @include('Admin.partials.testimoni_crud')
-                @include('Admin.partials.user_crud')
+                @include('Admin.crud.produk')
+                @include('Admin.crud.order')
+                @include('Admin.crud.agroeduwisata')
+                @include('Admin.crud.katalog')
+                @include('Admin.crud.testimoni')
+                @include('Admin.crud.user')
 
             </div>
         </main>
@@ -147,6 +88,18 @@
             user: 'Manajemen User & Settings'
         };
 
+        const descriptions = {
+            dashboard: 'Pantau ringkasan produk, katalog, pengguna, pesanan, dan statistik penjualan.',
+            produk: 'Kelola produk e-commerce, stok, harga, gambar, dan status produk unggulan.',
+            order: 'Pantau pesanan customer, pembayaran, pengiriman, dan status proses order.',
+            agro: 'Kelola konten agroeduwisata dan tahapan aktivitas wisata desa.',
+            katalog: 'Kelola katalog desa, kategori dokumen, gambar, dan tautan akses.',
+            testimoni: 'Kelola testimoni pengunjung dan rating yang tampil di website.',
+            user: 'Kelola akun admin, super admin, role akses, dan kredensial pengguna sistem.'
+        };
+
+        let salesChartInstance = null;
+
         function tampilkanPanel(panelId, clickedElement = null) {
             // Sembunyikan semua panel
             const panels = document.querySelectorAll('.crud-panel');
@@ -168,9 +121,19 @@
                 target.classList.remove('hidden');
                 target.style.display = 'block';
                 localStorage.setItem('activeSuperAdminPanel', activePanelId);
+
+                const pageHeader = document.getElementById('admin-page-header');
+                if (pageHeader) {
+                    pageHeader.classList.toggle('hidden', activePanelId !== 'dashboard');
+                }
                 
                 // Update Title
                 document.getElementById('page-title') ? document.getElementById('page-title').innerText = titles[activePanelId] || 'Dashboard' : null;
+                document.getElementById('page-description') ? document.getElementById('page-description').innerText = descriptions[activePanelId] || descriptions.dashboard : null;
+
+                if (activePanelId === 'dashboard') {
+                    setTimeout(initChart, 0);
+                }
             }
 
             // Update state active di sidebar
@@ -205,55 +168,97 @@
         
         // Cek panel terakhir yang dibuka
         window.onload = function() {
-            const activePanel = localStorage.getItem('activeSuperAdminPanel') || 'dashboard';
+            const params = new URLSearchParams(window.location.search);
+            const panelFromUrl = params.get('panel');
+            const availablePanels = Object.keys(titles);
+            const activePanel = availablePanels.includes(panelFromUrl)
+                ? panelFromUrl
+                : (localStorage.getItem('activeSuperAdminPanel') || 'dashboard');
+
             tampilkanPanel(activePanel);
-            initChart();
+
+            if (params.has('panel')) {
+                params.delete('panel');
+                const queryString = params.toString();
+                window.history.replaceState({}, document.title, window.location.pathname + (queryString ? '?' + queryString : ''));
+            }
         };
 
         // Inisialisasi Chart
         function initChart() {
             const ctx = document.getElementById('salesChart');
             if (!ctx) return;
+            if (typeof Chart === 'undefined') return;
+
+            if (salesChartInstance) {
+                salesChartInstance.resize();
+                salesChartInstance.update();
+                return;
+            }
 
             const labels = {!! json_encode($chartLabels ?? []) !!};
             const dataValues = {!! json_encode($chartData ?? []) !!};
+            const chartLabels = labels.map((label) => {
+                const words = String(label).split(' ');
 
-            // Palet warna estetik (Earthy, Green, Gold tones)
-            const backgroundColors = [
-                'rgba(0, 77, 64, 0.8)',   // Primary Green
-                'rgba(212, 175, 55, 0.8)', // Gold
-                'rgba(46, 125, 50, 0.8)',  // Forest Green
-                'rgba(192, 113, 20, 0.8)', // Bronze/Orange
-                'rgba(0, 105, 92, 0.8)',   // Teal
-                'rgba(245, 127, 23, 0.8)', // Yellow
-                'rgba(85, 139, 47, 0.8)',  // Light Olive
-                'rgba(121, 85, 72, 0.8)',  // Brown
-                'rgba(21, 101, 192, 0.8)', // Blue
-                'rgba(158, 157, 36, 0.8)'  // Lime Dark
-            ];
+                if (words.length <= 2) {
+                    return label;
+                }
 
-            const borderColors = backgroundColors.map(color => color.replace('0.8', '1.0'));
+                const firstLine = words.slice(0, 2).join(' ');
+                const secondLine = words.slice(2).join(' ');
 
-            new Chart(ctx, {
-                type: 'bar',
+                return [
+                    firstLine.length > 18 ? firstLine.slice(0, 18) + '...' : firstLine,
+                    secondLine.length > 18 ? secondLine.slice(0, 18) + '...' : secondLine,
+                ];
+            });
+
+            salesChartInstance = new Chart(ctx, {
+                type: 'line',
                 data: {
-                    labels: labels,
+                    labels: chartLabels,
                     datasets: [{
                         label: 'Total Produk Terjual',
                         data: dataValues,
-                        backgroundColor: backgroundColors,
-                        borderColor: borderColors,
-                        borderWidth: 1,
-                        borderRadius: 6,
-                        hoverBackgroundColor: borderColors
+                        backgroundColor: 'rgba(0, 77, 64, 0.10)',
+                        borderColor: '#004D40',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#D4AF37',
+                        pointBorderColor: '#004D40',
+                        pointBorderWidth: 2,
+                        pointHoverBackgroundColor: '#004D40',
+                        pointHoverBorderColor: '#D4AF37',
+                        pointRadius: 4,
+                        pointHoverRadius: 6,
+                        fill: true,
+                        tension: 0.35
                     }]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                autoSkip: false,
+                                maxRotation: 0,
+                                minRotation: 0,
+                                padding: 8,
+                                font: {
+                                    size: 11,
+                                    family: 'Public Sans'
+                                }
+                            }
+                        },
                         y: {
                             beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 77, 64, 0.08)'
+                            },
                             ticks: {
                                 stepSize: 1,
                                 precision: 0
@@ -265,11 +270,16 @@
                             display: false
                         },
                         tooltip: {
-                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            backgroundColor: 'rgba(0, 77, 64, 0.92)',
                             titleFont: { family: 'Public Sans', size: 14 },
                             bodyFont: { family: 'Public Sans', size: 13, weight: 'bold' },
                             padding: 12,
-                            displayColors: true
+                            displayColors: false,
+                            callbacks: {
+                                title: function (items) {
+                                    return labels[items[0].dataIndex] || '';
+                                }
+                            }
                         }
                     }
                 }
@@ -286,16 +296,8 @@
                 modal.dataset.moved = 'true';
             }
             
-            modal.style.display = ''; // Clear inline display to let Tailwind work
-            modal.style.position = 'fixed';
-            modal.style.top = '0';
-            modal.style.left = '0';
-            modal.style.width = '100vw';
-            modal.style.height = '100vh';
-            modal.style.zIndex = '99999';
-            modal.style.overflowY = 'auto';
             modal.classList.remove('hidden');
-            modal.classList.add('flex'); // Add flex for items-center centering
+            modal.classList.add('flex');
             document.documentElement.style.overflow = 'hidden';
         }
         
@@ -303,7 +305,7 @@
             const modal = document.getElementById(id);
             if (!modal) return;
             modal.classList.add('hidden');
-            modal.classList.remove('flex'); // Remove flex so it hides completely
+            modal.classList.remove('flex');
             document.documentElement.style.overflow = '';
         }
         
