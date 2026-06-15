@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\View\Presenters\EcommercePagePresenter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,6 +27,12 @@ class EcommerceController extends Controller
         $cartSubtotalFormatted = $this->rupiah($cartSubtotal);
         $activeCustomer = Auth::check() && Auth::user()->role === 'customer';
         $checkoutCustomer = $activeCustomer ? Auth::user() : null;
+        $page = EcommercePagePresenter::make(
+            $produks,
+            $produkUnggulan,
+            $cartItems,
+            $checkoutCustomer,
+        );
 
         return view('pages.e-commerce', compact(
             'produks',
@@ -35,24 +42,40 @@ class EcommerceController extends Controller
             'cartSubtotal',
             'cartSubtotalFormatted',
             'activeCustomer',
-            'checkoutCustomer'
+            'checkoutCustomer',
+            'page'
         ));
     }
 
     private function prepareCartItems(array $cart): Collection
     {
-        return collect($cart)->map(function (array $item) {
+        $productIds = collect($cart)
+            ->pluck('id')
+            ->filter()
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values();
+        $products = Produk::whereIn('id', $productIds)->get()->keyBy('id');
+
+        return collect($cart)->map(function (array $item) use ($products) {
+            $id = (int) ($item['id'] ?? 0);
+            $produk = $products->get($id);
             $quantity = (int) ($item['quantity'] ?? 0);
-            $harga = (float) ($item['harga'] ?? 0);
+            $harga = (float) ($produk?->harga ?? $item['harga'] ?? 0);
+            $subtotal = $harga * $quantity;
 
             return [
-                'id' => $item['id'] ?? '',
-                'nama' => $item['nama'] ?? 'Produk',
+                'id' => $id,
+                'nama' => $produk?->nama ?? $item['nama'] ?? 'Produk',
                 'harga' => $harga,
                 'harga_formatted' => $this->rupiah($harga),
                 'quantity' => $quantity,
-                'subtotal' => $harga * $quantity,
-                'subtotal_formatted' => $this->rupiah($harga * $quantity),
+                'subtotal' => $subtotal,
+                'subtotal_formatted' => $this->rupiah($subtotal),
+                'satuan' => $produk?->satuan ?? 'pcs',
+                'stok' => (int) ($produk?->stok ?? 0),
+                'image_url' => $produk?->gambar_url ?? asset('images/beranda.bg.jpeg'),
+                'available' => $produk !== null,
             ];
         });
     }

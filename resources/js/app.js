@@ -1,4 +1,5 @@
 import "./bootstrap";
+import "./ecommerce-cart";
 
 window.counter = function (target, speed = 40) {
     return {

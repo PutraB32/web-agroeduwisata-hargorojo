@@ -38,6 +38,12 @@ class CartController extends Controller
         $produk = Produk::findOrFail($validated['produk_id']);
 
         if ($produk->stok < $validated['quantity']) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => "Stok produk {$produk->nama} tidak mencukupi.",
+                ], 422);
+            }
+
             return redirect()->back()->with('error', "Stok produk {$produk->nama} tidak mencukupi.");
         }
 
@@ -52,12 +58,25 @@ class CartController extends Controller
         $newQuantity = $cartItem['quantity'] + $validated['quantity'];
 
         if ($newQuantity > $produk->stok) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => "Stok produk {$produk->nama} tidak mencukupi.",
+                ], 422);
+            }
+
             return redirect()->back()->with('error', "Stok produk {$produk->nama} tidak mencukupi.");
         }
 
         $cartItem['quantity'] = $newQuantity;
         $cart[$produk->id] = $cartItem;
         session()->put('cart', $cart);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Produk berhasil dimasukkan ke keranjang.',
+                'cart' => $this->cartItemsForJson($cart),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Produk berhasil dimasukkan ke keranjang.');
     }
@@ -78,6 +97,13 @@ class CartController extends Controller
         unset($cart[$validated['produk_id']]);
         session()->put('cart', $cart);
 
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Produk berhasil dihapus dari keranjang.',
+                'cart' => $this->cartItemsForJson($cart),
+            ]);
+        }
+
         return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang.');
     }
 
@@ -97,12 +123,24 @@ class CartController extends Controller
         $produk = Produk::findOrFail($validated['produk_id']);
 
         if ($produk->stok < $validated['quantity']) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => "Stok produk {$produk->nama} tidak mencukupi.",
+                ], 422);
+            }
+
             return redirect()->back()->with('error', "Stok produk {$produk->nama} tidak mencukupi.");
         }
 
         $cart = session()->get('cart', []);
 
         if (! isset($cart[$produk->id])) {
+            if ($request->expectsJson()) {
+                return response()->json([
+                    'message' => 'Produk tidak ditemukan di keranjang.',
+                ], 422);
+            }
+
             return redirect()->back()->with('error', 'Produk tidak ditemukan di keranjang.');
         }
 
@@ -110,6 +148,13 @@ class CartController extends Controller
         $cart[$produk->id]['harga'] = (float) $produk->harga;
         $cart[$produk->id]['quantity'] = $validated['quantity'];
         session()->put('cart', $cart);
+
+        if ($request->expectsJson()) {
+            return response()->json([
+                'message' => 'Keranjang berhasil diperbarui.',
+                'cart' => $this->cartItemsForJson($cart),
+            ]);
+        }
 
         return redirect()->back()->with('success', 'Keranjang berhasil diperbarui.');
     }
@@ -304,5 +349,33 @@ class CartController extends Controller
         }
 
         return null;
+    }
+
+    private function cartItemsForJson(array $cart): array
+    {
+        $productIds = collect($cart)
+            ->pluck('id')
+            ->filter()
+            ->map(fn ($id) => (int) $id)
+            ->unique()
+            ->values();
+        $products = Produk::whereIn('id', $productIds)->get()->keyBy('id');
+
+        return collect($cart)
+            ->map(function (array $item) use ($products) {
+                $id = (int) ($item['id'] ?? 0);
+                $produk = $products->get($id);
+
+                return [
+                    'id' => $id,
+                    'nama' => $produk?->nama ?? $item['nama'] ?? 'Produk',
+                    'harga' => (float) ($produk?->harga ?? $item['harga'] ?? 0),
+                    'satuan' => $produk?->satuan ?? 'pcs',
+                    'gambar' => $produk?->gambar_url ?? asset('images/beranda.bg.jpeg'),
+                    'qty' => (int) ($item['quantity'] ?? 0),
+                ];
+            })
+            ->values()
+            ->all();
     }
 }
