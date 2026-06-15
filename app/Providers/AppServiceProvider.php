@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\View\Composers\AdminDashboardOverviewComposer;
 use App\View\Composers\NavbarComposer;
+use Carbon\Carbon;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -26,6 +27,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('id');
+
         \Illuminate\Pagination\Paginator::useTailwind();
 
         View::composer('Admin.dashboard.overview', AdminDashboardOverviewComposer::class);
