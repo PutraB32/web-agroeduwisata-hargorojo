@@ -923,3 +923,45 @@ document.querySelectorAll('.tradisi-section').forEach(el => {
 document.querySelectorAll('.tradisi-footnote').forEach(el => {
     tradisiFootnoteObserver.observe(el)
 })
+
+// =====================================================
+// AGRO TESTIMONI — per card individual
+// =====================================================
+const agroTestiObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            agroTestiObserver.unobserve(entry.target)
+        }
+    })
+}, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
+})
+
+document.querySelectorAll('.agro-testi-card').forEach(el => {
+    agroTestiObserver.observe(el)
+})
+
+// =====================================================
+// FAQ REVEAL
+// =====================================================
+const faqObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+
+            entry.target.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.add('visible')
+            })
+
+            const cta = entry.target.querySelector('.faq-cta')
+            if (cta) cta.classList.add('visible')
+
+            faqObserver.unobserve(entry.target)
+        }
+    })
+}, { threshold: 0.1 })
+
+document.querySelectorAll('.faq-section').forEach(el => {
+    faqObserver.observe(el)
+})
