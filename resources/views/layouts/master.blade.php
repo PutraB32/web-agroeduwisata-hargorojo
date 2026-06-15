@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Desa Wisata Hargorojo')</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
+    <link rel="apple-touch-icon" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
 
     @vite(['resources/css/app.css'])
     @vite(['resources/css/app.css', 'resources/js/app.js'])
