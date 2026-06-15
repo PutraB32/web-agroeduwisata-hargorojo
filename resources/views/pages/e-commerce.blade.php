@@ -902,6 +902,7 @@
 <!-- BACKDROP -->
 <!-- ===================================================== -->
 <div
+    x-cloak
     x-show="cartOpen"
     x-transition.opacity
     @click="cartOpen = false"
@@ -920,6 +921,7 @@
 <!-- CART SIDE PANEL -->
 <!-- ===================================================== -->
 <div
+    x-cloak
     x-show="cartOpen"
 
     x-transition:enter="
@@ -957,7 +959,7 @@
 
         h-screen
         w-full
-        max-w-[500px]
+        max-w-[450px]
 
         bg-white
 
@@ -1538,6 +1540,7 @@
 <!-- TOAST NOTIFICATION -->
 <!-- ===================================================== -->
 <div
+    x-cloak
     x-show="showToast"
     x-transition:enter="
         transition

@@ -7,189 +7,635 @@
 {{-- NAVBAR --}}
 @include('layouts.navbar')
 
-<!-- Hero Berita Utama -->
-<section class="relative py-16 px-4 shadow-sm overflow-hidden border-b border-green-900" style="background-image: url('{{ asset('images/beranda.bg.jpeg') }}'); background-size: cover; background-position: center;">
-    <div class="absolute inset-0 bg-gradient-to-r from-green-900/95 to-black/80"></div>
-    <div class="max-w-6xl mx-auto flex flex-col md:flex-row gap-10 items-center relative z-10">
-        <div class="flex-1 order-2 md:order-1 text-center md:text-left pr-4">
-            <span class="inline-flex items-center gap-2 bg-yellow-500/20 backdrop-blur-sm px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-widest mb-4 text-yellow-400 border border-yellow-500/50">
-                <span class="w-2 h-2 rounded-full bg-red-500"></span> Selamat Datang
-            </span>
-            <h1 class="font-playfair text-3xl md:text-5xl font-bold text-white mb-5 leading-tight drop-shadow-lg">
-                Katalog Informasi Terpadu Desa Hargorojo
-            </h1>
-            <p class="text-gray-200 text-sm md:text-base mb-8 leading-relaxed max-w-lg mx-auto md:mx-0 drop-shadow-md">
-                Pusat informasi desa mulai dari pengumuman warga, berita terkini, literatur perpustakaan, hingga dokumentasi visual.
-            </p>
-        </div>
-        <div class="w-full md:w-[480px] h-[320px] bg-green-800 rounded-3xl overflow-hidden order-1 md:order-2 shadow-2xl relative group border-4 border-yellow-500">
-             <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="Berita Utama">
-             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-             <div class="absolute bottom-6 left-6 right-6">
-                <p class="text-yellow-400 text-xs font-bold uppercase tracking-widest mb-1 drop-shadow-md">Portal Desa</p>
-                <h3 class="text-white font-playfair font-bold text-xl leading-snug drop-shadow-md group-hover:text-yellow-400 transition-colors">Transparan & Terpercaya</h3>
-             </div>
-        </div>
-    </div>
-</section>
+<!-- ===================================================== -->
+<!-- HERO BERITA UTAMA -->
+<!-- ===================================================== -->
+<section class="relative h-[700px] pt-28 overflow-hidden bg-black">
 
-<!-- Section Pengumuman -->
-<section class="max-w-7xl mx-auto px-4 py-8 -mt-12 relative z-20">
-    <div class="bg-yellow-500 rounded-2xl shadow-2xl p-1 overflow-hidden">
-        <div class="bg-white rounded-xl p-6 flex flex-col md:flex-row gap-8 items-start md:items-center">
-            <div class="flex-shrink-0 flex items-center justify-center bg-yellow-100 text-yellow-600 w-20 h-20 rounded-full border-4 border-white shadow-inner">
-                <i class="fas fa-bullhorn text-3xl"></i>
-            </div>
-            <div class="flex-1 w-full">
-                <h2 class="text-xl font-bold text-gray-900 mb-4 pb-2 border-b-2 border-gray-100 inline-block">Pengumuman Desa</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    @forelse($pengumuman as $p)
-                    <div class="flex items-start gap-4 p-4 bg-gray-50 rounded-xl hover:bg-yellow-50 transition border-l-4 border-yellow-400 shadow-sm">
-                        <div class="flex-1">
-                            <h3 class="font-bold text-gray-900 text-sm mb-1">{{ $p->judul }}</h3>
-                            <p class="text-xs text-gray-600 line-clamp-2">{{ $p->deskripsi }}</p>
-                        </div>
+    <div class="absolute inset-0">
+        <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.png') }}" alt="" class="w-full h-full object-cover scale-110 animate-kenburns">
+        <div class="absolute inset-0 bg-black animate-vignette"></div>
+        <div class="absolute inset-0 bg-[#173121]/50"></div>
+    </div>
+
+    <div class="relative z-20 max-w-[1400px] mx-auto px-4 lg:px-8">
+        <div class="grid lg:grid-cols-[2.1fr_1fr] gap-5">
+
+            {{-- BERITA UTAMA — tambah hero-slide-left --}}
+            <a href="#" class="hero-slide-left relative overflow-hidden rounded-[20px] h-[550px] group">
+
+                <img
+                    src="{{ asset('images/katalog/' . $beritaUtama->gambar) }}"
+                    alt="{{ $beritaUtama->judul }}"
+                    class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                >
+
+                <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
+
+                <div class="relative z-10 h-full flex flex-col justify-end p-8 lg:p-12">
+
+                    <span class="hero-fade-up delay-100 inline-flex w-fit px-4 py-2 rounded-[10px] bg-green-700 text-white text-sm font-semibold mb-3">
+                        BERITA UTAMA
+                    </span>
+
+                    <div class="hero-fade-up delay-200 flex flex-wrap gap-5 text-white/80 text-sm mb-2">
+                        <span><i class="fa-regular fa-calendar mr-1"></i>{{ $beritaUtama->created_at->translatedFormat('d F Y') }}</span>
+                        <span><i class="fa-regular fa-folder mr-1"></i>{{ $beritaUtama->kategoriKatalog->nama_kategori }}</span>
+                        <span><i class="fa-solid fa-award mr-1"></i>Berita Pilihan</span>
                     </div>
-                    @empty
-                    <p class="text-xs text-gray-500 italic">Belum ada pengumuman saat ini.</p>
-                    @endforelse
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- Main Grid: Artikel & Berita + Perpustakaan -->
-<div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-10">
-    
-    <!-- Left Col: Artikel & Berita (8 cols) -->
-    <div class="lg:col-span-8 space-y-6">
-        <div class="flex items-center justify-between border-b-2 border-green-800 pb-3 mb-6">
-            <h3 class="font-playfair text-2xl font-bold text-gray-900">Artikel & Berita</h3>
-            <span class="text-sm font-semibold text-green-700 bg-green-100 px-3 py-1 rounded-full">{{ $artikelBerita->count() }} Postingan</span>
-        </div>
-        
-        @forelse($artikelBerita as $artikel)
-        <div class="flex flex-col md:flex-row bg-white rounded-2xl p-5 shadow-sm border border-gray-100 gap-6 group hover:-translate-y-1 hover:shadow-xl hover:border-green-400 transition-all duration-300">
-            <div class="w-full md:w-56 h-40 bg-gray-100 rounded-xl overflow-hidden shrink-0 relative">
-                @php
-                    $fotoUrl = asset('images/beranda.bg.jpeg');
-                    if ($artikel->gambar) {
-                        if (\Illuminate\Support\Facades\Storage::disk('public')->exists('katalog/' . $artikel->gambar)) {
-                            $fotoUrl = asset('storage/katalog/' . $artikel->gambar);
-                        } else {
-                            $fotoUrl = file_exists(public_path('images/katalog/' . $artikel->gambar)) ? asset('images/katalog/' . $artikel->gambar) : asset('images/' . $artikel->gambar);
-                        }
-                    }
-                @endphp
-                <img src="{{ $fotoUrl }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500" alt="{{ $artikel->judul }}" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
-            </div>
-            <div class="flex-1 flex flex-col justify-center text-left">
-                <div class="flex items-center gap-3 mb-2">
-                    <span class="text-[10px] font-bold uppercase tracking-widest text-green-700 bg-green-50 border border-green-200 px-2 py-1 rounded">Berita Desa</span>
-                    <span class="text-xs text-gray-500"><i class="far fa-calendar-alt"></i> {{ $artikel->created_at->format('d M Y') }}</span>
-                </div>
-                <h3 class="font-bold text-gray-900 text-xl mb-3 leading-tight group-hover:text-green-700 transition-colors">{{ $artikel->judul }}</h3>
-                <p class="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
-                    {{ $artikel->deskripsi }}
-                </p>
-                <a href="#" class="text-xs font-bold text-green-700 inline-flex items-center gap-2 uppercase tracking-wide group-hover:text-yellow-600 transition-colors">
-                    Baca Artikel <i class="fas fa-arrow-right text-[10px]"></i>
-                </a>
-            </div>
-        </div>
-        @empty
-        <div class="text-center py-10 bg-gray-50 rounded-2xl border border-dashed border-gray-300">
-            <p class="text-gray-500">Belum ada artikel atau berita.</p>
-        </div>
-        @endforelse
-    </div>
+                    <h1 class="hero-fade-up delay-300 font-lora text-white text-[42px] lg:text-[50px] leading-[1.05] font-medium max-w-2xl">
+                        {{ $beritaUtama->judul }}
+                    </h1>
 
-    <!-- Right Col: Perpustakaan (Sidebar 4 cols) -->
-    <aside class="lg:col-span-4">
-        <div class="sticky top-24">
-            <div class="bg-gradient-to-br from-green-900 to-green-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
-                <div class="absolute -right-6 -top-6 text-white/5 text-9xl">
-                    <i class="fas fa-book-open"></i>
+                    <p class="hero-fade-up delay-450 mt-2 max-w-2xl text-white/80 italic text-[17px] font-light leading-relaxed">
+                        {{ Str::limit(strip_tags($beritaUtama->deskripsi), 180) }}
+                    </p>
+
+                    {{-- Button — tambah btn-rise --}}
+                    <div class="hero-fade-up delay-600 mt-6">
+                        <span class="btn-rise inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-green-700 text-white font-semibold cursor-pointer">
+                            Baca Artikel Lengkap
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    </div>
+
                 </div>
-                
-                <h3 class="font-playfair text-2xl font-bold text-white mb-6 relative z-10 flex items-center gap-3 border-b border-white/20 pb-4">
-                    <i class="fas fa-book text-yellow-400"></i> Perpustakaan
+
+            </a>
+
+            {{-- SIDEBAR — sidebar-slide dari kanan sudah ada --}}
+            <div class="sidebar-slide bg-white/70 rounded-[15px] p-5 border border-[#ece8df] shadow-[0_15px_40px_rgba(0,0,0,0.05)] h-full flex flex-col justify-center">
+
+                <h3 class="sidebar-item font-lora text-[18px] font-bold text-[#173121] mb-5">
+                    Berita Terbaru Lainnya
                 </h3>
-                
-                <div class="space-y-4 relative z-10">
-                    @forelse($perpustakaan as $buku)
-                    <a href="{{ $buku->Url ?? '#' }}" target="_blank" class="block bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/10 rounded-xl p-4 transition cursor-pointer group">
-                        <div class="flex items-start gap-4">
-                            <div class="bg-yellow-500/20 p-3 rounded-lg text-yellow-400 group-hover:bg-yellow-400 group-hover:text-green-900 transition-colors">
-                                <i class="fas fa-file-pdf text-xl"></i>
-                            </div>
-                            <div class="flex-1">
-                                <h4 class="text-white font-bold text-sm leading-tight mb-1 group-hover:text-yellow-300 transition-colors">{{ $buku->judul }}</h4>
-                                <p class="text-gray-300 text-xs line-clamp-2">{{ $buku->deskripsi }}</p>
+
+                <div class="flex flex-col gap-3">
+                    @foreach($sidebarBerita as $berita)
+                    <a href="#" class="sidebar-item flex gap-3 p-2 rounded-[15px] group hover:bg-[#e3e1da] transition-all duration-300">
+                        <img src="{{ asset('images/katalog/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-[120px] h-[80px] rounded-[10px] object-cover flex-shrink-0">
+                        <div class="flex flex-col justify-center">
+                            <h4 class="font-lora text-[15px] leading-[1.3] font-bold text-[#173121] group-hover:text-[#d4b254] transition-colors">
+                                {{ Str::limit($berita->judul, 75) }}
+                            </h4>
+                            <div class="mt-2 text-sm text-[#4c4444]">
+                                {{ $berita->created_at->translatedFormat('d F Y') }}
                             </div>
                         </div>
                     </a>
-                    @empty
-                    <p class="text-white/70 text-sm text-center py-4">Belum ada dokumen di perpustakaan.</p>
-                    @endforelse
+                    @endforeach
                 </div>
-                
-                <button class="mt-8 w-full py-3 bg-yellow-500 hover:bg-yellow-400 text-green-900 font-bold text-center rounded-xl transition text-sm flex items-center justify-center gap-2 shadow-lg">
-                    <i class="fas fa-download"></i> Unduh Katalog Lengkap
-                </button>
-            </div>
-        </div>
-    </aside>
 
-</div>
-
-<!-- Galeri -->
-<section class="bg-black py-16 border-t-4 border-yellow-500 relative">
-    <div class="max-w-7xl mx-auto px-4 relative z-10">
-        <div class="text-center mb-10">
-            <div class="inline-block border border-yellow-500 rounded-full px-4 py-1.5 mb-3"><span class="font-bold text-[10px] text-yellow-400 uppercase tracking-widest">Koleksi Visual</span></div>
-            <h2 class="font-playfair text-3xl md:text-4xl font-bold text-white drop-shadow-md mb-4">Galeri Desa</h2>
-            <p class="text-gray-400 text-sm max-w-xl mx-auto">Potret kehidupan, keindahan alam, dan aktivitas warga Desa Hargorojo yang diabadikan dalam lensa.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            @forelse($galeri as $foto)
-            <div class="bg-gray-900 rounded-2xl overflow-hidden shadow-2xl group relative cursor-pointer border-2 border-transparent hover:border-yellow-500 transition-colors duration-300">
-                <div class="w-full aspect-[4/3] overflow-hidden bg-black">
-                    @php
-                        $fotoUrl = asset('images/beranda.bg.jpeg');
-                        if ($foto->gambar) {
-                            if (\Illuminate\Support\Facades\Storage::disk('public')->exists('katalog/' . $foto->gambar)) {
-                                $fotoUrl = asset('storage/katalog/' . $foto->gambar);
-                            } else {
-                                $fotoUrl = file_exists(public_path('images/katalog/' . $foto->gambar)) ? asset('images/katalog/' . $foto->gambar) : asset('images/' . $foto->gambar);
-                            }
-                        }
-                    @endphp
-                    <img src="{{ $fotoUrl }}" class="w-full h-full object-cover group-hover:scale-105 filter brightness-75 group-hover:brightness-100 transition duration-500" alt="{{ $foto->judul }}" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                <div class="sidebar-item mt-5 flex justify-end">
+                    {{-- Link — tambah btn-rise --}}
+                    <a href="#" class="btn-rise inline-flex items-center gap-2 text-[#173121] font-semibold hover:text-[#d4b254] transition-colors duration-300">
+                        <span>Lihat Semua Berita</span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
                 </div>
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-90 flex flex-col justify-end p-6">
-                    <div class="translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                        <h3 class="font-bold text-white text-lg mb-2 drop-shadow-md group-hover:text-yellow-400 transition-colors">{{ $foto->judul }}</h3>
-                        <p class="text-xs text-gray-300 line-clamp-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">{{ $foto->deskripsi }}</p>
-                    </div>
-                </div>
+
             </div>
-            @empty
-            <div class="col-span-full py-12 text-center border border-dashed border-gray-700 rounded-2xl">
-                <i class="fas fa-images text-4xl text-gray-600 mb-3"></i>
-                <p class="text-gray-400 text-sm">Belum ada foto galeri.</p>
-            </div>
-            @endforelse
-        </div>
-        
-        <div class="text-center mt-12">
-            <button class="inline-flex items-center gap-2 border border-white text-white hover:bg-white hover:text-black font-bold text-sm px-6 py-3 rounded-full transition-colors">
-                Muat Lebih Banyak <i class="fas fa-chevron-down"></i>
-            </button>
+
         </div>
     </div>
+
 </section>
+
+<!-- ===================================================== -->
+<!-- STATISTIK KATALOG DESA -->
+<!-- ===================================================== -->
+<section class="py-10 bg-[#f8f8f6]">
+    <div class="max-w-[1400px] mx-auto px-2 md:px-6 lg:px-8">
+
+        {{-- Box utama — box-scale-in --}}
+        <div class="
+            box-scale-in
+            bg-white rounded-[25px]
+            shadow-[0_10px_30px_rgba(0,0,0,0.04)]
+            grid grid-cols-2 lg:grid-cols-4
+            overflow-hidden
+        ">
+
+            {{-- ITEM 1 --}}
+            <div class="stat-card stat-card-delay-1 flex items-center gap-5 p-6 lg:p-8">
+                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#D97706] flex items-center justify-center shrink-0">
+                    <i class="fa-solid fa-bullhorn text-white text-[25px]"></i>
+                </div>
+                <div>
+                    <div data-count="12" class="font-display text-[30px] font-semibold leading-none text-[#111]">
+                        12
+                    </div>
+                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Pengumuman</div>
+                    <p class="text-sm text-[#666]">Informasi terbaru desa</p>
+                </div>
+            </div>
+
+            {{-- ITEM 2 --}}
+            <div class="stat-card stat-card-delay-2 flex items-center gap-5 p-6 lg:p-8">
+                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#2563EB] flex items-center justify-center shrink-0">
+                    <i class="fa-regular fa-newspaper text-white text-[25px]"></i>
+                </div>
+                <div>
+                    <div data-count="58" class="font-display text-[30px] font-semibold leading-none text-[#111]">
+                        58
+                    </div>
+                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Artikel & Berita</div>
+                    <p class="text-sm text-[#666]">Cerita dan kegiatan desa</p>
+                </div>
+            </div>
+
+            {{-- ITEM 3 --}}
+            <div class="stat-card stat-card-delay-3 flex items-center gap-5 p-6 lg:p-8">
+                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#7C3AED] flex items-center justify-center shrink-0">
+                    <i class="fa-regular fa-file-lines text-white text-[25px]"></i>
+                </div>
+                <div>
+                    <div data-count="35" class="font-display text-[30px] font-semibold leading-none text-[#111]">
+                        35
+                    </div>
+                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Perpustakaan Desa</div>
+                    <p class="text-sm text-[#666]">Arsip & buku desa</p>
+                </div>
+            </div>
+
+            {{-- ITEM 4 --}}
+            <div class="stat-card stat-card-delay-4 flex items-center gap-5 p-6 lg:p-8">
+                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#5B8F5B] flex items-center justify-center shrink-0">
+                    <i class="fa-regular fa-image text-white text-[25px]"></i>
+                </div>
+                <div>
+                    <div data-count="120" class="font-display text-[30px] font-semibold leading-none text-[#111]">
+                        120
+                    </div>
+                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Galeri Desa</div>
+                    <p class="text-sm text-[#666]">Momen kegiatan desa</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+<!-- ===================================================== -->
+<!-- PENGUMUMAN DESA -->
+<!-- ===================================================== -->
+{{-- Tambah pengumuman-section --}}
+<section class="pengumuman-section py-5">
+
+    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+
+            <div class="reveal reveal-delay-1 flex items-center gap-4">
+
+                <div class="w-15 h-15 rounded-full bg-[#D97706] flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-bullhorn text-white text-[25px]"></i>
+                </div>
+
+                <div>
+                    <h2 class="font-lora text-[36px] md:text-[25px] font-bold text-[#173121] leading-none">
+                        Pengumuman
+                    </h2>
+                    <p class="text-[#6b736d] mt-1">
+                        Informasi penting dan pengumuman terbaru dari Desa Hargorojo
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- PENGUMUMAN -->
+        <div class="relative">
+
+            {{-- Nav buttons — tambah nav-btn-reveal --}}
+            <button id="prevPengumuman" class="
+                nav-btn-reveal
+                hidden lg:flex
+                absolute left-[-50px] top-1/2 -translate-y-1/2 z-10
+                w-12 h-12 rounded-full bg-white shadow-lg
+                items-center justify-center text-[#173121]
+                hover:bg-[#173121] hover:text-white transition-all
+            ">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+
+            <button id="nextPengumuman" class="
+                nav-btn-reveal
+                hidden lg:flex
+                absolute right-[-55px] top-1/2 -translate-y-1/2 z-10
+                w-12 h-12 rounded-full bg-white shadow-lg
+                items-center justify-center text-[#173121]
+                hover:bg-[#173121] hover:text-white transition-all
+            ">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+
+            @if($pengumuman->count())
+
+            <div id="pengumumanContainer" class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-4">
+
+                @foreach($pengumuman as $item)
+
+                {{-- Tambah pengumuman-card --}}
+                <div class="
+                    pengumuman-card
+                    flex-shrink-0 w-[350px]
+                    bg-white rounded-[24px]
+                    border border-[#ececec]
+                    shadow-[0_8px_25px_rgba(0,0,0,0.04)]
+                    p-5 relative
+                    hover:-translate-y-1 hover:shadow-lg
+                    transition-all duration-300
+                ">
+
+                    {{-- Date badge — tambah date-badge-pop --}}
+                    <div class="date-badge-pop absolute top-5 left-5 w-[52px] h-[58px] rounded-xl bg-[#f8f8f6] border flex flex-col items-center justify-center">
+                        <span class="text-[20px] font-bold text-[#173121]">
+                            {{ $item->created_at->format('d') }}
+                        </span>
+                        <span class="text-[10px] uppercase text-[#6b736d]">
+                            {{ $item->created_at->translatedFormat('M') }}
+                        </span>
+                    </div>
+
+                    {{-- Icon — tambah pengumuman-icon --}}
+                    <div class="pengumuman-icon w-16 h-16 mx-auto mt-2 mb-5 rounded-full bg-[#FFF7ED] flex items-center justify-center">
+                        <i class="fa-solid fa-bullhorn text-[#D97706] text-2xl"></i>
+                    </div>
+
+                    <h3 class="font-lora min-h-[80px] text-[20px] font-bold text-center text-[#173121] leading-tight">
+                        {{ $item->judul }}
+                    </h3>
+
+                    <p class="text-center text-[#6b736d] min-h-[100px] text-[15px] leading-relaxed mb-2">
+                        {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
+                    </p>
+
+                    <a href="#" class="flex justify-center items-center gap-2 text-[#5d8c5a] font-semibold hover:text-[#173121] transition-colors">
+                        Selengkapnya
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+                @endforeach
+
+            </div>
+
+            @else
+
+            <div class="bg-white rounded-[24px] border border-dashed border-gray-300 py-16 px-8 text-center">
+                <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gray-100 flex items-center justify-center">
+                    <i class="fa-solid fa-bullhorn text-2xl text-gray-400"></i>
+                </div>
+                <h3 class="text-xl font-semibold text-gray-700 mb-2">Belum Ada Pengumuman</h3>
+                <p class="text-gray-500">Informasi terbaru dari Desa Hargorojo akan ditampilkan di sini.</p>
+            </div>
+
+            @endif
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- ARTIKEL & BERITA -->
+<!-- ===================================================== -->
+<section class="artikel-section py-12">
+
+    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+
+            <div class="reveal reveal-delay-1 flex items-center gap-4">
+
+                <div class="w-15 h-15 rounded-full bg-[#2563EB] flex items-center justify-center shadow-md">
+                    <i class="fa-regular fa-newspaper text-white text-2xl"></i>
+                </div>
+
+                <div>
+                    <h2 class="font-lora text-[36px] md:text-[25px] font-bold text-[#173121] leading-none">
+                        Artikel & Berita
+                    </h2>
+                    <p class="text-[#6b736d] mt-1">
+                        Berita terkini seputar kegiatan dan perkembangan Desa Hargorojo
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- ARTICLE GRID -->
+        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+
+            @forelse($artikelBerita as $artikel)
+
+            {{-- Tambah artikel-card + relative untuk ::before --}}
+            <article class="
+                artikel-card
+                relative
+                bg-white rounded-[15px] overflow-hidden
+                border border-[#ececec]
+                shadow-[0_8px_25px_rgba(0,0,0,0.04)]
+                hover:-translate-y-1 hover:shadow-lg
+                transition-all duration-300
+                group
+            ">
+
+                {{-- Image — tambah artikel-img --}}
+                <img
+                    src="{{ $artikel->gambar ? asset('images/katalog/' . $artikel->gambar) : asset('images/default-article.jpg') }}"
+                    alt=""
+                    class="artikel-img w-full h-[220px] object-cover transition-all duration-900"
+                >
+
+                <div class="p-5">
+
+                    {{-- Date — tambah artikel-date --}}
+                    <div class="artikel-date text-sm text-[#6b736d] mb-2">
+                        <i class="fa-regular fa-calendar"></i>
+                        <span>{{ $artikel->created_at->translatedFormat('d F Y') }}</span>
+                        <span>•</span>
+                        <i class="fa-regular fa-clock"></i>
+                        <span>{{ $artikel->created_at->format('H.i') }} WIB</span>
+                    </div>
+
+                    <h3 class="font-lora text-[20px] font-bold text-[#173121] leading-snug min-h-[90px] line-clamp-3 mb-2">
+                        {{ $artikel->judul }}
+                    </h3>
+
+                    <p class="text-[#6b736d] text-[15px] leading-relaxed min-h-[72px] line-clamp-3">
+                        {{ Str::limit(strip_tags($artikel->deskripsi), 140) }}
+                    </p>
+
+                </div>
+
+            </article>
+
+            @empty
+
+            <div class="col-span-full py-16 text-center">
+                <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#f8f6f1] flex items-center justify-center">
+                    <i class="fa-regular fa-newspaper text-3xl text-[#173121]"></i>
+                </div>
+                <h3 class="font-lora text-2xl font-bold text-[#173121] mb-2">Belum Ada Artikel</h3>
+                <p class="text-[#6b736d]">Artikel dan berita terbaru desa akan tampil di sini.</p>
+            </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ===================================================== -->
+<!-- PERPUSTAKAAN DESA -->
+<!-- ===================================================== -->
+<section class="perpus-section py-10">
+
+    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+
+        <!-- HEADER -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+
+            <div class="reveal reveal-delay-1 flex items-center gap-4">
+                <div class="w-15 h-15 rounded-full bg-[#7C3AED] flex items-center justify-center shadow-md">
+                    <i class="fa-solid fa-book-open text-white text-[28px]"></i>
+                </div>
+                <div>
+                    <h2 class="font-lora text-[28px] md:text-[25px] font-bold text-[#173121] leading-none">
+                        Perpustakaan Desa
+                    </h2>
+                    <p class="text-[#6B736D] mt-1">Koleksi buku, dokumen, dan literatur desa</p>
+                </div>
+            </div>
+
+        </div>
+
+        @php
+            $themes = [
+                ['card' => 'bg-[#F5F9EE] border-[#E5ECD7]', 'icon_bg' => 'bg-[#ECF4DF]', 'text' => 'text-[#7FA45A]', 'icon' => 'fa-book-open', 'label' => 'BUKU'],
+                ['card' => 'bg-[#F2F8FD] border-[#DDEAF6]', 'icon_bg' => 'bg-[#E6F1FB]', 'text' => 'text-[#5D9CD6]', 'icon' => 'fa-file-lines', 'label' => 'DOKUMEN'],
+                ['card' => 'bg-[#FFF8E7] border-[#F4E5B3]', 'icon_bg' => 'bg-[#FFF2CF]', 'text' => 'text-[#D7A731]', 'icon' => 'fa-book', 'label' => 'BUKU'],
+                ['card' => 'bg-[#F7F3FD] border-[#E9DEF7]', 'icon_bg' => 'bg-[#EFE7FA]', 'text' => 'text-[#9B7ED9]', 'icon' => 'fa-file-pdf', 'label' => 'LAPORAN'],
+            ];
+        @endphp
+
+        <!-- GRID -->
+        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+            @forelse($perpustakaan as $index => $item)
+
+            @php $theme = $themes[$index % count($themes)]; @endphp
+
+            {{-- Tambah perpus-card + delay --}}
+            <div class="
+                perpus-card perpus-card-delay-{{ ($index % 4) + 1 }}
+                {{ $theme['card'] }} border rounded-[28px] p-6
+                shadow-[0_8px_25px_rgba(0,0,0,0.04)]
+                hover:-translate-y-1 hover:shadow-lg
+                transition-all duration-300
+                flex flex-col min-h-[280px]
+            ">
+
+                <div class="flex gap-5 flex-1 mb-6">
+
+                    {{-- Icon box — tambah perpus-icon --}}
+                    <div class="perpus-icon w-[60px] h-[60px] rounded-[20px] {{ $theme['icon_bg'] }} flex items-center justify-center shrink-0">
+                        <i class="fa-solid {{ $theme['icon'] }} {{ $theme['text'] }} text-[28px]"></i>
+                    </div>
+
+                    <div class="flex-1">
+
+                        {{-- Label — tambah perpus-label --}}
+                        <span class="perpus-label text-[12px] font-bold uppercase tracking-wide {{ $theme['text'] }}">
+                            {{ $theme['label'] }}
+                        </span>
+
+                        <h3 class="mt-2 font-lora text-[18px] font-bold text-[#173121] leading-tight line-clamp-3 min-h-[60px]">
+                            {{ $item->judul }}
+                        </h3>
+
+                        <p class="mt-2 text-[#6B736D] text-[14px] leading-relaxed line-clamp-3 min-h-[42px]">
+                            {{ Str::limit(strip_tags($item->deskripsi), 90) }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                @if($item->Url)
+                {{-- Button — tambah perpus-arrow pada icon --}}
+                <a href="{{ $item->Url }}" target="_blank" class="mt-auto inline-flex items-center gap-2 font-semibold text-[#173121] hover:gap-3 transition-all duration-300">
+                    <span class="w-2 h-2 rounded-full {{ $theme['text'] }}"></span>
+                    Lihat Koleksi
+                    <i class="perpus-arrow fa-solid fa-arrow-right"></i>
+                </a>
+                @endif
+
+            </div>
+
+            @empty
+
+            <div class="col-span-full text-center py-16">
+                <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#F8F6F1] flex items-center justify-center">
+                    <i class="fa-solid fa-book-open text-[#173121] text-3xl"></i>
+                </div>
+                <h3 class="font-lora text-2xl font-bold text-[#173121] mb-2">Belum Ada Koleksi</h3>
+                <p class="text-[#6B736D]">Koleksi perpustakaan desa akan tampil di sini.</p>
+            </div>
+
+            @endforelse
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ===================================================== -->
+<!-- GALERI DESA -->
+<!-- ===================================================== -->
+<section class="galeri-katalog-section py-12 bg-[#faf9f6]">
+
+    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+
+        <!-- HEADER -->
+        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+
+            <div class="reveal reveal-delay-1 flex items-center gap-4">
+                <div class="w-15 h-15 rounded-full bg-[#5B8F5B] flex items-center justify-center shadow-md">
+                    <i class="fa-regular fa-image text-white text-[28px]"></i>
+                </div>
+                <div>
+                    <h2 class="font-lora text-[28px] md:text-[25px] font-bold text-[#173121] leading-none">
+                        Galeri Desa
+                    </h2>
+                    <p class="text-[#6B736D] mt-1">Potret kehidupan, budaya, dan keindahan Desa Hargorojo</p>
+                </div>
+            </div>
+
+        </div>
+
+        @if($galeri->isNotEmpty())
+
+            @php $hero = $galeri->first(); @endphp
+
+            <div class="grid lg:grid-cols-2 gap-2">
+
+                {{-- HERO IMAGE — galeri-katalog-hero + galeri-tint --}}
+                <div class="galeri-katalog-hero galeri-tint relative overflow-hidden rounded-[20px] group min-h-[500px]">
+
+                    <img
+                        src="{{ asset('images/katalog/' . $hero->gambar) }}"
+                        alt="{{ $hero->judul }}"
+                        class="galeri-zoom w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                    >
+
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+
+                    {{-- Caption — galeri-caption --}}
+                    <div class="galeri-caption absolute bottom-8 left-8 right-8">
+                        <h3 class="font-lora text-white/80 text-[28px] md:text-[35px] font-bold leading-tight">
+                            {{ $hero->judul }}
+                        </h3>
+                        <p class="text-white/70 leading-relaxed max-w-[600px]">
+                            {{ Str::limit(strip_tags($hero->deskripsi), 140) }}
+                        </p>
+                    </div>
+
+                </div>
+
+                {{-- SMALL GRID --}}
+                <div class="grid sm:grid-cols-2 gap-2">
+
+                    @foreach($galeri->skip(1)->take(4) as $item)
+
+                    {{-- Tambah galeri-katalog-item + galeri-tint --}}
+                    <div class="galeri-katalog-item galeri-tint relative overflow-hidden rounded-[20px] group min-h-[240px]">
+
+                        <img
+                            src="{{ asset('images/katalog/' . $item->gambar) }}"
+                            alt="{{ $item->judul }}"
+                            class="galeri-zoom w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
+                        >
+
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
+
+                        {{-- Caption — galeri-caption --}}
+                        <div class="galeri-caption absolute bottom-6 left-6 right-6">
+                            <h4 class="font-lora text-white text-[20px] font-bold leading-tight line-clamp-2">
+                                {{ $item->judul }}
+                            </h4>
+                        </div>
+
+                    </div>
+
+                    @endforeach
+
+                </div>
+
+            </div>
+
+        @else
+
+            <div class="text-center py-20">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-[#F8F6F1] flex items-center justify-center">
+                    <i class="fa-solid fa-camera-retro text-[#173121] text-4xl"></i>
+                </div>
+                <h3 class="font-lora text-[28px] font-bold text-[#173121] mb-3">Belum Ada Galeri</h3>
+                <p class="text-[#6B736D] max-w-[500px] mx-auto">
+                    Dokumentasi kegiatan dan potret kehidupan Desa Hargorojo akan tampil di sini.
+                </p>
+            </div>
+
+        @endif
+
+    </div>
+
+</section>
+
+
+<script>
+    const container = document.getElementById('pengumumanContainer');
+
+    if (container) {
+
+        document.getElementById('nextPengumuman')
+            ?.addEventListener('click', () => {
+
+                container.scrollBy({
+                    left: 340,
+                    behavior: 'smooth'
+                });
+
+            });
+
+        document.getElementById('prevPengumuman')
+            ?.addEventListener('click', () => {
+
+                container.scrollBy({
+                    left: -340,
+                    behavior: 'smooth'
+                });
+
+            });
+
+    }
+</script>
 
 @endsection
