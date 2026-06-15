@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ResolvesMediaUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Agroeduwisata extends Model
 {
+    use ResolvesMediaUrl;
+
     protected $table = 'agroeduwisata';
 
     protected $fillable = [
@@ -30,5 +33,10 @@ class Agroeduwisata extends Model
     public function parent()
     {
         return $this->belongsTo(Agroeduwisata::class, 'parent_id');
+    }
+
+    public function getGambarUrlAttribute(): string
+    {
+        return $this->resolveImageUrl($this->gambar, 'agroeduwisata');
     }
 }

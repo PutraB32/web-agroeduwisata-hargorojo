@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('testimoni', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('produk_id')->nullable()->constrained('produk')->cascadeOnDelete();
             $table->string('nama');
             $table->text('isi_testimoni');
             $table->integer('rating')->nullable(); 
