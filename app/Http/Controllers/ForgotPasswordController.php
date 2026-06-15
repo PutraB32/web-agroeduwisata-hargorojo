@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -13,6 +14,14 @@ class ForgotPasswordController extends Controller
     public function showLinkRequestForm()
     {
         return view('Admin.forgot-password');
+    }
+
+    /**
+     * Tampilkan form lupa password customer.
+     */
+    public function showCustomerLinkRequestForm()
+    {
+        return view('customer.forgot-password');
     }
 
     /**
@@ -34,6 +43,34 @@ class ForgotPasswordController extends Controller
         return back()->with(
             'status',
             'Jika email terdaftar, tautan ganti password akan dikirim. Silakan periksa kotak masuk Anda.'
+        );
+    }
+
+    /**
+     * Kirim email token reset password untuk akun customer.
+     */
+    public function sendCustomerResetLinkEmail(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email|max:255',
+        ], [
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+        ]);
+
+        Password::sendResetLink(
+            [
+                'email' => $request->email,
+                'role' => 'customer',
+            ],
+            function ($user, $token) {
+                $user->notify(new ResetPasswordNotification($token, 'customer.password.reset'));
+            }
+        );
+
+        return back()->with(
+            'status',
+            'Jika email customer terdaftar, tautan ganti password akan dikirim. Silakan periksa kotak masuk Anda.'
         );
     }
 }

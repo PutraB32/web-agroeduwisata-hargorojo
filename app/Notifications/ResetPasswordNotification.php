@@ -18,11 +18,19 @@ class ResetPasswordNotification extends Notification
     public $token;
 
     /**
+     * Nama route tujuan reset password.
+     *
+     * @var string
+     */
+    public string $resetRouteName;
+
+    /**
      * Buat instance notifikasi baru.
      */
-    public function __construct(string $token)
+    public function __construct(string $token, string $resetRouteName = 'password.reset')
     {
         $this->token = $token;
+        $this->resetRouteName = $resetRouteName;
     }
 
     /**
@@ -40,19 +48,19 @@ class ResetPasswordNotification extends Notification
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $url = url(route('password.reset', [
+        $url = url(route($this->resetRouteName, [
             'token' => $this->token,
             'email' => $notifiable->getEmailForPasswordReset(),
         ], false));
 
+        $expireMinutes = config('auth.passwords.users.expire', 60);
+
         return (new MailMessage)
             ->subject('Permintaan Reset Password - Agroeduwisata Hargorojo')
-            ->greeting('Halo, ' . $notifiable->name . '!')
-            ->line('Kami menerima permintaan untuk mereset password akun Anda di portal Desa Hargorojo.')
-            ->line('Silakan klik tombol di bawah ini untuk mereset password Anda:')
-            ->action('Reset Password', $url)
-            ->line('Tautan reset password ini akan kedaluwarsa dalam 60 menit.')
-            ->line('Jika Anda tidak meminta reset password, tidak ada tindakan lebih lanjut yang diperlukan.')
-            ->salutation('Salam hangat, Admin Desa Hargorojo');
+            ->view('emails.reset-password', [
+                'name' => $notifiable->name,
+                'url' => $url,
+                'expireMinutes' => $expireMinutes,
+            ]);
     }
 }

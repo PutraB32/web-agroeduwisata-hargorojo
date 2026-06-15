@@ -45,6 +45,14 @@ class BerandaController extends Controller
 
         $galeri = $semuaKatalog->get('Galeri', collect());
 
+        $latestKatalogItems = collect()
+            ->merge($pengumuman)
+            ->merge($artikelBerita)
+            ->merge($perpustakaan)
+            ->merge($galeri)
+            ->sortByDesc('created_at')
+            ->take(3);
+
         return view('pages.beranda', compact(
             'agroeduwisata',
             'produkUnggulan',
@@ -52,7 +60,8 @@ class BerandaController extends Controller
             'pengumuman',
             'artikelBerita',
             'perpustakaan',
-            'galeri'
+            'galeri',
+            'latestKatalogItems'
         ));
     }
 

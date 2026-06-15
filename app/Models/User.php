@@ -21,6 +21,9 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'no_hp',
+        'alamat',
+        'foto',
         'password',
         'role',
     ];
@@ -51,6 +54,11 @@ class User extends Authenticatable
     public function produks()
     {
         return $this->hasMany(Produk::class, 'user_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'user_id');
     }
 
     public function katalogDesas()

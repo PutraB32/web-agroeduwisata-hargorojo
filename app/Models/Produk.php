@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Models\Concerns\ResolvesMediaUrl;
 use Illuminate\Database\Eloquent\Model;
 
 class Produk extends Model
 {
+    use ResolvesMediaUrl;
+
     protected $table = 'produk';
 
     protected $fillable = [
@@ -33,5 +36,15 @@ class Produk extends Model
     public function testimoni()
     {
         return $this->hasMany(Testimoni::class, 'produk_id');
+    }
+
+    public function getGambarUrlAttribute(): string
+    {
+        return $this->resolveImageUrl($this->gambar, 'produk');
+    }
+
+    public function getHargaRupiahAttribute(): string
+    {
+        return 'Rp'.number_format((float) $this->harga, 0, ',', '.');
     }
 }
