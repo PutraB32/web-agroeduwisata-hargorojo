@@ -2176,6 +2176,7 @@
 
                         px-6
                         py-5
+                        text-left
                     "
                 >
 
@@ -2238,6 +2239,7 @@
 
                         px-6
                         py-5
+                        text-left
                     "
                 >
 
@@ -2299,6 +2301,7 @@
 
                         px-6
                         py-5
+                        text-left
                     "
                 >
 

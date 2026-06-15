@@ -90,11 +90,15 @@
                 </a>
 
             </div>
+            
 
         </div>
+        
 
     </div>
-
+<div class="absolute bottom-0 left-0 w-full h-25
+            bg-gradient-to-t from-[#f8f6f0] via-[#f8f6f0]/30 to-transparent">
+</div>
 </section>
 
 

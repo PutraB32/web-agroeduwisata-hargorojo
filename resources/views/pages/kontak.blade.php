@@ -15,7 +15,7 @@
     relative
 
     py-32
-    lg:py-28
+    lg:py-29
 
     px-4
 
@@ -237,8 +237,8 @@ style="
             grid
             lg:grid-cols-[0.9fr_1fr]
 
-            gap-8
-            lg:gap-10
+            gap-7
+            lg:gap-8
         ">
 
             <!-- ====================================== -->
@@ -247,7 +247,7 @@ style="
             <div class="space-y-6">
 
                 <!-- WHATSAPP -->
-                <a href="https://wa.me/6281234567890"
+                <a href="https://wa.me/6281286427780"
                     target="_blank"
                     class="
                         group
@@ -256,7 +256,7 @@ style="
 
                         p-6
 
-                        rounded-[28px]
+                        rounded-[25px]
 
                         bg-[#173121]
 
@@ -276,8 +276,8 @@ style="
                     ">
 
                         <div class="
-                            w-14
-                            h-14
+                            w-13
+                            h-13
 
                             rounded-full
 
@@ -295,7 +295,7 @@ style="
                                 fa-whatsapp
 
                                 text-[#d4b254]
-                                text-xl
+                                text-4xl
                             "></i>
 
                         </div>
@@ -331,7 +331,7 @@ style="
 
                                 font-semibold
                             ">
-                                +62 812-3456-7890
+                                +62 812-8642-7780
                             </span>
 
                         </div>
