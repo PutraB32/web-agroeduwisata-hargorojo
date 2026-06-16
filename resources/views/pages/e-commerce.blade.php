@@ -29,7 +29,7 @@
                 </div>
             @endif
 
-            <div class="mx-auto mb-9 flex max-w-4xl flex-col gap-3 sm:flex-row">
+            <div class="mx-auto mb-9 flex max-w-6xl flex-col gap-3 sm:flex-row">
                 <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
                     <i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i>
                     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-10 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none">
@@ -58,15 +58,15 @@
 
                     <div id="produkUnggulanSlider" class="flex snap-x gap-4 overflow-x-auto pb-4 scrollbar-hide">
                         @foreach($page['featuredProducts'] as $produk)
-                            <article class="group relative h-[320px] w-[82vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:h-[350px] sm:w-[360px]">
+                            <article class="group relative h-[320px] w-[82vw] max-w-[420px] lg:w-[400px] lg:h-[320px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:h-[350px] sm:w-[360px]">
                                 <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
                                 <span class="absolute left-4 top-4 rounded-full bg-[#d8b15a] px-3 py-1 text-xs font-bold text-[#173121]">BEST SELLER</span>
                                 <div class="absolute inset-x-0 bottom-0 p-5 text-white">
-                                    <h3 class="font-lora text-xl font-bold">{{ $produk['name'] }}</h3>
-                                    <p class="mt-2 line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
+                                    <h3 class="font-lora text-xl font-bold min-h-[50px]">{{ $produk['name'] }}</h3>
+                                    <p class="line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
                                     <div class="mt-4 flex items-end justify-between gap-3">
-                                        <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}</p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
+                                        <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['unit'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
                                         <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="rounded-xl bg-[#d8b15a] px-4 py-2 text-sm font-bold text-[#173121] transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300">Tambah</button>
                                     </div>
                                 </div>
@@ -103,9 +103,9 @@
                                 @if($produk['stock'] < 1)<span class="absolute right-3 top-3 rounded-full bg-red-600 px-3 py-1 text-[11px] font-bold text-white">HABIS</span>@endif
                             </div>
                             <div class="flex flex-1 flex-col p-5 text-left">
-                                <h3 class="font-lora text-lg font-bold text-[#173121]">{{ $produk['name'] }}</h3>
+                                <h3 class="font-lora text-lg font-extrabold text-[#173121] line-clamp-2 min-h-[40px]">{{ $produk['name']}}</h3>
                                 <p class="mt-2 flex-1 text-sm leading-6 text-[#6b736d]">{{ $produk['descriptionExcerpt'] }}</p>
-                                <p class="mt-4 text-xl font-bold text-[#173121]">{{ $produk['priceFormatted'] }}</p>
+                                <p class="mt-4 text-xl font-bold text-[#231d11]">{{ $produk['priceFormatted'] }} <span class="text-sm font-medium text-[#6b736d]"> / {{ $produk['unit'] }}</span></p>
                                 <p class="mt-1 text-xs text-[#6b736d]">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p>
                                 <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] disabled:cursor-not-allowed disabled:bg-gray-300">
                                     <i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang
