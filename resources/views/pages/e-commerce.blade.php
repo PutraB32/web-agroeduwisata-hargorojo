@@ -29,18 +29,9 @@
                 </div>
             @endif
 
-            <div class="mx-auto mb-9 flex max-w-6xl flex-col gap-3 sm:flex-row">
-                <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
-                    <i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i>
-                    <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-10 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none">
-                    <button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">
-                        Cari
-                    </button>
-                </form>
-                <button type="button" @click="cartOpen = true" class="relative inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#173121] px-5 text-sm font-bold text-white shadow-sm transition hover:bg-[#244832] sm:min-w-44">
-                    <i class="fa-solid fa-cart-shopping"></i> Keranjang
-                    <span class="absolute -right-2 -top-2 flex h-6 min-w-6 items-center justify-center rounded-full border-2 border-white bg-[#d8b15a] px-1 text-xs font-bold text-[#173121]" x-text="cart.reduce((total, item) => total + item.qty, 0)"></span>
-                </button>
+            <div class="mx-auto mb-9 flex items-center gap-2 max-w-5xl">
+                <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10"><i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i><input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-9 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"><button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">Cari</button></form>
+                <button type="button" @click="cartOpen = true" class="relative w-13 h-13 shrink-0 flex items-center justify-center rounded-full bg-[#173121] text-white shadow-[0_10px_25px_rgba(23,49,33,0.25)] hover:bg-[#204732] hover:-translate-y-1 transition-all duration-300"><i class="fa-solid fa-cart-shopping text-lg"></i><span x-text="cart.reduce((total, item) => total + item.qty, 0)" class="absolute -top-2 -right-1 w-7 h-7 rounded-full bg-[#d8b15a] text-[#173121] text-[14px] font-bold flex items-center justify-center border-2 border-white"></span></button>
             </div>
 
             @if($page['featuredProducts']->count())
@@ -65,9 +56,9 @@
                                 <div class="absolute inset-x-0 bottom-0 p-5 text-white">
                                     <h3 class="font-lora text-xl font-bold min-h-[50px]">{{ $produk['name'] }}</h3>
                                     <p class="line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
-                                    <div class="mt-4 flex items-end justify-between gap-3">
+                                    <div class="mt-2 flex items-end justify-between gap-3">
                                         <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['unit'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
-                                        <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="rounded-xl bg-[#d8b15a] px-4 py-2 text-sm font-bold text-[#173121] transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300">Tambah</button>
+                                        <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d8b15a] px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-[#173121] whitespace-nowrap transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300"><i class="fa-solid fa-cart-plus text-lg"></i><span class="sm:hidden">+ Keranjang</span><span class="hidden sm:inline">Tambah ke Keranjang</span></button>
                                     </div>
                                 </div>
                             </article>
@@ -102,13 +93,12 @@
                                 @if($produk['isFeatured'])<span class="absolute left-3 top-3 rounded-full bg-[#d8b15a] px-3 py-1 text-[11px] font-bold text-[#173121]">BEST SELLER</span>@endif
                                 @if($produk['stock'] < 1)<span class="absolute right-3 top-3 rounded-full bg-red-600 px-3 py-1 text-[11px] font-bold text-white">HABIS</span>@endif
                             </div>
-                            <div class="flex flex-1 flex-col p-5 text-left">
-                                <h3 class="font-lora text-lg font-extrabold text-[#173121] line-clamp-2 min-h-[40px]">{{ $produk['name']}}</h3>
-                                <p class="mt-2 flex-1 text-sm leading-6 text-[#6b736d]">{{ $produk['descriptionExcerpt'] }}</p>
-                                <p class="mt-4 text-xl font-bold text-[#231d11]">{{ $produk['priceFormatted'] }} <span class="text-sm font-medium text-[#6b736d]"> / {{ $produk['unit'] }}</span></p>
-                                <p class="mt-1 text-xs text-[#6b736d]">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p>
+                            <div class="flex flex-1 flex-col p-6 text-left">
+                                <h3 class="font-lora text-center text-xl lg:text-[18px] font-extrabold text-[#173121] line-clamp-2 min-h-[54px] mb-1 ">{{ $produk['name']}}</h3>
+                                <p class=" text-xl text-center font-bold text-[#c6a949]">{{ $produk['priceFormatted'] }} <span class="text-sm font-medium text-[#717772]"> /{{ $produk['unit'] }}</span></p>
+                                <div class="text-center text-sm font-medium text-green-600"> ● Stok Tersedia </div>
                                 <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] disabled:cursor-not-allowed disabled:bg-gray-300">
-                                    <i class="fa-solid fa-cart-plus"></i> Tambah ke Keranjang
+                                    <i class="fa-solid fa-cart-plus text-lg"></i> Tambah ke Keranjang
                                 </button>
                             </div>
                         </article>
@@ -202,49 +192,174 @@
         <div><b class="text-sm">Info</b><p x-text="toastMessage" class="text-sm text-white/80"></p></div>
     </div>
 
-    <section class="relative overflow-hidden bg-[#173121] py-14 text-white sm:py-20">
-        <img src="{{ $page['assets']['ctaImage'] }}" alt="Produk Hargorojo" class="absolute inset-0 h-full w-full object-cover opacity-35">
-        <div class="absolute inset-0 bg-[#07150f]/70"></div>
-        <div class="relative z-10 mx-auto grid max-w-6xl gap-8 px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-10">
-            <div>
-                <p class="text-sm font-bold uppercase tracking-[.18em] text-[#d8b15a]">Butuh pesanan grosir?</p>
-                <h2 class="mt-3 font-lora text-3xl font-bold sm:text-4xl">Dapatkan harga terbaik untuk pembelian jumlah besar.</h2>
-                <p class="mt-4 max-w-2xl text-sm leading-7 text-white/75 sm:text-base">Hubungi admin untuk diskusi kebutuhan produk lokal Desa Hargorojo, stok, dan pengiriman.</p>
+
+<section class="relative w-full overflow-hidden py-6 mb-0">
+    <img src="{{ asset('images/assets foto/CTA_ecommerceee.png') }}" alt="Produk Desa Hargorojo" class="absolute inset-0 w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-r from-[#07150f]/95 via-[#173121]/85 to-[#173121]/40"></div>
+
+    <!-- CONTENT -->
+    <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-8">
+
+        <!-- TRUST BADGE -->
+        <div class="hidden lg:block absolute top-8 right-10 xl:top-1 xl:right-2 z-20">
+            <img src="{{ asset('/images/assets foto/label_produk.png') }}" alt="Produk Alami Desa Hargorojo" class="w-[140px] xl:w-[180px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.30)] hover:scale-105 transition-all duration-700">
+        </div>
+
+        <!-- TITLE -->
+        <h2 class="max-w-2xl font-lora text-white text-[42px] md:text-[48px] leading-[1.05] font-bold mb-2">
+            Butuh Produk Kelapa
+            <span class="text-[#d8b15a]">dalam Jumlah Besar?</span>
+        </h2>
+
+        <!-- DESCRIPTION -->
+        <p class="max-w-4xl text-white/80 text-[17px] italic leading-[1.3] mb-6 font-thin">
+            Kami melayani pemesanan grosir untuk UMKM, reseller, toko oleh-oleh, dan distributor dari seluruh Indonesia dengan harga khusus dan kualitas terbaik langsung dari Desa Hargorojo.
+        </p>
+
+        <!-- FEATURES -->
+        <div class="grid md:grid-cols-3 max-w-4xl mb-10">
+
+            <!-- ITEM -->
+            <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
+                    <i class="fa-solid fa-tags"></i>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold">Harga Grosir</h4>
+                    <p class="text-white/70 text-sm">
+                        Harga terbaik untuk <br> pembelian dalam jumlah besar.
+                    </p>
+                </div>
             </div>
-            <a href="https://wa.me/6280000000000" target="_blank" class="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#d8b15a] px-6 font-bold text-[#173121] transition hover:bg-white">
-                <i class="fa-brands fa-whatsapp"></i> Hubungi Admin
+
+            <!-- ITEM -->
+            <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
+                    <i class="fa-solid fa-cube"></i>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-1">Produk Berkualitas</h4>
+                    <p class="text-white/70 text-sm">
+                        Diproduksi langsung oleh <br> masyarakat Desa Hargorojo.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ITEM -->
+            <div class="flex items-start gap-4">
+                <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
+                    <i class="fa-solid fa-truck"></i>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-semibold mb-1">Pengiriman Nasional</h4>
+                    <p class="text-white/70 text-sm">
+                        Melayani pengiriman ke <br> seluruh wilayah Indonesia.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- BUTTON AREA -->
+        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+            <a href="https://wa.me/6280000000000" target="_blank" class="group inline-flex items-center gap-4 px-6 py-3 rounded-4xl bg-[#d8b15a] text-[#173121] font-semibold shadow-[0_20px_50px_rgba(216,177,90,0.30)] hover:scale-[1.02] transition-all duration-500">
+                <i class="fa-brands fa-whatsapp text-xl"></i>
+                Hubungi Admin
+                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-all"></i>
             </a>
         </div>
-    </section>
 
-    <section class="bg-[#f8f6f1] px-5 py-14 sm:py-20">
-        <div class="mx-auto max-w-4xl">
-            <div class="mb-8 text-center">
-                <p class="text-sm font-bold uppercase tracking-[.18em] text-[#b89b5e]">Informasi Tambahan</p>
-                <h2 class="mt-2 font-lora text-3xl font-bold text-[#173121] sm:text-4xl">Pertanyaan yang Sering Diajukan</h2>
-            </div>
-            <div class="space-y-3">
-                @foreach($page['faqItems'] as $faq)
-                    <article x-data="{ open: false }" class="overflow-hidden rounded-2xl border border-[#ece6da] bg-white shadow-sm">
-                        <button type="button" @click="open = !open" class="flex w-full items-center justify-between gap-4 px-5 py-4 text-left">
-                            <span class="font-lora text-base font-bold text-[#173121] sm:text-lg">{{ $faq['question'] }}</span>
-                            <i class="fa-solid fa-chevron-down shrink-0 transition" :class="open ? 'rotate-180' : ''"></i>
-                        </button>
-                        <div x-show="open" x-transition class="px-5 pb-5 text-sm leading-7 text-[#5d675f] sm:text-base">
-                            <p>{{ $faq['answer'] }}</p>
-                            @if(isset($faq['image']))
-                                <img src="{{ $faq['image'] }}" alt="Alur pemesanan" class="mt-4 w-full rounded-2xl border border-[#ece8df]">
-                            @endif
-                        </div>
-                    </article>
-                @endforeach
-            </div>
-            <div class="mt-8 rounded-2xl border border-[#ece6da] bg-white p-6 text-center sm:flex sm:items-center sm:justify-between sm:text-left">
-                <div><h3 class="font-lora text-2xl font-bold text-[#173121]">Masih ada pertanyaan lain?</h3><p class="mt-1 text-sm italic text-[#6b736d]">Jangan ragu untuk menghubungi admin kami.</p></div>
-                <a href="https://wa.me/6280000000000" target="_blank" class="mt-5 inline-flex h-12 items-center justify-center gap-3 rounded-full bg-[#173121] px-6 font-bold text-white transition hover:bg-[#244832] sm:mt-0"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
-            </div>
+    </div>
+
+</section>
+
+
+<section class="py-20 bg-[#faf8f4]">
+    <div class="max-w-4xl mx-auto px-6 lg:px-10">
+        <!-- SMALL LABEL -->
+        <div class="flex items-center justify-center gap-3 mb-4">
+            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+            <span class="uppercase tracking-[0.2em] text-[14px] font-semibold text-[#b89b5e]">
+                Informasi Tambahan
+            </span>
+            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
         </div>
-    </section>
+
+        <!-- TITLE -->
+        <h2 class="text-center font-lora text-[40px] md:text-[45px] leading-[1] font-bold text-[#173121] mb-2">
+            Pertanyaan yang Sering Diajukan
+        </h2>
+        <!-- DESCRIPTION -->
+        <p class="max-w-2xl mx-auto text-[#52605a] text-[15px] md:text-[18px] text-center leading-[1.4] font-light mb-10">
+            Berikut adalah beberapa pertanyaan yang sering diajukan oleh pelanggan kami.
+            Temukan jawabannya di bawah ini.
+        </p>
+
+        <!-- FAQ LIST -->
+        <div class="space-y-3">
+            @foreach($page['faqItems'] as $faq)
+                <article
+                    x-data="{ open: false }"
+                    class="bg-white rounded-[24px] border border-[#ece6da] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
+                >
+                    <button
+                        type="button"
+                        @click="open = !open"
+                        class="w-full flex items-center justify-between px-6 py-5 text-left"
+                    >
+                        <span class="text-[#173121] font-semibold text-[18px] font-lora">
+                            {{ $faq['question'] }}
+                        </span>
+                        <i
+                            class="fa-solid fa-chevron-down transition duration-300"
+                            :class="open ? 'rotate-180' : ''"
+                        ></i>
+                    </button>
+
+                    <div
+                        x-show="open"
+                        x-transition
+                        class="font-lora px-6 pb-6 text-[17px] text-[#5d675f] leading-[1.5]"
+                    >
+                        <p>
+                            {{ $faq['answer'] }}
+                        </p>
+                        @if(isset($faq['image']))
+                            <img
+                                src="{{ $faq['image'] }}"
+                                alt="Alur Pemesanan"
+                                class="w-full max-w-4xl mx-auto rounded-2xl border border-[#ece8df] mt-4"
+                            >
+                        @endif
+                    </div>
+                </article>
+            @endforeach
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="mt-12 bg-white rounded-[28px] border border-[#ece6da] p-6 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div>
+                <h3 class="font-lora text-[#173121] font-bold text-2xl mb-2">
+                    Masih ada pertanyaan lain?
+                </h3>
+                <p class="text-[#6b736d] font-lora italic">
+                    Jangan ragu untuk menghubungi admin kami.
+                </p>
+            </div>
+            <a
+                href="https://wa.me/6280000000000"
+                target="_blank"
+                class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-[#173121] text-white font-medium hover:bg-[#204732] transition-all"
+            >
+                <i class="fa-brands fa-whatsapp"></i>
+                Hubungi Admin via WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
 </main>
 
 @if(filled($page['midtrans']['clientKey']))
