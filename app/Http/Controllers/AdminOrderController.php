@@ -45,7 +45,7 @@ class AdminOrderController extends Controller
         $order->update($data);
 
         return redirect()->back()
-            ->with('success', 'Status pesanan berhasil diperbarui!');
+            ->with('order_success', 'Status pesanan berhasil diperbarui!');
     }
 
     public function updatePengiriman(Request $request, $id)
@@ -89,7 +89,7 @@ class AdminOrderController extends Controller
         }
 
         return redirect()->back()
-            ->with('success', 'Kurir dan nomor resi transaksi berhasil disimpan.');
+            ->with('order_success', 'Kurir dan nomor resi transaksi berhasil disimpan.');
     }
 
     public function destroy($id)
@@ -105,6 +105,6 @@ class AdminOrderController extends Controller
         $order->delete();
 
         return redirect()->back()
-            ->with('success', 'Data pesanan berhasil dihapus!');
+            ->with('order_success', 'Data pesanan berhasil dihapus!');
     }
 }
