@@ -1,3 +1,13 @@
+ @if($navbarCustomer)
+    <div
+        data-order-notification-config
+        data-storage-key="hargorojo.orderNotifications.seen.{{ $navbarCustomer->id }}"
+        data-order-ids='@json($navbarOrderIds)'
+        data-new-order-id="{{ (int) session('navbar_new_order_id', 0) }}"
+        hidden
+    ></div>
+@endif
+
  <!-- NAVBAR -->
    <nav
    x-data="{ open: false, scrolled: false, notifOpen: false }"
@@ -532,39 +542,3 @@
         @endif
     @endauth
 
-    @if($navbarCustomer)
-        <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                const storageKey = 'hargorojo.orderNotifications.seen.{{ $navbarCustomer->id }}';
-                const orderIds = @json($navbarOrderIds);
-                const latestOrderId = orderIds.length ? Math.max(...orderIds) : 0;
-                const badges = document.querySelectorAll('[data-order-notification-badge]');
-                const triggers = document.querySelectorAll('[data-order-notification-trigger], [data-order-notification-link]');
-
-                const setBadgeCount = (count) => {
-                    badges.forEach((badge) => {
-                        badge.textContent = count;
-                        badge.hidden = count <= 0;
-                    });
-                };
-
-                const seenOrderId = Number(localStorage.getItem(storageKey) || 0);
-
-                if (!latestOrderId) {
-                    setBadgeCount(0);
-                } else if (seenOrderId > 0) {
-                    setBadgeCount(orderIds.filter((id) => id > seenOrderId).length);
-                }
-
-                triggers.forEach((trigger) => {
-                    trigger.addEventListener('click', () => {
-                        if (latestOrderId) {
-                            localStorage.setItem(storageKey, String(latestOrderId));
-                        }
-
-                        setBadgeCount(0);
-                    });
-                });
-            });
-        </script>
-    @endif
