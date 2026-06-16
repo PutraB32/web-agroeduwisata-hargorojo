@@ -26,6 +26,12 @@
         </div>
     @endif
 
+    @if(session('order_success'))
+        <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span class="block sm:inline">{{ session('order_success') }}</span>
+        </div>
+    @endif
+    
     <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
         <table class="admin-data-table admin-table-order min-w-full divide-y divide-gray-200">
             <thead class="bg-gray-50">
