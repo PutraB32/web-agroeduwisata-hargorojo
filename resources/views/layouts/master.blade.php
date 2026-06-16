@@ -50,6 +50,10 @@
 
 <body class="overflow-x-hidden antialiased text-gray-800 selection:bg-green-600 selection:text-white">
 
+
+    {{-- NAVBAR --}}
+    @include('layouts.navbar')
+
     {{-- Main Content --}}
     <main class="min-h-screen">
         @yield('content')
