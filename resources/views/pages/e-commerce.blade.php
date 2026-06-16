@@ -3,40 +3,41 @@
 @section('title', 'Belanja Produk - Desa Hargorojo')
 
 @section('content')
-@include('layouts.navbar')
 
-<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" class="bg-[#f8f6f1]">
-    <section class="relative overflow-hidden px-4 pb-16 pt-32 sm:px-6 sm:pb-24 sm:pt-36 lg:px-10 lg:pb-28 lg:pt-40">
+
+<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
+    <section class="relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
         <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="absolute inset-0 h-full w-full object-cover">
-        <div class="absolute inset-0 bg-[#07150f]/50"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,.88)_0%,rgba(255,255,255,.70)_28%,rgba(255,255,255,.24)_58%,rgba(255,255,255,0)_100%)]"></div>
+        <div class="absolute inset-0 bg-[#07150f]/45"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,.88)_0%,rgba(255,255,255,.68)_30%,rgba(255,255,255,.24)_58%,rgba(255,255,255,0)_100%)]"></div>
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
 
-        <div class="relative z-10 mx-auto flex max-w-6xl flex-col items-center text-center">
+        <div class="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
             <span class="rounded-full border border-[#d4b254] bg-white/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#173121] sm:text-sm">Produk lokal Desa Hargorojo</span>
-            <h1 class="mt-5 max-w-4xl font-lora text-4xl font-bold leading-tight text-[#173121] drop-shadow-sm sm:text-5xl lg:text-[64px]">Belanja Produk Desa</h1>
-            <p class="font-lobster mt-1 text-5xl leading-none text-[#c89a44] drop-shadow-sm sm:text-6xl lg:text-[76px]">Asli Hargorojo</p>
-            <p class="mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
+            <h1 class="mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[76px]">Belanja Produk Desa</h1>
+            <p class="font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[88px]">Asli Hargorojo</p>
+            <p class="mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg sm:leading-8">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
 
         </div>
     </section>
 
-    <section id="produk-katalog" class="relative px-4 py-10 sm:px-6 sm:py-12 lg:px-10">
-        <div class="relative z-10 mx-auto max-w-[1350px] rounded-2xl border border-[#ece6da] bg-white p-5 shadow-[0_18px_55px_rgba(0,0,0,.07)] sm:p-7 lg:rounded-[32px] lg:p-10">
+    <section id="produk-katalog" class="relative -mt-20 px-4 pb-14 sm:-mt-24 sm:px-6 sm:pb-16 lg:px-10 lg:pb-20">
+        <div class="relative z-10 mx-auto max-w-[1350px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
             @if(session('success') || session('error'))
                 <div class="mb-5 rounded-lg border {{ session('success') ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800' }} px-4 py-3 text-sm font-semibold">
                     {{ session('success') ?? session('error') }}
                 </div>
             @endif
 
-            <div class="mx-auto mb-9 flex max-w-3xl flex-col gap-3 sm:flex-row">
-                <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
+            <div class="mx-auto mb-9 flex max-w-4xl flex-col gap-3 sm:flex-row">
+                <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
                     <i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i>
                     <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-10 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none">
-                    <button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-lg bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832]">
+                    <button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">
                         Cari
                     </button>
                 </form>
-                <button type="button" @click="cartOpen = true" class="relative inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#173121] px-5 text-sm font-bold text-white shadow-sm transition hover:bg-[#244832] sm:min-w-44">
+                <button type="button" @click="cartOpen = true" class="relative inline-flex h-12 items-center justify-center gap-2 rounded-2xl bg-[#173121] px-5 text-sm font-bold text-white shadow-sm transition hover:bg-[#244832] sm:min-w-44">
                     <i class="fa-solid fa-cart-shopping"></i> Keranjang
                     <span class="absolute -right-2 -top-2 flex h-6 min-w-6 items-center justify-center rounded-full border-2 border-white bg-[#d8b15a] px-1 text-xs font-bold text-[#173121]" x-text="cart.reduce((total, item) => total + item.qty, 0)"></span>
                 </button>
@@ -57,7 +58,7 @@
 
                     <div id="produkUnggulanSlider" class="flex snap-x gap-4 overflow-x-auto pb-4 scrollbar-hide">
                         @foreach($page['featuredProducts'] as $produk)
-                            <article class="group relative h-[340px] w-[82vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:w-[360px]">
+                            <article class="group relative h-[320px] w-[82vw] max-w-[380px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:h-[350px] sm:w-[360px]">
                                 <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
                                 <span class="absolute left-4 top-4 rounded-full bg-[#d8b15a] px-3 py-1 text-xs font-bold text-[#173121]">BEST SELLER</span>
@@ -76,17 +77,32 @@
             @endif
 
             <div>
-                <h2 class="font-lora text-2xl font-bold text-[#173121] sm:text-3xl">Semua Produk</h2>
-                <p class="mb-6 mt-1 text-sm italic text-[#6b736d]">Pilihan lengkap produk berkualitas Desa Hargorojo</p>
+                <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+                    <div>
+                        <h2 class="font-lora text-2xl font-bold text-[#173121] sm:text-3xl">Semua Produk</h2>
+                        <p class="mt-1 text-sm italic text-[#6b736d]">
+                            @if(request('q'))
+                                Hasil pencarian untuk "{{ request('q') }}"
+                            @else
+                                Pilihan lengkap produk berkualitas Desa Hargorojo
+                            @endif
+                        </p>
+                    </div>
+                    @if(request('q'))
+                        <a href="{{ route('ecommerce') }}#produk-katalog" class="inline-flex h-10 items-center justify-center rounded-xl border border-[#e6dece] px-4 text-sm font-bold text-[#173121] transition hover:bg-[#f8f6f1]">
+                            Tampilkan semua
+                        </a>
+                    @endif
+                </div>
                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @forelse($page['products'] as $produk)
                         <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#ece6da] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                             <div class="relative overflow-hidden">
-                                <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="h-52 w-full object-cover transition duration-700 group-hover:scale-105">
+                                <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105">
                                 @if($produk['isFeatured'])<span class="absolute left-3 top-3 rounded-full bg-[#d8b15a] px-3 py-1 text-[11px] font-bold text-[#173121]">BEST SELLER</span>@endif
                                 @if($produk['stock'] < 1)<span class="absolute right-3 top-3 rounded-full bg-red-600 px-3 py-1 text-[11px] font-bold text-white">HABIS</span>@endif
                             </div>
-                            <div class="flex flex-1 flex-col p-5 text-center">
+                            <div class="flex flex-1 flex-col p-5 text-left">
                                 <h3 class="font-lora text-lg font-bold text-[#173121]">{{ $produk['name'] }}</h3>
                                 <p class="mt-2 flex-1 text-sm leading-6 text-[#6b736d]">{{ $produk['descriptionExcerpt'] }}</p>
                                 <p class="mt-4 text-xl font-bold text-[#173121]">{{ $produk['priceFormatted'] }}</p>

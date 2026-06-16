@@ -4,9 +4,6 @@
 
 @section('content')
 
-{{-- Navbar --}}
-@include('layouts.navbar')
-
 <section class="relative w-full h-screen overflow-hidden bg-black">
 
     {{-- Background --}}
