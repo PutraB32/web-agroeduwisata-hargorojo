@@ -287,6 +287,7 @@ class CartController extends Controller
             ]);
 
             session()->forget('cart');
+            session()->flash('navbar_new_order_id', $order->id);
 
             if ($request->expectsJson()) {
                 return response()->json([
