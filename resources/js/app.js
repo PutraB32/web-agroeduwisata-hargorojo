@@ -1,5 +1,6 @@
 import "./bootstrap";
 import "./ecommerce-cart";
+import "./order-notification";
 
 window.counter = function (target, speed = 40) {
     return {
