@@ -167,6 +167,17 @@
                 <input type="text" x-model="checkoutForm.nama" placeholder="Nama Lengkap" class="h-11 rounded-xl border border-[#ece6da] px-4 outline-none focus:border-[#173121]">
                 <input type="text" x-model="checkoutForm.no_telepon" placeholder="Nomor WhatsApp" class="h-11 rounded-xl border border-[#ece6da] px-4 outline-none focus:border-[#173121]">
                 <textarea rows="3" x-model="checkoutForm.alamat" placeholder="Alamat Lengkap" class="rounded-xl border border-[#ece6da] px-4 py-3 outline-none focus:border-[#173121]"></textarea>
+                <div class="grid gap-2">
+                    <p class="text-sm font-bold text-[#173121]">Metode penerimaan</p>
+                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-[#ece6da] p-3 text-sm transition" :class="checkoutForm.metode_penerimaan === 'ambil_di_tempat' ? 'border-[#173121] bg-[#f8f6f1]' : 'bg-white'">
+                        <input type="radio" x-model="checkoutForm.metode_penerimaan" value="ambil_di_tempat" class="accent-[#173121]">
+                        <span><b>Ambil di tempat</b><br><small class="text-[#6b736d]">Pesanan diambil langsung di lokasi.</small></span>
+                    </label>
+                    <label class="flex cursor-pointer items-center gap-3 rounded-xl border border-[#ece6da] p-3 text-sm transition" :class="checkoutForm.metode_penerimaan === 'cod_bayar_di_tempat' ? 'border-[#173121] bg-[#f8f6f1]' : 'bg-white'">
+                        <input type="radio" x-model="checkoutForm.metode_penerimaan" value="cod_bayar_di_tempat" class="accent-[#173121]">
+                        <span><b>COD / Bayar di tempat</b><br><small class="text-[#6b736d]">Bayar saat pesanan diterima.</small></span>
+                    </label>
+                </div>
             </div>
             <button type="button" @click="checkout" :disabled="checkoutLoading || cart.length === 0" class="h-12 w-full rounded-xl bg-[#173121] font-bold text-white transition hover:bg-[#244832] disabled:cursor-not-allowed disabled:opacity-60">
                 <span x-text="checkoutLoading ? 'Memproses...' : 'Bayar via Midtrans'"></span>
