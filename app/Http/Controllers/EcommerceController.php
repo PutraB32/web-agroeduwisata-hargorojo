@@ -12,7 +12,19 @@ class EcommerceController extends Controller
 {
     public function index(Request $request)
     {
-        $produks = Produk::all()
+        $search = trim((string) $request->query('q', ''));
+
+        $produks = Produk::query()
+            ->when($search !== '', function ($query) use ($search) {
+                $query->where(function ($query) use ($search) {
+                    $query->where('nama', 'like', "%{$search}%")
+                        ->orWhere('deskripsi', 'like', "%{$search}%")
+                        ->orWhere('manfaat', 'like', "%{$search}%")
+                        ->orWhere('satuan', 'like', "%{$search}%");
+                });
+            })
+            ->latest()
+            ->get()
             ->map(function (Produk $produk) {
                 $produk->image_url = $produk->gambar_url;
 
