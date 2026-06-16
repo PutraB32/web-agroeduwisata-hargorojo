@@ -164,11 +164,19 @@ window.cartApp = function (config = {}) {
             localStorage.removeItem("cart");
 
             window.snap.pay(data.snap_token, {
-                onSuccess: () => this.notify("Pembayaran berhasil. Status pesanan akan diperbarui."),
-                onPending: () => this.notify("Transaksi dibuat. Silakan selesaikan pembayaran."),
+                onSuccess: () => this.finishMidtransCheckout(data, "Pembayaran berhasil. Status pesanan akan diperbarui."),
+                onPending: () => this.finishMidtransCheckout(data, "Transaksi dibuat. Silakan selesaikan pembayaran."),
                 onError: () => this.notify("Pembayaran gagal diproses. Silakan coba lagi."),
                 onClose: () => this.notify("Pop-up pembayaran ditutup."),
             });
+        },
+
+        finishMidtransCheckout(data, message) {
+            this.notify(message);
+
+            setTimeout(() => {
+                window.location.href = data.profile_orders_url || data.ecommerce_url || window.location.href;
+            }, 900);
         },
     };
 };

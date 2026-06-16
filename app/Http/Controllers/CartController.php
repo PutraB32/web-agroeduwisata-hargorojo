@@ -241,6 +241,11 @@ class CartController extends Controller
                     'midtrans_order_id' => $midtransOrderId,
                 ]);
 
+                $profileOrdersUrl = route('customer.profile', [
+                    'panel' => 'orders',
+                    'order' => $order->id,
+                ]);
+
                 $payload = [
                     'transaction_details' => [
                         'order_id' => $midtransOrderId,
@@ -258,7 +263,7 @@ class CartController extends Controller
                         ],
                     ],
                     'callbacks' => [
-                        'finish' => route('ecommerce'),
+                        'finish' => $profileOrdersUrl,
                     ],
                 ];
 
