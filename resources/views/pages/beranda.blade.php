@@ -12,9 +12,9 @@
             class="home-hero__image h-full w-full scale-100 object-cover object-center animate-kenburns"
         >
 
-        <div class="absolute inset-0 bg-black/35 animate-vignette"></div>
+        <div class="absolute inset-0 bg-black/45 animate-vignette"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent animate-slide-gradient"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
         <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
     </div>
 
@@ -31,8 +31,8 @@
                     </div>
 
                     <h1 class="home-hero__title hero-fade-up delay-200 font-hero text-[2.25rem] font-[550] uppercase leading-[0.98] tracking-normal text-white drop-shadow-[0_5px_25px_rgba(0,0,0,0.5)] sm:text-[3.75rem] md:text-[4.5rem] lg:text-[4.1rem]">
-                        Desa Agroeduwisata
-                        <span class="block text-yellow-500 drop-shadow-[0_0_25px_rgba(250,204,21,0.35)]">
+                        <span class="block whitespace-nowrap lg:inline">Desa Agroeduwisata</span>
+                        <span class="block text-yellow-500 drop-shadow-[0_0_25px_rgba(250,204,21,0.35)] lg:inline lg:whitespace-nowrap lg:[overflow-wrap:normal]">
                             Gula Kelapa Hargorojo
                         </span>
                     </h1>
@@ -51,6 +51,7 @@
                         <span class="home-hero__tag tag-shimmer flex items-center rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-normal text-white/90 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 sm:px-5 sm:py-2.5 sm:text-sm">
                             Produk Gula Kelapa
                         </span>
+                        
                     </div>
 
                     <div class="home-hero__avatars mt-7 flex items-center sm:mt-10">
@@ -69,21 +70,21 @@
                     </div>
                 </div>
 
-                <div class="home-hero__cta hero-fade-up delay-750 flex w-full flex-col gap-3 sm:max-w-md sm:flex-row lg:w-auto lg:min-w-[22rem] lg:flex-col">
+                <div class="home-hero__cta hero-fade-up delay-750 flex w-full flex-col gap-3 sm:max-w-md sm:flex-row lg:w-auto lg:min-w-[26rem] lg:max-w-none lg:flex-row xl:min-w-[30rem]">
                     <a
                         href="{{ route('profil') }}"
-                        class="home-hero__button btn-pulse group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] sm:px-5"
+                        class="home-hero__button btn-pulse group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-yellow-300/50 bg-yellow-500 px-6 text-md font-bold text-[#152014] shadow-[0_16px_40px_rgba(212,175,55,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-200 hover:bg-yellow-300 hover:shadow-[0_22px_55px_rgba(212,175,55,0.46)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-6"
                     >
                         <span class="home-hero__button-text min-w-0 flex-1 text-center">Lihat Profil Desa</span>
-                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:bg-yellow-400"><i class="fa-solid fa-arrow-right text-sm leading-none"></i></span>
+                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#173c2d] text-white transition-all duration-300 group-hover:bg-white group-hover:text-[#173c2d]"><i class="fa-solid fa-arrow-right text-md leading-none"></i></span>
                     </a>
 
                     <a
                         href="{{ route('kontak') }}"
-                        class="home-hero__button group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] sm:px-5"
+                        class="home-hero__button group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-green-300/70 bg-green-800/90 px-4 text-md font-bold text-white shadow-[0_16px_40px_rgba(0,77,64,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-300 hover:bg-green-700 hover:shadow-[0_22px_55px_rgba(0,77,64,0.48)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-5"
                     >
                         <span class="home-hero__button-text min-w-0 flex-1 text-center">Hubungi Kami</span>
-                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:bg-yellow-400"><i class="fa-solid fa-arrow-right text-sm leading-none"></i></span>
+                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-green-900 transition-all duration-300 group-hover:bg-yellow-400 group-hover:text-black"><i class="fa-solid fa-arrow-right text-md leading-none"></i></span>
                     </a>
                 </div>
             </div>
@@ -838,12 +839,12 @@
 <section class="max-w-7xl mx-auto px-6 py-15">
 
     <!-- HEADER -->
-    <div class="mb-14 text-center">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-6 mb-14">
 
         <!-- LEFT — reveal -->
-        <div class="reveal reveal-delay-1 mx-auto max-w-3xl">
+        <div class="reveal reveal-delay-1 text-center lg:text-left">
 
-            <div class="inline-flex items-center gap-3 mb-4">
+            <div class="inline-flex items-center gap-3 mb-2">
                 <div class="line-expand h-[2px] bg-yellow-500"></div>
                 <span class="uppercase tracking-[0.25em] text-[12px] font-semibold text-yellow-600">
                     Testimoni
@@ -851,7 +852,7 @@
                 <div class="line-expand h-[2px] bg-yellow-500"></div>
             </div>
 
-            <h2 class="font-bold text-[30px] lg:text-[42px] leading-[1.1] tracking-normal text-[#1c3528] mb-2">
+            <h2 class="font-bold text-[30px] lg:text-[42px] leading-[1.1] tracking-[-0.03em] text-[#1c3528] mb-2">
                 Apa Kata Pengunjung Kami?
             </h2>
 
@@ -964,7 +965,6 @@
 
     <div class="max-w-[1400px] mx-auto relative z-10">
 
-        {{-- Main box — tambah box-scale-in --}}
         <div class="
             box-scale-in
             relative overflow-hidden rounded-[40px]
@@ -979,7 +979,6 @@
 
             <div class="relative z-10 grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-15 items-center">
 
-                <!-- LEFT — stagger reveal -->
                 <div>
 
                     <div class="reveal reveal-delay-1 inline-flex items-center gap-3 px-4 py-2 rounded-full bg-white border border-[#dce6d7] mb-1">
@@ -1002,15 +1001,15 @@
                         Lebih dari sekadar destinasi wisata, Desa Agroeduwisata Hargorojo menghadirkan pengalaman yang menghubungkan pengunjung dengan alam, budaya, serta kehidupan masyarakat lokal yang penuh kehangatan dan kearifan tradisional.
                     </p>
 
-                    <a href="#" class="reveal reveal-delay-4
-                        inline-flex items-center gap-5
+                    <a href="{{ route('agro') }}" class="reveal reveal-delay-4
+                        inline-flex items-center gap-6
                         bg-[#1d4d3a] hover:bg-[#173c2d] hover:-translate-y-[2px]
-                        text-white px-8 py-3 rounded-full font-semibold
+                        text-white px-6 py-3 rounded-full font-semibold
                         shadow-[0_12px_30px_rgba(29,77,58,0.20)]
                         transition-all duration-300
                     ">
                         Jelajahi Desa
-                        <span class="w-9 h-9 rounded-full bg-white/15 flex items-center justify-center text-sm">
+                        <span class="w-9 h-8 rounded-full bg-white/15 flex items-center justify-center text-sm">
                             <i class="fa-solid fa-arrow-right"></i>
                         </span>
                     </a>

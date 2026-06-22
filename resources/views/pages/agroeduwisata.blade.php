@@ -5,7 +5,6 @@
 @section('content')
 
 
-{{-- Tambah bg-black --}}
 <section class="relative h-screen overflow-hidden bg-black">
 
     {{-- BACKGROUND IMAGE --}}
@@ -99,10 +98,12 @@
         <!-- HEADER -->
         <div class="text-center max-w-[800px] mx-auto mb-[3.75rem]">
 
-            <div class="reveal reveal-delay-1 flex items-center justify-center mb-2">
+            <div class="reveal reveal-delay-1 flex items-center justify-center gap-3 mb-2">
+                <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
                 <span class="uppercase tracking-[0.2em] text-sm font-semibold text-yellow-600">
                     Proses Produksi Tradisional
                 </span>
+                <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
             </div>
 
             <h2 class="reveal reveal-delay-2 font-lora text-[#173121] text-[38px] md:text-[52px] tracking-[-0.04rem] leading-[1] font-bold mb-2">
@@ -158,7 +159,7 @@
                         $bagian2 = implode(' ', array_slice($kata, $split));
                     @endphp
 
-                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[38px] font-bold leading-[1.1] mb-2">
+                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[37px] font-bold leading-[1.1] mb-2">
                         {{ $bagian1 }} <span class="text-[#d4b254]">{{ $bagian2 }}</span>
                     </h3>
 
@@ -215,7 +216,7 @@
                         $bagian2 = implode(' ', array_slice($kata, $split));
                     @endphp
 
-                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[42px] font-bold leading-[1.1] mb-2">
+                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[37px] font-bold leading-[1.1] mb-2">
                         {{ $bagian1 }} <span class="text-[#d4b254]">{{ $bagian2 }}</span>
                     </h3>
 
@@ -257,7 +258,7 @@
                         $bagian2 = implode(' ', array_slice($kata, $split));
                     @endphp
 
-                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[42px] font-bold leading-[1.1] mb-3">
+                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[37px] font-bold leading-[1.1] mb-3">
                         {{ $bagian1 }} <span class="text-[#d4b254]">{{ $bagian2 }}</span>
                     </h3>
 
@@ -318,7 +319,7 @@
                         $bagian2 = implode(' ', array_slice($kata, $split));
                     @endphp
 
-                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[40px] font-bold leading-[1.1] mb-2">
+                    <h3 class="font-lora text-[#173121] text-[34px] md:text-[37px] font-bold leading-[1.1] mb-2">
                         {{ $bagian1 }} <span class="text-[#d4b254]">{{ $bagian2 }}</span>
                     </h3>
 
@@ -375,7 +376,7 @@
 
 </section>
 
-{{-- Tambah edukasi-section --}}
+
 <section class="edukasi-section relative py-8 lg:py-[3.75rem] overflow-hidden">
 
     <div class="absolute inset-0">
@@ -390,7 +391,7 @@
     <div class="relative z-10 max-w-[1400px] mx-auto px-4 lg:px-10">
         <div class="grid lg:grid-cols-[1fr_0.9fr] gap-8 lg:gap-1 items-end">
 
-            {{-- LEFT CARD — tambah edukasi-left --}}
+            
             <div class="edukasi-left w-full max-w-[600px] bg-white/80 backdrop-blur-lg rounded-[35px] p-5 md:p-10 lg:p-12 shadow-[0_20px_60px_rgba(0,0,0,0.12)]">
 
                 <span class="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#173121] text-white font-lora font-[17px] mb-5">
@@ -407,7 +408,7 @@
                     Di Hargorojo, kami tidak hanya memanen, tetapi merawat. Setiap pohon kelapa adalah investasi jangka panjang bagi ekosistem desa. Kami menerapkan standar pertanian organik yang ketat untuk memastikan kualitas nira terbaik.
                 </p>
 
-                {{-- TIPS — tambah tips-item tiap item --}}
+                
                 <div class="space-y-4">
                     @foreach([
                         ['icon' => 'fa-seedling', 'title' => 'Pemupukan Organik', 'desc' => 'Menggunakan kompos kotoran ternak dan limbah nira untuk mengembalikan nutrisi tanah secara alami tanpa bahan kimia.'],
@@ -431,7 +432,6 @@
 
             </div>
 
-            {{-- RIGHT SIDE — tambah edukasi-right --}}
             <div class="edukasi-right">
 
                 <div class="mb-5 text-center lg:text-left drop-shadow-[0_10px_60px_rgba(0,0,0,0.2)]">
@@ -504,7 +504,6 @@
         <!-- GRID 2 KOLOM -->
         <div class="grid lg:grid-cols-[1.3fr_0.8fr] gap-4">
 
-            {{-- CARD BESAR — wisata-card-left --}}
             <a href="#" class="wisata-card-left relative h-[500px] rounded-[20px] overflow-hidden group">
                 <img
                     src="{{ asset('images/assets foto/wisata alam_trekking.png') }}"
@@ -524,7 +523,6 @@
                 </div>
             </a>
 
-            {{-- CARD KECIL — wisata-card-right --}}
             <a href="#" class="wisata-card-right relative h-[500px] rounded-[20px] overflow-hidden group">
                 <img
                     src="{{ asset('images/assets foto/assets wisata panorama.png') }}"
@@ -533,7 +531,7 @@
                 >
                 <div class="absolute inset-0 bg-gradient-to-t from-[#173121]/95 via-[#173121]/40 to-transparent"></div>
 
-                {{-- Caption — wisata-caption --}}
+                
                 <div class="wisata-caption absolute inset-x-0 bottom-0 p-6">
                     <h3 class="font-lora text-white/80 text-[26px] font-bold leading-tight mb-3">
                         Jelajah Panorama Alam
@@ -546,7 +544,7 @@
 
         </div>
 
-        {{-- CARD FULL WIDTH — wisata-card-full --}}
+        
         <a href="#" class="wisata-card-full relative mt-5 h-[500px] rounded-[25px] overflow-hidden group block">
             <img
                 src="{{ asset('images/assets foto/asset wisata keindahan.png') }}"
@@ -605,7 +603,7 @@
                     <div class="relative z-10 w-[72px] h-[72px] rounded-full bg-[#173121] border-[6px] border-[#F8F5F0] shadow-lg flex items-center justify-center shrink-0">
                         <span class="font-lora text-white text-[26px] font-bold">01</span>
                     </div>
-                    <div class="flex-1 p-5 rounded-[30px] bg-white shadow-[0_10px_35px_rgba(0,0,0,0.06)]">
+                    <div class="flex-1 p-5 rounded-[30px] bg-white shadow-[0_10px_35px_rgba(0,0,0,0.06)] hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
                         <div class="flex items-start gap-5 mb-5">
                             <div class="w-14 h-14 rounded-full bg-[#d4b254]/20 flex items-center justify-center shrink-0">
                                 <i class="fa-solid fa-hand-holding-droplet text-[#d4b254] text-[34px]"></i>
@@ -756,7 +754,6 @@
 <!-- ===================================================== -->
 <!-- MENGAPA TRADISIONAL -->
 <!-- ===================================================== -->
-{{-- Tambah tradisi-section --}}
 <section class="tradisi-section relative py-10 lg:py-12 bg-[#f8f6f1] overflow-hidden">
 
     <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
@@ -852,7 +849,6 @@
 
         </div>
 
-        {{-- FOOTNOTE — tradisi-footnote --}}
         <div class="tradisi-footnote mt-[5.75rem] text-center">
             <p class="font-lora text-[#173121] text-[22px] lg:text-[30px] italic leading-relaxed">
                 "Tradisi bukan tentang bertahan di masa lalu, tetapi tentang menjaga masa depan."
@@ -863,906 +859,223 @@
 
 </section>
 
-
 <!-- ===================================================== -->
-<!-- TESTIMONI PENGUNJUNG -->
+<!-- TESTIMONI-CERITA PENGUNJUNG -->
 <!-- ===================================================== -->
-<section class="
-    py-[4.5rem]
-    lg:py-10
+<section class="py-[4.5rem] lg:py-10 bg-[#F8F6F1]">
 
-    bg-[#F8F6F1]
-">
-
-    <div class="
-        max-w-[1400px]
-        mx-auto
-
-        px-4
-        lg:px-8
-    ">
+    <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
 
         <!-- HEADER -->
-        <div class="
-            flex
-            flex-col
-            lg:flex-row
+        <div class="flex flex-col lg:flex-row items-center justify-between gap-5 mb-[3.75rem]">
 
-            items-center
-            justify-between
+            <div class="reveal reveal-delay-1 text-center lg:text-left">
 
-            gap-5
-
-            mb-[3.75rem]
-        ">
-
-            <div class="
-                text-center
-                lg:text-left
-            ">
-
-                <div class="
-                    inline-flex
-                    items-center
-
-                    gap-3
-
-                    mb-2
-                ">
-
-                    <div class="
-                        w-16
-                        h-px
-
-                        bg-gradient-to-r
-                        from-transparent
-                        to-[#d4b254]
-                    "></div>
-
-                    <span class="
-                        uppercase
-
-                        tracking-[0.25em]
-
-                        text-sm
-                        font-semibold
-
-                        text-[#d4b254]
-                    ">
-                        Cerita Pengunjung
-                    </span>
-
-                    <div class="
-                        w-16
-                        h-px
-
-                        bg-gradient-to-l
-                        from-transparent
-                        to-[#d4b254]
-                    "></div>
-
+                <div class="inline-flex items-center gap-3 mb-2">
+                    <div class="w-16 h-px bg-gradient-to-r from-transparent to-[#d4b254]"></div>
+                    <span class="uppercase tracking-[0.25em] text-sm font-semibold text-[#d4b254]">Cerita Pengunjung</span>
+                    <div class="w-16 h-px bg-gradient-to-l from-transparent to-[#d4b254]"></div>
                 </div>
 
-                <h2 class="
-                    font-lora
-
-                    text-[#173121]
-
-                    text-[30px]
-                    lg:text-[42px]
-
-                    font-bold
-
-                    leading-[1.1]
-
-                    mb-2
-                ">
-
-                    Kesan yang Tertinggal
-                    dari Hargorojo
-
+                <h2 class="font-lora text-[#173121] text-[30px] lg:text-[42px] font-bold leading-[1.1] mb-2">
+                    Kesan yang Tertinggal dari Hargorojo
                 </h2>
 
-                <p class="
-                    max-w-2xl
-
-                    text-[#6B736D]
-
-                    leading-relaxed
-                ">
-
-                    Setiap kunjungan menghadirkan
-                    cerita yang berbeda. Dengarkan
-                    pengalaman mereka yang telah
-                    menikmati Agroeduwisata Hargorojo.
-
+                <p class="max-w-2xl text-[#6B736D] leading-relaxed">
+                    Setiap kunjungan menghadirkan cerita yang berbeda. Dengarkan pengalaman mereka yang telah menikmati Agroeduwisata Hargorojo.
                 </p>
 
             </div>
 
-            <!-- BUTTON -->
             <button
                 onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;if(m.parentElement!==document.body){document.body.appendChild(m);}m.classList.remove('hidden');m.style.display='block';m.style.zIndex='99999';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';})()"
-
-                class="
-                    inline-flex
-                    items-center
-
-                    gap-3
-
-                    px-7
-                    py-4
-
-                    rounded-full
-
-                    bg-[#173121]
-
-                    text-white
-
-                    font-semibold
-
-                    hover:bg-[#244933]
-
-                    transition-all
-                    duration-300
-                "
+                class="reveal reveal-delay-2 inline-flex items-center gap-3 px-7 py-4 rounded-full bg-[#173121] text-white font-semibold hover:bg-[#244933] transition-all duration-300"
             >
-
                 Bagikan Cerita Anda
-
-                <i class="
-                    fa-solid
-                    fa-pen-to-square
-                "></i>
-
+                <i class="fa-solid fa-pen-to-square"></i>
             </button>
 
         </div>
-        <div class="
-    grid
 
-    lg:grid-cols-2
+        <div class="grid lg:grid-cols-2 gap-8">
 
-    gap-8
-">
-@forelse($testimoni as $testi)
+            @forelse($testimoni as $testi)
 
-<div class="
-    bg-[#FFFDF9]
-
-    rounded-[35px]
-
-    border
-    border-[#ECE7DE]
-
-    p-8
-
-    shadow-[0_10px_35px_rgba(0,0,0,0.04)]
-
-    hover:-translate-y-1
-    hover:border-[#d4b254]/30
-    hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]
-
-    transition-all
-    duration-500
-">
-
-    <div class="
-        flex
-        flex-col
-        sm:flex-row
-
-        gap-7
-    ">
-
-        <!-- FOTO -->
-        <div class="
-            flex
-            justify-center
-        ">
-
-            @if($testi->foto)
-
-                <img
-                    src="{{ $testi->foto_url }}"
-                    alt="{{ $testi->nama }}"
-
-                    class="
-                        w-20
-                        h-20
-
-                        rounded-full
-
-                        object-cover
-
-                        border-4
-                        border-[#F3EEE6]
-
-                        shadow-md
-                    "
-                >
-
-            @else
-
-                <div class="
-                    w-28
-                    h-28
-
-                    rounded-full
-
-                    bg-[#EEF5EB]
-
-                    border-4
-                    border-[#F3EEE6]
-
-                    flex
-                    items-center
-                    justify-center
-
-                    text-[#173121]
-
-                    text-4xl
-                    font-bold
-                ">
-
-                    {{ strtoupper(substr($testi->nama, 0, 1)) }}
-
-                </div>
-
-            @endif
-
-        </div>
-
-        <!-- CONTENT -->
-        <div class="flex-1">
-
-            <!-- QUOTE -->
             <div class="
-                text-[#d4b254]
-
-                text-5xl
-
-                leading-none
-
-                
-            ">
-                ❝
-            </div>
-
-            <!-- TESTIMONI -->
-            <p class="
-                font-lora
-
-                text-[#5F6D63]
-
-                italic
-
-                leading-[1.9]
-
-                mb-4
+                testi-pengunjung-card
+                bg-[#FFFDF9] rounded-[35px]
+                border border-[#ECE7DE] p-8
+                shadow-[0_10px_35px_rgba(0,0,0,0.04)]
+                hover:border-[#d4b254]/30
+                hover:shadow-[0_20px_50px_rgba(0,0,0,0.06)]
+                will-change-transform
             ">
 
-                {{ Str::limit($testi->isi_testimoni, 250) }}
+                <div class="flex flex-col sm:flex-row gap-7">
 
-            </p>
+                    <div class="flex justify-center">
+                        @if($testi->foto)
+                            <img
+                                src="{{ $testi->foto_url }}"
+                                alt="{{ $testi->nama }}"
+                                class="w-20 h-20 rounded-full object-cover border-4 border-[#F3EEE6] shadow-md"
+                            >
+                        @else
+                            <div class="w-28 h-28 rounded-full bg-[#EEF5EB] border-4 border-[#F3EEE6] flex items-center justify-center text-[#173121] text-4xl font-bold">
+                                {{ strtoupper(substr($testi->nama, 0, 1)) }}
+                            </div>
+                        @endif
+                    </div>
 
-            <!-- FOOTER -->
-            <div class="
-                flex
-                flex-wrap
+                    <div class="flex-1">
 
-                items-center
-                justify-between
+                        <div class="text-[#d4b254] text-5xl leading-none">❝</div>
 
-                gap-3
+                        <p class="font-lora text-[#5F6D63] italic leading-[1.9] mb-4">
+                            {{ Str::limit($testi->isi_testimoni, 250) }}
+                        </p>
 
-                pt-3
+                        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-[#ECE7DE]">
+                            <div>
+                                <h3 class="font-bold text-[#173121]">{{ $testi->nama }}</h3>
+                                <p class="text-sm text-[#6B736D]">Pengunjung Agroeduwisata</p>
+                            </div>
 
-                border-t
-                border-[#ECE7DE]
-            ">
-
-                <div>
-
-                    <h3 class="
-                        
-                        font-bold
-
-                        text-[#173121]
-
-                        
-                    ">
-
-                        {{ $testi->nama }}
-
-                    </h3>
-
-                    <p class="
-                        text-sm
-
-                        text-[#6B736D]
-                    ">
-
-                        Pengunjung Agroeduwisata
-
-                    </p>
-
-                </div>
-
-                <!-- RATING -->
-                <div class="
-                    flex
-                    items-center
-
-                    gap-2
-                ">
-
-                    <div class="
-                        text-[#d4b254]
-
-                        tracking-[0.1em]
-                    ">
-
-                        @for($s = 1; $s <= 5; $s++)
-
-                            {{ $s <= ($testi->rating ?: 5) ? '★' : '☆' }}
-
-                        @endfor
+                            <div class="flex items-center gap-2">
+                                <div class="text-[#d4b254] tracking-[0.1em]">
+                                    @for($s = 1; $s <= 5; $s++)
+                                        {{ $s <= ($testi->rating ?: 5) ? '★' : '☆' }}
+                                    @endfor
+                                </div>
+                                <span class="text-sm font-medium text-[#173121]">
+                                    {{ number_format($testi->rating ?: 5, 1) }}
+                                </span>
+                            </div>
+                        </div>
 
                     </div>
 
-                    <span class="
-                        text-sm
-
-                        font-medium
-
-                        text-[#173121]
-                    ">
-
-                        {{ number_format($testi->rating ?: 5, 1) }}
-
-                    </span>
-
                 </div>
-
             </div>
+
+            @empty
+
+            <div class="col-span-full text-center py-20">
+                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-[#EEF5EB] flex items-center justify-center">
+                    <i class="fa-regular fa-comments text-[#173121] text-4xl"></i>
+                </div>
+                <h3 class="font-lora text-[#173121] text-3xl font-bold mb-3">Belum Ada Cerita</h3>
+                <p class="text-[#6B736D] mb-8">Jadilah pengunjung pertama yang membagikan pengalaman Anda.</p>
+                <button
+                    onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;if(m.parentElement!==document.body){document.body.appendChild(m);}m.classList.remove('hidden');m.style.display='block';m.style.zIndex='99999';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';})()"
+                    class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-[#173121] text-white font-semibold"
+                >
+                    Tulis Cerita
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </div>
+
+            @endforelse
 
         </div>
 
     </div>
 
-</div>
-
-@empty
-<div class="
-    col-span-full
-
-    text-center
-
-    py-20
-">
-
-    <div class="
-        w-24
-        h-24
-
-        mx-auto
-        mb-6
-
-        rounded-full
-
-        bg-[#EEF5EB]
-
-        flex
-        items-center
-        justify-center
-    ">
-
-        <i class="
-            fa-regular
-            fa-comments
-
-            text-[#173121]
-
-            text-4xl
-        "></i>
-
-    </div>
-
-    <h3 class="
-        font-lora
-
-        text-[#173121]
-
-        text-3xl
-
-        font-bold
-
-        mb-3
-    ">
-
-        Belum Ada Cerita
-
-    </h3>
-
-    <p class="
-        text-[#6B736D]
-
-        mb-8
-    ">
-
-        Jadilah pengunjung pertama yang
-        membagikan pengalaman Anda.
-
-    </p>
-
-    <button
-        onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;if(m.parentElement!==document.body){document.body.appendChild(m);}m.classList.remove('hidden');m.style.display='block';m.style.zIndex='99999';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';})()"
-
-        class="
-            inline-flex
-            items-center
-
-            gap-3
-
-            px-6
-            py-3
-
-            rounded-full
-
-            bg-[#173121]
-
-            text-white
-
-            font-semibold
-        "
-    >
-
-        Tulis Cerita
-
-        <i class="
-            fa-solid
-            fa-pen-to-square
-        "></i>
-
-    </button>
-@endforelse
-</div>
-</div>
-
-</div>
-
 </section>
 
-<!-- ===================================================== -->
-<!-- FAQ -->
-<!-- ===================================================== -->
-<section class="
-    relative
-    py-[3.75rem]
-    bg-[#f8f6f1]
-">
+{{-- Tambah faq-section --}}
+<section class="faq-section relative py-[3.75rem] bg-[#f8f6f1]">
 
-    <!-- CONTAINER -->
-    <div class="
-        max-w-4xl
-        mx-auto
-        px-6
-        lg:px-10
-    ">
-    
-    {{-- Small Label --}}
-    <div class="
-    flex 
-    items-center 
-    justify-center 
-    gap-3 
-    
-    ">
-        <div class="
-        w-14 h-[2px] 
-        bg-yellow-500 
-        rounded-full">
-    </div>
-        <span class="
-        uppercase 
-        tracking-[0.2em] 
-        text-[14px] 
-        font-semibold 
-        text-[#b89b5e]">
-            Informasi Tambahan
-        </span>
+    <div class="max-w-4xl mx-auto px-6 lg:px-10">
 
-        <div class="
-        w-14 h-[2px] 
-        bg-yellow-500 
-        rounded-full">
-    </div>
-    
-    </div>
+        {{-- Label --}}
+        <div class="reveal reveal-delay-1 flex items-center justify-center gap-3">
+            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+            <span class="uppercase tracking-[0.2em] text-[14px] text-center font-semibold text-[#b89b5e]">
+                Informasi Tambahan
+            </span>
+            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+        </div>
 
-        <!-- TITLE -->
-        <h2 class="
-            text-center
-
-            font-lora
-
-            text-[40px]
-            md:text-[45px]
-
-            leading-[1]
-
-            font-bold
-
-            text-[#173121]
-
-            mb-2
-        ">
-
+        {{-- Title --}}
+        <h2 class="reveal reveal-delay-2 text-center font-lora text-[40px] md:text-[45px] leading-[1] font-bold text-[#173121] mb-2">
             Pertanyaan yang Sering diajukan
-
         </h2>
 
-        <!-- DESC -->
-        <p class="
-            max-w-2xl
-            mx-auto
-            text-[#52605a]
-            text-[15px]
-            md:text-[18px]
-            text-center
-            leading-[1.4]
-            font-light
-            mb-10
-        ">
-            Berikut adalah beberapa pertanyaan yang sering diajukan
-            oleh pelanggan kami. Temukan jawabannya di bawah ini.
+        {{-- Desc --}}
+        <p class="reveal reveal-delay-3 max-w-2xl mx-auto text-[#52605a] text-[15px] md:text-[18px] text-center leading-[1.4] font-light mb-10">
+            Berikut adalah beberapa pertanyaan yang sering diajukan oleh pelanggan kami. Temukan jawabannya di bawah ini.
         </p>
 
         <!-- FAQ LIST -->
         <div class="space-y-3">
 
-            <!-- FAQ ITEM -->
-            <div
-                x-data="{ open: false }"
-                class="
-                    bg-white
-
-                    rounded-[20px]
-
-                    border
-                    border-[#ece6da]
-
-                    overflow-hidden
-
-                    shadow-[0_10px_30px_rgba(0,0,0,0.04)]
-                "
-            >
-
-                <!-- QUESTION -->
-                <button
-                    @click="open = !open"
-                    class="
-                        w-full
-                        flex
-                        items-center
-                        justify-between
-                        px-6
-                        py-5
-                        text-left
-                    "
-                >
-
-                    <div class="
-                        flex
-                        items-center
-                        gap-2
-                    ">
-
-                        <span class="
-                            text-[#173121]
-                            font-semibold
-                            text-[18px]
-                            font-lora
-                        ">
+            {{-- FAQ 1 — faq-item --}}
+            <div x-data="{ open: false }" class="faq-item bg-white rounded-[20px] border border-[#ece6da] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+                <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-5 text-left">
+                    <div class="flex items-center gap-2">
+                        <span class="text-[#173121] font-semibold text-[18px] font-lora">
                             Apa itu Agroeduwisata Desa Hargorojo?
                         </span>
-
                     </div>
-
-                    <i
-                        class="fa-solid fa-chevron-down transition duration-300"
-                        :class="open ? 'rotate-180' : ''"
-                    ></i>
-
+                    <i class="fa-solid fa-chevron-down transition duration-300" :class="open ? 'rotate-180' : ''"></i>
                 </button>
-
-                <!-- ANSWER -->
-                <div
-                    x-show="open"
-                    x-transition
-                    class="
-                        font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
-                        text-[#5d675f]
-                        leading-[1.5]
-                    "
-                >
-                    Agroeduwisata Desa Hargorojo merupakan kegiatan 
-                    wisata berbasis edukasi yang mengajak pengunjung 
-                    mengenal proses pembuatan gula kelapa, pertanian kelapa, 
-                    budaya lokal, serta kehidupan masyarakat desa secara langsung.
-
-                    
+                <div x-show="open" x-transition class="font-lora px-6 pb-6 text-[17px] text-[#5d675f] leading-[1.5]">
+                    Agroeduwisata Desa Hargorojo merupakan kegiatan wisata berbasis edukasi yang mengajak pengunjung mengenal proses pembuatan gula kelapa, pertanian kelapa, budaya lokal, serta kehidupan masyarakat desa secara langsung.
                 </div>
             </div>
 
-            <!-- FAQ ITEM -->
-            <div
-                x-data="{ open: false }"
-                class="
-                    bg-white
-                    rounded-[24px]
-                    border
-                    border-[#ece6da]
-                    overflow-hidden
-                "
-            >
-
-                <button
-                    @click="open = !open"
-                    class="
-                        w-full
-                        flex
-                        items-center
-                        justify-between
-
-                        px-6
-                        py-5
-                    "
-                >
-
-                    <span class="
-                        text-[#173121]
-                        font-semibold
-                        text-[18px]
-                        font-lora
-                    ">
+            {{-- FAQ 2 — faq-item --}}
+            <div x-data="{ open: false }" class="faq-item bg-white rounded-[24px] border border-[#ece6da] overflow-hidden">
+                <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-5">
+                    <span class="text-[#173121] font-semibold text-[18px] text-left font-lora">
                         Apa saja kegiatan yang dapat dilakukan pengunjung?
                     </span>
-
-                    <i
-                        class="fa-solid fa-chevron-down transition duration-300"
-                        :class="open ? 'rotate-180' : ''"
-                    ></i>
-
+                    <i class="fa-solid fa-chevron-down transition duration-300" :class="open ? 'rotate-180' : ''"></i>
                 </button>
-
-                <div
-                    x-show="open"
-                    x-transition
-                    class="
-                        font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
-                        text-[#5d675f]
-                        leading-[1.5]
-                    "
-                >
-
-                    Pengunjung dapat menyaksikan proses penyadapan nira, 
-                    pengolahan gula kelapa, menjelajahi wisata alam, 
-                    mempelajari pertanian kelapa, serta mengenal 
-                    tradisi dan budaya masyarakat Hargorojo.
-
+                <div x-show="open" x-transition class="font-lora px-6 pb-6 text-[17px] text-[#5d675f] leading-[1.5]">
+                    Pengunjung dapat menyaksikan proses penyadapan nira, pengolahan gula kelapa, menjelajahi wisata alam, mempelajari pertanian kelapa, serta mengenal tradisi dan budaya masyarakat Hargorojo.
                 </div>
-
             </div>
 
-            <!-- FAQ ITEM -->
-            <div
-                x-data="{ open: false }"
-                class="
-                    bg-white
-                    rounded-[24px]
-                    border
-                    border-[#ece6da]
-                    overflow-hidden
-                "
-            >
-
-                <button
-                    @click="open = !open"
-                    class="
-                        w-full
-                        flex
-                        items-center
-                        justify-between
-
-                        px-6
-                        py-5
-                    "
-                >
-
-                    <span class="
-                        text-[#173121]
-                        font-semibold
-                        text-[18px]
-                        font-lora
-                    ">
-                       Apakah pengunjung dapat melihat proses pembuatan gula kelapa secara langsung?
+            {{-- FAQ 3 — faq-item --}}
+            <div x-data="{ open: false }" class="faq-item bg-white rounded-[24px] border border-[#ece6da] overflow-hidden">
+                <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-5">
+                    <span class="text-[#173121] font-semibold text-[18px] text-left font-lora">
+                        Apakah pengunjung dapat melihat proses pembuatan gula kelapa secara langsung?
                     </span>
-
-                    <i
-                        class="fa-solid fa-chevron-down transition duration-300"
-                        :class="open ? 'rotate-180' : ''"
-                    ></i>
-
+                    <i class="fa-solid fa-chevron-down transition duration-300" :class="open ? 'rotate-180' : ''"></i>
                 </button>
-
-                <div
-                    x-show="open"
-                    x-transition
-                    class="
-                        font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
-                        text-[#5d675f]
-                        leading-[1.5]
-                    "
-                >
-
-                    Ya. Pengunjung dapat melihat tahapan pembuatan gula kelapa, 
-                    mulai dari penyadapan nira hingga proses pemasakan 
-                    dan pencetakan yang masih dilakukan secara tradisional.
-
+                <div x-show="open" x-transition class="font-lora px-6 pb-6 text-[17px] text-[#5d675f] leading-[1.5]">
+                    Ya. Pengunjung dapat melihat tahapan pembuatan gula kelapa, mulai dari penyadapan nira hingga proses pemasakan dan pencetakan yang masih dilakukan secara tradisional.
                 </div>
-
             </div>
 
-            <!-- FAQ ITEM -->
-            <div
-                x-data="{ open: false }"
-                class="
-                    bg-white
-                    rounded-[24px]
-                    border
-                    border-[#ece6da]
-                    overflow-hidden
-                "
-            >
-
-                <button
-                    @click="open = !open"
-                    class="
-                        w-full
-                        flex
-                        items-center
-                        justify-between
-
-                        px-6
-                        py-5
-                    "
-                >
-
-                    <span class="
-                        text-[#173121]
-                        font-semibold
-                        text-[18px]
-                        font-lora
-                    ">
+            {{-- FAQ 4 — faq-item --}}
+            <div x-data="{ open: false }" class="faq-item bg-white rounded-[24px] border border-[#ece6da] overflow-hidden">
+                <button @click="open = !open" class="w-full flex items-center justify-between px-6 py-5">
+                    <span class="text-[#173121] font-semibold text-[18px] text-left font-lora">
                         Bagaimana cara melakukan reservasi kunjungan?
                     </span>
-
-                    <i
-                        class="fa-solid fa-chevron-down transition duration-300"
-                        :class="open ? 'rotate-180' : ''"
-                    ></i>
-
+                    <i class="fa-solid fa-chevron-down transition duration-300" :class="open ? 'rotate-180' : ''"></i>
                 </button>
-
-                <div
-                    x-show="open"
-                    x-transition
-                    class="
-                        font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
-                        text-[#5d675f]
-                        leading-[1.5]
-                    ">
-
-                    Pengunjung dapat menghubungi pengelola melalui 
-                    kontak yang tersedia pada website untuk memperoleh 
-                    informasi jadwal, paket wisata, dan kebutuhan kunjungan lainnya.
-
+                <div x-show="open" x-transition class="font-lora px-6 pb-6 text-[17px] text-[#5d675f] leading-[1.5]">
+                    Pengunjung dapat menghubungi pengelola melalui kontak yang tersedia pada website untuk memperoleh informasi jadwal, paket wisata, dan kebutuhan kunjungan lainnya.
                 </div>
-
             </div>
 
         </div>
 
-        <!-- BOTTOM CTA -->
-        <div class="
-            mt-12
-
-            bg-white
-
-            rounded-[28px]
-
-            border
-            border-[#ece6da]
-
-            p-6
-            lg:p-8
-
-            flex
-            flex-col
-            lg:flex-row
-
-            items-center
-            justify-between
-
-            gap-6
-        ">
-
+        {{-- BOTTOM CTA — faq-cta --}}
+        <div class="faq-cta mt-12 bg-white rounded-[28px] border border-[#ece6da] p-6 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div>
-
-                <h3 class="
-                    font-lora
-                    text-[#173121]
-                    font-bold
-                    text-2xl
-                    mb-2
-                ">
-                    Masih ada pertanyaan lain?
-                </h3>
-
-                <p class="
-                    text-[#6b736d]
-                    font-lora
-                    text-light
-                    italic
-                ">
-                    Jangan ragu untuk menghubungi admin kami.
-                </p>
-
+                <h3 class="font-lora text-[#173121] font-bold text-2xl mb-2">Masih ada pertanyaan lain?</h3>
+                <p class="text-[#6b736d] font-lora text-light italic">Jangan ragu untuk menghubungi admin kami.</p>
             </div>
-
-            <a href="#"
-                class="
-                    inline-flex
-                    items-center
-                    gap-3
-
-                    px-7
-                    py-4
-
-                    rounded-2xl
-
-                    bg-[#173121]
-
-                    text-white
-
-                    font-medium
-
-                    hover:bg-[#204732]
-
-                    transition-all
-                "
-            >
-
+            <a href="#" class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-[#173121] text-white font-medium hover:bg-[#204732] transition-all">
                 <i class="fa-brands fa-whatsapp"></i>
-
                 Hubungi Admin via WhatsApp
-
             </a>
-
         </div>
 
     </div>

@@ -7,12 +7,12 @@
 <!-- ===================================================== -->
 <!-- HERO BERITA UTAMA -->
 <!-- ===================================================== -->
-<section class="relative overflow-hidden bg-black pt-28 pb-10 sm:pt-32 lg:h-[700px] lg:pb-0">
+<section class="katalog-hero relative overflow-hidden bg-black pt-28 pb-10 sm:pt-32 lg:h-[700px] lg:pb-0">
 
     <div class="absolute inset-0">
-        <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.png') }}" alt="" class="w-full h-full object-cover scale-110 animate-kenburns">
-        <div class="absolute inset-0 bg-black animate-vignette"></div>
-        <div class="absolute inset-0 bg-[#173121]/50"></div>
+        <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.png') }}" alt="" class="katalog-hero__bg w-full h-full object-cover">
+        <div class="katalog-hero__shade absolute inset-0"></div>
+        <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/55 to-transparent"></div>
     </div>
 
     <div class="relative z-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -22,7 +22,7 @@
             <a
                 href="{{ $beritaUtama->external_url ?? '#' }}"
                 @if($beritaUtama->external_url) target="_blank" rel="noopener noreferrer" @else aria-disabled="true" tabindex="-1" @endif
-                class="hero-slide-left relative min-h-[430px] overflow-hidden rounded-[18px] group sm:min-h-[500px] sm:rounded-[20px] lg:h-[550px] lg:min-h-0 {{ $beritaUtama->external_url ? '' : 'pointer-events-none' }}"
+                class="hero-slide-left katalog-hero-card relative min-h-[430px] overflow-hidden rounded-[18px] group sm:min-h-[500px] sm:rounded-[20px] lg:h-[550px] lg:min-h-0 {{ $beritaUtama->external_url ? '' : 'pointer-events-none' }}"
             >
 
                 <img
@@ -66,7 +66,7 @@
             </a>
 
             {{-- SIDEBAR — sidebar-slide dari kanan sudah ada --}}
-            <div class="sidebar-slide flex h-full flex-col justify-start rounded-[15px] border border-[#d4b254]/30 bg-[#173121]/70 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm sm:p-5 lg:justify-center">
+            <div class="sidebar-slide katalog-sidebar flex h-full flex-col justify-start rounded-[15px] border border-[#d4b254]/30 bg-[#173121]/70 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm sm:p-5 lg:justify-center">
 
                 <h3 class="sidebar-item mb-4 font-lora text-[17px] font-bold text-white sm:mb-5 sm:text-[18px]">
                     Berita Terbaru Lainnya

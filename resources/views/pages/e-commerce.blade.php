@@ -6,40 +6,39 @@
 
 
 <main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
-    <section class="relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
-        <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="absolute inset-0 h-full w-full object-cover">
-        <div class="absolute inset-0 bg-[#07150f]/45"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,.88)_0%,rgba(255,255,255,.68)_30%,rgba(255,255,255,.24)_58%,rgba(255,255,255,0)_100%)]"></div>
-        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
+    <section class="ecommerce-hero relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
+        <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover">
+        <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50"></div>
+        <div class="ecommerce-hero__soft-light absolute inset-0"></div>
+        <div class="ecommerce-hero__bottom-fade absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
 
-        <div class="relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
-            <span class="rounded-full border border-[#d4b254] bg-white/40 px-4 py-2 text-[11px] font-bold uppercase tracking-[.16em] text-[#173121] sm:text-sm">Produk lokal Desa Hargorojo</span>
-            <h1 class="mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[76px]">Belanja Produk Desa</h1>
-            <p class="font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[88px]">Asli Hargorojo</p>
+        <div class="ecommerce-hero__content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
+            <h1 class="mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[60px]">Belanja Produk Desa</h1>
+            <p class="font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[77px]">Asli Hargorojo</p>
             <p class="mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg sm:leading-8">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
 
             @if(! $activeCustomer)
-                <div class="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
-                    <a href="{{ route('customer.login') }}" class="inline-flex h-12 w-full max-w-[13rem] items-center justify-center rounded-xl bg-[#173121] px-6 text-sm font-extrabold uppercase tracking-[0.14em] text-white shadow-[0_16px_35px_rgba(23,49,33,0.22)] transition hover:-translate-y-0.5 hover:bg-[#244832]">Masuk</a>
-                    <a href="{{ route('customer.register') }}" class="inline-flex h-12 w-full max-w-[13rem] items-center justify-center rounded-xl border border-[#173121]/25 bg-white/70 px-6 text-sm font-extrabold uppercase tracking-[0.14em] text-[#173121] shadow-[0_16px_35px_rgba(23,49,33,0.12)] transition hover:-translate-y-0.5 hover:bg-white">Daftar</a>
+                <div class="mt-7 flex w-full flex-row items-center justify-center gap-3">
+                    <a href="{{ route('customer.login') }}" class="inline-flex h-12 min-w-0 flex-1 max-w-[10.5rem] items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_16px_35px_rgba(23,49,33,0.22)] transition hover:-translate-y-0.5 hover:bg-[#244832] sm:max-w-[13rem] sm:px-6 sm:tracking-[0.14em]">Masuk</a>
+                    <a href="{{ route('customer.register') }}" class="inline-flex h-12 min-w-0 flex-1 max-w-[10.5rem] items-center justify-center rounded-xl border border-[#173121]/25 bg-white/70 px-4 text-sm font-extrabold uppercase tracking-[0.12em] text-[#173121] shadow-[0_16px_35px_rgba(23,49,33,0.12)] transition hover:-translate-y-0.5 hover:bg-white sm:max-w-[13rem] sm:px-6 sm:tracking-[0.14em]">Daftar</a>
                 </div>
             @endif
 
         </div>
     </section>
 
-    <section id="produk-katalog" class="relative -mt-20 px-4 pb-14 sm:-mt-24 sm:px-6 sm:pb-16 lg:px-10 lg:pb-20">
-        <div class="relative z-10 mx-auto max-w-[1400px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
+    <section id="produk-katalog" class="ecommerce-catalog-section relative -mt-20 px-4 pb-14 sm:-mt-24 sm:px-6 sm:pb-16 lg:px-10 lg:pb-20">
+        <div class="ecommerce-catalog-panel relative z-10 mx-auto max-w-[1400px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
             @if(session('success') || session('error'))
                 <div class="mb-5 rounded-lg border {{ session('success') ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800' }} px-4 py-3 text-sm font-semibold">
                     {{ session('success') ?? session('error') }}
                 </div>
             @endif
 
-            <div class="mx-auto mb-9 max-w-[1400px]">
+            <div class="ecommerce-catalog-toolbar mx-auto mb-9 max-w-[1400px]">
                 <div class="grid gap-3 xl:grid-cols-[minmax(18rem,1fr)_auto] xl:items-center">
                     <div class="flex min-w-0 items-center gap-3">
-                        <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex min-w-0 flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
+                        <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="ecommerce-search-form relative flex min-w-0 flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
                             <i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i>
                             <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-9 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none">
                             <button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">
@@ -48,7 +47,7 @@
                         </form>
 
 
-                        <button type="button" @click="cartOpen = true; notifOpen = false; totalOrdersOpen = false; profileOpen = false" aria-label="Buka keranjang" class="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#2f6f1f] shadow-[0_10px_24px_rgba(23,49,33,0.12)] ring-1 ring-[#e6dece] transition-all duration-300 hover:-translate-y-0.5 hover:text-[#173121] sm:h-14 sm:w-14">
+                        <button type="button" @click="cartOpen = true; notifOpen = false; totalOrdersOpen = false; profileOpen = false" aria-label="Buka keranjang" class="ecommerce-cart-shortcut relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#2f6f1f] shadow-[0_10px_24px_rgba(23,49,33,0.12)] ring-1 ring-[#e6dece] transition-all duration-300 hover:-translate-y-0.5 hover:text-[#173121] sm:h-14 sm:w-14">
                             <i class="fa-solid fa-cart-shopping text-base sm:text-lg"></i>
                             <span x-text="cart.reduce((total, item) => total + item.qty, 0)" class="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#d8b15a] px-1 text-xs font-bold text-white"></span>
                         </button>
@@ -202,40 +201,40 @@
                 </div>
             </div>
             @if($page['featuredProducts']->count())
-                <div class="mb-10">
-                    <div class="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+                <div class="ecommerce-featured-block mb-10">
+                    <div class="ecommerce-section-heading mb-5 flex flex-col gap-1">
                         <div>
                             <h2 class="font-lora text-2xl font-bold text-[#173121] sm:text-3xl">Produk Unggulan</h2>
                             <p class="text-sm italic text-[#6b736d]">Geser untuk melihat produk unggulan lainnya</p>
                         </div>
-                        <div class="hidden gap-2 sm:flex">
-                            <button type="button" onclick="scrollProduk(-360)" class="h-10 w-10 rounded-full border border-[#ece6da] bg-white text-[#173121] shadow-sm transition hover:bg-[#173121] hover:text-white"><i class="fa-solid fa-chevron-left"></i></button>
-                            <button type="button" onclick="scrollProduk(360)" class="h-10 w-10 rounded-full border border-[#ece6da] bg-white text-[#173121] shadow-sm transition hover:bg-[#173121] hover:text-white"><i class="fa-solid fa-chevron-right"></i></button>
-                        </div>
                     </div>
 
-                    <div id="produkUnggulanSlider" class="flex snap-x gap-4 overflow-x-auto pb-4 scrollbar-hide">
-                        @foreach($page['featuredProducts'] as $produk)
-                            <article class="group relative h-[320px] w-[82vw] max-w-[420px] lg:w-[400px] lg:h-[320px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:h-[350px] sm:w-[360px]">
-                                <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
-                                <span class="absolute left-4 top-4 rounded-full bg-[#d8b15a] px-3 py-1 text-xs font-bold text-[#173121]">BEST SELLER</span>
-                                <div class="absolute inset-x-0 bottom-0 p-5 text-white">
-                                    <h3 class="font-lora text-xl font-bold min-h-[50px]">{{ $produk['name'] }}</h3>
-                                    <p class="line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
-                                    <div class="mt-2 flex items-end justify-between gap-3">
-                                        <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['unit'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
-                                        <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d8b15a] px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-[#173121] whitespace-nowrap transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300"><i class="fa-solid fa-cart-plus text-lg"></i><span class="sm:hidden">+ Keranjang</span><span class="hidden sm:inline">Tambah ke Keranjang</span></button>
+                    <div class="relative lg:px-14">
+                        <button type="button" onclick="scrollProduk(-380)" aria-label="Geser produk unggulan ke kiri" class="absolute -left-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#ece6da] bg-white/95 text-[#173121] shadow-[0_12px_30px_rgba(0,0,0,0.12)] transition hover:-translate-x-0.5 hover:bg-[#173121] hover:text-white lg:flex"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div id="produkUnggulanSlider" class="flex snap-x gap-4 overflow-x-auto py-4 scrollbar-hide">
+                            @foreach($page['featuredProducts'] as $produk)
+                                <article class="ecommerce-feature-card group relative h-[320px] w-[82vw] max-w-[420px] lg:w-[400px] lg:h-[320px] shrink-0 snap-start overflow-hidden rounded-2xl bg-[#173121] shadow-sm sm:h-[350px] sm:w-[360px]">
+                                    <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="h-full w-full object-cover transition duration-700 group-hover:scale-105">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-transparent"></div>
+                                    <span class="absolute left-4 top-4 rounded-full bg-[#d8b15a] px-3 py-1 text-xs font-bold text-[#173121]">BEST SELLER</span>
+                                    <div class="absolute inset-x-0 bottom-0 p-5 text-white">
+                                        <h3 class="font-lora text-xl font-bold min-h-[45px]">{{ $produk['name'] }}</h3>
+                                        <p class="line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
+                                        <div class="mt-1 flex items-end justify-between gap-3">
+                                            <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['unit'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
+                                            <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d8b15a] px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-[#173121] whitespace-nowrap transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300"><i class="fa-solid fa-cart-plus text-lg"></i><span class="sm:hidden">+ Keranjang</span><span class="hidden sm:inline">Tambah ke Keranjang</span></button>
+                                        </div>
                                     </div>
-                                </div>
-                            </article>
-                        @endforeach
+                                </article>
+                            @endforeach
+                        </div>
+                        <button type="button" onclick="scrollProduk(450)" aria-label="Geser produk unggulan ke kanan" class="absolute -right-2 top-1/2 z-10 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-[#ece6da] bg-white/95 text-[#173121] shadow-[0_12px_30px_rgba(0,0,0,0.12)] transition hover:translate-x-0.5 hover:bg-[#173121] hover:text-white lg:flex"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
                 </div>
             @endif
 
-            <div>
-                <div class="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+            <div class="ecommerce-products-block">
+                <div class="ecommerce-section-heading mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                         <h2 class="font-lora text-2xl font-bold text-[#173121] sm:text-3xl">Semua Produk</h2>
                         <p class="mt-1 text-sm italic text-[#6b736d]">
@@ -254,7 +253,7 @@
                 </div>
                 <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
                     @forelse($page['products'] as $produk)
-                        <article class="group flex h-full flex-col overflow-hidden rounded-2xl border border-[#ece6da] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                        <article class="ecommerce-product-card group flex h-full flex-col overflow-hidden rounded-2xl border border-[#ece6da] bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
                             <div class="relative overflow-hidden">
                                 <img src="{{ $produk['imageUrl'] }}" alt="{{ $produk['name'] }}" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105">
                                 @if($produk['isFeatured'])<span class="absolute left-3 top-3 rounded-full bg-[#d8b15a] px-3 py-1 text-[11px] font-bold text-[#173121]">BEST SELLER</span>@endif
@@ -360,26 +359,26 @@
     </div>
 
 
-<section class="relative w-full overflow-hidden py-6 mb-0">
-    <img src="{{ asset('images/assets foto/CTA_ecommerceee.png') }}" alt="Produk Desa Hargorojo" class="absolute inset-0 w-full h-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-r from-[#07150f]/95 via-[#173121]/85 to-[#173121]/40"></div>
+<section class="ecommerce-bulk-cta relative w-full overflow-hidden py-6 mb-0">
+    <img src="{{ asset('images/assets foto/CTA_ecommerceee.png') }}" alt="Produk Desa Hargorojo" class="ecommerce-bulk-cta__image absolute inset-0 w-full h-full object-cover">
+    <div class="ecommerce-bulk-cta__overlay absolute inset-0 bg-gradient-to-r from-[#07150f]/95 via-[#173121]/85 to-[#173121]/40"></div>
 
     <!-- CONTENT -->
     <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10 py-16 lg:py-8">
 
         <!-- TRUST BADGE -->
-        <div class="hidden lg:block absolute top-8 right-10 xl:top-1 xl:right-2 z-20">
+        <div class="ecommerce-bulk-cta__badge hidden lg:block absolute top-8 right-10 xl:top-1 xl:right-2 z-20">
             <img src="{{ asset('/images/assets foto/label_produk.png') }}" alt="Produk Alami Desa Hargorojo" class="w-[140px] xl:w-[180px] drop-shadow-[0_20px_40px_rgba(0,0,0,0.30)] hover:scale-105 transition-all duration-700">
         </div>
 
         <!-- TITLE -->
-        <h2 class="max-w-2xl font-lora text-white text-[42px] md:text-[48px] leading-[1.05] font-bold mb-2">
+        <h2 class="ecommerce-bulk-cta__title max-w-2xl font-lora text-white text-[42px] md:text-[48px] leading-[1.05] font-bold mb-2">
             Butuh Produk Kelapa
             <span class="text-[#d8b15a]">dalam Jumlah Besar?</span>
         </h2>
 
         <!-- DESCRIPTION -->
-        <p class="max-w-4xl text-white/80 text-[17px] italic leading-[1.3] mb-6 font-thin">
+        <p class="ecommerce-bulk-cta__lead max-w-4xl text-white/80 text-[17px] italic leading-[1.3] mb-6 font-thin">
             Kami melayani pemesanan grosir untuk UMKM, reseller, toko oleh-oleh, dan distributor dari seluruh Indonesia dengan harga khusus dan kualitas terbaik langsung dari Desa Hargorojo.
         </p>
 
@@ -387,7 +386,7 @@
         <div class="grid md:grid-cols-3 max-w-4xl mb-10">
 
             <!-- ITEM -->
-            <div class="flex items-start gap-4">
+            <div class="ecommerce-bulk-cta__feature flex items-start gap-4">
                 <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
                     <i class="fa-solid fa-tags"></i>
                 </div>
@@ -401,7 +400,7 @@
             </div>
 
             <!-- ITEM -->
-            <div class="flex items-start gap-4">
+            <div class="ecommerce-bulk-cta__feature flex items-start gap-4">
                 <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
                     <i class="fa-solid fa-cube"></i>
                 </div>
@@ -415,7 +414,7 @@
             </div>
 
             <!-- ITEM -->
-            <div class="flex items-start gap-4">
+            <div class="ecommerce-bulk-cta__feature flex items-start gap-4">
                 <div class="w-14 h-14 rounded-full bg-[#d8b15a]/10 border border-[#d8b15a]/20 flex items-center justify-center text-[#d8b15a]">
                     <i class="fa-solid fa-truck"></i>
                 </div>
@@ -431,7 +430,7 @@
         </div>
 
         <!-- BUTTON AREA -->
-        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+        <div class="ecommerce-bulk-cta__action flex flex-col lg:flex-row items-start lg:items-center gap-6">
             <a href="https://wa.me/6280000000000" target="_blank" class="group inline-flex items-center gap-4 px-6 py-3 rounded-4xl bg-[#d8b15a] text-[#173121] font-semibold shadow-[0_20px_50px_rgba(216,177,90,0.30)] hover:scale-[1.02] transition-all duration-500">
                 <i class="fa-brands fa-whatsapp text-xl"></i>
                 Hubungi Admin
@@ -447,20 +446,20 @@
 <section class="py-20 bg-[#faf8f4]">
     <div class="max-w-4xl mx-auto px-6 lg:px-10">
         <!-- SMALL LABEL -->
-        <div class="flex items-center justify-center gap-3 mb-4">
-            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
-            <span class="uppercase tracking-[0.2em] text-[14px] font-semibold text-[#b89b5e]">
+        <div class="ecommerce-faq-label reveal reveal-delay-1 flex items-center justify-center gap-3 mb-4">
+            <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
+            <span class="shrink-0 text-center uppercase tracking-[0.2em] text-[14px] font-semibold text-[#b89b5e]">
                 Informasi Tambahan
             </span>
-            <div class="w-14 h-[2px] bg-yellow-500 rounded-full"></div>
+            <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
         </div>
 
         <!-- TITLE -->
-        <h2 class="text-center font-lora text-[40px] md:text-[45px] leading-[1] font-bold text-[#173121] mb-2">
+        <h2 class="reveal reveal-delay-2 text-center font-lora text-[40px] md:text-[45px] leading-[1] font-bold text-[#173121] mb-2">
             Pertanyaan yang Sering Diajukan
         </h2>
         <!-- DESCRIPTION -->
-        <p class="max-w-2xl mx-auto text-[#52605a] text-[15px] md:text-[18px] text-center leading-[1.4] font-light mb-10">
+        <p class="reveal reveal-delay-3 max-w-2xl mx-auto text-[#52605a] text-[15px] md:text-[18px] text-center leading-[1.4] font-light mb-10">
             Berikut adalah beberapa pertanyaan yang sering diajukan oleh pelanggan kami.
             Temukan jawabannya di bawah ini.
         </p>
@@ -470,7 +469,7 @@
             @foreach($page['faqItems'] as $faq)
                 <article
                     x-data="{ open: false }"
-                    class="bg-white rounded-[24px] border border-[#ece6da] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
+                    class="faq-item bg-white rounded-[24px] border border-[#ece6da] overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.04)]"
                 >
                     <button
                         type="button"
@@ -507,7 +506,7 @@
         </div>
 
         <!-- BOTTOM CTA -->
-        <div class="mt-12 bg-white rounded-[28px] border border-[#ece6da] p-6 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
+        <div class="faq-cta mt-12 bg-white rounded-[28px] border border-[#ece6da] p-6 lg:p-8 flex flex-col lg:flex-row items-center justify-between gap-6">
             <div>
                 <h3 class="font-lora text-[#173121] font-bold text-2xl mb-2">
                     Masih ada pertanyaan lain?
