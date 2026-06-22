@@ -4,117 +4,91 @@
 
 @section('content')
 
-<section class="relative w-full h-screen overflow-hidden bg-black">
+<section class="home-hero relative min-h-[100svh] w-full overflow-hidden bg-black">
+    <div class="absolute inset-0 h-full w-full">
+        <img
+            src="{{ asset('images/assets foto/hero section.png') }}"
+            alt="Pemandangan Desa Wisata Hargorojo"
+            class="home-hero__image h-full w-full scale-100 object-cover object-center animate-kenburns"
+        >
 
-    {{-- Background --}}
-    <div class="absolute inset-0 w-full h-full">
-
-        <!-- Background Image -->
-        <img 
-            src="{{ asset('images/assets foto/hero section.png') }}"alt="Hero Background"
-            class="w-full h-full object-cover object-center scale-100 animate-kenburns">
-
-        <!-- Dark Overlay -->
-        <div class="absolute inset-0 bg-black/30 animate-vignete"></div>
-
-        <!-- Left Gradient -->
-        <div class="absolute inset-0 bg-gradient-to-r  from-black/60 via-black/ to-transparent animate-slide-gradient"> </div>
-
-        <!-- Bottom Shadow -->
-        <div class="absolute inset-0 
-            bg-gradient-to-t 
-            from-black/30 
-            via-transparent 
-            to-transparent">
-        </div>
-
-        <!-- Warm Tone -->
+        <div class="absolute inset-0 bg-black/35 animate-vignette"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent animate-slide-gradient"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/45 via-transparent to-transparent"></div>
         <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
     </div>
 
-    {{-- HERO CONTENT --}}
-<div class="relative z-20 h-full flex items-end">
-    <div class="max-w-7xl mx-auto px-3 w-full pb-1 md:pb-9 pl-3">
-        <div class="flex flex-col lg:flex-row justify-between items-end gap-12">
-
-            <!-- LEFT CONTENT -->
-            <div class="max-w-5xl">
-
-                <!-- TOP LABEL — delay pertama -->
-                <div class="flex items-center gap-3 mb-4 hero-fade-up delay-100">
-                    <div class="w-15 h-[2px] bg-white/60"></div>
-                    <span class="text-yellow-400 uppercase tracking-[0.35em] text-sm md:text-base font-medium">
-                        Selamat Datang Di
-                    </span>
-                    <div class="w-15 h-[2px] bg-white/60"></div>
-                </div>
-
-                <!-- MAIN HEADING — delay kedua -->
-                <h1 class="hero-fade-up delay-200 font-hero font-[550] text-[52px] md:text-[72px] lg:text-[65px] leading-[0.9] tracking-[-0.03em] uppercase text-white drop-shadow-[0_5px_25px_rgba(0,0,0,0.5)]">
-                    Desa Agroeduwisata
-                    <br>
-                    <span class="text-yellow-500 whitespace-nowrap drop-shadow-[0_0_25px_rgba(250,204,21,0.35)]">
-                        Gula Kelapa Hargorojo
-                    </span>
-                </h1>
-
-                <!-- SUBTITLE — delay ketiga -->
-                <p class="hero-fade-up delay-300 mt-3 font-light md:text-lg text-gray-200 leading-relaxed max-w-2xl pl-2">
-                    Menawarkan edukasi unik dan pengalaman natural wisata gula kelapa, didukung sistem monitoring terpadu yang menghadirkan informasi real-time, pengelolaan destinasi
-                    yang efektif, dengan mengutamakan kenyamanan, pelayanan, dan pengalaman terbaik bagi wisatawan.
-                </p>
-
-                <!-- TAGS — delay keempat, tambah tag-shimmer -->
-                <div class="flex flex-wrap gap-4 mt-8 hero-fade-up delay-450">
-                    <span class="tag-shimmer flex items-center gap-2.5 border border-white/25 bg-white/5 backdrop-blur-2xl text-white/90 text-sm px-5 py-2.5 rounded-full font-normal hover:bg-white/10 transition-all duration-300">
-                        Budaya & Tradisi
-                    </span>
-                    <span class="tag-shimmer flex items-center gap-2.5 border border-white/25 bg-white/5 backdrop-blur-xl text-white/90 text-sm px-5 py-2.5 rounded-full font-normal hover:bg-white/10 transition-all duration-300">
-                        Agroeduwisata
-                    </span>
-                    <span class="tag-shimmer flex items-center gap-2.5 border border-white/25 bg-white/5 backdrop-blur-xl text-white/90 text-sm px-5 py-2.5 rounded-full font-normal hover:bg-white/10 transition-all duration-300">
-                        Produk Gula Kelapa
-                    </span>
-                </div>
-
-                <!-- CIRCULAR IMAGES — masing-masing delay berbeda -->
-                <div class="flex items-center mt-10">
-                    <div class="avatar-in delay-600 w-18 h-18 rounded-full border-2 border-white overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300 z-10">
-                        <img src="{{ asset('images/agroeduwisata/menanam tanaman.jpg') }}" alt="" class="w-full h-full object-cover">
+    <div class="home-hero__shell relative z-20 flex min-h-[100svh] items-end pb-8 pt-32 sm:pb-12 sm:pt-36 lg:pb-14 lg:pt-40">
+        <div class="home-hero__inner mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-10">
+            <div class="home-hero__grid flex w-full flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+                <div class="home-hero__copy w-full max-w-[46rem]">
+                    <div class="home-hero__eyebrow hero-fade-up delay-100 mb-4 flex items-center gap-3">
+                        <div class="home-hero__eyebrow-line h-px w-10 shrink-0 bg-white/60 sm:w-14"></div>
+                        <span class="home-hero__eyebrow-text text-xs font-medium uppercase tracking-[0.28em] text-yellow-400 sm:text-sm">
+                            Selamat Datang Di
+                        </span>
+                        <div class="home-hero__eyebrow-line h-px w-10 shrink-0 bg-white/60 sm:w-14"></div>
                     </div>
-                    <div class="avatar-in delay-700 w-18 h-18 rounded-full border-2 border-white overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300 -ml-7 z-20">
-                        <img src="{{ asset('images/agroeduwisata/1776929726.jpg') }}" alt="" class="w-full h-full object-cover">
+
+                    <h1 class="home-hero__title hero-fade-up delay-200 font-hero text-[2.25rem] font-[550] uppercase leading-[0.98] tracking-normal text-white drop-shadow-[0_5px_25px_rgba(0,0,0,0.5)] sm:text-[3.75rem] md:text-[4.5rem] lg:text-[4.1rem]">
+                        Desa Agroeduwisata
+                        <span class="block text-yellow-500 drop-shadow-[0_0_25px_rgba(250,204,21,0.35)]">
+                            Gula Kelapa Hargorojo
+                        </span>
+                    </h1>
+
+                    <p class="home-hero__lead hero-fade-up delay-300 mt-4 max-w-2xl text-sm font-light leading-relaxed text-gray-200 sm:text-base md:text-lg">
+                        Menawarkan edukasi unik dan pengalaman natural wisata gula kelapa, didukung sistem monitoring terpadu yang menghadirkan informasi real-time, pengelolaan destinasi yang efektif, dengan mengutamakan kenyamanan, pelayanan, dan pengalaman terbaik bagi wisatawan.
+                    </p>
+
+                    <div class="home-hero__tags hero-fade-up delay-450 mt-6 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
+                        <span class="home-hero__tag tag-shimmer flex items-center rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-normal text-white/90 backdrop-blur-2xl transition-all duration-300 hover:bg-white/10 sm:px-5 sm:py-2.5 sm:text-sm">
+                            Budaya & Tradisi
+                        </span>
+                        <span class="home-hero__tag tag-shimmer flex items-center rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-normal text-white/90 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 sm:px-5 sm:py-2.5 sm:text-sm">
+                            Agroeduwisata
+                        </span>
+                        <span class="home-hero__tag tag-shimmer flex items-center rounded-full border border-white/25 bg-white/5 px-4 py-2 text-xs font-normal text-white/90 backdrop-blur-xl transition-all duration-300 hover:bg-white/10 sm:px-5 sm:py-2.5 sm:text-sm">
+                            Produk Gula Kelapa
+                        </span>
                     </div>
-                    <div class="avatar-in delay-800 w-18 h-18 rounded-full border-2 border-white overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300 -ml-5 z-30">
-                        <img src="{{ asset('images/agroeduwisata/1776929702.jpg') }}" alt="" class="w-full h-full object-cover">
-                    </div>
-                    <div class="avatar-in delay-900 w-18 h-18 rounded-full border-2 border-white overflow-hidden shadow-2xl hover:scale-105 transition-all duration-300 -ml-5 z-40">
-                        <img src="{{ asset('images/produk/Coconut sugar.jpg') }}" alt="" class="w-full h-full object-cover">
+
+                    <div class="home-hero__avatars mt-7 flex items-center sm:mt-10">
+                        <div class="home-hero__avatar avatar-in delay-600 z-10 h-[3.25rem] w-[3.25rem] overflow-hidden rounded-full border-2 border-white shadow-2xl transition-all duration-300 hover:scale-105 sm:h-[4.5rem] sm:w-[4.5rem]">
+                            <img src="{{ asset('images/agroeduwisata/menanam tanaman.jpg') }}" alt="Aktivitas menanam tanaman" class="h-full w-full object-cover">
+                        </div>
+                        <div class="home-hero__avatar home-hero__avatar--overlap avatar-in delay-700 z-20 -ml-4 h-[3.25rem] w-[3.25rem] overflow-hidden rounded-full border-2 border-white shadow-2xl transition-all duration-300 hover:scale-105 sm:-ml-7 sm:h-[4.5rem] sm:w-[4.5rem]">
+                            <img src="{{ asset('images/agroeduwisata/1776929726.jpg') }}" alt="Kegiatan agroeduwisata Desa Hargorojo" class="h-full w-full object-cover">
+                        </div>
+                        <div class="home-hero__avatar home-hero__avatar--overlap avatar-in delay-800 z-30 -ml-4 h-[3.25rem] w-[3.25rem] overflow-hidden rounded-full border-2 border-white shadow-2xl transition-all duration-300 hover:scale-105 sm:-ml-5 sm:h-[4.5rem] sm:w-[4.5rem]">
+                            <img src="{{ asset('images/agroeduwisata/1776929702.jpg') }}" alt="Wisata alam Desa Hargorojo" class="h-full w-full object-cover">
+                        </div>
+                        <div class="home-hero__avatar home-hero__avatar--overlap avatar-in delay-900 z-40 -ml-4 h-[3.25rem] w-[3.25rem] overflow-hidden rounded-full border-2 border-white shadow-2xl transition-all duration-300 hover:scale-105 sm:-ml-5 sm:h-[4.5rem] sm:w-[4.5rem]">
+                            <img src="{{ asset('images/produk/Coconut sugar.jpg') }}" alt="Produk gula kelapa Hargorojo" class="h-full w-full object-cover">
+                        </div>
                     </div>
                 </div>
 
-            </div>
+                <div class="home-hero__cta hero-fade-up delay-750 flex w-full flex-col gap-3 sm:max-w-md sm:flex-row lg:w-auto lg:min-w-[22rem] lg:flex-col">
+                    <a
+                        href="{{ route('profil') }}"
+                        class="home-hero__button btn-pulse group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] sm:px-5"
+                    >
+                        <span class="home-hero__button-text min-w-0 flex-1 text-center">Lihat Profil Desa</span>
+                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:bg-yellow-400"><i class="fa-solid fa-arrow-right text-sm leading-none"></i></span>
+                    </a>
 
-            <!-- RIGHT BUTTONS — delay terakhir -->
-            <div class="hero-fade-up delay-750 flex flex-col sm:flex-row gap-5 w-full translate-x-20">
-
-                <!-- Button 1 — tambah btn-pulse -->
-                <a href="{{ route('profil') }}"
-                class="btn-pulse flex items-center justify-center gap-1 bg-white hover:bg-yellow-400 text-black font-bold h-13 text-sm px-1 lg:px-6 lg:py-1.5 rounded-full transition-all duration-300 shadow-2xl hover:scale-105">
-                    Lihat Profil Desa
-                    <span class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center text-lg translate-x-4">➜</span>
-                </a>
-
-                <!-- Button 2 -->
-                <a href="{{ route('kontak') }}"
-                class="flex items-center justify-center gap-1 bg-white/10 backdrop-blur-xl border border-white/20 text-white font-bold h-13 text-sm px-7 rounded-full transition-all duration-300 hover:bg-white hover:text-black shadow-xl group">
-                    Hubungi Kami
-                    <span class="w-10 h-10 rounded-full bg-white text-black flex items-center justify-center text-lg transition-all group-hover:bg-black group-hover:text-white translate-x-4">➜</span>
-                </a>
+                    <a
+                        href="{{ route('kontak') }}"
+                        class="home-hero__button group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-white/25 bg-white/10 px-4 text-sm font-bold text-white shadow-xl backdrop-blur-xl transition-all duration-300 hover:bg-white/20 hover:scale-[1.02] sm:px-5"
+                    >
+                        <span class="home-hero__button-text min-w-0 flex-1 text-center">Hubungi Kami</span>
+                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-black transition-all duration-300 group-hover:bg-yellow-400"><i class="fa-solid fa-arrow-right text-sm leading-none"></i></span>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 </section>
 
 <!-- 2. POTENSI AGROEDUWISATA KAMI -->
@@ -144,7 +118,7 @@
         <!-- Main Title — reveal kedua -->
         <h2 class="reveal reveal-delay-2
             font-display text-[38px] md:text-[56px] lg:text-[50px]
-            font-medium leading-[1] tracking-[-0.02em]
+            font-medium leading-[1] tracking-normal
             text-gray-900 drop-shadow-sm
         ">
             Potensi Agroeduwisata Kami
@@ -225,9 +199,7 @@
             {{ $index % 2 == 1 ? 'lg:order-2' : '' }}
         ">
             <img 
-                src="{{ $agro->gambar 
-                    ? asset('images/agroeduwisata/' . $agro->gambar) 
-                    : asset('images/beranda.bg.jpeg') }}"
+                src="{{ $agro->gambar_url }}"
                 alt="{{ $agro->judul }}"
                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
             >
@@ -265,7 +237,7 @@
             </div>
 
             <!-- TITLE -->
-            <h3 class="font-display text-[35px] md:text-[38px] leading-[1] tracking-[-0.02em] text-[#146432] mb-4">
+            <h3 class="font-display text-[35px] md:text-[38px] leading-[1] tracking-normal text-[#146432] mb-4">
                 {{ $agro->judul }}
             </h3>
 
@@ -403,7 +375,7 @@
                 <div class="reveal reveal-delay-1">
                     <h3 class="
                         font-display text-white/90 text-[30px]
-                        leading-[1] tracking-[-0.02em] mb-5
+                        leading-[1] tracking-normal mb-5
                     ">
                         Agroeduwisata untuk Pengalaman yang Bermakna
                     </h3>
@@ -540,7 +512,7 @@
 
             <h2 class="reveal reveal-delay-2
                 font-display text-[38px] md:text-[58px] lg:text-[55px]
-                leading-[0.95] tracking-[-0.03em] text-[#183322] mb-3 drop-shadow-sm
+                leading-[0.95] tracking-normal text-[#183322] mb-3 drop-shadow-sm
             ">
                 Produk Unggulan Kami
             </h2>
@@ -621,7 +593,7 @@
                         <i class="fa-solid fa-heart"></i>
                     </div>
 
-                    <h3 class="font-bold text-[20px] leading-[1.1] tracking-[-0.02em] text-[#1b472b] mb-4 line-clamp-2">
+                    <h3 class="font-bold text-[20px] leading-[1.1] tracking-normal text-[#1b472b] mb-4 line-clamp-2">
                         {{ strtoupper($produk->nama) }}
                     </h3>
 
@@ -680,227 +652,178 @@
 <!-- ===================================================== -->
 <!-- 4. KATALOG DESA -->
 <!-- ===================================================== -->
-<section class="relative py-15 bg-[#f8f6f1] overflow-hidden">
+@php
+    $katalogTabs = [
+        [
+            'key' => 'Pengumuman',
+            'label' => 'Pengumuman',
+            'description' => 'Info terbaru desa',
+            'icon' => 'fa-solid fa-bullhorn',
+            'items' => $pengumuman,
+            'empty' => 'Belum ada pengumuman terbaru.',
+        ],
+        [
+            'key' => 'Artikel & Berita',
+            'label' => 'Artikel & Berita',
+            'description' => 'Informasi kegiatan',
+            'icon' => 'fa-regular fa-newspaper',
+            'items' => $artikelBerita,
+            'empty' => 'Belum ada artikel dan berita terbaru.',
+        ],
+        [
+            'key' => 'Perpustakaan',
+            'label' => 'Perpustakaan',
+            'description' => 'Arsip & dokumen',
+            'icon' => 'fa-regular fa-file-lines',
+            'items' => $perpustakaan,
+            'empty' => 'Belum ada arsip perpustakaan desa.',
+        ],
+        [
+            'key' => 'Galeri',
+            'label' => 'Galeri Desa',
+            'description' => 'Foto & dokumentasi',
+            'icon' => 'fa-regular fa-image',
+            'items' => $galeri,
+            'empty' => 'Belum ada dokumentasi galeri desa.',
+        ],
+    ];
+@endphp
+<section x-data="{ activeKatalogTab: 'Pengumuman' }" class="relative overflow-hidden bg-[#f8f6f1] py-15">
 
-    <div class="absolute top-0 left-0 opacity-[0.06] hidden lg:block">
+    <div class="absolute left-0 top-0 hidden opacity-[0.06] lg:block">
         <img src="{{ asset('images/ornament-daun.png') }}" class="w-[300px]" alt="">
     </div>
 
-    <div class="max-w-[1200px] mx-auto px-6 lg:px-8 relative z-10">
+    <div class="relative z-10 mx-auto max-w-[1200px] px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="text-center mb-14">
+        <div class="mb-14 text-center">
 
-            {{-- Label — reveal --}}
-            <div class="reveal reveal-delay-1 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-[#eef3ea] border border-[#dde7d7] mb-2">
+            <div class="reveal reveal-delay-1 mb-2 inline-flex items-center gap-2 rounded-full border border-[#dde7d7] bg-[#eef3ea] px-6 py-3">
                 <i class="fa-solid fa-book-open text-green-800"></i>
-                <span class="text-green-900 text-sm font-semibold tracking-wide">
+                <span class="text-sm font-semibold tracking-wide text-green-900">
                     Informasi & Dokumentasi Desa Hargorojo
                 </span>
             </div>
 
-            {{-- Title — reveal --}}
-            <h2 class="reveal reveal-delay-2
-                font-display text-[38px] md:text-[58px] lg:text-[55px]
-                leading-[0.95] tracking-[-0.03em] text-[#000000] mb-3 drop-shadow-sm
-            ">
+            <h2 class="reveal reveal-delay-2 mb-3 font-display text-[38px] leading-[0.95] tracking-normal text-[#000000] drop-shadow-sm md:text-[58px] lg:text-[55px]">
                 Katalog Desa
             </h2>
 
-            {{-- Description — reveal --}}
-            <p class="reveal reveal-delay-3
-                mt-3 max-w-3xl mx-auto text-[#1f211f]
-                text-[18px] leading-[1.3] font-thin
-            ">
+            <p class="reveal reveal-delay-3 mx-auto mt-3 max-w-3xl text-[18px] font-thin leading-[1.3] text-[#1f211f]">
                 Temukan berbagai informasi, berita, artikel, dan dokumentasi kegiatan yang mencerminkan
                 semangat serta perkembangan Desa Hargorojo
             </p>
 
         </div>
 
-        <!-- CATEGORY MENU — tambah cat-menu pada wrapper -->
-        <div class="
-            cat-menu
-            max-w-[1000px] mx-auto
-            bg-white/90 backdrop-blur-xl
-            border border-[#ebe7de]
-            rounded-[25px]
-            shadow-[0_10px_40px_rgba(0,0,0,0.05)]
-            mt-5 lg:mt-10 mb-8
-        ">
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-
-                {{-- Item 1 — cat-item + delay --}}
-                <div class="cat-item cat-item-delay-1 flex items-center gap-4 px-5 py-5 rounded-2xl bg-[#e4eddf]">
-                    <div class="w-12 h-12 rounded-2xl bg-green-100 text-green-800 flex items-center justify-center text-lg">
-                        <i class="fa-solid fa-bullhorn"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#1b3b2b] text-[16px]">Pengumuman</h4>
-                        <p class="text-sm text-gray-500">Info terbaru desa</p>
-                    </div>
-                </div>
-
-                {{-- Item 2 --}}
-                <div class="cat-item cat-item-delay-2 flex items-center gap-4 px-5 py-5 rounded-2xl bg-white">
-                    <div class="w-12 h-12 rounded-2xl bg-gray-100 text-gray-700 flex items-center justify-center text-lg">
-                        <i class="fa-regular fa-newspaper"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#1b3b2b] text-[16px]">Artikel & Berita</h4>
-                        <p class="text-sm text-gray-500">Informasi kegiatan</p>
-                    </div>
-                </div>
-
-                {{-- Item 3 --}}
-                <div class="cat-item cat-item-delay-3 flex items-center gap-4 px-5 py-5 rounded-2xl bg-white">
-                    <div class="w-12 h-12 rounded-2xl bg-gray-100 text-gray-700 flex items-center justify-center text-lg">
-                        <i class="fa-regular fa-file-lines"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#1b3b2b] text-[16px]">Perpustakaan</h4>
-                        <p class="text-sm text-gray-500">Arsip & dokumen</p>
-                    </div>
-                </div>
-
-                {{-- Item 4 --}}
-                <div class="cat-item cat-item-delay-4 flex items-center gap-4 px-5 py-5 rounded-2xl bg-white">
-                    <div class="w-12 h-12 rounded-2xl bg-gray-100 text-gray-700 flex items-center justify-center text-lg">
-                        <i class="fa-regular fa-image"></i>
-                    </div>
-                    <div>
-                        <h4 class="font-bold text-[#1b3b2b] text-[16px]">Galeri Desa</h4>
-                        <p class="text-sm text-gray-500">Foto & dokumentasi</p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-        <!-- CONTENT — katalog cards -->
-        <div class="space-y-5">
-
-            @foreach(
-                collect()
-                ->merge($pengumuman)
-                ->merge($artikelBerita)
-                ->merge($perpustakaan)
-                ->merge($galeri)
-                ->sortByDesc('created_at')
-                ->take(3)
-                as $loopIndex => $item
-            )
-
-            @php
-                $fotoUrl = asset('images/beranda.bg.jpeg');
-                if ($item->gambar) {
-                    if (\Illuminate\Support\Facades\Storage::disk('public')->exists('katalog/' . $item->gambar)) {
-                        $fotoUrl = asset('storage/katalog/' . $item->gambar);
-                    } else {
-                        $fotoUrl = file_exists(public_path('images/katalog/' . $item->gambar))
-                            ? asset('images/katalog/' . $item->gambar)
-                            : asset('images/' . $item->gambar);
-                    }
-                }
-                $kategori = $item->kategoriKatalog->nama_kategori ?? 'Informasi Desa';
-            @endphp
-
-            {{-- Card — tambah katalog-card + delay --}}
-            <div class="
-                katalog-card katalog-card-delay-{{ $loopIndex + 1 }}
-                max-w-[1100px] mx-auto
-                grid lg:grid-cols-[0.8fr_1.2fr]
-                h-[300px]
-                bg-white rounded-[20px] overflow-hidden
-                border border-[#ece7de]
-                shadow-[0_10px_35px_rgba(0,0,0,0.05)]
-                hover:-translate-y-1
-                hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)]
-                transition-all duration-500
-            ">
-
-                <!-- IMAGE -->
-                <div class="relative overflow-hidden group">
-                    <img
-                        src="{{ $fotoUrl }}"
-                        alt="{{ $item->judul }}"
-                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'"
+        <!-- CATEGORY MENU -->
+        <div class="cat-menu mx-auto mb-8 mt-5 max-w-[1000px] rounded-[25px] border border-[#ebe7de] bg-white/90 shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-xl lg:mt-10">
+            <div class="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach($katalogTabs as $index => $tab)
+                    <button
+                        type="button"
+                        @click="activeKatalogTab = {{ \Illuminate\Support\Js::from($tab['key']) }}"
+                        :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-[#e4eddf] shadow-sm' : 'bg-white hover:bg-[#f7faf5]'"
+                        class="cat-item cat-item-delay-{{ $index + 1 }} flex min-w-0 items-center gap-4 rounded-2xl px-5 py-5 text-left transition-all duration-300"
                     >
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-
-                    {{-- Badge — tambah badge-reveal --}}
-                    <div class="
-                        badge-reveal
-                        absolute top-6 left-6
-                        bg-green-800 text-white
-                        px-5 py-3 rounded-full
-                        text-sm font-semibold
-                        flex items-center gap-3 shadow-xl
-                    ">
-                        <i class="{{
-                            $kategori == 'Pengumuman'
-                            ? 'fa-solid fa-bullhorn'
-                            : ($kategori == 'Artikel & Berita'
-                            ? 'fa-regular fa-newspaper'
-                            : ($kategori == 'Perpustakaan'
-                            ? 'fa-regular fa-file-lines'
-                            : 'fa-regular fa-image'))
-                        }}"></i>
-                        {{ $kategori }}
-                    </div>
-                </div>
-
-                <!-- CONTENT -->
-                <div class="p-8 lg:p-10 flex flex-col justify-center">
-
-                    <div class="flex items-center gap-3 text-sm text-gray-500 mb-4">
-                        <i class="fa-regular fa-calendar"></i>
-                        {{ $item->created_at->format('d M Y') }}
-                    </div>
-
-                    <h3 class="
-                        font-display font-regular
-                        text-[25px] md:text-[22px]
-                        leading-[1.2] tracking-[-0.01em]
-                        text-[#000000] mb-5 line-clamp-2
-                    ">
-                        {{ $item->judul }}
-                    </h3>
-
-                    <p class="font-lora italic text-[#5f6d63] text-[14px] leading-[1.9] font-thin mb-3 line-clamp-5">
-                        {{ Str::limit($item->deskripsi, 300) }}
-                    </p>
-
-                    {{-- Read more — tambah read-more-link --}}
-                    <a href="{{ $item->Url ?? route('katalog') }}"
-                    class="read-more-link text-[#2b4238] font-semibold text-lg">
-                        Baca Selengkapnya
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
-
-                </div>
-
+                        <span
+                            :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-700'"
+                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg transition-colors duration-300"
+                        >
+                            <i class="{{ $tab['icon'] }}"></i>
+                        </span>
+                        <span class="min-w-0">
+                            <span class="block truncate text-[16px] font-bold text-[#1b3b2b]">{{ $tab['label'] }}</span>
+                            <span class="block truncate text-sm text-gray-500">{{ $tab['description'] }}</span>
+                        </span>
+                    </button>
+                @endforeach
             </div>
-
-            @endforeach
-
         </div>
 
-        <!-- CTA — reveal -->
-        <div class="reveal reveal-delay-4 text-center mt-16">
-            <a href="{{ route('katalog') }}"
-            class="
-                inline-flex items-center gap-5
-                bg-gradient-to-r from-[#1d4d3a] to-[#2f7a5d]
-                hover:scale-[1.03] text-white px-8 py-3
-                rounded-full font-semibold text-lg
-                shadow-[0_15px_40px_rgba(29,77,58,0.25)]
-                transition-all duration-500
-            ">
+        <!-- CONTENT -->
+        <div class="space-y-5">
+            @foreach($katalogTabs as $tab)
+                <div
+                    x-cloak
+                    x-show="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }}"
+                    x-transition.opacity.duration.200ms
+                    class="space-y-5"
+                >
+                    @forelse($tab['items']->sortByDesc('created_at')->take(3) as $loopIndex => $item)
+                        @php
+                            $kategori = $item->kategoriKatalog->nama_kategori ?? $tab['label'];
+                            $kategoriLabel = $kategori === 'Galeri' ? 'Galeri Desa' : $kategori;
+                            $externalUrl = $item->external_url ?? null;
+                        @endphp
+
+                        <article class="katalog-card visible katalog-card-delay-{{ $loopIndex + 1 }} mx-auto grid min-h-[300px] max-w-[1100px] overflow-hidden rounded-[20px] border border-[#ece7de] bg-white shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] lg:grid-cols-[0.8fr_1.2fr]">
+
+                            <div class="group relative min-h-[220px] overflow-hidden lg:min-h-0">
+                                <img
+                                    src="{{ $item->gambar_url }}"
+                                    alt="{{ $item->judul }}"
+                                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'"
+                                >
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
+
+                                <div class="badge-reveal absolute left-5 top-5 flex items-center gap-3 rounded-full bg-green-800 px-4 py-2.5 text-sm font-semibold text-white shadow-xl sm:left-6 sm:top-6 sm:px-5 sm:py-3">
+                                    <i class="{{ $tab['icon'] }}"></i>
+                                    {{ $kategoriLabel }}
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+
+                                <div class="mb-4 flex items-center gap-3 text-sm text-gray-500">
+                                    <i class="fa-regular fa-calendar"></i>
+                                    {{ $item->created_at->format('d M Y') }}
+                                </div>
+
+                                <h3 class="mb-5 line-clamp-2 font-display text-[24px] leading-[1.2] tracking-normal text-[#000000] md:text-[22px]">
+                                    {{ $item->judul }}
+                                </h3>
+
+                                <p class="mb-3 line-clamp-5 font-lora text-[14px] font-thin italic leading-[1.9] text-[#5f6d63]">
+                                    {{ Str::limit($item->deskripsi, 300) }}
+                                </p>
+
+                                @if($externalUrl)
+                                    <a href="{{ $externalUrl }}" target="_blank" rel="noopener noreferrer" class="read-more-link text-lg font-semibold text-[#2b4238]">
+                                        Baca Selengkapnya
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                @else
+                                    <a href="{{ route('katalog') }}" class="read-more-link text-lg font-semibold text-[#2b4238]">
+                                        Baca Selengkapnya
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </a>
+                                @endif
+
+                            </div>
+
+                        </article>
+                    @empty
+                        <div class="mx-auto max-w-[900px] rounded-[20px] border border-dashed border-[#d9d2c4] bg-white/80 px-6 py-12 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+                            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#eef3ea] text-green-800">
+                                <i class="{{ $tab['icon'] }} text-xl"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-[#173121]">{{ $tab['label'] }}</h3>
+                            <p class="mt-2 text-sm text-[#6b736d]">{{ $tab['empty'] }}</p>
+                        </div>
+                    @endforelse
+                </div>
+            @endforeach
+        </div>
+
+        <!-- CTA -->
+        <div class="reveal reveal-delay-4 mt-16 text-center">
+            <a href="{{ route('katalog') }}" class="inline-flex items-center gap-5 rounded-full bg-gradient-to-r from-[#1d4d3a] to-[#2f7a5d] px-8 py-3 text-lg font-semibold text-white shadow-[0_15px_40px_rgba(29,77,58,0.25)] transition-all duration-500 hover:scale-[1.03]">
                 <i class="fa-solid fa-book-open"></i>
                 Lihat Selengkapnya di Katalog Desa
-                <span class="w-8 h-8 rounded-full bg-white text-black flex items-center justify-center text-sm">
+                <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm text-black">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
             </a>
@@ -909,17 +832,16 @@
     </div>
 
 </section>
-
 <!-- ===================================================== -->
 <!-- TESTIMONI PENGUNJUNG -->
 <!-- ===================================================== -->
 <section class="max-w-7xl mx-auto px-6 py-15">
 
     <!-- HEADER -->
-    <div class="flex flex-col lg:flex-row items-center justify-between gap-6 mb-14">
+    <div class="mb-14 text-center">
 
         <!-- LEFT — reveal -->
-        <div class="reveal reveal-delay-1 text-center lg:text-left">
+        <div class="reveal reveal-delay-1 mx-auto max-w-3xl">
 
             <div class="inline-flex items-center gap-3 mb-4">
                 <div class="line-expand h-[2px] bg-yellow-500"></div>
@@ -929,7 +851,7 @@
                 <div class="line-expand h-[2px] bg-yellow-500"></div>
             </div>
 
-            <h2 class="font-bold text-[30px] lg:text-[42px] leading-[1.1] tracking-[-0.03em] text-[#1c3528] mb-2">
+            <h2 class="font-bold text-[30px] lg:text-[42px] leading-[1.1] tracking-normal text-[#1c3528] mb-2">
                 Apa Kata Pengunjung Kami?
             </h2>
 
@@ -939,41 +861,7 @@
             </p>
 
         </div>
-
-        <!-- BUTTON — reveal -->
-        <button
-            onclick="document.getElementById('modal-testimoni-public').classList.remove('hidden')"
-            class="
-                reveal reveal-delay-2
-                inline-flex items-center gap-4
-                bg-white border border-[#dfe7dc]
-                hover:bg-[#f7faf5] text-[#000000]
-                px-8 py-4 rounded-full font-semibold
-                shadow-sm hover:shadow-md transition-all duration-300
-            ">
-            Berikan Ulasan
-            <i class="fa-solid fa-pen"></i>
-        </button>
-
-    </div>
-
-    <!-- SUCCESS / ERROR — tidak diubah -->
-    @if(session('success_testimoni'))
-        <div class="bg-green-100 border border-green-300 text-green-800 px-5 py-4 rounded-2xl mb-10">
-            {{ session('success_testimoni') }}
-        </div>
-    @endif
-
-    @if ($errors->any())
-        <div class="bg-red-100 border border-red-300 text-red-700 px-5 py-4 rounded-2xl mb-10">
-            <ul class="list-disc ml-5 space-y-1 text-sm">
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-
+</div>
     <!-- TESTIMONI GRID -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 
@@ -993,7 +881,7 @@
             <!-- FOTO / INISIAL — tambah avatar-scale -->
             @if($testi->foto)
                 <img
-                    src="{{ asset('images/testimoni/' . $testi->foto) }}"
+                    src="{{ $testi->foto_url }}"
                     alt="{{ $testi->nama }}"
                     class="
                         avatar-scale
@@ -1103,7 +991,7 @@
 
                     <h2 class="reveal reveal-delay-2
                         text-[#183322] text-[34px] lg:text-[42px]
-                        leading-[1.1] tracking-[-0.05em] font-bold mb-2
+                        leading-[1.1] tracking-normal font-bold mb-2
                     ">
                         Temukan Cerita, Tradisi, dan Keindahan Desa Hargorojo
                     </h2>
@@ -1202,180 +1090,5 @@
         </div>
     </div>
 </section>
-
-
-<!-- Modal Create Testimoni Public -->
-<div id="modal-testimoni-public" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <!-- Latar Belakang Hitam Transparan & Efek Blur -->
-    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')"></div>
-    
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    
-    <!-- Kontainer Putih Form (Sudah ditambahkan relative z-10) -->
-    <div class="relative z-10 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-      <form action="{{ route('public.testimoni.store') }}" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <h3 class="text-xl font-bold text-gray-900 mb-6 text-center border-b pb-4">Beri Kami Ulasan</h3>
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
-                <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" type="text" name="nama" required placeholder="Contoh: Budi Santoso">
-            </div>
-
-<!-- ===================================================== -->
-<!-- JENIS ULASAN -->
-<!-- ===================================================== -->
-<div
-    x-data="{ jenis: 'wisata' }"
-    class="mb-4"
->
-
-    <label class="
-        block
-        text-gray-700
-        text-sm
-        font-bold
-        mb-3
-    ">
-        Jenis Ulasan
-    </label>
-
-    <div class="
-        flex
-        gap-5
-        mb-4
-    ">
-
-        <!-- WISATA -->
-        <label class="
-            flex
-            items-center
-            gap-2
-            cursor-pointer
-        ">
-            <input
-                type="radio"
-                name="jenis_ulasan"
-                value="wisata"
-                x-model="jenis"
-                checked
-            >
-
-            <span>
-                Ulasan Umum
-            </span>
-        </label>
-
-        <!-- PRODUK -->
-        <label class="
-            flex
-            items-center
-            gap-2
-            cursor-pointer
-        ">
-            <input
-                type="radio"
-                name="jenis_ulasan"
-                value="produk"
-                x-model="jenis"
-            >
-
-            <span>
-                Produk Desa
-            </span>
-        </label>
-
-    </div>
-
-    <!-- DROPDOWN PRODUK -->
-    <div
-        x-show="jenis === 'produk'"
-        x-transition
-    >
-
-        <label class="
-            block
-            text-gray-700
-            text-sm
-            font-bold
-            mb-2
-        ">
-            Pilih Produk
-        </label>
-
-        <select
-            name="produk_id"
-            class="
-                w-full
-                px-4
-                py-3
-
-                rounded-lg
-
-                bg-gray-50
-
-                border
-                border-gray-300
-
-                focus:border-green-500
-                focus:bg-white
-                focus:outline-none
-
-                transition
-            "
-        >
-
-            <option value="">
-                -- Pilih Produk --
-            </option>
-
-            @foreach($produkUnggulan as $p)
-
-                <option value="{{ $p->id }}">
-                    {{ $p->nama }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Rating <span class="text-xs text-gray-500">(Wajib)</span></label>
-                <select name="rating" class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="5">★★★★★ Sangat Memuaskan</option>
-                    <option value="4">★★★★ Memuaskan</option>
-                    <option value="3">★★★ Cukup</option>
-                    <option value="2">★★ Kurang</option>
-                    <option value="1">★ Sangat Kurang</option>
-                </select>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Komentar / Ulasan <span class="text-red-500">*</span></label>
-                <textarea class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" name="isi_testimoni" rows="4" required placeholder="Ceritakan pengalaman Anda..."></textarea>
-            </div>
-
-            <div class="form-group mb-2">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Pilih Foto Profil Cepat <span class="text-xs text-gray-500">(Opsional)</span></label>
-                <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" type="file" name="foto" accept="image/*">
-                <p class="text-[10px] text-gray-500 mt-1">Maksimal 5MB. Mendukung format standar JPG, PNG, WEBP.</p>
-            </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-4 sm:px-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-2 border-t">
-            <button type="button" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')" class="w-full sm:w-auto px-5 py-2.5 bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-50 focus:outline-none transition-colors">Batal</button>
-            <button type="submit" class="w-full sm:w-auto px-5 py-2.5 bg-green-600 text-white text-sm font-bold rounded-lg hover:bg-green-700 focus:outline-none transition-colors shadow-sm">Kirim Ulasan</button>
-          </div>
-      </form>
-    </div>
-  </div>
-</div>
-
 
 @endsection

@@ -12,8 +12,8 @@
             <form action="{{ url()->current() }}" method="GET" class="flex flex-col gap-2 w-full md:w-auto md:flex-row">
                 <select name="filter_kat_agro" onchange="this.form.submit()" class="shadow-sm border rounded py-2 px-3 bg-white text-gray-800 leading-tight focus:outline-none focus:ring-1 focus:ring-green-800 md:w-[16rem]">
                     <option value="">Semua Data</option>
-                    <option value="induk" {{ request('filter_kat_agro') == 'induk' ? 'selected' : '' }}>Hanya Menu Utama (Induk)</option>
-                    <option value="anak" {{ request('filter_kat_agro') == 'anak' ? 'selected' : '' }}>Hanya Menu Anak / Tahapan</option>
+                    <option value="induk" {{ request('filter_kat_agro') == 'induk' ? 'selected' : '' }}>Induk</option>
+                    <option value="anak" {{ request('filter_kat_agro') == 'anak' ? 'selected' : '' }}>Anak</option>
                 </select>
                 <div class="admin-search-control w-full md:w-[18rem]">
                     <input type="text" name="search_agro" value="{{ request('search_agro') }}" placeholder="Cari judul..." class="shadow-sm border rounded-l w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-green-800">
@@ -101,7 +101,7 @@
 <!-- MODAL CREATE AGROEDUWISATA -->
 <!-- ========================================== -->
 <div id="modal-create-agro" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-agro')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-create-agro')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah Agroeduwisata</h3>
@@ -116,9 +116,9 @@
                     <div class="col-span-1 md:col-span-2">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Menu Induk (Opsional) <span class="text-xs text-gray-400">Pilih jika ini adalah Tahapan/Anak</span></label>
                         <select class="w-full bg-white text-gray-800 border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" name="parent_id">
-                            <option value="">-- Jadikan Menu Utama (Bapak) --</option>
+                            <option value="">-- Induk --</option>
                             @foreach($parentAgros as $parent)
-                                <option value="{{ $parent->id }}">{{ $parent->judul }}</option>
+                                <option value="{{ $parent->id }}">{{ \Illuminate\Support\Str::limit($parent->judul, 22) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -129,7 +129,7 @@
                 </div>
                 <div class="mb-4 text-center border border-dashed border-gray-300 p-4 rounded-lg bg-gray-50">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Upload Gambar <span class="text-xs text-gray-400">(Format: JPG, PNG, WEBP)</span></label>
-                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-800 hover:file:bg-green-200 cursor-pointer" type="file" name="gambar" accept="image/*">
+                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-800 hover:file:bg-green-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                 </div>
 
                 <div class="mb-4">
@@ -149,7 +149,7 @@
 <!-- MODAL EDIT AGROEDUWISATA -->
 <!-- ========================================== -->
 <div id="modal-edit-agro" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-agro')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-edit-agro')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Agroeduwisata</h3>
@@ -164,9 +164,9 @@
                     <div class="col-span-1 md:col-span-2">
                         <label class="block text-gray-700 text-sm font-bold mb-2">Menu Induk (Opsional) <span class="text-xs text-gray-400">Pilih jika ini adalah Tahapan/Anak</span></label>
                         <select class="w-full bg-white text-gray-800 border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-agro-parent" name="parent_id">
-                            <option value="">-- Jadikan Menu Utama (Bapak) --</option>
+                            <option value="">-- Induk --</option>
                             @foreach($parentAgros as $parent)
-                                <option value="{{ $parent->id }}">{{ $parent->judul }}</option>
+                                <option value="{{ $parent->id }}">{{ \Illuminate\Support\Str::limit($parent->judul, 22) }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="mb-4 text-center border border-dashed border-gray-300 p-4 rounded-lg bg-gray-50">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Ganti Gambar <span class="text-xs text-gray-400">(Biarkan kosong jika tidak diubah)</span></label>
-                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 cursor-pointer" type="file" name="gambar" accept="image/*">
+                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                 </div>
 
                 <div class="mb-4">
@@ -192,13 +192,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function openEditModalAgro(id, parent_id, judul, deskripsi) {
-        openModal('modal-edit-agro');
-        document.getElementById('form-edit-agro').action = '/admin/agroeduwisata/' + id;
-        document.getElementById('edit-agro-parent').value = parent_id;
-        document.getElementById('edit-agro-judul').value = judul;
-        document.getElementById('edit-agro-deskripsi').value = deskripsi;
-    }
-</script>

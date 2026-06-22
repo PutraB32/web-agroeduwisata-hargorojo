@@ -5,7 +5,7 @@
             'label' => 'Pengguna Sistem',
             'count' => $users->count(),
             'unit' => 'user',
-            'meta' => 'Kelola akun admin dan super admin.',
+            'meta' => 'Kelola akun admin, super admin, dan customer.',
         ])
 
         <div class="admin-toolbar-actions">
@@ -42,8 +42,8 @@
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $user->name }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="px-3 py-1 rounded-full font-bold text-[10px] uppercase {{ $user->role == 'super_admin' ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700' }}">
-                            {{ str_replace('_', ' ', $user->role) }}
+                        <span class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase {{ $user->role_badge_class }}">
+                            {{ $user->role_label }}
                         </span>
                     </td>
                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-gray-500">
@@ -71,7 +71,7 @@
 
 <!-- MODAL CREATE USER -->
 <div id="modal-create-user" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-user')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-create-user')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah User Baru</h3>
@@ -92,13 +92,19 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Password</label>
-                    <input class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:ring-2 focus:ring-green-800 outline-none" type="password" name="password" required minlength="8">
+                    <div class="admin-password-field flex items-center border border-gray-300 rounded-lg bg-white focus-within:ring-2 focus-within:ring-green-800 w-full" style="border: 1px solid #D7E1D7; border-radius: 0.65rem; background-color: #FFFFFF; min-height: 2.55rem;">
+                        <input id="create-user-password" type="password" name="password" required minlength="8" style="border: none !important; outline: none !important; box-shadow: none !important; background: transparent !important; flex: 1; width: 100%; min-height: auto; margin: 0; padding-left: 0.75rem; padding-right: 0.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; font-size: 0.9rem; color: #2C2C2C;">
+                        <button type="button" onclick="return window.adminTogglePasswordField(this)" class="admin-password-toggle text-gray-400 hover:text-green-800 transition-colors" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding-left: 0.75rem; padding-right: 0.75rem; height: 100%; z-index: 20;" aria-label="Tampilkan password">
+                            <i class="fas fa-eye" id="create-user-password-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Role Akses</label>
                     <select class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:ring-2 focus:ring-green-800 outline-none" name="role" required>
                         <option value="admin">Admin</option>
                         <option value="super_admin">Super Admin</option>
+                        <option value="customer">Customer</option>
                     </select>
                 </div>
             </div>
@@ -112,7 +118,7 @@
 
 <!-- MODAL EDIT USER -->
 <div id="modal-edit-user" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-user')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-edit-user')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden flex flex-col">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Profile User</h3>
@@ -133,13 +139,19 @@
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Password Baru <span class="text-[10px] text-gray-400 font-normal">(Kosongkan jika tetap)</span></label>
-                    <input class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" type="password" name="password" minlength="8">
+                    <div class="admin-password-field flex items-center border border-gray-300 rounded-lg bg-white focus-within:ring-2 focus-within:ring-yellow-500 w-full" style="border: 1px solid #D7E1D7; border-radius: 0.65rem; background-color: #FFFFFF; min-height: 2.55rem;">
+                        <input id="edit-user-password" type="password" name="password" minlength="8" style="border: none !important; outline: none !important; box-shadow: none !important; background: transparent !important; flex: 1; width: 100%; min-height: auto; margin: 0; padding-left: 0.75rem; padding-right: 0.5rem; padding-top: 0.5rem; padding-bottom: 0.5rem; font-size: 0.9rem; color: #2C2C2C;">
+                        <button type="button" onclick="return window.adminTogglePasswordField(this)" class="admin-password-toggle text-gray-400 hover:text-yellow-600 transition-colors" style="background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding-left: 0.75rem; padding-right: 0.75rem; height: 100%; z-index: 20;" aria-label="Tampilkan password baru">
+                            <i class="fas fa-eye" id="edit-user-password-eye"></i>
+                        </button>
+                    </div>
                 </div>
                 <div>
                     <label class="block text-gray-700 text-sm font-bold mb-2">Role Akses</label>
                     <select id="edit-user-role" class="w-full border border-gray-300 rounded-lg py-2 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" name="role" required>
                         <option value="admin">Admin</option>
                         <option value="super_admin">Super Admin</option>
+                        <option value="customer">Customer</option>
                     </select>
                 </div>
             </div>
@@ -150,13 +162,3 @@
         </form>
     </div>
 </div>
-
-<script>
-    function openEditModalUser(id, name, email, role) {
-        openModal('modal-edit-user');
-        document.getElementById('form-edit-user').action = '/admin/user/' + id;
-        document.getElementById('edit-user-name').value = name;
-        document.getElementById('edit-user-email').value = email;
-        document.getElementById('edit-user-role').value = role;
-    }
-</script>

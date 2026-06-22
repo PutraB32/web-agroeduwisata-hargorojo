@@ -9,7 +9,7 @@
 {{-- HERO SECTION                                                  --}}
 {{-- =========================================================== --}}
 {{-- Tambah bg-black --}}
-<section class="relative h-[700px] isolate overflow-hidden bg-black">
+<section class="relative isolate min-h-[620px] overflow-hidden bg-black sm:min-h-[700px]">
 
     {{-- Background Image --}}
     <div class="absolute inset-0">
@@ -19,7 +19,7 @@
             id="hero-produk-bg"
             src="{{ asset('images/assets foto/hero section_produk.png') }}"
             alt="Produk Gula Kelapa"
-            class="w-full h-full object-cover scale-100 animate-kenburns"
+            class="w-full h-full object-cover object-center scale-100 animate-kenburns"
         >
 
         {{-- Dark Overlay — tambah animate-vignette --}}
@@ -34,12 +34,12 @@
     </div>
 
     {{-- Content Container --}}
-    <div class="relative z-20 max-w-7xl mx-auto px-8 lg:px-4 min-h-screen flex items-start pt-55">
+    <div class="relative z-20 mx-auto flex min-h-[620px] max-w-7xl items-center px-4 pb-12 pt-28 sm:min-h-[700px] sm:px-6 lg:px-8">
 
         <div class="max-w-3xl">
 
             {{-- Title — stagger delay 1 & 2 --}}
-            <h1 class="hero-fade-up delay-100 font-lora text-[68px] leading-[0.9] tracking-[-0.04em] font-bold text-white mb-5">
+            <h1 class="hero-fade-up delay-100 mb-5 font-lora text-[38px] font-bold leading-[0.98] tracking-[-0.01em] text-white sm:text-[52px] sm:leading-[0.92] lg:text-[68px] lg:leading-[0.9]">
                 Manis Alami dari
                 <span class="font-display block text-[#e29f10] italic hero-fade-up delay-200">
                     Jantung Desa Hargorojo
@@ -47,24 +47,24 @@
             </h1>
 
             {{-- Description — stagger delay 3 --}}
-            <p class="hero-fade-up delay-300 max-w-2xl text-[#ececec] text-[18px] leading-[1.5] font-thin mb-8">
+            <p class="hero-fade-up delay-300 mb-6 max-w-2xl text-sm font-thin leading-[1.7] text-[#ececec] sm:mb-8 sm:text-base sm:leading-[1.6] lg:text-[18px] lg:leading-[1.5]">
                 Nikmati gula kelapa organik asli Desa Hargorojo yang diolah secara
                 tradisional dan higienis, menghadirkan rasa manis alami berkualitas
                 langsung dari petani lokal.
             </p>
 
             {{-- Buttons — stagger delay 4 --}}
-            <div class="hero-fade-up delay-450 flex items-center gap-4">
+            <div class="hero-fade-up delay-450 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:items-center sm:gap-4">
 
                 {{-- Primary Button --}}
                 
                 <a href="{{ route('ecommerce') }}"
-                    class="group inline-flex items-center gap-4 px-8 py-3 rounded-full bg-[#173121] text-white
+                    class="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-[#173121] px-5 py-3 text-sm text-white sm:w-auto sm:justify-center sm:px-8 sm:text-base
                            shadow-[0_15px_40px_rgba(0,0,0,0.30)] hover:bg-[#214a36] hover:-translate-y-1
                            transition-all duration-500"
                 >
                     <span class="font-medium">Belanja Sekarang</span>
-                    <div class="w-9 h-9 rounded-full bg-[#d8b15a] flex items-center justify-center
+                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#d8b15a]
                                 group-hover:rotate-[-12deg] transition-all duration-500">
                         <i class="fa-solid fa-cart-shopping text-[#173121] text-sm"></i>
                     </div>
@@ -72,13 +72,13 @@
 
                 {{-- Secondary Button --}}
                 
-                    <a href="##"
-                    class="group inline-flex items-center gap-4 px-8 py-3 rounded-full bg-white/12
+                    <a href="#produk-unggulan"
+                    class="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-white/12 px-5 py-3 text-sm sm:w-auto sm:justify-center sm:px-8 sm:text-base
                            backdrop-blur-xl text-white hover:bg-white/20 hover:-translate-y-1
                            transition-all duration-500"
                 >
                     <span class="font-medium">Jelajahi Produk</span>
-                    <div class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center
+                    <div class="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/10
                                 group-hover:translate-x-1 transition-all duration-500">
                         <i class="fa-solid fa-arrow-right text-[#d8b15a] text-sm"></i>
                     </div>
@@ -96,18 +96,18 @@
     {{-- =========================================================== --}}
     {{-- PRODUK UNGGULAN                                               --}}
     {{-- =========================================================== --}}
-    <section class="relative py-20 overflow-hidden bg-[#f8f6f1]">
+    <section id="produk-unggulan" class="relative overflow-hidden bg-[#f8f6f1] py-14 sm:py-16 lg:py-20">
 
     <div class="absolute left-[-120px] top-[10%] w-[320px] h-[320px] rounded-full bg-[#173121]/10 blur-[120px]"></div>
     <div class="absolute right-[-100px] bottom-[0%] w-[300px] h-[300px] rounded-full bg-[#c8ab6d]/10 blur-[120px]"></div>
 
-    <div class="relative z-10 max-w-[1500px] mx-auto px-6 lg:px-12">
-        <div class="relative z-10 max-w-[1400px] mx-auto px-6 lg:px-10">
+    <div class="relative z-10 mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-12">
+        <div class="relative z-10 mx-auto max-w-[1400px] px-0 lg:px-10">
 
             {{-- Section Header --}}
             <div class="text-center mb-10">
 
-                <div class="reveal reveal-delay-1 flex items-center justify-center gap-3 mb-2">
+                <div class="reveal reveal-delay-1 mb-2 flex items-center justify-center gap-3">
                     <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
                     <span class="uppercase tracking-[0.2em] text-[14px] font-semibold text-[#b89b5e]">
                         Produk Kami
@@ -115,12 +115,11 @@
                     <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
                 </div>
 
-                <h2 class="reveal reveal-delay-2 font-display text-[38px] md:text-[58px] lg:text-[55px]
-                            leading-[0.95] tracking-[-0.03em] text-[#183322] mb-3 drop-shadow-md">
+                <h2 class="reveal reveal-delay-2 mb-3 font-display text-[32px] leading-[0.98] tracking-[-0.02em] text-[#183322] drop-shadow-md sm:text-[38px] md:text-[58px] lg:text-[55px] lg:leading-[0.95]">
                     Produk Unggulan Kami
                 </h2>
 
-                <p class="reveal reveal-delay-3 max-w-3xl mx-auto text-gray-600 text-base md:text-[18px] leading-[1.2] font-thin">
+                <p class="reveal reveal-delay-3 mx-auto max-w-3xl text-sm font-thin leading-[1.6] text-gray-600 sm:text-base md:text-[18px] md:leading-[1.35]">
                     Produk alami berkualitas premium yang diolah secara tradisional oleh masyarakat lokal
                     untuk menghadirkan pengalaman rasa yang autentik dan berkesan.
                 </p>
@@ -131,13 +130,13 @@
             @foreach ($produkUnggulan as $index => $produk)
 
             {{-- Tambah produk-row --}}
-            <div class="produk-row mt-20 lg:w-7xl mx-auto grid lg:grid-cols-[1fr_1fr] gap-13 items-start">
+            <div class="produk-row mx-auto mt-12 grid items-start gap-8 sm:mt-16 sm:gap-10 lg:mt-20 lg:grid-cols-[1fr_1fr] lg:gap-12 xl:gap-16">
 
                 {{-- PRODUCT CONTENT --}}
                 {{-- Ganjil: content dari kanan | Genap: content dari kiri --}}
                 <div class="
                     {{ $index % 2 == 1 ? 'produk-content-left lg:order-1' : 'produk-content-right lg:order-2' }}
-                    order-2
+                    order-2 min-w-0
                 ">
 
                     {{-- Organic Badge — tambah badge-organic --}}
@@ -149,8 +148,7 @@
                     </div>
 
                     {{-- Product Title --}}
-                    <h1 class="font-lora text-[#173121] text-[40px] md:text-[35px] leading-[1.05]
-                                tracking-[-0.03em] font-bold mb-1">
+                    <h1 class="mb-1 font-lora text-[30px] font-bold leading-[1.05] tracking-[-0.02em] text-[#173121] sm:text-[36px] lg:text-[40px]">
                         {{ $produk->nama }}
                     </h1>
 
@@ -165,21 +163,21 @@
             this.tab = newTab
         }
     }"
-    class="mb-5"
+    class="mb-5 max-w-full"
 >
 
-    <div class="flex items-center border-b border-[#e7e0d2] mb-4">
+    <div class="mb-4 flex items-center overflow-x-auto border-b border-[#e7e0d2]">
         <button
             @click="switchTab('description')"
             :class="tab === 'description' ? 'text-[#173121] border-[#b89b5e]' : 'text-[#7d847e] border-transparent'"
-            class="px-2 py-4 mr-8 border-b-2 font-semibold text-[16px] transition-all duration-300"
+            class="mr-6 shrink-0 border-b-2 px-1 py-3 text-[15px] font-semibold transition-all duration-300 sm:mr-8 sm:px-2 sm:py-4 sm:text-[16px]"
         >
             Deskripsi
         </button>
         <button
             @click="switchTab('reviews')"
             :class="tab === 'reviews' ? 'text-[#173121] border-[#b89b5e]' : 'text-[#7d847e] border-transparent'"
-            class="px-2 py-4 border-b-2 font-medium text-[17px] transition-all duration-300"
+            class="shrink-0 border-b-2 px-1 py-3 text-[15px] font-medium transition-all duration-300 sm:px-2 sm:py-4 sm:text-[17px]"
         >
             Reviews
         </button>
@@ -197,19 +195,19 @@
             : ''"
     >
         {{-- Tambah wrapper scroll pada deskripsi --}}
-        <div class="max-h-[285px] overflow-y-auto pr-2 scrollbar-thin">
+        <div class="max-h-[260px] overflow-y-auto pr-2 scrollbar-thin sm:max-h-[285px]">
 
-            <p class="font-lora text-[#373d38] text-[18px] leading-[1.7] font-light mb-4">
+            <p class="mb-4 font-lora text-[15px] font-light leading-[1.75] text-[#373d38] sm:text-[18px] sm:leading-[1.7]">
                 {{ $produk->deskripsi }}
             </p>
 
             <div class="space-y-2">
                 @foreach (explode('|', $produk->manfaat) as $manfaat)
-                <div class="benefit-item flex items-start gap-4">
-                    <div class="w-7 h-7 rounded-full bg-[#173121] flex items-center justify-center flex-shrink-0">
-                        <i class="fa-solid fa-check text-white text-[13px]"></i>
+                <div class="benefit-item flex items-start gap-3 sm:gap-4">
+                    <div class="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-[#173121] sm:h-7 sm:w-7">
+                        <i class="fa-solid fa-check text-[11px] text-white sm:text-[13px]"></i>
                     </div>
-                    <span class="text-[#4f5a53] font-lora text-[17px] leading-[1.8]">
+                    <span class="font-lora text-[15px] leading-[1.7] text-[#4f5a53] sm:text-[17px] sm:leading-[1.8]">
                         {{ trim($manfaat) }}
                     </span>
                 </div>
@@ -228,15 +226,15 @@
         : ''"
 >
     {{-- Tambah max-h dan overflow-y-auto pada wrapper ini --}}
-    <div class="space-y-4 max-h-[285px] overflow-y-auto pr-1 scrollbar-thin">
+    <div class="max-h-[260px] space-y-4 overflow-y-auto pr-1 scrollbar-thin sm:max-h-[285px]">
 
         @forelse ($produk->testimoni as $testimoni)
-        <div class="bg-white/70 border border-[#ebe3d4] rounded-[24px] p-6 shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-            <div class="flex items-center justify-between mb-3">
+        <div class="rounded-[20px] border border-[#ebe3d4] bg-white/70 p-4 shadow-[0_10px_30px_rgba(0,0,0,0.04)] sm:rounded-[24px] sm:p-6">
+            <div class="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <div class="flex items-center gap-2">
-                    <div class="w-12 h-12 rounded-full overflow-hidden bg-[#173121] flex items-center justify-center text-white font-semibold">
+                    <div class="flex h-11 w-11 items-center justify-center overflow-hidden rounded-full bg-[#173121] font-semibold text-white sm:h-12 sm:w-12">
                         @if ($testimoni->foto)
-                            <img src="{{ asset('images/testimoni/' . $testimoni->foto) }}" alt="{{ $testimoni->nama }}" class="w-full h-full object-cover">
+                            <img src="{{ $testimoni->foto_url }}" alt="{{ $testimoni->nama }}" class="w-full h-full object-cover">
                         @else
                             {{ strtoupper(substr($testimoni->nama, 0, 1)) }}
                         @endif
@@ -245,13 +243,13 @@
                         <h4 class="font-semibold text-[#173121]">{{ $testimoni->nama }}</h4>
                     </div>
                 </div>
-                <div class="flex items-center gap-1 text-[#d8b15a]">
+                <div class="flex items-center gap-1 text-sm text-[#d8b15a] sm:text-base">
                     @for ($i = 1; $i <= 5; $i++)
                         <i class="fa-star {{ $i <= $testimoni->rating ? 'fa-solid' : 'fa-regular' }}"></i>
                     @endfor
                 </div>
             </div>
-            <p class="text-[#5d675f] leading-[1.5]">{{ $testimoni->isi_testimoni }}</p>
+            <p class="text-sm leading-[1.6] text-[#5d675f] sm:text-base sm:leading-[1.5]">{{ $testimoni->isi_testimoni }}</p>
         </div>
         @empty
         <div class="text-center py-10 text-[#7d847e]">Belum ada testimoni untuk produk ini.</div>
@@ -265,16 +263,16 @@
 </div>
 
 {{-- CTA Button --}}
-<div class="flex items-center gap-5 mt-5">
+<div class="mt-5 flex items-center gap-5">
     
-        <a href="#"
-        class="group inline-flex items-center gap-4 px-6 py-2 rounded-full bg-[#173121] text-white shadow-[0_15px_40px_rgba(23,49,33,0.18)] hover:bg-[#214734] transition-colors duration-300"
+        <a href="{{ route('ecommerce') }}"
+        class="group inline-flex w-full items-center justify-between gap-4 rounded-full bg-[#173121] px-5 py-3 text-sm text-white shadow-[0_15px_40px_rgba(23,49,33,0.18)] transition-colors duration-300 hover:bg-[#214734] sm:w-auto sm:justify-center sm:px-6 sm:py-2 sm:text-base"
         style="will-change: transform; transition: background-color 0.3s ease, transform 0.3s ease;"
         onmouseenter="this.style.transform='translateY(-2px)'"
         onmouseleave="this.style.transform='translateY(0)'"
     >
         <span class="font-medium">Beli Sekarang Juga</span>
-        <div class="w-8 h-8 rounded-full bg-[#d8b15a] flex items-center justify-center group-hover:translate-x-1 transition-transform duration-300">
+        <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#d8b15a] transition-transform duration-300 group-hover:translate-x-1">
             <i class="fa-solid fa-arrow-right text-[#173121] text-md"></i>
         </div>
     </a>
@@ -283,17 +281,18 @@
                 </div>
 
                 {{-- PRODUCT IMAGE --}}
-                <div class="produk-img-reveal relative group order-1 {{ $index % 2 == 1 ? 'lg:order-2' : 'lg:order-1' }}">
+                <div class="produk-img-reveal group relative order-1 w-full {{ $index % 2 == 1 ? 'lg:order-2' : 'lg:order-1' }}">
 
                     {{-- Glow Effect — tambah produk-glow --}}
-                    <div class="produk-glow absolute inset-0 rounded-[36px] bg-[#173121]/10 blur-[40px] scale-90"></div>
+                    <div class="produk-glow absolute inset-0 scale-90 rounded-[24px] bg-[#173121]/10 blur-[34px] sm:rounded-[36px] sm:blur-[40px]"></div>
 
                     {{-- Image Wrapper --}}
-                    <div class="relative overflow-hidden rounded-[30px] shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
+                    <div class="relative overflow-hidden rounded-[22px] shadow-[0_24px_60px_rgba(0,0,0,0.12)] sm:rounded-[30px] lg:shadow-[0_30px_80px_rgba(0,0,0,0.12)]">
                         <img
-                            src="{{ asset('images/produk/1776927244.jpg') }}"
-                            alt="Produk Gula Kelapa"
-                            class="w-[800px] h-full lg:h-[520px] object-cover group-hover:scale-105 transition-transform duration-700"
+                            src="{{ $produk->gambar_url }}"
+                            alt="{{ $produk->nama }}"
+                            class="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105 sm:aspect-[16/11] lg:h-[520px] lg:aspect-auto"
+                            onerror="this.src='{{ asset('images/produk/1776927244.jpg') }}'"
                         >
                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     </div>
@@ -313,15 +312,15 @@
     {{-- =========================================================== --}}
     {{-- KEUNGGULAN PRODUK (WHY CHOOSE US)                             --}}
     {{-- =========================================================== --}}
-    <section class="relative overflow-hidden py-13 bg-[#f8f6f1]">
+    <section class="relative overflow-hidden bg-[#f8f6f1] py-12 sm:py-14 lg:py-16">
 
     <div class="absolute top-[-120px] left-[-100px] w-[320px] h-[320px] rounded-full bg-[#173121]/10 blur-[120px]"></div>
     <div class="absolute bottom-[-120px] right-[-100px] w-[320px] h-[320px] rounded-full bg-[#d4ae61]/10 blur-[120px]"></div>
 
-    <div class="relative z-10 max-w-[1350px] mx-auto px-6 lg:px-10">
+    <div class="relative z-10 mx-auto max-w-[1350px] px-4 sm:px-6 lg:px-10">
 
         {{-- Section Header --}}
-        <div class="text-center max-w-4xl mx-auto mb-10">
+        <div class="mx-auto mb-10 max-w-4xl text-center">
 
             <div class="reveal reveal-delay-1 flex items-center justify-center gap-3 mb-2">
                 <div class="line-expand h-[2px] bg-[#d4ae61] rounded-full"></div>
@@ -331,12 +330,11 @@
                 <div class="line-expand h-[2px] bg-[#d4ae61] rounded-full"></div>
             </div>
 
-            <h2 class="reveal reveal-delay-2 font-lora text-[24px] md:text-[32px] lg:text-[42px]
-                        leading-[1.05] tracking-[-0.03em] font-bold text-[#173121] mb-4">
+            <h2 class="reveal reveal-delay-2 mb-4 font-lora text-[28px] font-bold leading-[1.08] tracking-[-0.02em] text-[#173121] md:text-[32px] lg:text-[42px] lg:leading-[1.05]">
                 Mengapa Harus Memilih Produk Kami?
             </h2>
 
-            <p class="reveal reveal-delay-3 text-[#5b665f] text-[18px] leading-[1.7] font-light">
+            <p class="reveal reveal-delay-3 text-sm font-light leading-[1.7] text-[#5b665f] sm:text-base lg:text-[18px]">
                 Setiap butir gula yang kami hasilkan merupakan bentuk komitmen masyarakat
                 Desa Hargorojo terhadap kualitas, kesehatan, dan keberlanjutan lokal.
             </p>
@@ -344,11 +342,11 @@
         </div>
 
         {{-- Benefits Grid --}}
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6 mb-5 mt-2">
+        <div class="mt-2 mb-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-6">
 
             @php
-                $cardClass = 'keunggulan-card group relative bg-white/80 backdrop-blur-xl rounded-[28px] border border-white
-                              p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.05)]
+                $cardClass = 'keunggulan-card group relative bg-white/80 backdrop-blur-xl rounded-[24px] sm:rounded-[28px] border border-white
+                              p-6 sm:p-8 text-center shadow-[0_20px_60px_rgba(0,0,0,0.05)]
                               hover:-translate-y-3 hover:shadow-[0_30px_80px_rgba(0,0,0,0.08)]
                               transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]';
                 $iconWrapClass = 'icon-pop w-20 h-20 mx-auto mb-6 rounded-full border border-[#d8cfbb] bg-[#fdfbf7]

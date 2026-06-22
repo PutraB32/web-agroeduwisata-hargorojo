@@ -7,7 +7,7 @@
 <!-- ===================================================== -->
 <!-- HERO BERITA UTAMA -->
 <!-- ===================================================== -->
-<section class="relative h-[700px] pt-28 overflow-hidden bg-black">
+<section class="relative overflow-hidden bg-black pt-28 pb-10 sm:pt-32 lg:h-[700px] lg:pb-0">
 
     <div class="absolute inset-0">
         <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.png') }}" alt="" class="w-full h-full object-cover scale-110 animate-kenburns">
@@ -15,43 +15,47 @@
         <div class="absolute inset-0 bg-[#173121]/50"></div>
     </div>
 
-    <div class="relative z-20 max-w-[1400px] mx-auto px-4 lg:px-8">
-        <div class="grid lg:grid-cols-[2.1fr_1fr] gap-5">
+    <div class="relative z-20 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid gap-4 lg:grid-cols-[2.1fr_1fr] lg:gap-5">
 
             {{-- BERITA UTAMA — tambah hero-slide-left --}}
-            <a href="#" class="hero-slide-left relative overflow-hidden rounded-[20px] h-[550px] group">
+            <a
+                href="{{ $beritaUtama->external_url ?? '#' }}"
+                @if($beritaUtama->external_url) target="_blank" rel="noopener noreferrer" @else aria-disabled="true" tabindex="-1" @endif
+                class="hero-slide-left relative min-h-[430px] overflow-hidden rounded-[18px] group sm:min-h-[500px] sm:rounded-[20px] lg:h-[550px] lg:min-h-0 {{ $beritaUtama->external_url ? '' : 'pointer-events-none' }}"
+            >
 
                 <img
-                    src="{{ asset('images/katalog/' . $beritaUtama->gambar) }}"
+                    src="{{ $beritaUtama->gambar_url }}"
                     alt="{{ $beritaUtama->judul }}"
                     class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                 >
 
                 <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
 
-                <div class="relative z-10 h-full flex flex-col justify-end p-8 lg:p-12">
+                <div class="relative z-10 flex min-h-[430px] flex-col justify-end p-5 sm:min-h-[500px] sm:p-8 lg:h-full lg:min-h-0 lg:p-12">
 
-                    <span class="hero-fade-up delay-100 inline-flex w-fit px-4 py-2 rounded-[10px] bg-green-700 text-white text-sm font-semibold mb-3">
+                    <span class="hero-fade-up delay-100 mb-3 inline-flex w-fit rounded-[10px] bg-green-700 px-3 py-2 text-xs font-semibold text-white sm:px-4 sm:text-sm">
                         BERITA UTAMA
                     </span>
 
-                    <div class="hero-fade-up delay-200 flex flex-wrap gap-5 text-white/80 text-sm mb-2">
+                    <div class="hero-fade-up delay-200 mb-2 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/80 sm:gap-x-5 sm:text-sm">
                         <span><i class="fa-regular fa-calendar mr-1"></i>{{ $beritaUtama->created_at->translatedFormat('d F Y') }}</span>
                         <span><i class="fa-regular fa-folder mr-1"></i>{{ $beritaUtama->kategoriKatalog->nama_kategori }}</span>
                         <span><i class="fa-solid fa-award mr-1"></i>Berita Pilihan</span>
                     </div>
 
-                    <h1 class="hero-fade-up delay-300 font-lora text-white text-[42px] lg:text-[50px] leading-[1.05] font-medium max-w-2xl">
+                    <h1 class="hero-fade-up delay-300 max-w-2xl font-lora text-[30px] font-medium leading-[1.08] text-white sm:text-[40px] lg:text-[50px] lg:leading-[1.05]">
                         {{ $beritaUtama->judul }}
                     </h1>
 
-                    <p class="hero-fade-up delay-450 mt-2 max-w-2xl text-white/80 italic text-[17px] font-light leading-relaxed">
+                    <p class="hero-fade-up delay-450 mt-3 max-w-2xl text-sm font-light italic leading-relaxed text-white/80 sm:text-base lg:text-[17px]">
                         {{ Str::limit(strip_tags($beritaUtama->deskripsi), 180) }}
                     </p>
 
                     {{-- Button — tambah btn-rise --}}
                     <div class="hero-fade-up delay-600 mt-6">
-                        <span class="btn-rise inline-flex items-center gap-3 px-5 py-3 rounded-2xl bg-green-700 text-white font-semibold cursor-pointer">
+                        <span class="btn-rise inline-flex w-full items-center justify-center gap-3 rounded-2xl px-5 py-3 text-sm font-semibold sm:w-auto sm:text-base {{ $beritaUtama->external_url ? 'cursor-pointer bg-green-700 text-white' : 'cursor-not-allowed bg-white/20 text-white/60' }}">
                             Baca Artikel Lengkap
                             <i class="fa-solid fa-arrow-right"></i>
                         </span>
@@ -62,21 +66,25 @@
             </a>
 
             {{-- SIDEBAR — sidebar-slide dari kanan sudah ada --}}
-            <div class="sidebar-slide bg-white/70 rounded-[15px] p-5 border border-[#ece8df] shadow-[0_15px_40px_rgba(0,0,0,0.05)] h-full flex flex-col justify-center">
+            <div class="sidebar-slide flex h-full flex-col justify-start rounded-[15px] border border-[#d4b254]/30 bg-[#173121]/70 p-4 shadow-[0_15px_40px_rgba(0,0,0,0.16)] backdrop-blur-sm sm:p-5 lg:justify-center">
 
-                <h3 class="sidebar-item font-lora text-[18px] font-bold text-[#173121] mb-5">
+                <h3 class="sidebar-item mb-4 font-lora text-[17px] font-bold text-white sm:mb-5 sm:text-[18px]">
                     Berita Terbaru Lainnya
                 </h3>
 
                 <div class="flex flex-col gap-3">
                     @foreach($sidebarBerita as $berita)
-                    <a href="#" class="sidebar-item flex gap-3 p-2 rounded-[15px] group hover:bg-[#e3e1da] transition-all duration-300">
-                        <img src="{{ asset('images/katalog/' . $berita->gambar) }}" alt="{{ $berita->judul }}" class="w-[120px] h-[80px] rounded-[10px] object-cover flex-shrink-0">
-                        <div class="flex flex-col justify-center">
-                            <h4 class="font-lora text-[15px] leading-[1.3] font-bold text-[#173121] group-hover:text-[#d4b254] transition-colors">
+                    <a
+                        href="{{ $berita->external_url ?? '#' }}"
+                        @if($berita->external_url) target="_blank" rel="noopener noreferrer" @else aria-disabled="true" tabindex="-1" @endif
+                        class="sidebar-item group flex gap-3 rounded-[15px] p-2 transition-all duration-300 hover:bg-white/10 {{ $berita->external_url ? '' : 'pointer-events-none opacity-60' }}"
+                    >
+                        <img src="{{ $berita->gambar_url }}" alt="{{ $berita->judul }}" class="h-[72px] w-[96px] flex-shrink-0 rounded-[10px] object-cover sm:h-[80px] sm:w-[120px]">
+                        <div class="flex min-w-0 flex-col justify-center">
+                            <h4 class="font-lora text-[14px] font-bold leading-[1.35] text-white transition-colors group-hover:text-[#d4b254] sm:text-[15px]">
                                 {{ Str::limit($berita->judul, 75) }}
                             </h4>
-                            <div class="mt-2 text-sm text-[#4c4444]">
+                            <div class="mt-2 text-xs text-white/72 sm:text-sm">
                                 {{ $berita->created_at->translatedFormat('d F Y') }}
                             </div>
                         </div>
@@ -86,7 +94,7 @@
 
                 <div class="sidebar-item mt-5 flex justify-end">
                     {{-- Link — tambah btn-rise --}}
-                    <a href="#" class="btn-rise inline-flex items-center gap-2 text-[#173121] font-semibold hover:text-[#d4b254] transition-colors duration-300">
+                    <a href="#" class="btn-rise inline-flex items-center gap-2 text-sm font-semibold text-white transition-colors duration-300 hover:text-[#d4b254] sm:text-base">
                         <span>Lihat Semua Berita</span>
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
@@ -102,73 +110,35 @@
 <!-- ===================================================== -->
 <!-- STATISTIK KATALOG DESA -->
 <!-- ===================================================== -->
-<section class="py-10 bg-[#f8f8f6]">
-    <div class="max-w-[1400px] mx-auto px-2 md:px-6 lg:px-8">
+<section class="bg-[#f8f8f6] py-8 sm:py-10">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         {{-- Box utama — box-scale-in --}}
         <div class="
             box-scale-in
-            bg-white rounded-[25px]
+            bg-white rounded-[20px] sm:rounded-[25px]
             shadow-[0_10px_30px_rgba(0,0,0,0.04)]
-            grid grid-cols-2 lg:grid-cols-4
+            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
             overflow-hidden
         ">
 
-            {{-- ITEM 1 --}}
-            <div class="stat-card stat-card-delay-1 flex items-center gap-5 p-6 lg:p-8">
-                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#D97706] flex items-center justify-center shrink-0">
-                    <i class="fa-solid fa-bullhorn text-white text-[25px]"></i>
-                </div>
-                <div>
-                    <div data-count="12" class="font-display text-[30px] font-semibold leading-none text-[#111]">
-                        12
+            @foreach($statistikKatalog as $statistik)
+                <div class="stat-card {{ $statistik['delayClass'] }} flex min-w-0 items-center gap-4 p-4 sm:p-5 lg:p-8">
+                    <div
+                        class="stat-icon-pop flex h-12 w-12 shrink-0 items-center justify-center rounded-full sm:h-15 sm:w-15"
+                        style="background-color: {{ $statistik['color'] }}"
+                    >
+                        <i class="{{ $statistik['icon'] }} text-[20px] text-white sm:text-[25px]"></i>
                     </div>
-                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Pengumuman</div>
-                    <p class="text-sm text-[#666]">Informasi terbaru desa</p>
-                </div>
-            </div>
-
-            {{-- ITEM 2 --}}
-            <div class="stat-card stat-card-delay-2 flex items-center gap-5 p-6 lg:p-8">
-                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#2563EB] flex items-center justify-center shrink-0">
-                    <i class="fa-regular fa-newspaper text-white text-[25px]"></i>
-                </div>
-                <div>
-                    <div data-count="58" class="font-display text-[30px] font-semibold leading-none text-[#111]">
-                        58
+                    <div class="min-w-0">
+                        <div data-count="{{ $statistik['count'] }}" class="font-display text-[26px] font-semibold leading-none text-[#111] sm:text-[30px]">
+                            {{ $statistik['count'] }}
+                        </div>
+                        <div class="font-lora text-[18px] font-bold leading-tight text-[#111] sm:text-[20px]">{{ $statistik['label'] }}</div>
+                        <p class="text-xs leading-relaxed text-[#666] sm:text-sm">{{ $statistik['description'] }}</p>
                     </div>
-                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Artikel & Berita</div>
-                    <p class="text-sm text-[#666]">Cerita dan kegiatan desa</p>
                 </div>
-            </div>
-
-            {{-- ITEM 3 --}}
-            <div class="stat-card stat-card-delay-3 flex items-center gap-5 p-6 lg:p-8">
-                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#7C3AED] flex items-center justify-center shrink-0">
-                    <i class="fa-regular fa-file-lines text-white text-[25px]"></i>
-                </div>
-                <div>
-                    <div data-count="35" class="font-display text-[30px] font-semibold leading-none text-[#111]">
-                        35
-                    </div>
-                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Perpustakaan Desa</div>
-                    <p class="text-sm text-[#666]">Arsip & buku desa</p>
-                </div>
-            </div>
-
-            {{-- ITEM 4 --}}
-            <div class="stat-card stat-card-delay-4 flex items-center gap-5 p-6 lg:p-8">
-                <div class="stat-icon-pop w-15 h-15 rounded-full bg-[#5B8F5B] flex items-center justify-center shrink-0">
-                    <i class="fa-regular fa-image text-white text-[25px]"></i>
-                </div>
-                <div>
-                    <div data-count="120" class="font-display text-[30px] font-semibold leading-none text-[#111]">
-                        120
-                    </div>
-                    <div class="font-lora text-[20px] font-bold leading-tight text-[#111]">Galeri Desa</div>
-                    <p class="text-sm text-[#666]">Momen kegiatan desa</p>
-                </div>
-            </div>
+            @endforeach
 
         </div>
 
@@ -181,24 +151,24 @@
 <!-- PENGUMUMAN DESA -->
 <!-- ===================================================== -->
 {{-- Tambah pengumuman-section --}}
-<section class="pengumuman-section py-5">
+<section class="pengumuman-section py-8 sm:py-10">
 
-    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+        <div class="mb-6 flex flex-col gap-5 sm:mb-8 md:flex-row md:items-center md:justify-between">
 
-            <div class="reveal reveal-delay-1 flex items-center gap-4">
+            <div class="reveal reveal-delay-1 flex items-start gap-3 sm:items-center sm:gap-4">
 
-                <div class="w-15 h-15 rounded-full bg-[#D97706] flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-bullhorn text-white text-[25px]"></i>
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#D97706] shadow-md sm:h-15 sm:w-15">
+                    <i class="fa-solid fa-bullhorn text-[20px] text-white sm:text-[25px]"></i>
                 </div>
 
-                <div>
-                    <h2 class="font-lora text-[36px] md:text-[25px] font-bold text-[#173121] leading-none">
+                <div class="min-w-0">
+                    <h2 class="font-lora text-[28px] font-bold leading-tight text-[#173121] sm:text-[34px] md:text-[36px]">
                         Pengumuman
                     </h2>
-                    <p class="text-[#6b736d] mt-1">
+                    <p class="mt-1 text-sm leading-relaxed text-[#6b736d] sm:text-base">
                         Informasi penting dan pengumuman terbaru dari Desa Hargorojo
                     </p>
                 </div>
@@ -210,50 +180,27 @@
         <!-- PENGUMUMAN -->
         <div class="relative">
 
-            {{-- Nav buttons — tambah nav-btn-reveal --}}
-            <button id="prevPengumuman" class="
-                nav-btn-reveal
-                hidden lg:flex
-                absolute left-[-50px] top-1/2 -translate-y-1/2 z-10
-                w-12 h-12 rounded-full bg-white shadow-lg
-                items-center justify-center text-[#173121]
-                hover:bg-[#173121] hover:text-white transition-all
-            ">
-                <i class="fa-solid fa-chevron-left"></i>
-            </button>
-
-            <button id="nextPengumuman" class="
-                nav-btn-reveal
-                hidden lg:flex
-                absolute right-[-55px] top-1/2 -translate-y-1/2 z-10
-                w-12 h-12 rounded-full bg-white shadow-lg
-                items-center justify-center text-[#173121]
-                hover:bg-[#173121] hover:text-white transition-all
-            ">
-                <i class="fa-solid fa-chevron-right"></i>
-            </button>
-
             @if($pengumuman->count())
 
-            <div id="pengumumanContainer" class="flex gap-5 overflow-x-auto scroll-smooth no-scrollbar pb-4">
+            <div id="pengumumanContainer" class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
 
                 @foreach($pengumuman as $item)
 
                 {{-- Tambah pengumuman-card --}}
                 <div class="
                     pengumuman-card
-                    flex-shrink-0 w-[350px]
-                    bg-white rounded-[24px]
+                    h-full w-full
+                    bg-white rounded-[20px] sm:rounded-[24px]
                     border border-[#ececec]
                     shadow-[0_8px_25px_rgba(0,0,0,0.04)]
-                    p-5 relative
+                    p-4 sm:p-5 relative
                     hover:-translate-y-1 hover:shadow-lg
                     transition-all duration-300
                 ">
 
                     {{-- Date badge — tambah date-badge-pop --}}
-                    <div class="date-badge-pop absolute top-5 left-5 w-[52px] h-[58px] rounded-xl bg-[#f8f8f6] border flex flex-col items-center justify-center">
-                        <span class="text-[20px] font-bold text-[#173121]">
+                    <div class="date-badge-pop absolute left-4 top-4 flex h-[52px] w-[48px] flex-col items-center justify-center rounded-xl border bg-[#f8f8f6] sm:left-5 sm:top-5 sm:h-[58px] sm:w-[52px]">
+                        <span class="text-[18px] font-bold text-[#173121] sm:text-[20px]">
                             {{ $item->created_at->format('d') }}
                         </span>
                         <span class="text-[10px] uppercase text-[#6b736d]">
@@ -262,22 +209,29 @@
                     </div>
 
                     {{-- Icon — tambah pengumuman-icon --}}
-                    <div class="pengumuman-icon w-16 h-16 mx-auto mt-2 mb-5 rounded-full bg-[#FFF7ED] flex items-center justify-center">
-                        <i class="fa-solid fa-bullhorn text-[#D97706] text-2xl"></i>
+                    <div class="pengumuman-icon mx-auto mb-4 mt-2 flex h-14 w-14 items-center justify-center rounded-full bg-[#FFF7ED] sm:mb-5 sm:h-16 sm:w-16">
+                        <i class="fa-solid fa-bullhorn text-xl text-[#D97706] sm:text-2xl"></i>
                     </div>
 
-                    <h3 class="font-lora min-h-[80px] text-[20px] font-bold text-center text-[#173121] leading-tight">
+                    <h3 class="min-h-[72px] text-center font-lora text-[18px] font-bold leading-tight text-[#173121] sm:min-h-[80px] sm:text-[20px]">
                         {{ $item->judul }}
                     </h3>
 
-                    <p class="text-center text-[#6b736d] min-h-[100px] text-[15px] leading-relaxed mb-2">
+                    <p class="mb-2 min-h-[92px] text-center text-sm leading-relaxed text-[#6b736d] sm:min-h-[100px] sm:text-[15px]">
                         {{ \Illuminate\Support\Str::limit($item->deskripsi, 150) }}
                     </p>
 
-                    <a href="#" class="flex justify-center items-center gap-2 text-[#5d8c5a] font-semibold hover:text-[#173121] transition-colors">
-                        Selengkapnya
-                        <i class="fa-solid fa-arrow-right"></i>
-                    </a>
+                    @if($item->external_url)
+                        <a href="{{ $item->external_url }}" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 text-sm font-semibold text-[#5d8c5a] transition-colors hover:text-[#173121] sm:text-base">
+                            Selengkapnya
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    @else
+                        <span class="flex cursor-not-allowed items-center justify-center gap-2 text-sm font-semibold text-[#5d8c5a]/45 sm:text-base" aria-disabled="true">
+                            Selengkapnya
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </span>
+                    @endif
 
                 </div>
 
@@ -287,8 +241,8 @@
 
             @else
 
-            <div class="bg-white rounded-[24px] border border-dashed border-gray-300 py-16 px-8 text-center">
-                <div class="w-16 h-16 mx-auto mb-5 rounded-full bg-gray-100 flex items-center justify-center">
+            <div class="rounded-[20px] border border-dashed border-gray-300 bg-white px-5 py-12 text-center sm:rounded-[24px] sm:px-8 sm:py-16">
+                <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100">
                     <i class="fa-solid fa-bullhorn text-2xl text-gray-400"></i>
                 </div>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Belum Ada Pengumuman</h3>
@@ -307,24 +261,24 @@
 <!-- ===================================================== -->
 <!-- ARTIKEL & BERITA -->
 <!-- ===================================================== -->
-<section class="artikel-section py-12">
+<section class="artikel-section py-10 sm:py-12">
 
-    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-5 mb-8">
+        <div class="mb-6 flex flex-col gap-5 sm:mb-8 md:flex-row md:items-center md:justify-between">
 
-            <div class="reveal reveal-delay-1 flex items-center gap-4">
+            <div class="reveal reveal-delay-1 flex items-start gap-3 sm:items-center sm:gap-4">
 
-                <div class="w-15 h-15 rounded-full bg-[#2563EB] flex items-center justify-center shadow-md">
-                    <i class="fa-regular fa-newspaper text-white text-2xl"></i>
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#2563EB] shadow-md sm:h-15 sm:w-15">
+                    <i class="fa-regular fa-newspaper text-xl text-white sm:text-2xl"></i>
                 </div>
 
-                <div>
-                    <h2 class="font-lora text-[36px] md:text-[25px] font-bold text-[#173121] leading-none">
+                <div class="min-w-0">
+                    <h2 class="font-lora text-[28px] font-bold leading-tight text-[#173121] sm:text-[34px] md:text-[36px]">
                         Artikel & Berita
                     </h2>
-                    <p class="text-[#6b736d] mt-1">
+                    <p class="mt-1 text-sm leading-relaxed text-[#6b736d] sm:text-base">
                         Berita terkini seputar kegiatan dan perkembangan Desa Hargorojo
                     </p>
                 </div>
@@ -334,7 +288,7 @@
         </div>
 
         <!-- ARTICLE GRID -->
-        <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-4">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
 
             @forelse($artikelBerita as $artikel)
 
@@ -342,7 +296,7 @@
             <article class="
                 artikel-card
                 relative
-                bg-white rounded-[15px] overflow-hidden
+                bg-white rounded-[14px] sm:rounded-[15px] overflow-hidden
                 border border-[#ececec]
                 shadow-[0_8px_25px_rgba(0,0,0,0.04)]
                 hover:-translate-y-1 hover:shadow-lg
@@ -352,15 +306,15 @@
 
                 {{-- Image — tambah artikel-img --}}
                 <img
-                    src="{{ $artikel->gambar ? asset('images/katalog/' . $artikel->gambar) : asset('images/default-article.jpg') }}"
+                    src="{{ $artikel->gambar ? $artikel->gambar_url : asset('images/default-article.jpg') }}"
                     alt=""
-                    class="artikel-img w-full h-[220px] object-cover transition-all duration-900"
+                    class="artikel-img h-[190px] w-full object-cover transition-all duration-900 sm:h-[220px]"
                 >
 
-                <div class="p-5">
+                <div class="p-4 sm:p-5">
 
                     {{-- Date — tambah artikel-date --}}
-                    <div class="artikel-date text-sm text-[#6b736d] mb-2">
+                    <div class="artikel-date mb-2 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-[#6b736d] sm:text-sm">
                         <i class="fa-regular fa-calendar"></i>
                         <span>{{ $artikel->created_at->translatedFormat('d F Y') }}</span>
                         <span>•</span>
@@ -368,13 +322,33 @@
                         <span>{{ $artikel->created_at->format('H.i') }} WIB</span>
                     </div>
 
-                    <h3 class="font-lora text-[20px] font-bold text-[#173121] leading-snug min-h-[90px] line-clamp-3 mb-2">
+                    <h3 class="mb-2 font-lora text-[18px] font-bold leading-snug text-[#173121] line-clamp-3 sm:min-h-[90px] sm:text-[20px]">
                         {{ $artikel->judul }}
                     </h3>
 
-                    <p class="text-[#6b736d] text-[15px] leading-relaxed min-h-[72px] line-clamp-3">
+                    <p class="text-sm leading-relaxed text-[#6b736d] line-clamp-3 sm:min-h-[72px] sm:text-[15px]">
                         {{ Str::limit(strip_tags($artikel->deskripsi), 140) }}
                     </p>
+
+                    @if($artikel->external_url)
+                        <a
+                            href="{{ $artikel->external_url }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#173121] px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-[#224430] sm:w-auto"
+                        >
+                            Selengkapnya
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </a>
+                    @else
+                        <span
+                            class="mt-5 inline-flex w-full cursor-not-allowed items-center justify-center gap-2 rounded-xl bg-[#173121]/35 px-4 py-3 text-sm font-semibold text-white/70 sm:w-auto"
+                            aria-disabled="true"
+                        >
+                            Selengkapnya
+                            <i class="fa-solid fa-arrow-right text-xs"></i>
+                        </span>
+                    @endif
 
                 </div>
 
@@ -382,12 +356,12 @@
 
             @empty
 
-            <div class="col-span-full py-16 text-center">
-                <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#f8f6f1] flex items-center justify-center">
-                    <i class="fa-regular fa-newspaper text-3xl text-[#173121]"></i>
+            <div class="col-span-full py-12 text-center sm:py-16">
+                <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#f8f6f1] sm:h-20 sm:w-20">
+                    <i class="fa-regular fa-newspaper text-2xl text-[#173121] sm:text-3xl"></i>
                 </div>
-                <h3 class="font-lora text-2xl font-bold text-[#173121] mb-2">Belum Ada Artikel</h3>
-                <p class="text-[#6b736d]">Artikel dan berita terbaru desa akan tampil di sini.</p>
+                <h3 class="mb-2 font-lora text-xl font-bold text-[#173121] sm:text-2xl">Belum Ada Artikel</h3>
+                <p class="text-sm text-[#6b736d] sm:text-base">Artikel dan berita terbaru desa akan tampil di sini.</p>
             </div>
 
             @endforelse
@@ -402,22 +376,22 @@
 <!-- ===================================================== -->
 <!-- PERPUSTAKAAN DESA -->
 <!-- ===================================================== -->
-<section class="perpus-section py-10">
+<section class="perpus-section py-8 sm:py-10">
 
-    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+        <div class="mb-6 flex flex-col gap-5 sm:mb-8 lg:flex-row lg:items-center lg:justify-between">
 
-            <div class="reveal reveal-delay-1 flex items-center gap-4">
-                <div class="w-15 h-15 rounded-full bg-[#7C3AED] flex items-center justify-center shadow-md">
-                    <i class="fa-solid fa-book-open text-white text-[28px]"></i>
+            <div class="reveal reveal-delay-1 flex items-start gap-3 sm:items-center sm:gap-4">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#7C3AED] shadow-md sm:h-15 sm:w-15">
+                    <i class="fa-solid fa-book-open text-[22px] text-white sm:text-[28px]"></i>
                 </div>
-                <div>
-                    <h2 class="font-lora text-[28px] md:text-[25px] font-bold text-[#173121] leading-none">
+                <div class="min-w-0">
+                    <h2 class="font-lora text-[28px] font-bold leading-tight text-[#173121] sm:text-[34px] md:text-[36px]">
                         Perpustakaan Desa
                     </h2>
-                    <p class="text-[#6B736D] mt-1">Koleksi buku, dokumen, dan literatur desa</p>
+                    <p class="mt-1 text-sm leading-relaxed text-[#6B736D] sm:text-base">Koleksi buku, dokumen, dan literatur desa</p>
                 </div>
             </div>
 
@@ -433,7 +407,7 @@
         @endphp
 
         <!-- GRID -->
-        <div class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-4 xl:gap-6">
 
             @forelse($perpustakaan as $index => $item)
 
@@ -442,32 +416,32 @@
             {{-- Tambah perpus-card + delay --}}
             <div class="
                 perpus-card perpus-card-delay-{{ ($index % 4) + 1 }}
-                {{ $theme['card'] }} border rounded-[28px] p-6
+                {{ $theme['card'] }} border rounded-[22px] sm:rounded-[28px] p-5 sm:p-6
                 shadow-[0_8px_25px_rgba(0,0,0,0.04)]
                 hover:-translate-y-1 hover:shadow-lg
                 transition-all duration-300
-                flex flex-col min-h-[280px]
+                flex flex-col min-h-[240px] sm:min-h-[280px]
             ">
 
-                <div class="flex gap-5 flex-1 mb-6">
+                <div class="mb-5 flex flex-1 gap-4 sm:mb-6 sm:gap-5">
 
                     {{-- Icon box — tambah perpus-icon --}}
-                    <div class="perpus-icon w-[60px] h-[60px] rounded-[20px] {{ $theme['icon_bg'] }} flex items-center justify-center shrink-0">
-                        <i class="fa-solid {{ $theme['icon'] }} {{ $theme['text'] }} text-[28px]"></i>
+                    <div class="perpus-icon flex h-12 w-12 shrink-0 items-center justify-center rounded-[16px] {{ $theme['icon_bg'] }} sm:h-[60px] sm:w-[60px] sm:rounded-[20px]">
+                        <i class="fa-solid {{ $theme['icon'] }} {{ $theme['text'] }} text-[22px] sm:text-[28px]"></i>
                     </div>
 
-                    <div class="flex-1">
+                    <div class="min-w-0 flex-1">
 
                         {{-- Label — tambah perpus-label --}}
                         <span class="perpus-label text-[12px] font-bold uppercase tracking-wide {{ $theme['text'] }}">
                             {{ $theme['label'] }}
                         </span>
 
-                        <h3 class="mt-2 font-lora text-[18px] font-bold text-[#173121] leading-tight line-clamp-3 min-h-[60px]">
+                        <h3 class="mt-2 font-lora text-[17px] font-bold leading-tight text-[#173121] line-clamp-3 sm:min-h-[60px] sm:text-[18px]">
                             {{ $item->judul }}
                         </h3>
 
-                        <p class="mt-2 text-[#6B736D] text-[14px] leading-relaxed line-clamp-3 min-h-[42px]">
+                        <p class="mt-2 text-[13px] leading-relaxed text-[#6B736D] line-clamp-3 sm:min-h-[42px] sm:text-[14px]">
                             {{ Str::limit(strip_tags($item->deskripsi), 90) }}
                         </p>
 
@@ -475,25 +449,31 @@
 
                 </div>
 
-                @if($item->Url)
+                @if($item->external_url)
                 {{-- Button — tambah perpus-arrow pada icon --}}
-                <a href="{{ $item->Url }}" target="_blank" class="mt-auto inline-flex items-center gap-2 font-semibold text-[#173121] hover:gap-3 transition-all duration-300">
+                <a href="{{ $item->external_url }}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-[#173121] transition-all duration-300 hover:gap-3 sm:text-base">
                     <span class="w-2 h-2 rounded-full {{ $theme['text'] }}"></span>
                     Lihat Koleksi
                     <i class="perpus-arrow fa-solid fa-arrow-right"></i>
                 </a>
+                @else
+                <span class="mt-auto inline-flex cursor-not-allowed items-center gap-2 text-sm font-semibold text-[#173121]/35 sm:text-base" aria-disabled="true">
+                    <span class="w-2 h-2 rounded-full {{ $theme['text'] }}"></span>
+                    Lihat Koleksi
+                    <i class="fa-solid fa-arrow-right"></i>
+                </span>
                 @endif
 
             </div>
 
             @empty
 
-            <div class="col-span-full text-center py-16">
-                <div class="w-20 h-20 mx-auto mb-5 rounded-full bg-[#F8F6F1] flex items-center justify-center">
-                    <i class="fa-solid fa-book-open text-[#173121] text-3xl"></i>
+            <div class="col-span-full py-12 text-center sm:py-16">
+                <div class="mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-[#F8F6F1] sm:h-20 sm:w-20">
+                    <i class="fa-solid fa-book-open text-2xl text-[#173121] sm:text-3xl"></i>
                 </div>
-                <h3 class="font-lora text-2xl font-bold text-[#173121] mb-2">Belum Ada Koleksi</h3>
-                <p class="text-[#6B736D]">Koleksi perpustakaan desa akan tampil di sini.</p>
+                <h3 class="mb-2 font-lora text-xl font-bold text-[#173121] sm:text-2xl">Belum Ada Koleksi</h3>
+                <p class="text-sm text-[#6B736D] sm:text-base">Koleksi perpustakaan desa akan tampil di sini.</p>
             </div>
 
             @endforelse
@@ -507,22 +487,22 @@
 <!-- ===================================================== -->
 <!-- GALERI DESA -->
 <!-- ===================================================== -->
-<section class="galeri-katalog-section py-12 bg-[#faf9f6]">
+<section class="galeri-katalog-section bg-[#faf9f6] py-10 sm:py-12">
 
-    <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
+    <div class="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-8">
+        <div class="mb-6 flex flex-col gap-5 sm:mb-8 lg:flex-row lg:items-center lg:justify-between">
 
-            <div class="reveal reveal-delay-1 flex items-center gap-4">
-                <div class="w-15 h-15 rounded-full bg-[#5B8F5B] flex items-center justify-center shadow-md">
-                    <i class="fa-regular fa-image text-white text-[28px]"></i>
+            <div class="reveal reveal-delay-1 flex items-start gap-3 sm:items-center sm:gap-4">
+                <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#5B8F5B] shadow-md sm:h-15 sm:w-15">
+                    <i class="fa-regular fa-image text-[22px] text-white sm:text-[28px]"></i>
                 </div>
-                <div>
-                    <h2 class="font-lora text-[28px] md:text-[25px] font-bold text-[#173121] leading-none">
+                <div class="min-w-0">
+                    <h2 class="font-lora text-[28px] font-bold leading-tight text-[#173121] sm:text-[34px] md:text-[36px]">
                         Galeri Desa
                     </h2>
-                    <p class="text-[#6B736D] mt-1">Potret kehidupan, budaya, dan keindahan Desa Hargorojo</p>
+                    <p class="mt-1 text-sm leading-relaxed text-[#6B736D] sm:text-base">Potret kehidupan, budaya, dan keindahan Desa Hargorojo</p>
                 </div>
             </div>
 
@@ -532,13 +512,13 @@
 
             @php $hero = $galeri->first(); @endphp
 
-            <div class="grid lg:grid-cols-2 gap-2">
+            <div class="grid gap-3 lg:grid-cols-2">
 
                 {{-- HERO IMAGE — galeri-katalog-hero + galeri-tint --}}
-                <div class="galeri-katalog-hero galeri-tint relative overflow-hidden rounded-[20px] group min-h-[500px]">
+                <div class="galeri-katalog-hero galeri-tint group relative min-h-[340px] overflow-hidden rounded-[18px] sm:min-h-[420px] sm:rounded-[20px] lg:min-h-[500px]">
 
                     <img
-                        src="{{ asset('images/katalog/' . $hero->gambar) }}"
+                        src="{{ $hero->gambar_url }}"
                         alt="{{ $hero->judul }}"
                         class="galeri-zoom w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                     >
@@ -546,11 +526,11 @@
                     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
 
                     {{-- Caption — galeri-caption --}}
-                    <div class="galeri-caption absolute bottom-8 left-8 right-8">
-                        <h3 class="font-lora text-white/80 text-[28px] md:text-[35px] font-bold leading-tight">
+                    <div class="galeri-caption absolute bottom-5 left-5 right-5 sm:bottom-8 sm:left-8 sm:right-8">
+                        <h3 class="font-lora text-[24px] font-bold leading-tight text-white/80 sm:text-[28px] md:text-[35px]">
                             {{ $hero->judul }}
                         </h3>
-                        <p class="text-white/70 leading-relaxed max-w-[600px]">
+                        <p class="mt-2 max-w-[600px] text-sm leading-relaxed text-white/70 sm:text-base">
                             {{ Str::limit(strip_tags($hero->deskripsi), 140) }}
                         </p>
                     </div>
@@ -558,15 +538,15 @@
                 </div>
 
                 {{-- SMALL GRID --}}
-                <div class="grid sm:grid-cols-2 gap-2">
+                <div class="grid gap-3 sm:grid-cols-2">
 
                     @foreach($galeri->skip(1)->take(4) as $item)
 
                     {{-- Tambah galeri-katalog-item + galeri-tint --}}
-                    <div class="galeri-katalog-item galeri-tint relative overflow-hidden rounded-[20px] group min-h-[240px]">
+                    <div class="galeri-katalog-item galeri-tint group relative min-h-[190px] overflow-hidden rounded-[18px] sm:min-h-[220px] sm:rounded-[20px] lg:min-h-[240px]">
 
                         <img
-                            src="{{ asset('images/katalog/' . $item->gambar) }}"
+                            src="{{ $item->gambar_url }}"
                             alt="{{ $item->judul }}"
                             class="galeri-zoom w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                         >
@@ -574,8 +554,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent"></div>
 
                         {{-- Caption — galeri-caption --}}
-                        <div class="galeri-caption absolute bottom-6 left-6 right-6">
-                            <h4 class="font-lora text-white text-[20px] font-bold leading-tight line-clamp-2">
+                        <div class="galeri-caption absolute bottom-5 left-5 right-5 sm:bottom-6 sm:left-6 sm:right-6">
+                            <h4 class="font-lora text-[18px] font-bold leading-tight text-white line-clamp-2 sm:text-[20px]">
                                 {{ $item->judul }}
                             </h4>
                         </div>
@@ -590,12 +570,12 @@
 
         @else
 
-            <div class="text-center py-20">
-                <div class="w-24 h-24 mx-auto mb-6 rounded-full bg-[#F8F6F1] flex items-center justify-center">
-                    <i class="fa-solid fa-camera-retro text-[#173121] text-4xl"></i>
+            <div class="py-16 text-center sm:py-20">
+                <div class="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-[#F8F6F1] sm:h-24 sm:w-24">
+                    <i class="fa-solid fa-camera-retro text-3xl text-[#173121] sm:text-4xl"></i>
                 </div>
-                <h3 class="font-lora text-[28px] font-bold text-[#173121] mb-3">Belum Ada Galeri</h3>
-                <p class="text-[#6B736D] max-w-[500px] mx-auto">
+                <h3 class="mb-3 font-lora text-2xl font-bold text-[#173121] sm:text-[28px]">Belum Ada Galeri</h3>
+                <p class="mx-auto max-w-[500px] text-sm leading-relaxed text-[#6B736D] sm:text-base">
                     Dokumentasi kegiatan dan potret kehidupan Desa Hargorojo akan tampil di sini.
                 </p>
             </div>
@@ -606,33 +586,5 @@
 
 </section>
 
-
-<script>
-    const container = document.getElementById('pengumumanContainer');
-
-    if (container) {
-
-        document.getElementById('nextPengumuman')
-            ?.addEventListener('click', () => {
-
-                container.scrollBy({
-                    left: 340,
-                    behavior: 'smooth'
-                });
-
-            });
-
-        document.getElementById('prevPengumuman')
-            ?.addEventListener('click', () => {
-
-                container.scrollBy({
-                    left: -340,
-                    behavior: 'smooth'
-                });
-
-            });
-
-    }
-</script>
 
 @endsection
