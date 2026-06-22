@@ -7,7 +7,7 @@
 <!-- ===================================================== -->
 <!-- HERO SECTION -->
 <!-- ===================================================== -->
-<section class="relative h-[630px] overflow-hidden bg-black">
+<section class="relative min-h-[560px] overflow-hidden bg-black sm:min-h-[630px]">
 
     <!-- BACKGROUND -->
     <div class="absolute inset-0">
@@ -30,7 +30,7 @@
 
     </div>
     <!-- CONTENT -->
-<div class="relative z-20 h-full flex items-center justify-center px-6 text-center">
+<div class="relative z-20 flex min-h-[560px] items-center justify-center px-4 text-center sm:min-h-[630px] sm:px-6">
     <div class="max-w-6xl mx-auto">
 
         <!-- TOP LABEL — fade-up seperti sebelumnya -->
@@ -78,7 +78,7 @@
 <!-- ===================================================== -->
 <!-- SEJARAH DESA -->
 <!-- ===================================================== -->
-<section class="sejarah-section relative -mt-px py-17 overflow-hidden bg-[#ffffff]">
+<section class="sejarah-section relative -mt-px py-12 sm:py-[4.25rem] overflow-hidden bg-[#ffffff]">
 
     <div class="absolute inset-x-0 top-0 z-[1] h-12 bg-white"></div>
     <div class="absolute inset-x-0 top-12 bottom-0 opacity-[0.04] bg-[url('/images/pattern/pattern-line.png')] bg-repeat"></div>
@@ -97,7 +97,7 @@
                 </div>
 
                 {{-- Title — slide-left delay 2 --}}
-                <h2 class="slide-left slide-left-delay-2 font-lora text-[48px] md:text-[50px] leading-[1] tracking-[-0.03em] font-bold text-[#173121] mb-5">
+                <h2 class="slide-left slide-left-delay-2 font-lora text-[34px] sm:text-[42px] md:text-[50px] leading-[1] tracking-[-0.03em] font-bold text-[#173121] mb-5">
                     Mengenal Desa Wisata
                     <br>
                     Hargorojo
@@ -122,20 +122,20 @@
             <div class="relative">
 
                 {{-- Dot decor — tambah dot-float --}}
-                <div class="dot-float absolute -right-10 top-20 w-32 h-32 opacity-40 bg-[radial-gradient(#b9ab83_1.5px,transparent_1.5px)] [background-size:16px_16px]"></div>
+                <div class="dot-float absolute -right-10 top-20 hidden w-32 h-32 lg:block opacity-40 bg-[radial-gradient(#b9ab83_1.5px,transparent_1.5px)] [background-size:16px_16px]"></div>
 
                 {{-- Image wrapper — tambah img-reveal-overlay --}}
                 <div class="relative rounded-[30px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.12)] group">
                     <img
                         src="{{ asset('images/assets foto/section_sejarah desa.jpeg') }}"
                         alt="Sejarah Desa"
-                        class="img-slide-right w-full h-[620px] object-cover group-hover:scale-105 transition-transform duration-700">
+                        class="img-slide-right h-[360px] w-full sm:h-[480px] lg:h-[620px] object-cover group-hover:scale-105 transition-transform duration-700">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-black/10 to-transparent"></div>
 
                 </div>
 
                 {{-- Floating card — tambah float-card-pop --}}
-                <div class="float-card-pop absolute -bottom-10 -right-8 w-[290px] rounded-[25px] bg-gradient-to-br from-[#173121] to-[#1c4932] p-7 border border-white/10 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
+                <div class="float-card-pop relative z-10 ml-auto mt-[-4rem] w-[min(100%,290px)] sm:absolute sm:-bottom-10 sm:-right-8 sm:mt-0 rounded-[25px] bg-gradient-to-br from-[#173121] to-[#1c4932] p-7 border border-white/10 backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.25)]">
                     <h3 class="text-white text-[28px] leading-[1.2] font-semibold mb-3">
                         Cerita dari Tradisi Desa
                     </h3>
@@ -156,7 +156,7 @@
 <!-- ===================================================== -->
 <!-- VISI MISI -->
 <!-- ===================================================== -->
-<section class="visimisi-section relative py-13 overflow-hidden bg-[#f8f6f1]">
+<section class="visimisi-section relative py-12 sm:py-[3.25rem] overflow-hidden bg-[#f8f6f1]">
 
     <div class="absolute inset-0 opacity-[0.0] bg-[url('/images/pattern/pattern-line.png')] bg-repeat"></div>
 
@@ -166,7 +166,7 @@
         <div class="text-center mb-8">
 
             {{-- Title — reveal --}}
-            <h2 class="reveal reveal-delay-1 font-lora text-[50px] md:text-[50px] leading-[0.95] tracking-[-0.03em] font-bold text-[#173121] mb-3">
+            <h2 class="reveal reveal-delay-1 font-lora text-[36px] sm:text-[44px] md:text-[50px] leading-[0.95] tracking-[-0.03em] font-bold text-[#173121] mb-3">
                 Visi & Misi Kami
             </h2>
 
@@ -185,13 +185,13 @@
 
                 {{-- TOP BAR — tambah bar-expand, hilangkan rounded agar expand smooth --}}
                 <div class="overflow-hidden">
-                    <div class="bar-expand flex items-center px-10 py-5 bg-gradient-to-r from-[#173121] to-[#205239]">
-                        <h3 class="font-lora text-[32px] font-bold text-white tracking-[-0.01em]">Visi</h3>
+                    <div class="bar-expand flex items-center px-6 py-5 sm:px-10 bg-gradient-to-r from-[#173121] to-[#205239]">
+                        <h3 class="font-lora text-[28px] font-bold sm:text-[32px] text-white tracking-[-0.01em]">Visi</h3>
                     </div>
                 </div>
 
                 <!-- CONTENT -->
-                <div class="px-8 py-25 min-h-(500px) flex flex-col items-center justify-center text-center">
+                <div class="flex min-h-[360px] flex-col items-center justify-center px-6 py-12 text-center sm:min-h-[500px] sm:px-8 sm:py-[6.25rem]">
                     <p class="font-lora italic text-[#3f4a43] text-[18px] leading-[2]">
                         "Terwujudnya Desa Hargorojo sebagai
                         desa agroeduwisata unggulan yang
@@ -211,14 +211,14 @@
 
                 {{-- TOP BAR — tambah bar-expand --}}
                 <div class="overflow-hidden">
-                    <div class="bar-expand flex px-10 py-5 bg-gradient-to-r from-[#8d784c] to-[#bda061]">
-                        <h3 class="font-lora text-[32px] font-bold text-white tracking-[-0.01em]">Misi</h3>
+                    <div class="bar-expand flex px-6 py-5 sm:px-10 bg-gradient-to-r from-[#8d784c] to-[#bda061]">
+                        <h3 class="font-lora text-[28px] font-bold sm:text-[32px] text-white tracking-[-0.01em]">Misi</h3>
                     </div>
                 </div>
 
                 <!-- CONTENT -->
-                <div class="px-10 py-12">
-                    <ul class="space-y-3.5 font-lora text-[18px]">
+                <div class="px-6 py-10 sm:px-10 sm:py-12">
+                    <ul class="space-y-3.5 font-lora text-[16px] sm:text-[18px]">
 
                         @php
                             $misiItems = [
@@ -254,12 +254,12 @@
 <!-- ===================================================== -->
 <!-- FONDASI DESA -->
 <!-- ===================================================== -->
-<section class="relative py-15 overflow-hidden bg-[#f5f3ea]">
+<section class="relative py-12 sm:py-[3.75rem] overflow-hidden bg-[#f5f3ea]">
 
     <div class="absolute left-[-120px] top-[20%] w-[320px] h-[320px] rounded-full bg-[#1d4d3a]/10 blur-[100px]"></div>
     <div class="absolute right-[-120px] bottom-[10%] w-[360px] h-[360px] rounded-full bg-[#c8ab6d]/10 blur-[120px]"></div>
-    <img src="{{ asset('images/dekor/palm-left.png') }}" alt="Palm" class="absolute left-0 top-20 w-[180px] opacity-[0.04]">
-    <img src="{{ asset('images/dekor/palm-right.png') }}" alt="Palm" class="absolute right-0 top-0 w-[220px] opacity-[0.04]">
+    <img src="{{ asset('images/dekor/palm-left.png') }}" alt="Palm" class="absolute left-0 top-20 hidden w-[180px] opacity-[0.04] sm:block">
+    <img src="{{ asset('images/dekor/palm-right.png') }}" alt="Palm" class="absolute right-0 top-0 hidden w-[220px] opacity-[0.04] sm:block">
     <div class="absolute inset-0 opacity-[0.03] bg-[url('/images/pattern/pattern-line.png')] bg-repeat"></div>
 
     <div class="relative z-10 max-w-7xl mx-auto px-5 lg:px-5">
@@ -271,7 +271,7 @@
                 <span class="uppercase tracking-[0.17em] text-sm font-semibold text-[#4b4b42]">Fondasi Desa</span>
             </div>
 
-            <h2 class="reveal reveal-delay-2 font-lora text-[36px] md:text-[48px] leading-[0.95] tracking-[-0.03em] font-bold text-[#173121] mb-4">
+            <h2 class="reveal reveal-delay-2 font-lora text-[32px] sm:text-[36px] md:text-[48px] leading-[0.95] tracking-[-0.03em] font-bold text-[#173121] mb-4">
                 Alam & Tradisi yang Menjadi
                 <br>
                 Kekuatan Kami
@@ -416,10 +416,10 @@
             <!-- RIGHT MAP — tambah map-slide -->
             <div class="map-slide relative">
                 {{-- Tambah map-glow pada wrapper dalam --}}
-                <div class="map-glow relative rounded-[38px] overflow-hidden border border-white/40 bg-white">
+                <div class="map-glow relative rounded-[24px] sm:rounded-[38px] overflow-hidden border border-white/40 bg-white">
                     <iframe
                         src="https://www.google.com/maps?q=Desa+Hargorojo+Bagelen+Purworejo&output=embed"
-                        class="w-full h-[400px] border-0"
+                        class="h-[280px] w-full border-0 sm:h-[360px] lg:h-[400px]"
                         allowfullscreen=""
                         loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade">
@@ -435,7 +435,7 @@
 <!-- ===================================================== -->
 <!-- GALERI DESA -->
 <!-- ===================================================== -->
-<section class="galeri-section relative py-15 overflow-hidden bg-[#f8f6f1]">
+<section class="galeri-section relative py-12 sm:py-[3.75rem] overflow-hidden bg-[#f8f6f1]">
 
     <div class="absolute left-[-120px] top-[10%] w-[320px] h-[320px] rounded-full bg-[#1d4d3a]/10 blur-[100px]"></div>
     <div class="absolute right-[-100px] bottom-[0%] w-[320px] h-[320px] rounded-full bg-[#c8ab6d]/10 blur-[120px]"></div>
@@ -472,7 +472,7 @@
                 <img
                     src="{{ asset('images/assets foto/galeri desa_tradisi.png') }}"
                     alt="Galeri Desa"
-                    class="galeri-zoom w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                    class="galeri-zoom h-[280px] w-full object-cover lg:h-full group-hover:scale-105 transition-transform duration-700">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
                 <div class="absolute bottom-0 left-0 p-8"></div>
             </div>
