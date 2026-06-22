@@ -1,7 +1,18 @@
 import "./bootstrap";
 import "./ecommerce-cart";
 import "./order-notification";
+import "./admin-custom-select";
+import "./admin-modal";
+import "./admin-dashboard";
+import "./admin-order";
+import "./admin-user";
+import "./admin-crud";
+import "./admin-toast";
+import "./auth";
 
+// =====================================================
+// ALPINE COUNTER — untuk komponen Alpine.js
+// =====================================================
 window.counter = function (target, speed = 40) {
     return {
         count: 0,
@@ -34,13 +45,24 @@ window.counter = function (target, speed = 40) {
 
 // =====================================================
 // HERO PARALLAX — background bergerak saat scroll
+// (semua hero parallax digabung dalam satu listener)
 // =====================================================
+const PARALLAX_IDS = [
+    "hero-bg",
+    "hero-profil-bg",
+    "hero-produk-bg",
+    "hero-katalog-bg",
+    "hero-agro-bg",
+];
+
 window.addEventListener(
     "scroll",
     () => {
-        const bg = document.getElementById("hero-bg");
-        if (!bg) return;
-        bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.12)`;
+        PARALLAX_IDS.forEach((id) => {
+            const bg = document.getElementById(id);
+            if (!bg) return;
+            bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.10)`;
+        });
     },
     { passive: true },
 );
@@ -214,7 +236,7 @@ document.querySelectorAll(".testi-card").forEach((el) => {
 });
 
 // =====================================================
-// MAIN BOX + STAT CARDS REVEAL
+// MAIN BOX + STAT CARDS REVEAL (untuk .box-scale-in)
 // =====================================================
 const statsBoxObserver = new IntersectionObserver(
     (entries) => {
@@ -254,7 +276,6 @@ function animateCount(el, target, duration = 1500) {
 
     let numStr = target.replace(/[^0-9.]/g, "");
     let num = parseFloat(numStr);
-    let start = 0;
     let startTime = null;
 
     function step(timestamp) {
@@ -297,19 +318,6 @@ document.querySelectorAll("[data-count]").forEach((el) => {
 });
 
 // =====================================================
-// HERO PROFIL PARALLAX
-// =====================================================
-window.addEventListener(
-    "scroll",
-    () => {
-        const bg = document.getElementById("hero-profil-bg");
-        if (!bg) return;
-        bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.10)`;
-    },
-    { passive: true },
-);
-
-// =====================================================
 // TYPEWRITER — hapus cursor setelah animasi selesai
 // =====================================================
 const twEl = document.getElementById("typewriter-title");
@@ -332,7 +340,6 @@ const sejarahObserver = new IntersectionObserver(
                     el.classList.add("visible");
                 });
 
-                // Ganti img-reveal-overlay → img-slide-right
                 const img = entry.target.querySelector(".img-slide-right");
                 if (img) img.classList.add("visible");
 
@@ -450,32 +457,17 @@ document.querySelectorAll(".galeri-section").forEach((el) => {
 });
 
 // =====================================================
-// HERO PRODUK PARALLAX
-// =====================================================
-window.addEventListener(
-    "scroll",
-    () => {
-        const bg = document.getElementById("hero-produk-bg");
-        if (!bg) return;
-        bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.10)`;
-    },
-    { passive: true },
-);
-
-// =====================================================
 // PRODUCT ROW REVEAL
 // =====================================================
 const produkRowObserver = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                // Content kiri atau kanan
                 const content = entry.target.querySelector(
                     ".produk-content-left, .produk-content-right",
                 );
                 if (content) content.classList.add("visible");
 
-                // Gambar
                 const img = entry.target.querySelector(".produk-img-reveal");
                 if (img) img.classList.add("visible");
 
@@ -510,460 +502,433 @@ document.querySelectorAll(".keunggulan-card").forEach((el) => {
 });
 
 // =====================================================
-// SIDEBAR ITEM STAGGER — trigger on page load
+// DOM CONTENT LOADED — inisialisasi awal
 // =====================================================
 document.addEventListener("DOMContentLoaded", () => {
+    // Berita utama dari kiri
+    const beritaUtama = document.querySelector(".hero-slide-left");
+    if (beritaUtama) {
+        setTimeout(() => beritaUtama.classList.add("visible"), 50);
+    }
+
+    // Sidebar dari kanan
+    const sidebar = document.querySelector(".sidebar-slide");
+    if (sidebar) {
+        setTimeout(() => sidebar.classList.add("visible"), 50);
+    }
+
+    // Sidebar items visible on load (berita/news layout)
     document.querySelectorAll(".sidebar-item").forEach((el) => {
-        el.classList.add("visible");
+        setTimeout(() => el.classList.add("visible"), 50);
     });
 });
 
 // =====================================================
-// HERO KATALOG PARALLAX
+// PENGUMUMAN SECTION REVEAL
 // =====================================================
-window.addEventListener(
-    "scroll",
-    () => {
-        const bg = document.getElementById("hero-katalog-bg");
-        if (!bg) return;
-        bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.10)`;
-    },
-    { passive: true },
-);
-
-// =====================================================
-// KATALOG STATS BOX REVEAL
-// =====================================================
-const katalogStatsObserver = new IntersectionObserver(
+const pengumumanObserver = new IntersectionObserver(
     (entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                entry.target.querySelectorAll(".stat-card").forEach((card) => {
-                    card.classList.add("visible");
+                entry.target.querySelectorAll(".reveal").forEach((el) => {
+                    el.classList.add("visible");
                 });
-                katalogStatsObserver.unobserve(entry.target);
+                entry.target
+                    .querySelectorAll(".pengumuman-card")
+                    .forEach((el) => {
+                        el.classList.add("visible");
+                    });
+                pengumumanObserver.unobserve(entry.target);
             }
         });
     },
-    { threshold: 0.2 },
+    { threshold: 0.1 },
 );
 
-document.querySelectorAll(".box-scale-in").forEach((el) => {
-    katalogStatsObserver.observe(el);
+document.querySelectorAll(".pengumuman-section").forEach((el) => {
+    pengumumanObserver.observe(el);
 });
-
-
-// =====================================================
-// HERO KATALOG — trigger on load
-// =====================================================
-document.addEventListener('DOMContentLoaded', () => {
-
-    // Berita utama dari kiri
-    const beritaUtama = document.querySelector('.hero-slide-left')
-    if (beritaUtama) {
-        setTimeout(() => beritaUtama.classList.add('visible'), 50)
-    }
-
-    // Sidebar dari kanan
-    const sidebar = document.querySelector('.sidebar-slide')
-    if (sidebar) {
-        setTimeout(() => sidebar.classList.add('visible'), 50)
-    }
-
-    // Sidebar items
-    document.querySelectorAll('.sidebar-item').forEach(el => {
-        setTimeout(() => el.classList.add('visible'), 50)
-    })
-
-})
-
-// =====================================================
-// PENGUMUMAN SECTION REVEAL
-// =====================================================
-const pengumumanObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-
-            // Header
-            entry.target.querySelectorAll('.reveal').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            // Cards
-            entry.target.querySelectorAll('.pengumuman-card').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            // Nav buttons
-            entry.target.querySelectorAll('.nav-btn-reveal').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            pengumumanObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.1 })
-
-document.querySelectorAll('.pengumuman-section').forEach(el => {
-    pengumumanObserver.observe(el)
-})
-
 
 // =====================================================
 // ARTIKEL SECTION REVEAL
 // =====================================================
-const artikelObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const artikelObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".reveal").forEach((el) => {
+                    el.classList.add("visible");
+                });
+                entry.target.querySelectorAll(".artikel-card").forEach((el) => {
+                    el.classList.add("visible");
+                });
+                artikelObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.08 },
+);
 
-            entry.target.querySelectorAll('.reveal').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            entry.target.querySelectorAll('.artikel-card').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            artikelObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.08 })
-
-document.querySelectorAll('.artikel-section').forEach(el => {
-    artikelObserver.observe(el)
-})
-
+document.querySelectorAll(".artikel-section").forEach((el) => {
+    artikelObserver.observe(el);
+});
 
 // =====================================================
 // PERPUSTAKAAN CARD REVEAL
 // =====================================================
-const perpusObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const perpusObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".reveal").forEach((el) => {
+                    el.classList.add("visible");
+                });
+                entry.target.querySelectorAll(".perpus-card").forEach((el) => {
+                    el.classList.add("visible");
+                });
+                perpusObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.1 },
+);
 
-            entry.target.querySelectorAll('.reveal').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            entry.target.querySelectorAll('.perpus-card').forEach(el => {
-                el.classList.add('visible')
-            })
-
-            perpusObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.1 })
-
-document.querySelectorAll('.perpus-section').forEach(el => {
-    perpusObserver.observe(el)
-})
-
+document.querySelectorAll(".perpus-section").forEach((el) => {
+    perpusObserver.observe(el);
+});
 
 // =====================================================
 // GALERI KATALOG REVEAL
 // =====================================================
-const galeriKatalogObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const galeriKatalogObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".reveal").forEach((el) => {
+                    el.classList.add("visible");
+                });
 
-            // Header
-            entry.target.querySelectorAll('.reveal').forEach(el => {
-                el.classList.add('visible')
-            })
+                const hero = entry.target.querySelector(".galeri-katalog-hero");
+                if (hero) hero.classList.add("visible");
 
-            // Hero image
-            const hero = entry.target.querySelector('.galeri-katalog-hero')
-            if (hero) hero.classList.add('visible')
+                entry.target
+                    .querySelectorAll(".galeri-katalog-item")
+                    .forEach((el) => {
+                        el.classList.add("visible");
+                    });
 
-            // Small grid items
-            entry.target.querySelectorAll('.galeri-katalog-item').forEach(el => {
-                el.classList.add('visible')
-            })
+                galeriKatalogObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.1 },
+);
 
-            galeriKatalogObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.1 })
-
-document.querySelectorAll('.galeri-katalog-section').forEach(el => {
-    galeriKatalogObserver.observe(el)
-})
-
-// =====================================================
-// HERO AGRO PARALLAX
-// =====================================================
-window.addEventListener('scroll', () => {
-    const bg = document.getElementById('hero-agro-bg')
-    if (!bg) return
-    bg.style.transform = `translateY(${window.scrollY * 0.35}px) scale(1.10)`
-}, { passive: true })
-
+document.querySelectorAll(".galeri-katalog-section").forEach((el) => {
+    galeriKatalogObserver.observe(el);
+});
 
 // =====================================================
 // TIMELINE LINE GROW
 // =====================================================
-const timelineLineObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            const line = entry.target.querySelector('.timeline-line')
-            if (line) line.classList.add('visible')
-            timelineLineObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.05 })
+const timelineLineObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const line = entry.target.querySelector(".timeline-line");
+                if (line) line.classList.add("visible");
+                timelineLineObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.05 },
+);
 
-document.querySelectorAll('.timeline-section').forEach(el => {
-    timelineLineObserver.observe(el)
-})
+document.querySelectorAll(".timeline-section").forEach((el) => {
+    timelineLineObserver.observe(el);
+});
 
 // =====================================================
 // TIMELINE ROW — trigger per row, bergantian kiri-kanan
 // =====================================================
-const rowObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const rowObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const row = entry.target;
 
-            const row = entry.target
+                const left = row.querySelector(".timeline-row-left");
+                if (left) left.classList.add("visible");
 
-            // Kiri duluan
-            const left = row.querySelector('.timeline-row-left')
-            if (left) left.classList.add('visible')
+                const right = row.querySelector(".timeline-row-right");
+                if (right) {
+                    setTimeout(() => right.classList.add("visible"), 250);
+                }
 
-            // Kanan menyusul 0.25s
-            const right = row.querySelector('.timeline-row-right')
-            if (right) {
-                setTimeout(() => right.classList.add('visible'), 250)
+                const dot = row.querySelector(".timeline-dot");
+                if (dot) dot.classList.add("visible");
+
+                rowObserver.unobserve(row);
             }
+        });
+    },
+    {
+        threshold: 0,
+        rootMargin: "0px 0px -180px 0px",
+    },
+);
 
-            // Dot pop-in
-            const dot = row.querySelector('.timeline-dot')
-            if (dot) dot.classList.add('visible')
-
-            rowObserver.unobserve(row)
-        }
-    })
-}, {
-    threshold: 0,
-    rootMargin: '0px 0px -180px 0px'
-})
-
-document.querySelectorAll('.timeline-row').forEach(el => {
-    rowObserver.observe(el)
-})
-
+document.querySelectorAll(".timeline-row").forEach((el) => {
+    rowObserver.observe(el);
+});
 
 // =====================================================
 // QUOTE FADE + WORD BY WORD
 // =====================================================
-const quoteObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const quoteObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
 
-            // Wrapper fade-up
-            entry.target.classList.add('visible')
+                const blockquote = entry.target.querySelector(".quote-blockquote");
+                if (blockquote) {
+                    const text = blockquote.textContent.trim();
+                    const words = text.split(" ");
 
-            // Word by word pada blockquote
-            const blockquote = entry.target.querySelector('.quote-blockquote')
-            if (blockquote) {
-                const text  = blockquote.textContent.trim()
-                const words = text.split(' ')
+                    blockquote.innerHTML = words
+                        .map((word) => `<span class="word-fade">${word}</span>`)
+                        .join(" ");
 
-                blockquote.innerHTML = words
-                    .map(word => `<span class="word-fade">${word}</span>`)
-                    .join(' ')
+                    blockquote
+                        .querySelectorAll(".word-fade")
+                        .forEach((span, index) => {
+                            setTimeout(() => {
+                                span.classList.add("visible");
+                            }, 300 + index * 60);
+                        });
+                }
 
-                blockquote.querySelectorAll('.word-fade').forEach((span, index) => {
-                    setTimeout(() => {
-                        span.classList.add('visible')
-                    }, 300 + index * 60) // mulai setelah 300ms, per kata 60ms
-                })
+                quoteObserver.unobserve(entry.target);
             }
+        });
+    },
+    {
+        threshold: 0.3,
+        rootMargin: "0px 0px -50px 0px",
+    },
+);
 
-            quoteObserver.unobserve(entry.target)
-        }
-    })
-}, {
-    threshold: 0.3,
-    rootMargin: '0px 0px -50px 0px'
-})
-
-document.querySelectorAll('.quote-fade').forEach(el => {
-    quoteObserver.observe(el)
-})
-
+document.querySelectorAll(".quote-fade").forEach((el) => {
+    quoteObserver.observe(el);
+});
 
 // =====================================================
 // EDUKASI PERTANIAN REVEAL
 // =====================================================
-const edukasiObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const edukasiObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                const left = entry.target.querySelector(".edukasi-left");
+                if (left) left.classList.add("visible");
 
-            const left = entry.target.querySelector('.edukasi-left')
-            if (left) left.classList.add('visible')
+                const right = entry.target.querySelector(".edukasi-right");
+                if (right) right.classList.add("visible");
 
-            const right = entry.target.querySelector('.edukasi-right')
-            if (right) right.classList.add('visible')
+                edukasiObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.15 },
+);
 
-            edukasiObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.15 })
-
-document.querySelectorAll('.edukasi-section').forEach(el => {
-    edukasiObserver.observe(el)
-})
-
+document.querySelectorAll(".edukasi-section").forEach((el) => {
+    edukasiObserver.observe(el);
+});
 
 // =====================================================
 // WISATA ALAM CARDS REVEAL
 // =====================================================
-const wisataObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            wisataObserver.unobserve(entry.target)
-        }
-    })
-}, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
-})
+const wisataObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                wisataObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
+    },
+);
 
-document.querySelectorAll('.wisata-card-left, .wisata-card-right, .wisata-card-full').forEach(el => {
-    wisataObserver.observe(el)
-})
+document
+    .querySelectorAll(".wisata-card-left, .wisata-card-right, .wisata-card-full")
+    .forEach((el) => {
+        wisataObserver.observe(el);
+    });
 
 // =====================================================
 // BUDAYA DESA — TIMELINE ITEM
 // =====================================================
-const budayaObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            budayaObserver.unobserve(entry.target)
-        }
-    })
-}, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
-})
+const budayaObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                budayaObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.15,
+        rootMargin: "0px 0px -80px 0px",
+    },
+);
 
-document.querySelectorAll('.budaya-item').forEach(el => {
-    budayaObserver.observe(el)
-})
+document.querySelectorAll(".budaya-item").forEach((el) => {
+    budayaObserver.observe(el);
+});
 
 // =====================================================
 // BUDAYA DESA — KOLASE
 // =====================================================
-const kolaseObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            kolaseObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.12 })
+const kolaseObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                kolaseObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.12 },
+);
 
-document.querySelectorAll('.kolase-hero, .kolase-item').forEach(el => {
-    kolaseObserver.observe(el)
-})
+document.querySelectorAll(".kolase-hero, .kolase-item").forEach((el) => {
+    kolaseObserver.observe(el);
+});
 
 // =====================================================
 // BUDAYA DESA — NILAI CARD
 // =====================================================
-const nilaiObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.querySelectorAll('.nilai-card').forEach(el => {
-                el.classList.add('visible')
-            })
-            nilaiObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.15 })
+const nilaiObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".nilai-card").forEach((el) => {
+                    el.classList.add("visible");
+                });
+                nilaiObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.15 },
+);
 
-document.querySelectorAll('.nilai-grid').forEach(el => {
-    nilaiObserver.observe(el)
-})
+document.querySelectorAll(".nilai-grid").forEach((el) => {
+    nilaiObserver.observe(el);
+});
 
 // =====================================================
 // MENGAPA TRADISIONAL REVEAL
 // =====================================================
-const tradisiObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+const tradisiObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll(".tradisi-card").forEach((el) => {
+                    el.classList.add("visible");
+                });
 
-            // Left cards stagger
-            entry.target.querySelectorAll('.tradisi-card').forEach(el => {
-                el.classList.add('visible')
-            })
+                const panel = entry.target.querySelector(".tradisi-quote-panel");
+                if (panel) panel.classList.add("visible");
 
-            // Quote panel kanan
-            const panel = entry.target.querySelector('.tradisi-quote-panel')
-            if (panel) panel.classList.add('visible')
+                tradisiObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.1 },
+);
 
-            tradisiObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.1 })
+const tradisiFootnoteObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                tradisiFootnoteObserver.unobserve(entry.target);
+            }
+        });
+    },
+    { threshold: 0.4 },
+);
 
-const tradisiFootnoteObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            tradisiFootnoteObserver.unobserve(entry.target)
-        }
-    })
-}, { threshold: 0.4 })
+document.querySelectorAll(".tradisi-section").forEach((el) => {
+    tradisiObserver.observe(el);
+});
 
-document.querySelectorAll('.tradisi-section').forEach(el => {
-    tradisiObserver.observe(el)
-})
-
-document.querySelectorAll('.tradisi-footnote').forEach(el => {
-    tradisiFootnoteObserver.observe(el)
-})
-
+document.querySelectorAll(".tradisi-footnote").forEach((el) => {
+    tradisiFootnoteObserver.observe(el);
+});
 // =====================================================
-// AGRO TESTIMONI — per card individual
+// PUBLIC TESTIMONI MODAL
 // =====================================================
-const agroTestiObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('visible')
-            agroTestiObserver.unobserve(entry.target)
+function setupPublicTestimoniModal() {
+    const modal = document.getElementById("modal-testimoni-public");
+    if (!modal) return;
+
+    const openButtons = document.querySelectorAll("[data-open-public-testimoni]");
+    const closeButtons = modal.querySelectorAll("[data-close-public-testimoni]");
+    const firstField = modal.querySelector("form input, form textarea, form select, form button");
+
+    const lockPage = () => {
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+    };
+
+    const unlockPage = () => {
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+    };
+
+    const openModal = () => {
+        if (modal.parentElement !== document.body) {
+            document.body.appendChild(modal);
         }
-    })
-}, {
-    threshold: 0.15,
-    rootMargin: '0px 0px -80px 0px'
-})
 
-document.querySelectorAll('.agro-testi-card').forEach(el => {
-    agroTestiObserver.observe(el)
-})
+        modal.classList.remove("hidden");
+        modal.style.display = "flex";
+        modal.style.alignItems = "center";
+        modal.style.justifyContent = "center";
+        modal.style.zIndex = "99999";
+        modal.classList.add("flex");
+        lockPage();
+        firstField?.focus({ preventScroll: true });
+    };
 
-// =====================================================
-// FAQ REVEAL
-// =====================================================
-const faqObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
+    const closeModal = () => {
+        modal.classList.add("hidden");
+        modal.style.display = "none";
+        modal.classList.remove("flex");
+        unlockPage();
+    };
 
-            entry.target.querySelectorAll('.faq-item').forEach(el => {
-                el.classList.add('visible')
-            })
+    openButtons.forEach((button) => {
+        button.addEventListener("click", openModal);
+    });
 
-            const cta = entry.target.querySelector('.faq-cta')
-            if (cta) cta.classList.add('visible')
+    closeButtons.forEach((button) => {
+        button.addEventListener("click", closeModal);
+    });
 
-            faqObserver.unobserve(entry.target)
+    document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !modal.classList.contains("hidden")) {
+            closeModal();
         }
-    })
-}, { threshold: 0.1 })
+    });
+}
 
-document.querySelectorAll('.faq-section').forEach(el => {
-    faqObserver.observe(el)
-})
+document.addEventListener("DOMContentLoaded", setupPublicTestimoniModal);

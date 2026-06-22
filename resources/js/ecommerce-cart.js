@@ -4,11 +4,77 @@ window.scrollProduk = function (amount) {
         ?.scrollBy({ left: amount, behavior: "smooth" });
 };
 
+
+window.focusCustomerOrder = function (orderDomId) {
+    if (!orderDomId) return;
+
+    const order = document.getElementById(orderDomId);
+    if (!order) return;
+
+    order.scrollIntoView({ behavior: "smooth", block: "center" });
+    order.classList.add("is-focused");
+
+    setTimeout(() => {
+        order.classList.remove("is-focused");
+    }, 1800);
+};
+function removeStoredCart() {
+    try {
+        localStorage.removeItem("cart");
+    } catch {
+        // Keranjang tetap berjalan walaupun storage browser diblokir.
+    }
+}
+
+window.printCustomerInvoice = function (invoiceId) {
+    const invoice = document.getElementById(invoiceId);
+
+    if (!invoice) {
+        console.warn(`Invoice ${invoiceId} tidak ditemukan.`);
+        return;
+    }
+
+    const previousTitle = document.title;
+    const previousMount = document.querySelector(".customer-invoice-print__mount");
+    previousMount?.remove();
+
+    const printMount = document.createElement("div");
+    printMount.className = "customer-invoice-print__mount";
+
+    const printInvoice = invoice.cloneNode(true);
+    printInvoice.removeAttribute("id");
+    printInvoice.classList.add("is-printing");
+    printMount.appendChild(printInvoice);
+    document.body.appendChild(printMount);
+
+    let cleaned = false;
+    const cleanup = () => {
+        if (cleaned) return;
+
+        cleaned = true;
+        printMount.remove();
+        document.body.classList.remove("customer-invoice-printing");
+        document.title = previousTitle;
+        window.removeEventListener("afterprint", cleanup);
+    };
+
+    document.title = invoice.dataset.invoiceTitle || previousTitle;
+    document.body.classList.add("customer-invoice-printing");
+    window.addEventListener("afterprint", cleanup, { once: true });
+
+    setTimeout(() => {
+        window.print();
+    }, 80);
+};
+
 window.cartApp = function (config = {}) {
     return {
         showToast: false,
         toastMessage: "",
         cartOpen: false,
+        notifOpen: false,
+        totalOrdersOpen: false,
+        profileOpen: false,
         confirmDeleteOpen: false,
         productToDelete: null,
         checkoutLoading: false,
@@ -35,7 +101,26 @@ window.cartApp = function (config = {}) {
         },
 
         persistCart() {
-            localStorage.setItem("cart", JSON.stringify(this.cart));
+            try {
+                localStorage.setItem("cart", JSON.stringify(this.cart));
+            } catch {
+                // Keranjang tetap berjalan walaupun storage browser diblokir.
+            }
+        },
+
+        openOrderHistoryFromNotification(orderDomId) {
+            this.notifOpen = false;
+            this.profileOpen = false;
+            this.cartOpen = false;
+            this.confirmDeleteOpen = false;
+
+            window.setTimeout(() => {
+                this.totalOrdersOpen = true;
+
+                window.setTimeout(() => {
+                    window.focusCustomerOrder(orderDomId);
+                }, 40);
+            }, 0);
         },
 
         async sendCartRequest(url, method, payload = {}) {
@@ -146,7 +231,7 @@ window.cartApp = function (config = {}) {
                 if (data.snap_token && window.snap) return this.openMidtransPopup(data);
 
                 this.cart = [];
-                localStorage.removeItem("cart");
+                removeStoredCart();
                 data.redirect_url
                     ? (window.location.href = data.redirect_url)
                     : this.notify(data.message || "Transaksi berhasil dibuat.");
@@ -161,7 +246,7 @@ window.cartApp = function (config = {}) {
             this.cart = [];
             this.cartOpen = false;
             this.checkoutLoading = false;
-            localStorage.removeItem("cart");
+            removeStoredCart();
 
             window.snap.pay(data.snap_token, {
                 onSuccess: () => this.finishMidtransCheckout(data, "Pembayaran berhasil. Status pesanan akan diperbarui."),

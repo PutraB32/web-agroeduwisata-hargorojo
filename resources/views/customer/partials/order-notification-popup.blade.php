@@ -6,7 +6,8 @@
         fixed
         left-4
         right-4
-        top-[5.75rem]
+        top-[9.75rem]
+        sm:top-[6.25rem]
         z-[140]
         flex
         flex-col
@@ -23,12 +24,12 @@
         lg:absolute
         lg:left-auto
         lg:right-0
-        lg:top-14
+        lg:top-[3rem]
         lg:w-[22rem]
         lg:max-w-[calc(100vw-2rem)]
         lg:p-4
     "
-    style="display: none; max-height: min(520px, calc(100vh - 7rem));"
+    style="display: none; max-height: min(520px, calc(100vh - 11.25rem));"
 >
     <div class="
         flex
@@ -41,23 +42,19 @@
         border-[#ece6da]
     ">
         <div>
-            <h4 class="font-lora text-lg font-bold leading-none">Pesanan Saya</h4>
-            <p class="text-xs text-[#6b736d]">Detail pesanan terbaru</p>
+            <h4 class="font-lora text-lg font-bold leading-none">Notifikasi Pesanan</h4>
+            <p class="text-xs text-[#6b736d]">Klik untuk melihat riwayat pesanan</p>
         </div>
 
         <span class="flex h-9 w-9 items-center justify-center rounded-full bg-[#fff4df] text-[#d8b15a]">
-            <i class="fa-solid fa-receipt"></i>
+            <i class="fa-regular fa-bell"></i>
         </span>
     </div>
 
     <div class="cart-panel-scroll mt-3 min-h-0 flex-1 overflow-y-auto pr-1">
         <div class="space-y-2.5">
             @forelse($navbarOrders as $order)
-            <a
-                href="{{ route('customer.profile', ['panel' => 'orders', 'order' => $order['id']]) }}"
-                data-order-notification-link
-                class="
-                rounded-xl
+            <button type="button" @click.stop="openOrderHistoryFromNotification({{ \Illuminate\Support\Js::from($order['domId']) }})" data-order-notification-link class="w-full text-left rounded-xl
                 border
                 border-[#ece6da]
                 bg-[#f8f6f1]
@@ -126,7 +123,8 @@
                         {{ $order['formattedTotal'] }}
                     </span>
                 </div>
-            </a>
+                <span class="mt-2 inline-flex text-xs font-bold text-[#b47a22]">Lihat Riwayat Pesanan</span>
+            </button>
             @empty
             <div class="
                 rounded-xl
