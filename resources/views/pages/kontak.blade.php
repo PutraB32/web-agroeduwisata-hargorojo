@@ -9,11 +9,18 @@
 <!-- ===================================================== -->
 <section class="
     relative
+    isolate
 
-    py-32
-    lg:py-28
+    min-h-[350px]
+    sm:min-h-[430px]
 
     px-4
+    pt-32
+    pb-16
+    sm:pt-36
+    sm:pb-20
+    lg:pt-40
+    lg:pb-24
 
     text-center
 
@@ -35,118 +42,6 @@ style="
         via-[#173121]/70
         to-black/50
     "></div>
-
-    <!-- LOGIN ADMIN -->
-    <div class="
-        absolute
-
-        top-25
-        right-1
-
-        md:top-28
-        md:right-8
-
-        z-20
-    ">
-
-        <a href="{{ route('login') }}"
-            class="
-                group
-
-                inline-flex
-                items-center
-                gap-3
-
-                px-3
-                py-2.5
-
-                rounded-full
-
-                bg-black/30
-                backdrop-blur-md
-
-                border
-                border-white/10
-
-                shadow-[0_8px_25px_rgba(0,0,0,0.25)]
-
-                hover:bg-[#173121]/70
-                hover:border-[#d4b254]/40
-                hover:-translate-y-0.5
-
-                transition-all
-                duration-300
-            "
-        >
-
-            <!-- ICON -->
-            <div class="
-                w-9
-                h-9
-
-                rounded-full
-
-                bg-[#d4b254]/15
-
-                flex
-                items-center
-                justify-center
-
-                transition-all
-                duration-300
-
-                group-hover:bg-[#d4b254]/25
-            ">
-
-                <i class="
-                    fa-solid
-                    fa-user-shield
-
-                    text-[#d4b254]
-                "></i>
-
-            </div>
-
-            <!-- TEXT -->
-            <div class="
-                hidden
-                sm:block
-
-                text-left
-            ">
-
-                <span class="
-                    block
-
-                    text-[10px]
-
-                    uppercase
-                    tracking-[0.15em]
-
-                    text-white/50
-                ">
-                    Portal
-                </span>
-
-                <span class="
-                    block
-
-                    text-sm
-                    font-semibold
-
-                    text-white
-                ">
-                    Login Admin
-                </span>
-
-            </div>
-
-        </a>
-
-    </div>
-
-    
-
     <!-- CONTENT -->
     <div class="
         relative
@@ -162,14 +57,16 @@ style="
 
             text-white
 
-            text-[42px]
+            text-[38px]
+            sm:text-[48px]
             md:text-[60px]
 
             font-bold
 
-            leading-tight
+            leading-[0.98]
+            sm:leading-tight
 
-            mb-1
+            mb-3
         ">
 
             Hubungi
@@ -187,10 +84,12 @@ style="
             text-white/80
             font-lora
 
-            text-[16px]
+            text-[15px]
+            sm:text-[16px]
             md:text-[19px]
 
-            leading-relaxed
+            leading-[1.65]
+            sm:leading-relaxed
 
             max-w-3xl
             mx-auto
@@ -199,7 +98,7 @@ style="
             Tertarik berkunjung atau ingin memesan produk
             gula kelapa asli Hargorojo?
 
-            <br>
+            <br class="hidden sm:block">
 
             Jangan ragu untuk menghubungi kami.
             Kami siap melayani Anda dengan sepenuh hati.
@@ -214,7 +113,8 @@ style="
 <!-- INFORMASI KONTAK -->
 <!-- ===================================================== -->
 <section class="
-    py-16
+    py-12
+    sm:py-16
     lg:py-20
 
     bg-white
@@ -235,12 +135,13 @@ style="
 
             gap-8
             lg:gap-10
+            items-start
         ">
 
             <!-- ====================================== -->
             <!-- LEFT -->
             <!-- ====================================== -->
-            <div class="space-y-6">
+            <div class="min-w-0 space-y-5 sm:space-y-6">
 
                 <!-- WHATSAPP -->
                 <a href="https://wa.me/6281234567890"
@@ -250,9 +151,11 @@ style="
 
                         block
 
-                        p-6
+                        p-5
+                        sm:p-6
 
-                        rounded-[28px]
+                        rounded-[22px]
+                        sm:rounded-[28px]
 
                         bg-[#173121]
 
@@ -268,12 +171,15 @@ style="
                     <div class="
                         flex
                         items-start
-                        gap-5
+                        gap-4
+                        sm:gap-5
                     ">
 
                         <div class="
-                            w-14
-                            h-14
+                            w-12
+                            h-12
+                            sm:w-14
+                            sm:h-14
 
                             rounded-full
 
@@ -312,7 +218,8 @@ style="
                             <p class="
                                 text-white/80
 
-                                text-md
+                                text-sm
+                                sm:text-base
 
                                 leading-relaxed
 
@@ -326,6 +233,9 @@ style="
                                 text-[#d4b254]
 
                                 font-semibold
+                                text-sm
+                                sm:text-base
+                                break-words
                             ">
                                 +62 812-3456-7890
                             </span>
@@ -341,14 +251,17 @@ style="
                     grid
                     sm:grid-cols-2
 
-                    gap-6
+                    gap-4
+                    sm:gap-6
                 ">
 
                     <!-- EMAIL -->
                     <div class="
-                        p-6
+                        p-5
+                        sm:p-6
 
-                        rounded-[20px]
+                        rounded-[18px]
+                        sm:rounded-[20px]
 
                         border
                         border-[#dfe5e1]
@@ -383,7 +296,9 @@ style="
                         <p class="
                             text-[#717773]
 
-                            text-md
+                            text-sm
+                            sm:text-base
+                            break-words
                         ">
                             info@hargorojo.id
                         </p>
@@ -392,9 +307,11 @@ style="
 
                     <!-- INSTAGRAM -->
                     <div class="
-                        p-6
+                        p-5
+                        sm:p-6
 
-                        rounded-[25px]
+                        rounded-[18px]
+                        sm:rounded-[25px]
 
                         border
                         border-[#dfe5e1]
@@ -429,7 +346,9 @@ style="
                         <p class="
                             text-[#717773]
 
-                            text-md
+                            text-sm
+                            sm:text-base
+                            break-words
                         ">
                             @desahargorojo
                         </p>
@@ -440,9 +359,11 @@ style="
                     <div class="
                         sm:col-span-2
 
-                        p-6
+                        p-5
+                        sm:p-6
 
-                        rounded-[25px]
+                        rounded-[20px]
+                        sm:rounded-[25px]
 
                         border
                         border-[#dfe5e1]
@@ -455,13 +376,17 @@ style="
 
                         <div class="
                             flex
-                            items-center
-                            gap-4
+                            items-start
+                            sm:items-center
+                            gap-3
+                            sm:gap-4
                         ">
 
                             <div class="
-                                w-12
-                                h-12
+                                w-11
+                                h-11
+                                sm:w-12
+                                sm:h-12
 
                                 rounded-full
 
@@ -473,11 +398,12 @@ style="
                             ">
 
                                 <i class="
-                                    text-2xl
                                     fa-solid
                                     fa-clock
 
                                     text-[#d4b254]
+                                    text-xl
+                                    sm:text-2xl
                                 "></i>
 
                             </div>
@@ -496,6 +422,8 @@ style="
                                     text-[#717773]
 
                                     text-sm
+                                    sm:text-base
+                                    leading-relaxed
                                 ">
                                     Senin – Minggu • 08.00 – 17.00 WIB
                                 </p>
@@ -512,20 +440,22 @@ style="
                 <div class="
                     overflow-hidden
 
-                    rounded-[25px]
+                    rounded-[22px]
+                    sm:rounded-[25px]
 
                     border
                     border-[#dfe5e1]
                 ">
 
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.0530874443425!2d110.04034548116041!3d-7.815595778079431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ae73c8ad22021%3A0x3f38846f3c7c85a4!2sKantor%20Balai%20Desa%20Hargorojo!5e1!3m2!1sen!2sid!4v1781547009835!5m2!1sen!2sid" width="600" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.0530874443425!2d110.04034548116041!3d-7.815595778079431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ae73c8ad22021%3A0x3f38846f3c7c85a4!2sKantor%20Balai%20Desa%20Hargorojo!5e1!3m2!1sen!2sid!4v1781547009835!5m2!1sen!2sid" class="h-[240px] w-full sm:h-[300px]" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
-                    <div class="p-6">
+                    <div class="p-5 sm:p-6">
 
                         <h4 class="
                             font-bold
                             font-lora
-                            text-[17px]
+                            text-base
+                            sm:text-[17px]
 
                             text-[#173121]
 
@@ -537,7 +467,8 @@ style="
                         <p class="
                             text-[#717773]
 
-                            text-md
+                            text-sm
+                            sm:text-base
 
                             leading-relaxed
 
@@ -553,7 +484,10 @@ style="
                             class="
                                 inline-flex
                                 items-center
+                                justify-center
                                 gap-3
+                                w-full
+                                sm:w-auto
 
                                 px-5
                                 py-3
@@ -590,10 +524,12 @@ style="
             <!-- FORM -->
             <!-- ====================================== -->
             <div class="
-                p-6
+                p-5
+                sm:p-6
                 md:p-8
 
-                rounded-[30px]
+                rounded-[24px]
+                sm:rounded-[30px]
 
                 bg-white
 
@@ -603,7 +539,7 @@ style="
                 shadow-[0_20px_70px_rgba(0,0,0,0.05)]
             ">
 
-                <div class="mb-8">
+                <div class="mb-6 sm:mb-8">
 
                     
 
@@ -612,9 +548,11 @@ style="
 
                         text-[#173121]
 
-                        text-[32px]
+                        text-[28px]
+                        sm:text-[32px]
 
                         font-bold
+                        leading-tight
 
                         
                     ">
@@ -625,6 +563,8 @@ style="
                         text-[#717773]
 
                         leading-relaxed
+                        text-sm
+                        sm:text-base
                     ">
                         Isi formulir berikut dan kami akan
                         merespon pesan Anda secepat mungkin.
@@ -636,7 +576,7 @@ style="
                     action="#"
                     method="POST"
 
-                    class="space-y-5"
+                    class="space-y-4 sm:space-y-5"
                 >
 
                     @csrf
@@ -664,10 +604,16 @@ style="
                         class="
                             w-full
 
-                            px-5
-                            py-4
+                            px-4
+                            py-3.5
+                            sm:px-5
+                            sm:py-4
 
-                            rounded-2xl
+                            rounded-xl
+                            sm:rounded-2xl
+
+                            text-sm
+                            sm:text-base
 
                             border
                             border-[#dfe5e1]
@@ -710,10 +656,16 @@ style="
         class="
             w-full
 
-            px-5
-            py-4
+            px-4
+            py-3.5
+            sm:px-5
+            sm:py-4
 
-            rounded-2xl
+            rounded-xl
+            sm:rounded-2xl
+
+            text-sm
+            sm:text-base
 
             border
             border-[#dfe5e1]
@@ -764,10 +716,16 @@ style="
         class="
             w-full
 
-            px-5
-            py-4
+            px-4
+            py-3.5
+            sm:px-5
+            sm:py-4
 
-            rounded-2xl
+            rounded-xl
+            sm:rounded-2xl
+
+            text-sm
+            sm:text-base
 
             border
             border-[#dfe5e1]
@@ -815,11 +773,17 @@ style="
             class="
                 w-full
 
-                px-5
-                py-4
+                px-4
+                py-3.5
+                sm:px-5
+                sm:py-4
                 pr-12
 
-                rounded-2xl
+                rounded-xl
+                sm:rounded-2xl
+
+                text-sm
+                sm:text-base
 
                 border
                 border-[#dfe5e1]
@@ -926,10 +890,16 @@ style="
         class="
             w-full
 
-            px-5
-            py-4
+            px-4
+            py-3.5
+            sm:px-5
+            sm:py-4
 
-            rounded-2xl
+            rounded-xl
+            sm:rounded-2xl
+
+            text-sm
+            sm:text-base
 
             border
             border-[#dfe5e1]
@@ -968,10 +938,15 @@ style="
                         class="
                             inline-flex
                             items-center
+                            justify-center
                             gap-3
+                            w-full
+                            sm:w-auto
 
-                            px-8
-                            py-4
+                            px-6
+                            py-3.5
+                            sm:px-8
+                            sm:py-4
 
                             rounded-full
 
@@ -1011,7 +986,9 @@ style="
 <!-- ===================================================== -->
 <section class="
     relative
-    py-15
+    py-12
+    sm:py-14
+    lg:py-16
     bg-[#f8f6f1]
 ">
 
@@ -1019,35 +996,38 @@ style="
     <div class="
         max-w-4xl
         mx-auto
-        px-6
+        px-4
+        sm:px-6
         lg:px-10
     ">
     
     {{-- Small Label --}}
     <div class="
-    flex 
-    items-center 
-    justify-center 
-    gap-3 
+    flex
+    items-center
+    justify-center
+    gap-2
+    sm:gap-3
     
     ">
         <div class="
-        w-14 h-[2px] 
-        bg-yellow-500 
+        w-8 sm:w-14 h-[2px]
+        bg-yellow-500
         rounded-full">
     </div>
         <span class="
-        uppercase 
-        tracking-[0.2em] 
-        text-[14px] 
-        font-semibold 
+        uppercase
+        tracking-[0.2em]
+        text-[11px]
+        sm:text-[14px]
+        font-semibold
         text-[#b89b5e]">
             Informasi Tambahan
         </span>
 
         <div class="
-        w-14 h-[2px] 
-        bg-yellow-500 
+        w-8 sm:w-14 h-[2px]
+        bg-yellow-500
         rounded-full">
     </div>
     
@@ -1059,10 +1039,11 @@ style="
 
             font-lora
 
-            text-[40px]
+            text-[30px]
+            sm:text-[36px]
             md:text-[45px]
 
-            leading-[1]
+            leading-[1.05]
 
             font-bold
 
@@ -1080,10 +1061,12 @@ style="
             max-w-2xl
             mx-auto
             text-[#52605a]
-            text-[15px]
+            text-sm
+            sm:text-base
             md:text-[18px]
             text-center
-            leading-[1.4]
+            leading-[1.6]
+            md:leading-[1.4]
             font-light
             mb-10
         ">
@@ -1119,8 +1102,10 @@ style="
                         flex
                         items-center
                         justify-between
-                        px-6
-                        py-5
+                        px-4
+                        py-4
+                        sm:px-6
+                        sm:py-5
                         text-left
                     "
                 >
@@ -1128,13 +1113,16 @@ style="
                     <div class="
                         flex
                         items-center
+                        min-w-0
                         gap-2
                     ">
 
                         <span class="
                             text-[#173121]
                             font-semibold
-                            text-[18px]
+                            text-[16px]
+                            sm:text-[18px]
+                            leading-snug
                             font-lora
                         ">
                             Bagaimana cara melakukan reservasi kunjungan?
@@ -1143,7 +1131,7 @@ style="
                     </div>
 
                     <i
-                        class="fa-solid fa-chevron-down transition duration-300"
+                        class="fa-solid fa-chevron-down ml-4 shrink-0 text-sm text-[#173121] transition duration-300"
                         :class="open ? 'rotate-180' : ''"
                     ></i>
 
@@ -1155,11 +1143,15 @@ style="
                     x-transition
                     class="
                         font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
+                        px-4
+                        sm:px-6
+                        pb-4
+                        sm:pb-6
+                        text-[15px]
+                        sm:text-[17px]
                         text-[#5d675f]
-                        leading-[1.5]
+                        leading-[1.6]
+                        sm:leading-[1.5]
                     "
                 >
                     Anda dapat melakukan reservasi melalui formulir kontak di halaman ini atau menghubungi kami secara langsung melalui WhatsApp. Tim kami akan membantu mengatur jadwal kunjungan sesuai kebutuhan Anda.
@@ -1193,8 +1185,10 @@ style="
                         flex
                         items-center
                         justify-between
-                        px-6
-                        py-5
+                        px-4
+                        py-4
+                        sm:px-6
+                        sm:py-5
                         text-left
                     "
                 >
@@ -1202,13 +1196,16 @@ style="
                     <div class="
                         flex
                         items-center
+                        min-w-0
                         gap-2
                     ">
 
                         <span class="
                             text-[#173121]
                             font-semibold
-                            text-[18px]
+                            text-[16px]
+                            sm:text-[18px]
+                            leading-snug
                             font-lora
                         ">
                             Apakah kunjungan tersedia untuk rombongan sekolah atau instansi?
@@ -1217,7 +1214,7 @@ style="
                     </div>
 
                     <i
-                        class="fa-solid fa-chevron-down transition duration-300"
+                        class="fa-solid fa-chevron-down ml-4 shrink-0 text-sm text-[#173121] transition duration-300"
                         :class="open ? 'rotate-180' : ''"
                     ></i>
 
@@ -1229,11 +1226,15 @@ style="
                     x-transition
                     class="
                         font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
+                        px-4
+                        sm:px-6
+                        pb-4
+                        sm:pb-6
+                        text-[15px]
+                        sm:text-[17px]
                         text-[#5d675f]
-                        leading-[1.5]
+                        leading-[1.6]
+                        sm:leading-[1.5]
                     "
                 >
                     Ya. Desa Wisata Hargorojo menerima kunjungan rombongan, baik dari sekolah, komunitas, maupun instansi. Silakan hubungi kami untuk informasi lebih lanjut mengenai paket edukasi dan kapasitas peserta.
@@ -1266,8 +1267,10 @@ style="
                         flex
                         items-center
                         justify-between
-                        px-6
-                        py-5
+                        px-4
+                        py-4
+                        sm:px-6
+                        sm:py-5
                         text-left
                     "
                 >
@@ -1275,13 +1278,16 @@ style="
                     <div class="
                         flex
                         items-center
+                        min-w-0
                         gap-2
                     ">
 
                         <span class="
                             text-[#173121]
                             font-semibold
-                            text-[18px]
+                            text-[16px]
+                            sm:text-[18px]
+                            leading-snug
                             font-lora
                         ">
                             Apakah produk gula kelapa dapat dipesan secara grosir?
@@ -1290,7 +1296,7 @@ style="
                     </div>
 
                     <i
-                        class="fa-solid fa-chevron-down transition duration-300"
+                        class="fa-solid fa-chevron-down ml-4 shrink-0 text-sm text-[#173121] transition duration-300"
                         :class="open ? 'rotate-180' : ''"
                     ></i>
 
@@ -1302,11 +1308,15 @@ style="
                     x-transition
                     class="
                         font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
+                        px-4
+                        sm:px-6
+                        pb-4
+                        sm:pb-6
+                        text-[15px]
+                        sm:text-[17px]
                         text-[#5d675f]
-                        leading-[1.5]
+                        leading-[1.6]
+                        sm:leading-[1.5]
                     "
                 >
                     Tentu. Kami melayani pemesanan produk gula kelapa dalam jumlah besar untuk kebutuhan usaha, reseller, maupun kerja sama distribusi.
@@ -1339,8 +1349,10 @@ style="
                         flex
                         items-center
                         justify-between
-                        px-6
-                        py-5
+                        px-4
+                        py-4
+                        sm:px-6
+                        sm:py-5
                         text-left
                     "
                 >
@@ -1348,13 +1360,16 @@ style="
                     <div class="
                         flex
                         items-center
+                        min-w-0
                         gap-2
                     ">
 
                         <span class="
                             text-[#173121]
                             font-semibold
-                            text-[18px]
+                            text-[16px]
+                            sm:text-[18px]
+                            leading-snug
                             font-lora
                         ">
                             Bagaimana cara menuju Desa Hargorojo?
@@ -1363,7 +1378,7 @@ style="
                     </div>
 
                     <i
-                        class="fa-solid fa-chevron-down transition duration-300"
+                        class="fa-solid fa-chevron-down ml-4 shrink-0 text-sm text-[#173121] transition duration-300"
                         :class="open ? 'rotate-180' : ''"
                     ></i>
 
@@ -1375,11 +1390,15 @@ style="
                     x-transition
                     class="
                         font-lora
-                        px-6
-                        pb-6
-                        text-[17px]
+                        px-4
+                        sm:px-6
+                        pb-4
+                        sm:pb-6
+                        text-[15px]
+                        sm:text-[17px]
                         text-[#5d675f]
-                        leading-[1.5]
+                        leading-[1.6]
+                        sm:leading-[1.5]
                     "
                 >
                     Lokasi Desa Hargorojo dapat diakses menggunakan kendaraan roda dua maupun roda empat. Anda dapat menggunakan Google Maps yang tersedia pada halaman ini untuk mempermudah perjalanan.
@@ -1393,12 +1412,14 @@ style="
 
             bg-white
 
-            rounded-[28px]
+            rounded-[24px]
+            sm:rounded-[28px]
 
             border
             border-[#ece6da]
 
-            p-6
+            p-5
+            sm:p-6
             lg:p-8
 
             flex
@@ -1411,13 +1432,15 @@ style="
             gap-6
         ">
 
-            <div>
+            <div class="w-full text-center lg:w-auto lg:text-left">
 
                 <h3 class="
                     font-lora
                     text-[#173121]
                     font-bold
-                    text-2xl
+                    text-xl
+                    sm:text-2xl
+                    leading-tight
                     mb-2
                 ">
                     Masih ada pertanyaan lain?
@@ -1426,24 +1449,33 @@ style="
                 <p class="
                     text-[#6b736d]
                     font-lora
-                    text-light
+                    font-light
                     italic
+                    text-sm
+                    sm:text-base
                 ">
                     Jangan ragu untuk menghubungi admin kami.
                 </p>
 
             </div>
 
-            <a href="#"
+            <a href="https://wa.me/6281234567890"
+                target="_blank"
                 class="
                     inline-flex
                     items-center
+                    justify-center
                     gap-3
+                    w-full
+                    lg:w-auto
 
-                    px-7
-                    py-4
+                    px-5
+                    py-3.5
+                    sm:px-7
+                    sm:py-4
 
-                    rounded-2xl
+                    rounded-xl
+                    sm:rounded-2xl
 
                     bg-[#173121]
 
