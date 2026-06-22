@@ -72,7 +72,7 @@
 <!-- MODAL CREATE KATALOG -->
 <!-- ========================================== -->
 <div id="modal-create-kat-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-kat-katalog')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-create-kat-katalog')"></div>
     <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center">
             <h3 class="text-lg font-bold text-white tracking-wide">Tambah Kategori Katalog</h3>
@@ -98,7 +98,7 @@
 <!-- MODAL EDIT KATALOG -->
 <!-- ========================================== -->
 <div id="modal-edit-kat-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-kat-katalog')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-edit-kat-katalog')"></div>
     <div class="relative bg-white w-full max-w-md rounded-2xl shadow-2xl overflow-hidden">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center">
             <h3 class="text-lg font-bold text-gray-900 tracking-wide">Edit Kategori Katalog</h3>
@@ -119,13 +119,3 @@
         </form>
     </div>
 </div>
-
-
-
-<script>
-function openEditKatKatalog(id, nama) {
-    openModal('modal-edit-kat-katalog');
-    document.getElementById('form-edit-kat-katalog').action = '/admin/kategori-katalog/' + id;
-    document.getElementById('edit-nama-katalog').value = nama;
-}
-</script>

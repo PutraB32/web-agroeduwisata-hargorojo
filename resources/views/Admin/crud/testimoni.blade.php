@@ -71,7 +71,7 @@
 
 <!-- MODAL CREATE -->
 <div id="modal-create-testimoni" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 overflow-y-auto" role="dialog">
-    <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-testimoni')"></div>
+    <div class="fixed inset-0 bg-gray-900/75" onclick="closeModal('modal-create-testimoni')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden z-10">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center text-white">
             <h3 class="text-lg font-bold tracking-wide">Tambah Testimoni</h3>
@@ -81,7 +81,7 @@
             @csrf
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2">Foto Profil</label>
-                <input type="file" name="foto" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
+                <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-green-50 file:text-green-700 hover:file:bg-green-100">
             </div>
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2">Nama</label>
@@ -105,7 +105,7 @@
 
 <!-- MODAL EDIT -->
 <div id="modal-edit-testimoni" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 overflow-y-auto" role="dialog">
-    <div class="fixed inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-testimoni')"></div>
+    <div class="fixed inset-0 bg-gray-900/75" onclick="closeModal('modal-edit-testimoni')"></div>
     <div class="relative bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border-t-4 border-yellow-500 z-10">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center border-b">
              <h3 class="text-lg font-bold text-gray-900 tracking-wide">Edit Testimoni</h3>
@@ -115,7 +115,7 @@
             @csrf @method('PUT')
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2">Ganti Foto Profil</label>
-                <input type="file" name="foto" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
+                <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:bg-yellow-50 file:text-yellow-700 hover:file:bg-yellow-100">
             </div>
             <div>
                 <label class="block text-gray-700 text-sm font-bold mb-2">Nama</label>
@@ -136,15 +136,3 @@
         </form>
     </div>
 </div>
-
-<script>
-
-
-    function openEditModalTestimoni(id, nama, isi, rating) {
-        openModal('modal-edit-testimoni');
-        document.getElementById('form-edit-testimoni').action = '/admin/testimoni/' + id;
-        document.getElementById('edit-testimoni-nama').value = nama;
-        document.getElementById('edit-testimoni-isi').value = isi;
-        document.getElementById('edit-testimoni-rating').value = rating;
-    }
-</script>

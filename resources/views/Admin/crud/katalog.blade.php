@@ -13,7 +13,7 @@
                 <select name="filter_kat_katalog" onchange="this.form.submit()" class="shadow-sm border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-green-800 md:w-[13.5rem]">
                     <option value="">Semua Kategori</option>
                     @foreach($kategoriKatalogs as $kat)
-                        <option value="{{ $kat->id }}" {{ request('filter_kat_katalog') == $kat->id ? 'selected' : '' }}>{{ $kat->nama_kategori }}</option>
+                        <option value="{{ $kat->id }}" {{ request('filter_kat_katalog') == $kat->id ? 'selected' : '' }}>{{ \Illuminate\Support\Str::limit($kat->nama_kategori, 22) }}</option>
                     @endforeach
                 </select>
                 <div class="admin-search-control w-full md:w-[18rem]">
@@ -102,7 +102,7 @@
 <!-- MODAL CREATE KATALOG DESA -->
 <!-- ========================================== -->
 <div id="modal-create-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-create-katalog')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-create-katalog')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-green-800 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-white tracking-wide">Tambah Katalog Desa</h3>
@@ -115,14 +115,14 @@
                 @csrf
                 <div class="mb-4 text-center border border-dashed border-gray-300 p-4 rounded-lg bg-gray-50">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Upload Gambar Katalog</label>
-                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-800 hover:file:bg-green-200 cursor-pointer" type="file" name="gambar" accept="image/*">
+                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-800 hover:file:bg-green-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Kategori <span class="text-red-500">*</span></label>
                     <select class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" name="kategori_id" required>
                         <option value="" disabled selected>Pilih Kategori</option>
                         @foreach($kategoriKatalogs as $kat)
-                            <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                            <option value="{{ $kat->id }}">{{ \Illuminate\Support\Str::limit($kat->nama_kategori, 22) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -151,7 +151,7 @@
 <!-- MODAL EDIT KATALOG DESA -->
 <!-- ========================================== -->
 <div id="modal-edit-katalog" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6" role="dialog">
-    <div class="absolute inset-0 bg-gray-900/75 backdrop-blur-sm" onclick="closeModal('modal-edit-katalog')"></div>
+    <div class="absolute inset-0 bg-gray-900/75" onclick="closeModal('modal-edit-katalog')"></div>
     <div class="relative bg-white w-full max-w-2xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden">
         <div class="bg-yellow-500 px-6 py-4 flex justify-between items-center shrink-0">
             <h3 class="text-lg md:text-xl font-bold text-gray-900 tracking-wide">Edit Katalog Desa</h3>
@@ -164,13 +164,13 @@
                 @csrf @method('PUT')
                 <div class="mb-4 text-center border border-dashed border-gray-300 p-4 rounded-lg bg-gray-50">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Ganti Gambar Katalog</label>
-                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 cursor-pointer" type="file" name="gambar" accept="image/*">
+                    <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Kategori <span class="text-red-500">*</span></label>
                     <select class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-katalog-kategori" name="kategori_id" required>
                         @foreach($kategoriKatalogs as $kat)
-                            <option value="{{ $kat->id }}">{{ $kat->nama_kategori }}</option>
+                            <option value="{{ $kat->id }}">{{ \Illuminate\Support\Str::limit($kat->nama_kategori, 22) }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -194,14 +194,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    function openEditModalKatalog(id, kategori_id, judul, deskripsi, url) {
-        openModal('modal-edit-katalog');
-        document.getElementById('form-edit-katalog').action = '/admin/katalog/' + id;
-        document.getElementById('edit-katalog-kategori').value = kategori_id;
-        document.getElementById('edit-katalog-judul').value = judul;
-        document.getElementById('edit-katalog-deskripsi').value = deskripsi;
-        document.getElementById('edit-katalog-url').value = url;
-    }
-</script>

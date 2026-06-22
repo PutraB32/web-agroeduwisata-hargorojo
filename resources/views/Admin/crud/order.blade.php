@@ -98,18 +98,18 @@
     <!-- Modals Detail Pesanan akan digenerate secara dinamis -->
     @foreach ($orders as $order)
     <div id="modal-detail-order-{{ $order->id }}"
-         class="admin-order-detail-modal hidden"
+         class="admin-order-detail-modal admin-order-detail-product-style fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-6"
          role="dialog"
          aria-modal="true"
          aria-labelledby="modal-order-title-{{ $order->id }}">
 
         <!-- Backdrop -->
-        <div class="absolute inset-0 bg-gray-900/70 backdrop-blur-sm" onclick="tutupModalDetailOrder({{ $order->id }})"></div>
+        <div class="absolute inset-0 bg-gray-900/70" onclick="tutupModalDetailOrder({{ $order->id }})"></div>
 
         <!-- Panel -->
-        <div class="relative bg-white rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] overflow-y-auto border border-gray-100">
+        <div class="admin-order-detail-panel relative bg-white w-full max-w-4xl rounded-2xl shadow-2xl flex flex-col max-h-full overflow-hidden border border-gray-100">
             <!-- Header -->
-            <div class="sticky top-0 bg-white flex justify-between items-center px-6 py-4 border-b border-gray-200 rounded-t-2xl z-10">
+            <div class="bg-white px-6 py-4 flex justify-between items-center shrink-0 border-b border-gray-200 rounded-t-2xl">
                 <h3 class="text-xl font-black text-gray-900 font-serif" id="modal-order-title-{{ $order->id }}">
                     <i class="fas fa-receipt text-green-600 mr-2"></i>Detail Pesanan #{{ $order->id }}
                 </h3>
@@ -118,7 +118,7 @@
                 </button>
             </div>
 
-            <div class="px-6 py-5">
+            <div class="admin-order-detail-body p-6 overflow-y-auto min-h-0" tabindex="0">
                 <!-- Info Grid -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
@@ -154,14 +154,14 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-xl border border-sky-100 bg-sky-50 p-4">
+                <div class="mb-6 rounded-xl border border-green-200/70 bg-green-50/60 p-4">
                     <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                         <div>
                             <p class="text-primary font-bold text-sm"><i class="fas fa-truck mr-1"></i> Pengiriman Transaksi</p>
-                            <p class="mt-1 text-xs text-sky-800">Satu kurir dan satu nomor resi berlaku untuk semua barang di pesanan ini.</p>
+                            <p class="mt-1 text-xs text-green-800/80">Satu kurir dan satu nomor resi berlaku untuk semua barang di pesanan ini.</p>
                             @if($order->punya_resi)
                                 <div class="mt-3 flex flex-wrap gap-2 text-xs">
-                                    <span class="inline-flex rounded-full border border-sky-200 bg-white px-3 py-1 font-bold text-sky-700">{{ $order->kurir }}</span>
+                                    <span class="inline-flex rounded-full border border-green-200/80 bg-white/80 px-3 py-1 font-bold text-green-700">{{ $order->kurir }}</span>
                                     <span class="inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 font-bold text-green-700">{{ $order->status_pengiriman_label }}</span>
                                     @if($order->tanggal_dikirim)
                                         <span class="inline-flex rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-500">{{ $order->tanggal_dikirim->format('d M Y, H:i') }}</span>
@@ -176,24 +176,24 @@
                             @csrf
                             @method('PUT')
                             <div>
-                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-sky-900">Kurir</label>
+                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Kurir</label>
                                 <input
                                     type="text"
                                     name="kurir"
                                     value="{{ old('kurir', $order->kurir) }}"
                                     placeholder="Contoh: JNE, J&T, Pos Indonesia, SiCepat"
-                                    class="w-full rounded-lg border border-sky-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+                                    class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
                                     required
                                 >
                             </div>
                             <div>
-                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-sky-900">Nomor Resi</label>
+                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Nomor Resi</label>
                                 <input
                                     type="text"
                                     name="nomor_resi"
                                     value="{{ old('nomor_resi', $order->nomor_resi) }}"
                                     placeholder="Masukkan nomor resi"
-                                    class="w-full rounded-lg border border-sky-200 bg-white px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+                                    class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
                                     required
                                 >
                             </div>
@@ -276,35 +276,3 @@
     @endforeach
 
 </div>
-
-<script>
-    function bukaModalDetailOrder(id) {
-        const modal = document.getElementById('modal-detail-order-' + id);
-        // Pindahkan modal ke <body> agar bebas dari overflow:hidden parent (hanya sekali)
-        if (!modal.dataset.moved) {
-            document.body.appendChild(modal);
-            modal.dataset.moved = 'true';
-        }
-        modal.classList.remove('hidden');
-        modal.classList.add('flex');
-        document.body.style.overflow = 'hidden';
-    }
-    function tutupModalDetailOrder(id) {
-        const modal = document.getElementById('modal-detail-order-' + id);
-        modal.classList.add('hidden');
-        modal.classList.remove('flex');
-        document.body.style.overflow = '';
-    }
-    // Tutup dengan tombol Escape
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            document.querySelectorAll('[id^="modal-detail-order-"]').forEach(function(modal) {
-                if (!modal.classList.contains('hidden')) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-    });
-</script>
