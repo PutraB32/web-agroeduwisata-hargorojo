@@ -22,7 +22,7 @@ class EcommercePagePresenter
             'assets' => [
                 'heroImage' => asset('images/assets foto/hero section-ecommerce.png'),
                 'ctaImage' => asset('images/assets foto/CTA_ecommerceee.png'),
-                'faqImage' => asset('images/assets foto/alur_pemesanan_FAQ.png'),
+                'faqImage' => asset('images/assets foto/alur_transaksi_ecommerce_FAQ.png'),
                 'fallbackImage' => $fallbackImage,
             ],
             'midtrans' => [
