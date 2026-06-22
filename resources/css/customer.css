@@ -1,0 +1,369 @@
+/* <-- Customer navbar responsive guard: cegah panel mobile melebar --> */
+.hargo-navbar,
+.hargo-navbar__bar,
+.hargo-navbar__panel,
+.hargo-navbar__panel-inner {
+    box-sizing: border-box;
+}
+
+.hargo-navbar {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+}
+
+.hargo-navbar__bar,
+.hargo-navbar__panel {
+    max-width: 100vw;
+}
+
+.hargo-navbar__panel {
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+}
+
+.hargo-navbar__panel-inner {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+}
+
+/* <-- Customer cart drawer: scrollbar panel keranjang/notifikasi --> */
+.cart-panel-scroll {
+    scroll-behavior: smooth;
+    scrollbar-color: #d8b15a #f8f6f1;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+}
+
+.cart-panel-scroll::-webkit-scrollbar {
+    width: 0.55rem;
+}
+
+.cart-panel-scroll::-webkit-scrollbar-track {
+    background: #f8f6f1;
+}
+
+.cart-panel-scroll::-webkit-scrollbar-thumb {
+    background: #d8b15a;
+    border: 2px solid #f8f6f1;
+    border-radius: 999px;
+}
+
+/* <-- Customer profile: guard responsif halaman profil dan riwayat pesanan --> */
+.customer-profile-page,
+.customer-profile-shell,
+.customer-profile-panels,
+.customer-profile-tabs,
+.customer-dashboard-grid,
+.customer-dashboard-card,
+.customer-profile-orders-panel,
+.customer-order-card {
+    min-width: 0;
+    max-width: 100%;
+}
+
+.customer-profile-page,
+.customer-profile-shell,
+.customer-profile-panels,
+.customer-profile-orders-panel,
+.customer-order-card {
+    overflow-x: hidden;
+}
+
+.customer-profile-shell {
+    width: 100%;
+}
+
+.customer-dashboard-grid h2,
+.customer-dashboard-grid h3,
+.customer-order-card {
+    overflow-wrap: anywhere;
+}
+
+.customer-order-card {
+    scroll-margin-top: 7rem;
+}
+
+@media (max-width: 640px) {
+    .customer-profile-shell {
+        padding-inline: 1rem;
+    }
+
+    .customer-dashboard-card,
+    .customer-profile-orders-panel {
+        border-radius: 1.25rem;
+        padding: 1.25rem;
+    }
+}
+
+/* <-- Customer dashboard cards: latar hijau transparan --> */
+.customer-dashboard-card {
+    border-color: rgba(0, 77, 64, 0.16) !important;
+    background:
+        linear-gradient(135deg, rgba(220, 252, 231, 0.92), rgba(236, 253, 245, 0.84)),
+        rgba(187, 247, 208, 0.72) !important;
+    box-shadow: 0 22px 55px rgba(0, 77, 64, 0.10) !important;
+}
+
+.customer-dashboard-card [class*="bg-[#f8f6f1]"],
+.customer-dashboard-card [class*="bg-[#fbfaf6]"] {
+    border-color: rgba(0, 77, 64, 0.12) !important;
+    background: rgba(220, 252, 231, 0.78) !important;
+}
+
+.customer-dashboard-card [class*="border-[#ece6da]"] {
+    border-color: rgba(0, 77, 64, 0.14) !important;
+}
+
+.customer-dashboard-card [class*="bg-white/70"] {
+    border-color: rgba(0, 77, 64, 0.14) !important;
+    background: rgba(236, 253, 245, 0.72) !important;
+}
+/* <-- Customer orders ledger: tampilan transaksi total pesanan --> */
+.customer-orders-ledger {
+    --customer-ledger-green: #004d40;
+    --customer-ledger-ink: #06251a;
+    --customer-ledger-muted: #4f665d;
+    position: relative;
+    overflow: hidden;
+    border-color: rgba(0, 77, 64, 0.18) !important;
+    border-radius: 0.85rem !important;
+    background:
+        linear-gradient(180deg, rgba(0, 77, 64, 0.075), rgba(236, 253, 245, 0.56)),
+        rgba(255, 255, 255, 0.82) !important;
+    color: var(--customer-ledger-ink);
+    font-family: 'League Spartan', 'Inter', sans-serif;
+    box-shadow: 0 20px 50px rgba(0, 77, 64, 0.10) !important;
+}
+
+.customer-orders-ledger::before {
+    content: "";
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: 4.8rem;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0, 77, 64, 0.22), transparent);
+}
+
+.customer-orders-ledger__header {
+    position: relative;
+    padding-bottom: 1.15rem;
+}
+
+.customer-orders-ledger__title {
+    color: #021d14 !important;
+    font-family: 'League Spartan', 'Inter', sans-serif !important;
+    font-size: clamp(1.4rem, 2.4vw, 1.85rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.035em;
+    line-height: 0.95;
+}
+
+.customer-orders-ledger__subtitle {
+    max-width: 38rem;
+    color: rgba(6, 37, 26, 0.68) !important;
+    font-size: 0.82rem !important;
+    font-weight: 600;
+    line-height: 1.45;
+}
+
+.customer-orders-ledger__badge {
+    border: 1px solid rgba(0, 77, 64, 0.14);
+    border-radius: 0.35rem !important;
+    background: rgba(0, 77, 64, 0.92) !important;
+    color: #ecfdf5 !important;
+    font-size: 0.72rem !important;
+    letter-spacing: 0.08em;
+    box-shadow: 0 10px 24px rgba(0, 77, 64, 0.18);
+}
+
+.customer-orders-ledger__badge i {
+    color: #d8b15a !important;
+}
+
+.customer-orders-ledger__list {
+    display: grid;
+    gap: 1rem;
+}
+
+.customer-order-ledger {
+    position: relative;
+    border-color: rgba(0, 77, 64, 0.20) !important;
+    border-radius: 0.55rem !important;
+    background:
+        linear-gradient(180deg, rgba(240, 253, 244, 0.78), rgba(255, 255, 255, 0.80)),
+        rgba(240, 253, 244, 0.70) !important;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.84), 0 14px 34px rgba(0, 77, 64, 0.08);
+}
+
+.customer-order-ledger::before {
+    content: "";
+    position: absolute;
+    inset-block: 1rem;
+    left: 0;
+    width: 3px;
+    border-radius: 999px;
+    background: rgba(0, 77, 64, 0.76);
+}
+
+.customer-order-ledger__summary {
+    align-items: stretch;
+}
+
+.customer-order-ledger__id {
+    color: var(--customer-ledger-green) !important;
+    font-family: 'League Spartan', 'Inter', sans-serif !important;
+    font-size: clamp(1rem, 2vw, 1.18rem) !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.03em;
+    line-height: 1;
+}
+
+.customer-order-ledger__pill,
+.customer-order-ledger__no-shipment {
+    border-color: rgba(0, 77, 64, 0.24) !important;
+    border-radius: 0.25rem !important;
+    background: rgba(236, 253, 245, 0.86) !important;
+    color: var(--customer-ledger-green) !important;
+    font-family: 'League Spartan', 'Inter', sans-serif;
+    font-size: 0.68rem !important;
+    font-weight: 900 !important;
+    letter-spacing: 0.045em;
+}
+
+.customer-order-ledger__date,
+.customer-order-ledger__info,
+.customer-order-ledger__product-meta,
+.customer-order-ledger__empty-products {
+    color: var(--customer-ledger-muted) !important;
+    font-weight: 600;
+}
+
+.customer-order-ledger__info {
+    font-size: 0.82rem !important;
+}
+
+.customer-order-ledger__info i {
+    color: rgba(0, 77, 64, 0.70) !important;
+}
+
+.customer-order-ledger__shipment {
+    border-left: 3px solid rgba(0, 77, 64, 0.74) !important;
+    border-color: rgba(0, 77, 64, 0.15) !important;
+    border-radius: 0.35rem !important;
+    background: rgba(220, 252, 231, 0.48) !important;
+    box-shadow: none !important;
+}
+
+.customer-order-ledger__shipment span {
+    background: rgba(255, 255, 255, 0.76) !important;
+    color: var(--customer-ledger-green) !important;
+}
+
+.customer-order-ledger__total {
+    display: flex;
+    min-width: 9.5rem;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid rgba(0, 77, 64, 0.14);
+    border-radius: 0.35rem !important;
+    background: linear-gradient(180deg, #004d40, #022e24) !important;
+    color: #ffffff;
+    box-shadow: 0 14px 28px rgba(0, 77, 64, 0.18) !important;
+}
+
+.customer-order-ledger__total p:first-child {
+    color: rgba(216, 177, 90, 0.92) !important;
+    font-family: 'League Spartan', 'Inter', sans-serif;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.12em;
+}
+
+.customer-order-ledger__total p:last-child {
+    color: #ffffff !important;
+    font-family: 'League Spartan', 'Inter', sans-serif !important;
+    font-size: clamp(1.45rem, 2.5vw, 1.8rem) !important;
+    font-weight: 900 !important;
+    line-height: 0.95;
+}
+
+.customer-order-ledger__products {
+    border-color: rgba(0, 77, 64, 0.14) !important;
+    border-radius: 0.45rem !important;
+    background: rgba(255, 255, 255, 0.62) !important;
+}
+
+.customer-order-ledger__products-head {
+    border-color: rgba(0, 77, 64, 0.12) !important;
+    background: rgba(220, 252, 231, 0.44);
+}
+
+.customer-order-ledger__products-head p,
+.customer-order-ledger__subtotal span:first-child {
+    color: rgba(0, 77, 64, 0.62) !important;
+    font-family: 'League Spartan', 'Inter', sans-serif;
+    letter-spacing: 0.12em;
+}
+
+.customer-order-ledger__products-list {
+    --tw-divide-opacity: 1;
+    border-color: rgba(0, 77, 64, 0.08) !important;
+}
+
+.customer-order-ledger__product-row {
+    background: rgba(255, 255, 255, 0.38);
+}
+
+.customer-order-ledger__product-row + .customer-order-ledger__product-row {
+    border-top: 1px solid rgba(0, 77, 64, 0.08);
+}
+
+.customer-order-ledger__product-image {
+    border: 1px solid rgba(0, 77, 64, 0.16);
+    border-radius: 0.4rem !important;
+    box-shadow: 0 8px 18px rgba(0, 77, 64, 0.10);
+}
+
+.customer-order-ledger__product-name,
+.customer-order-ledger__product-subtotal,
+.customer-order-ledger__subtotal span:last-child {
+    color: var(--customer-ledger-ink) !important;
+    font-family: 'League Spartan', 'Inter', sans-serif;
+    font-weight: 900 !important;
+}
+
+.customer-order-ledger__product-subtotal,
+.customer-order-ledger__subtotal span:last-child {
+    font-variant-numeric: tabular-nums;
+}
+
+.customer-order-ledger__subtotal {
+    border-color: rgba(0, 77, 64, 0.10) !important;
+    background: rgba(236, 253, 245, 0.58) !important;
+}
+
+.customer-orders-ledger__empty {
+    border-color: rgba(0, 77, 64, 0.20) !important;
+    background: rgba(236, 253, 245, 0.62) !important;
+}
+
+@media (max-width: 768px) {
+    .customer-orders-ledger::before {
+        top: 6.1rem;
+        inset-inline: 1rem;
+    }
+
+    .customer-order-ledger::before {
+        inset-block: 0.9rem;
+    }
+
+    .customer-order-ledger__total {
+        min-width: 0;
+        text-align: left;
+    }
+
+    .customer-order-ledger__product-subtotal {
+        text-align: left;
+    }
+}
