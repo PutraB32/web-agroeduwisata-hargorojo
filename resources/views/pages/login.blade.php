@@ -4,113 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin - Desa Hargorojo</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .font-playfair { font-family: 'Playfair+Display', serif; }
-    </style>
+    <link rel="icon" type="image/png" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
+    @vite(['resources/css/admin.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4 relative overflow-hidden">
-    
-    <div class="absolute inset-0 z-0">
-        <div class="absolute inset-0 bg-green-900/90 z-10"></div>
-        <img src="{{ asset('images/beranda.bg.jpeg') }}" class="w-full h-full object-cover" alt="Background">
-    </div>
+<body class="admin-auth-page overflow-x-hidden bg-[#12351f] antialiased text-[#12351f] selection:bg-[#12351f] selection:text-white">
+    <section class="relative min-h-screen overflow-hidden bg-[#12351f] px-3 py-6 sm:px-6 sm:py-10">
+        <img
+            src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
+            alt="Produk Desa Hargorojo"
+            class="absolute inset-x-0 top-0 h-[76%] min-h-[34rem] w-full object-cover object-center"
+        >
+        <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(18, 53, 31, 0.70) 0%, rgba(18, 53, 31, 0.48) 42%, rgba(18, 53, 31, 0.92) 78%, #12351f 100%);"></div>
+        <div class="absolute inset-0" style="background: radial-gradient(circle at 20% 12%, rgba(213, 173, 61, 0.20), transparent 28%), radial-gradient(circle at 84% 22%, rgba(255, 255, 255, 0.20), transparent 30%);"></div>
 
-    <div class="bg-white w-full max-w-md rounded-[2.5rem] shadow-2xl overflow-hidden relative z-20 border border-white/20">
-        <div class="p-8 md:p-12">
-            <div class="text-center mb-10">
-                <div class="w-20 h-20 bg-green-100 text-green-700 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4 shadow-inner">
-                    <i class="fas fa-user-shield"></i>
-                </div>
-                <h1 class="font-playfair text-3xl font-bold text-gray-900">Admin <span class="text-green-700">Login</span></h1>
-                <p class="text-gray-500 text-sm mt-2">Masuk ke dashboard pengelola Desa Hargorojo</p>
-            </div>
+        <div class="relative z-10 flex min-h-[calc(100vh-3rem)] items-center sm:min-h-[calc(100vh-5rem)] justify-center">
+            <div class="w-full max-w-[420px] rounded-lg border border-[#d5ad3d]/45 bg-[#12351f]/95 shadow-[0_28px_80px_rgba(15,45,27,0.34)] backdrop-blur-sm">
+                <div class="px-5 pb-6 pt-7 sm:px-9 sm:pb-8 sm:pt-8">
+                    <div class="text-center">
+                        <img
+                            src="{{ asset('images/assets foto/logo hargorojo.png') }}"
+                            alt="Logo Desa Wisata Hargorojo"
+                            class="mx-auto h-auto w-28 sm:w-32 object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.34)]"
+                        >
+                        <p class="mt-5 text-xs font-extrabold uppercase tracking-[0.22em] text-[#d5ad3d]">Admin Area</p>
+                        <h1 class="mt-2 font-lora text-2xl sm:text-3xl font-bold text-white">Selamat Datang</h1>
+                        <p class="mt-2 text-sm leading-6 text-white/75">Masuk ke dashboard pengelola Desa Hargorojo.</p>
+                    </div>
 
-            <form action="{{ route('login.post') }}" method="POST" class="space-y-6">
-                @csrf
-                @if (session('status'))
-                    <div class="bg-green-50 text-green-700 p-3 rounded-2xl text-sm mb-4 border border-green-200 text-center font-medium">
-                        {{ session('status') }}
-                    </div>
-                @endif
-                @if ($errors->any())
-                    <div class="bg-red-50 text-red-500 p-3 rounded-2xl text-sm mb-4 border border-red-200 text-center font-medium">
-                        {{ $errors->first() }}
-                    </div>
-                @endif
-                
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-widest">Username / Email</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <input type="text" name="email" required
-                            class="w-full pl-11 pr-4 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all"
-                            placeholder="admin@hargorojo.id">
-                    </div>
-                </div>
+                    <form action="{{ route('login.post') }}" method="POST" class="mt-8 space-y-4">
+                        @csrf
 
-                <div>
-                    <label class="block text-xs font-bold text-gray-700 mb-2 uppercase tracking-widest">Password</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gray-400">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <input type="password" name="password" id="password" required
-                            class="w-full pl-11 pr-12 py-4 bg-gray-50 border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-green-500 focus:bg-white transition-all"
-                            placeholder="••••••••">
-                        <button type="button" onclick="togglePasswordVisibility('password', 'password-eye')" class="absolute inset-y-0 right-0 flex items-center pr-4 text-gray-400 hover:text-gray-600 transition">
-                            <i class="fas fa-eye" id="password-eye"></i>
+                        @if (session('status'))
+                            <div class="rounded-md border border-green-200 bg-green-50 px-4 py-3 text-center text-sm font-medium text-green-700">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+
+                        @if ($errors->any())
+                            <div class="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-center text-sm font-medium text-red-600">
+                                {{ $errors->first() }}
+                            </div>
+                        @endif
+
+                        <div>
+                            <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Email Admin</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#8c9488]">
+                                    <i class="fa-regular fa-envelope text-sm"></i>
+                                </span>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value="{{ old('email') }}"
+                                    autocomplete="username"
+                                    class="h-12 w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] pl-11 pr-4 text-sm text-[#12351f] placeholder:text-[#9b978e] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25"
+                                    placeholder="admin@hargorojo.id"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Password</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#8c9488]">
+                                    <i class="fa-solid fa-lock text-sm"></i>
+                                </span>
+                                <input
+                                    type="password"
+                                    name="password"
+                                    id="password"
+                                    autocomplete="current-password"
+                                    class="h-12 w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] pl-11 pr-12 text-sm text-[#12351f] placeholder:text-[#9b978e] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25"
+                                    placeholder="Masukkan password"
+                                    required
+                                >
+                                <button
+                                    type="button"
+                                    onclick="togglePasswordVisibility('password', 'password-eye')"
+                                    class="absolute inset-y-0 right-0 flex w-12 items-center justify-center text-[#8c9488] transition-colors hover:text-[#12351f]"
+                                    title="Tampilkan password"
+                                    aria-label="Tampilkan password"
+                                >
+                                    <i class="fa-solid fa-eye" id="password-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col items-start gap-3 pt-1 text-xs sm:flex-row sm:items-center sm:justify-between">
+                            <label class="flex items-center gap-2 font-medium text-white/75">
+                                <input type="checkbox" name="remember" value="1" class="rounded border-[#e5dcc8] text-[#12351f] focus:ring-[#d5ad3d]">
+                                Ingat saya
+                            </label>
+
+                            <a href="{{ route('password.request') }}" class="font-extrabold uppercase tracking-[0.12em] text-[#d5ad3d] transition hover:text-white">
+                                Lupa Password?
+                            </a>
+                        </div>
+
+                        <button type="submit" class="group flex h-12 w-full items-center justify-center gap-3 rounded-md bg-[#d5ad3d] text-xs font-extrabold uppercase tracking-[0.18em] text-[#12351f] shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/55">
+                            Masuk Admin
+                            <i class="fa-solid fa-arrow-right text-[#12351f] transition-transform group-hover:translate-x-1"></i>
                         </button>
+                    </form>
+
+                    <div class="mt-7 text-center">
+                        <a href="{{ route('beranda') }}" class="inline-flex items-center justify-center gap-2 text-xs font-bold text-white/70 transition hover:text-[#d5ad3d]">
+                            <i class="fa-solid fa-arrow-left-long text-[#d5ad3d]"></i>
+                            Kembali ke Beranda
+                        </a>
                     </div>
                 </div>
 
-                <div class="flex items-center justify-between">
-                    <label class="flex items-center text-xs text-gray-600 cursor-pointer">
-                        <input type="checkbox" class="rounded text-green-600 focus:ring-green-500 mr-2"> Ingat Saya
-                    </label>
-                    <a href="{{ route('password.request') }}" class="text-xs font-bold text-green-700 hover:text-yellow-600 transition">Lupa Password?</a>
+                <div class="border-t border-[#d5ad3d]/30 bg-[#0f2d1b]/70 px-6 py-4 text-center">
+                    <p class="text-[0.65rem] font-bold uppercase tracking-[0.22em] text-white/60">&copy; 2026 Desa Agroeduwisata Hargorojo</p>
                 </div>
-
-                <button type="submit" 
-                    class="w-full bg-gradient-to-r from-green-800 to-green-600 hover:from-green-700 hover:to-green-500 text-yellow-400 hover:text-white font-bold py-4 rounded-2xl transition-all duration-300 shadow-[0_8px_30px_rgb(21,128,61,0.3)] hover:shadow-[0_8px_30px_rgb(21,128,61,0.5)] flex justify-center items-center gap-3 group relative overflow-hidden">
-                    <span class="relative z-10 tracking-widest text-sm">MASUK SEKARANG</span>
-                    <i class="fas fa-arrow-right relative z-10 group-hover:translate-x-2 transition-transform duration-300"></i>
-                    <div class="absolute inset-0 h-full w-full bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500 ease-out rounded-2xl"></div>
-                </button>
-            </form>
-
-            <div class="mt-10 text-center">
-                <a href="/" class="text-xs text-gray-400 hover:text-green-700 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-long-arrow-alt-left"></i> Kembali ke Beranda
-                </a>
             </div>
         </div>
-        
-        <div class="bg-gray-50 py-4 px-8 text-center border-t border-gray-100">
-            <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em]">&copy; 2024 Desa Digital Hargorojo</p>
-        </div>
-    </div>
+    </section>
 
-    <script>
-        function togglePasswordVisibility(inputId, eyeId) {
-            const passwordInput = document.getElementById(inputId);
-            const eyeIcon = document.getElementById(eyeId);
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                eyeIcon.classList.remove('fa-eye');
-                eyeIcon.classList.add('fa-eye-slash');
-            } else {
-                passwordInput.type = 'password';
-                eyeIcon.classList.remove('fa-eye-slash');
-                eyeIcon.classList.add('fa-eye');
-            }
-        }
-    </script>
 </body>
 </html>
