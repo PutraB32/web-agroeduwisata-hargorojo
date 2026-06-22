@@ -2,8 +2,10 @@
 
 namespace App\View\Composers;
 
+use App\Models\User;
 use App\View\Presenters\CustomerOrderPresenter;
 use App\View\Presenters\CustomerProfilePresenter;
+use App\View\Presenters\NavbarPresenter;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -11,10 +13,12 @@ class NavbarComposer
 {
     public function compose(View $view): void
     {
-        $navbarCustomer = Auth::check() && Auth::user()->role === 'customer'
-            ? Auth::user()
+        $authUser = Auth::user();
+        $navbarCustomer = $authUser instanceof User && ($authUser->role ?? null) === 'customer'
+            ? $authUser
             : null;
 
+        $navbar = NavbarPresenter::make(request(), $navbarCustomer, $authUser);
         $navbarOrders = collect();
         $navbarPreviewOrders = collect();
         $navbarOrderCount = 0;
@@ -36,6 +40,7 @@ class NavbarComposer
         }
 
         $view->with(compact(
+            'navbar',
             'navbarCustomer',
             'navbarOrders',
             'navbarPreviewOrders',

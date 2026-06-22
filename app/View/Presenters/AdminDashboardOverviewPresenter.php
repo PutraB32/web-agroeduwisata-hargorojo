@@ -9,11 +9,11 @@ class AdminDashboardOverviewPresenter
         $statusCounts = collect($stats['status_counts'] ?? []);
         $latestOrders = collect($stats['latest_orders'] ?? []);
         $lowStockProducts = collect($stats['low_stock_products'] ?? []);
-        $totalOrders = max((int) ($stats['total_orders'] ?? 0), 1);
+        $totalVisibleStatusOrders = max((int) $statusCounts->except('pending')->sum(), 1);
 
         return [
             'stats' => $stats,
-            'statusRows' => self::statusRows($statusCounts, $totalOrders),
+            'statusRows' => self::statusRows($statusCounts, $totalVisibleStatusOrders),
             'latestOrderRows' => self::latestOrderRows($latestOrders),
             'lowStockRows' => self::lowStockRows($lowStockProducts),
             'summaryCards' => self::summaryCards($stats, $isSuperAdmin),
@@ -92,7 +92,9 @@ class AdminDashboardOverviewPresenter
 
     private static function statusRows($statusCounts, int $totalOrders): array
     {
-        return collect(self::statusMeta())->map(function (array $meta, string $status) use ($statusCounts, $totalOrders) {
+        return collect(self::statusMeta())->reject(function (array $meta, string $status) {
+            return $status === 'pending';
+        })->map(function (array $meta, string $status) use ($statusCounts, $totalOrders) {
             $count = (int) ($statusCounts[$status] ?? 0);
 
             return array_merge($meta, [
@@ -146,7 +148,7 @@ class AdminDashboardOverviewPresenter
     {
         return [
             'pending' => [
-                'label' => 'Pending',
+                'label' => 'Menunggu proses',
                 'icon' => 'fa-clock',
                 'class' => 'bg-amber-50 text-amber-700 border-amber-200',
                 'bar' => 'bg-amber-500',
@@ -182,7 +184,7 @@ class AdminDashboardOverviewPresenter
     {
         return [
             'paid' => ['label' => 'Dibayar', 'class' => 'bg-green-50 text-green-700 border-green-200'],
-            'pending' => ['label' => 'Pending', 'class' => 'bg-amber-50 text-amber-700 border-amber-200'],
+            'pending' => ['label' => 'Menunggu pembayaran', 'class' => 'bg-amber-50 text-amber-700 border-amber-200'],
             'expired' => ['label' => 'Expired', 'class' => 'bg-orange-50 text-orange-700 border-orange-200'],
             'cancel' => ['label' => 'Cancel', 'class' => 'bg-red-50 text-red-700 border-red-200'],
             'failed' => ['label' => 'Failed', 'class' => 'bg-red-50 text-red-700 border-red-200'],
