@@ -1,87 +1,24 @@
 <?php
 
-use App\Models\Order;
 use App\Models\User;
-use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\View;
 
-it('guest diarahkan ke login customer saat membuka profil customer', function () {
-    $this->get(route('customer.profile'))
-        ->assertRedirect(route('customer.login'));
-});
-
-it('customer bisa membuka halaman profil dengan ringkasan order', function () {
-    $customer = User::factory()->create(['role' => 'customer']);
-
-    Order::create([
-        'user_id' => $customer->id,
-        'nama_pemesan' => $customer->name,
-        'no_hp' => '08123456789',
-        'alamat' => 'Desa Hargorojo',
-        'total' => 125000,
-        'status_order' => 'selesai',
-        'payment_status' => 'paid',
-    ]);
-
-    View::shouldReceive('share')->zeroOrMoreTimes();
-    View::shouldReceive('make')
-        ->once()
-        ->with('customer.profile', \Mockery::on(function (array $data) use ($customer) {
-            return $data['customer']->is($customer)
-                && $data['orders']->count() === 1
-                && $data['totalOrders'] === 1
-                && $data['totalBelanja'] === 125000.0;
-        }), [])
-        ->andReturn(new class implements ViewContract, \Stringable
-        {
-            public function render()
-            {
-                return 'PROFILE_OK';
-            }
-
-            public function name()
-            {
-                return 'customer.profile';
-            }
-
-            public function with($key, $value = null)
-            {
-                return $this;
-            }
-
-            public function getData()
-            {
-                return [];
-            }
-
-            public function __toString(): string
-            {
-                return $this->render();
-            }
-        });
-
-    $this->actingAs($customer)
-        ->get(route('customer.profile'))
-        ->assertOk()
-        ->assertSee('PROFILE_OK');
-});
-
-it('customer bisa memperbarui nama email nomor hp dan alamat profil', function () {
+it('customer bisa memperbarui nama email nomor hp dan alamat profil dari pop up', function () {
     $customer = User::factory()->create([
         'role' => 'customer',
         'email' => 'customer@example.com',
     ]);
 
     $this->actingAs($customer)
+        ->from(route('ecommerce'))
         ->put(route('customer.profile.update'), [
             'name' => 'Nico Geser Baru',
             'email' => 'nico.baru@example.com',
             'no_hp' => '08123456789',
             'alamat' => 'Desa Hargorojo, Purworejo',
         ])
-        ->assertRedirect(route('customer.profile'))
+        ->assertRedirect(route('ecommerce'))
         ->assertSessionHas('success');
 
     $this->assertDatabaseHas('users', [
@@ -93,7 +30,7 @@ it('customer bisa memperbarui nama email nomor hp dan alamat profil', function (
     ]);
 });
 
-it('customer bisa menambahkan foto profil opsional', function () {
+it('customer bisa menambahkan foto profil opsional dari pop up', function () {
     $customer = User::factory()->create([
         'role' => 'customer',
         'email' => 'foto.customer@example.com',
@@ -103,6 +40,7 @@ it('customer bisa menambahkan foto profil opsional', function () {
     $smallPng = base64_decode('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+/p9sAAAAASUVORK5CYII=');
 
     $this->actingAs($customer)
+        ->from(route('ecommerce'))
         ->put(route('customer.profile.update'), [
             'name' => 'Customer Foto',
             'email' => 'customer.foto.baru@example.com',
@@ -110,7 +48,7 @@ it('customer bisa menambahkan foto profil opsional', function () {
             'alamat' => 'Desa Hargorojo',
             'foto' => UploadedFile::fake()->createWithContent('profil.png', $smallPng),
         ])
-        ->assertRedirect(route('customer.profile'))
+        ->assertRedirect(route('ecommerce'))
         ->assertSessionHas('success');
 
     $customer->refresh();
@@ -126,6 +64,7 @@ it('validasi foto profil memakai pesan bahasa indonesia', function () {
     ]);
 
     $this->actingAs($customer)
+        ->from(route('ecommerce'))
         ->put(route('customer.profile.update'), [
             'name' => $customer->name,
             'email' => $customer->email,
@@ -138,7 +77,7 @@ it('validasi foto profil memakai pesan bahasa indonesia', function () {
         ]);
 });
 
-it('data nomor hp dan alamat dari register masuk ke profil customer', function () {
+it('data nomor hp dan alamat dari register tersimpan untuk pop up profil customer', function () {
     $this->post(route('customer.register.post'), [
         'name' => 'Siti Customer',
         'email' => 'siti.profile@example.com',

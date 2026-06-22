@@ -8,21 +8,6 @@ use Illuminate\Contracts\View\View as ViewContract;
 use Illuminate\Support\Facades\View;
 use Mockery\MockInterface;
 
-beforeEach(function () {
-    $compiledPath = storage_path('framework/testing/views');
-
-    if (! is_dir($compiledPath)) {
-        mkdir($compiledPath, 0777, true);
-    }
-
-    foreach (glob($compiledPath.DIRECTORY_SEPARATOR.'*') ?: [] as $compiledFile) {
-        if (is_file($compiledFile)) {
-            @unlink($compiledFile);
-        }
-    }
-
-    config(['view.compiled' => $compiledPath]);
-});
 
 function makeProduk(array $attributes = []): Produk
 {

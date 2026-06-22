@@ -6,21 +6,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Password;
 
-beforeEach(function () {
-    $compiledPath = storage_path('framework/testing/views');
-
-    if (! is_dir($compiledPath)) {
-        mkdir($compiledPath, 0777, true);
-    }
-
-    foreach (glob($compiledPath.DIRECTORY_SEPARATOR.'*') ?: [] as $compiledFile) {
-        if (is_file($compiledFile)) {
-            @unlink($compiledFile);
-        }
-    }
-
-    config(['view.compiled' => $compiledPath]);
-});
 
 it('menampilkan link lupa password di halaman login customer', function () {
     $loginView = file_get_contents(resource_path('views/customer/login.blade.php'));

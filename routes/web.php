@@ -74,7 +74,6 @@ Route::get('/customer/reset-password/{token}', [ResetPasswordController::class, 
 Route::post('/customer/reset-password', [ResetPasswordController::class, 'resetCustomer'])
     ->middleware('throttle:password-reset')
     ->name('customer.password.update');
-Route::get('/customer/profile', [CustomerAuthController::class, 'profile'])->name('customer.profile');
 Route::put('/customer/profile', [CustomerAuthController::class, 'updateProfile'])->name('customer.profile.update');
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->middleware('auth')->name('customer.logout');
 
