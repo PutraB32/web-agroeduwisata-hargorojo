@@ -191,8 +191,8 @@
                 </div>
 
                 <!-- CONTENT -->
-                <div class="flex min-h-[360px] flex-col items-center justify-center px-6 py-12 text-center sm:min-h-[500px] sm:px-8 sm:py-[6.25rem]">
-                    <p class="font-lora italic text-[#3f4a43] text-[18px] leading-[2]">
+                <div class="flex min-h-[280px] flex-col items-center justify-center px-6 py-10 text-center sm:min-h-[360px] sm:px-8 sm:py-12">
+                    <p class="font-lora italic text-[#3f4a43] text-[18px] leading-[1.85]">
                         "Terwujudnya Desa Hargorojo sebagai
                         desa agroeduwisata unggulan yang
                         mandiri, berbudaya, berkelanjutan,
@@ -217,8 +217,8 @@
                 </div>
 
                 <!-- CONTENT -->
-                <div class="px-6 py-10 sm:px-10 sm:py-12">
-                    <ul class="space-y-3.5 font-lora text-[16px] sm:text-[18px]">
+                <div class="px-6 py-8 sm:px-10 sm:py-10">
+                    <ul class="space-y-3 font-lora text-[16px] sm:text-[18px]">
 
                         @php
                             $misiItems = [
