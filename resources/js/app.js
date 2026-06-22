@@ -873,6 +873,145 @@ document.querySelectorAll(".tradisi-section").forEach((el) => {
 document.querySelectorAll(".tradisi-footnote").forEach((el) => {
     tradisiFootnoteObserver.observe(el);
 });
+
+// =====================================================
+// TESTIMONI PENGUNJUNG — per card individual
+// =====================================================
+const testiPengunjungObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            testiPengunjungObserver.unobserve(entry.target)
+        }
+    })
+}, {
+    threshold: 0.15,
+    rootMargin: '0px 0px -80px 0px'
+})
+
+document.querySelectorAll('.testi-pengunjung-card').forEach(el => {
+    testiPengunjungObserver.observe(el)
+})
+
+// =====================================================
+// FAQ AGROEDUWISATA — stagger item satu per satu
+// =====================================================
+const faqItems = document.querySelectorAll(".faq-item, .faq-cta");
+
+const faqObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                faqObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.18,
+        rootMargin: "0px 0px -70px 0px",
+    },
+);
+
+faqItems.forEach((el, index) => {
+    el.style.transitionDelay = `${index * 120}ms`;
+    faqObserver.observe(el);
+});
+
+// =====================================================
+// E-COMMERCE KATALOG — panel dan card masuk bertahap
+// =====================================================
+const ecommerceCatalogObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                ecommerceCatalogObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.12,
+        rootMargin: "0px 0px -70px 0px",
+    },
+);
+
+document
+    .querySelectorAll(
+        ".ecommerce-catalog-panel, .ecommerce-catalog-toolbar, .ecommerce-featured-block, .ecommerce-products-block",
+    )
+    .forEach((el, index) => {
+        el.style.transitionDelay = `${Math.min(index, 4) * 110}ms`;
+        ecommerceCatalogObserver.observe(el);
+    });
+
+document
+    .querySelectorAll(".ecommerce-feature-card, .ecommerce-product-card")
+    .forEach((el, index) => {
+        el.style.transitionDelay = `${(index % 6) * 80}ms`;
+        ecommerceCatalogObserver.observe(el);
+    });
+
+// =====================================================
+// E-COMMERCE CTA GROSIR — reveal formal bertahap
+// =====================================================
+const ecommerceBulkCtaObserver = new IntersectionObserver(
+    (entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                ecommerceBulkCtaObserver.unobserve(entry.target);
+            }
+        });
+    },
+    {
+        threshold: 0.18,
+        rootMargin: "0px 0px -80px 0px",
+    },
+);
+
+document
+    .querySelectorAll(
+        ".ecommerce-bulk-cta__title, .ecommerce-bulk-cta__lead, .ecommerce-bulk-cta__feature, .ecommerce-bulk-cta__action, .ecommerce-bulk-cta__badge",
+    )
+    .forEach((el, index) => {
+        el.style.transitionDelay = `${index * 120}ms`;
+        ecommerceBulkCtaObserver.observe(el);
+    });
+
+// =====================================================
+// HALAMAN KONTAK - reveal formal bertahap
+// =====================================================
+const contactMotionItems = document.querySelectorAll(
+    ".contact-reveal-card, .contact-form-card, .contact-faq-label, .contact-faq-title, .contact-faq-lead, .contact-faq-item, .contact-faq-cta",
+);
+
+if (contactMotionItems.length) {
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        contactMotionItems.forEach((el) => el.classList.add("visible"));
+    } else {
+        const contactMotionObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add("visible");
+                        contactMotionObserver.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                threshold: 0.14,
+                rootMargin: "0px 0px -70px 0px",
+            },
+        );
+
+        contactMotionItems.forEach((el, index) => {
+            el.style.transitionDelay = `${Math.min(index % 8, 7) * 90}ms`;
+            contactMotionObserver.observe(el);
+        });
+    }
+}
+
 // =====================================================
 // PUBLIC TESTIMONI MODAL
 // =====================================================
