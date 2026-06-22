@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\ManagesStoredImages;
 use App\Models\KatalogDesa;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AdminKatalogDesaController extends Controller
 {
+    use ManagesStoredImages;
+
+    private const IMAGE_DIRECTORY = 'katalog';
+
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules());
@@ -22,9 +26,7 @@ class AdminKatalogDesaController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->gambar->move(public_path('images/katalog'), $imageName);
-            $data['gambar'] = $imageName;
+            $data['gambar'] = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
         }
 
         KatalogDesa::create($data);
@@ -44,12 +46,8 @@ class AdminKatalogDesaController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($katalog->gambar && file_exists(public_path('images/katalog/' . $katalog->gambar))) {
-                unlink(public_path('images/katalog/' . $katalog->gambar));
-            }
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->gambar->move(public_path('images/katalog'), $imageName);
-            $data['gambar'] = $imageName;
+            $this->deletePublicImage($katalog->gambar, self::IMAGE_DIRECTORY);
+            $data['gambar'] = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
         }
 
         $katalog->update($data);
@@ -59,12 +57,10 @@ class AdminKatalogDesaController extends Controller
     public function destroy($id)
     {
         $katalog = KatalogDesa::findOrFail($id);
-        
-        if ($katalog->gambar && file_exists(public_path('images/katalog/' . $katalog->gambar))) {
-            unlink(public_path('images/katalog/' . $katalog->gambar));
-        }
 
+        $this->deletePublicImage($katalog->gambar, self::IMAGE_DIRECTORY);
         $katalog->delete();
+
         return redirect()->back()->with('success', 'Katalog Desa berhasil dihapus!');
     }
 
@@ -74,7 +70,7 @@ class AdminKatalogDesaController extends Controller
             'kategori_id' => 'required|exists:kategori_katalogs,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
             'url' => [
                 'nullable',
                 'url',

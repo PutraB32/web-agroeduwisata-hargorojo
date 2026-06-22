@@ -40,6 +40,7 @@ class AdminDashboardController extends Controller
     private function dashboardData(Request $request): array
     {
         [$chartLabels, $chartData] = $this->salesChartData();
+        $chartColors = $this->chartColors(count($chartLabels));
 
         return [
             'produks' => $this->products($request),
@@ -50,6 +51,7 @@ class AdminDashboardController extends Controller
             'kategoriKatalogs' => KategoriKatalog::all(),
             'chartLabels' => $chartLabels,
             'chartData' => $chartData,
+            'chartColors' => $chartColors,
             'parentAgros' => Agroeduwisata::whereNull('parent_id')->get(),
             'dashboardStats' => $this->dashboardStats(),
         ];
@@ -84,7 +86,7 @@ class AdminDashboardController extends Controller
 
     private function users(Request $request)
     {
-        return User::whereIn('role', ['admin', 'super_admin'])
+        return User::whereIn('role', ['super_admin', 'admin', 'customer'])
             ->when($request->query('search_user'), function ($query, $search) {
                 return $query->where(function ($q) use ($search) {
                     $q->where('name', 'like', "%{$search}%")
@@ -130,6 +132,30 @@ class AdminDashboardController extends Controller
         ];
     }
 
+    private function chartColors(int $count): array
+    {
+        $palette = [
+            '#004D40',
+            '#D4AF37',
+            '#0EA5E9',
+            '#16A34A',
+            '#EF4444',
+            '#8B5CF6',
+            '#F97316',
+            '#14B8A6',
+            '#DB2777',
+            '#64748B',
+        ];
+
+        $colors = [];
+
+        for ($index = 0; $index < $count; $index++) {
+            $colors[] = $palette[$index % count($palette)];
+        }
+
+        return $colors;
+    }
+
     private function dashboardStats(): array
     {
         $orderStatusCounts = Order::selectRaw('status_order, COUNT(*) as total')
@@ -150,7 +176,7 @@ class AdminDashboardController extends Controller
             'total_produk' => Produk::count(),
             'total_katalog' => KatalogDesa::count(),
             'total_agro' => Agroeduwisata::count(),
-            'total_users' => User::whereIn('role', ['admin', 'super_admin'])->count(),
+            'total_users' => User::whereIn('role', ['super_admin', 'admin', 'customer'])->count(),
             'total_orders' => Order::count(),
             'total_omzet' => (float) Order::where('payment_status', 'paid')->sum('total'),
             'month_omzet' => (float) Order::where('payment_status', 'paid')

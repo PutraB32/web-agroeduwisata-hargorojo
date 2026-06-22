@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\View\Presenters\CustomerProfilePresenter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -71,43 +70,6 @@ class CustomerAuthController extends Controller
         return redirect()->route('ecommerce')->with('success', 'Registrasi berhasil. Silakan lanjut berbelanja.');
     }
 
-    public function profile(Request $request)
-    {
-        $customer = $request->user();
-
-        if (! $customer) {
-            return redirect()->route('customer.login')
-                ->with('error', 'Silakan login customer terlebih dahulu.');
-        }
-
-        if ($customer->role !== 'customer') {
-            abort(403, 'Halaman profil ini hanya untuk customer.');
-        }
-
-        $orders = $customer->orders()
-            ->with('orderDetails.produk')
-            ->latest('created_at')
-            ->take(10)
-            ->get();
-        $profile = CustomerProfilePresenter::make($customer, $orders, $request);
-
-        return view('customer.profile', [
-            'customer' => $customer,
-            'profile' => $profile,
-            'orders' => $profile['orders'],
-            'totalOrders' => $profile['summary']['totalOrders'],
-            'totalBelanja' => $profile['summary']['totalBelanja'],
-            'totalBelanjaFormatted' => $profile['summary']['totalBelanjaFormatted'],
-            'customerInitials' => $profile['customer']['initials'],
-            'customerPhotoUrl' => $profile['customer']['photoUrl'],
-            'fallbackProductImageUrl' => $profile['fallbackProductImageUrl'],
-            'requestedPanel' => $profile['requestedPanel'],
-            'selectedOrderId' => $profile['selectedOrderId'],
-            'editingProfileOnLoad' => $profile['editingProfileOnLoad'],
-            'latestOrder' => $profile['latestOrder'],
-        ]);
-    }
-
     public function updateProfile(Request $request)
     {
         $customer = $request->user();
@@ -163,7 +125,7 @@ class CustomerAuthController extends Controller
 
         $customer->save();
 
-        return redirect()->route('customer.profile')
+        return back()
             ->with('success', 'Profil customer berhasil diperbarui.');
     }
 

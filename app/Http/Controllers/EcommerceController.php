@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+use App\Models\User;
+use App\View\Presenters\CustomerOrderPresenter;
+use App\View\Presenters\CustomerProfilePresenter;
 use App\View\Presenters\EcommercePagePresenter;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -45,6 +48,7 @@ class EcommerceController extends Controller
             $cartItems,
             $checkoutCustomer,
         );
+        $page['customerActions'] = $this->customerActions($checkoutCustomer, $request);
 
         return view('pages.e-commerce', compact(
             'produks',
@@ -96,4 +100,45 @@ class EcommerceController extends Controller
     {
         return 'Rp'.number_format((float) $value, 0, ',', '.');
     }
+
+    private function customerActions(?User $customer, Request $request): ?array
+    {
+        if (! $customer) {
+            return null;
+        }
+
+        $latestOrders = $customer->orders()
+            ->with('orderDetails.produk')
+            ->latest('created_at')
+            ->take(5)
+            ->get();
+
+        $newOrderId = (int) $request->session()->get('navbar_new_order_id', 0);
+        $targetOrder = $newOrderId > 0
+            ? $latestOrders->firstWhere('id', $newOrderId)
+            : $latestOrders->first();
+
+        return [
+            'ordersUrl' => route('ecommerce').'#produk-katalog',
+            'notificationTargetOrderDomId' => $targetOrder ? 'customer-order-'.$targetOrder->id : null,
+            'profileName' => $customer->name,
+            'profileLabel' => $this->profileLabel($customer->name),
+            'profileEmail' => $customer->email,
+            'profilePhoneLabel' => $customer->no_hp ?: 'Belum diisi',
+            'profileAddressLabel' => $customer->alamat ?: 'Belum diisi',
+            'profilePhotoUrl' => CustomerProfilePresenter::photoUrl($customer),
+            'totalOrders' => $customer->orders()->count(),
+            'notificationCount' => $latestOrders->count(),
+            'notificationOrders' => CustomerOrderPresenter::collection($latestOrders, 2),
+            'orders' => CustomerOrderPresenter::collection($latestOrders),
+        ];
+    }
+
+    private function profileLabel(string $name): string
+    {
+        $label = strtolower((string) preg_replace('/\s+/', '_', trim($name)));
+
+        return $label !== '' ? $label : 'customer';
+    }
+
 }

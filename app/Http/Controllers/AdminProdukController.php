@@ -3,13 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\ManagesStoredImages;
 use App\Models\Produk;
-use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AdminProdukController extends Controller
 {
+    use ManagesStoredImages;
+
+    private const IMAGE_DIRECTORY = 'produk';
+
     public function store(Request $request)
     {
         if (! $request->exists('satuan')) {
@@ -23,14 +26,10 @@ class AdminProdukController extends Controller
             'stok' => 'required|integer|min:0',
             'deskripsi' => 'nullable|string|max:5000',
             'manfaat' => 'nullable|string|max:5000',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar' => 'required|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
-        $imageName = null;
-        if ($request->hasFile('gambar')) {
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images/produk'), $imageName);
-        }
+        $imagePath = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
 
         Produk::create([
             'nama' => $validated['nama'],
@@ -40,7 +39,7 @@ class AdminProdukController extends Controller
             'deskripsi' => $validated['deskripsi'] ?? null,
             'manfaat' => $validated['manfaat'] ?? null,
             'is_unggulan' => $request->has('is_unggulan') ? true : false,
-            'gambar' => $imageName,
+            'gambar' => $imagePath,
             'user_id' => Auth::id(),
         ]);
 
@@ -62,17 +61,14 @@ class AdminProdukController extends Controller
             'stok' => 'required|integer|min:0',
             'deskripsi' => 'nullable|string|max:5000',
             'manfaat' => 'nullable|string|max:5000',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
-        
-        $imageName = $produk->gambar;
+
+        $imagePath = $produk->gambar;
+
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama jika ada
-            if ($produk->gambar && File::exists(public_path('images/produk/' . $produk->gambar))) {
-                File::delete(public_path('images/produk/' . $produk->gambar));
-            }
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images/produk'), $imageName);
+            $this->deletePublicImage($produk->gambar, self::IMAGE_DIRECTORY);
+            $imagePath = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
         }
 
         $produk->update([
@@ -83,7 +79,7 @@ class AdminProdukController extends Controller
             'deskripsi' => $validated['deskripsi'] ?? null,
             'manfaat' => $validated['manfaat'] ?? null,
             'is_unggulan' => $request->has('is_unggulan') ? true : false,
-            'gambar' => $imageName,
+            'gambar' => $imagePath,
         ]);
 
         return redirect()->back()->with('success', 'Produk berhasil diperbarui!');
@@ -92,12 +88,8 @@ class AdminProdukController extends Controller
     public function destroy($id)
     {
         $produk = Produk::findOrFail($id);
-        
-        // Hapus gambar saat didelete
-        if ($produk->gambar && File::exists(public_path('images/produk/' . $produk->gambar))) {
-            File::delete(public_path('images/produk/' . $produk->gambar));
-        }
 
+        $this->deletePublicImage($produk->gambar, self::IMAGE_DIRECTORY);
         $produk->delete();
 
         return redirect()->back()->with('success', 'Produk berhasil dihapus!');

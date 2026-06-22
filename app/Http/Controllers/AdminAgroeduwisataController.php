@@ -3,32 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\ManagesStoredImages;
 use App\Models\Agroeduwisata;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Str;
 
 class AdminAgroeduwisataController extends Controller
 {
+    use ManagesStoredImages;
+
+    private const IMAGE_DIRECTORY = 'agroeduwisata';
+
     public function store(Request $request)
     {
         $validated = $request->validate([
             'parent_id' => 'nullable|exists:agroeduwisata,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string|max:5000',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
         $data = [
             'parent_id' => $validated['parent_id'] ?? null,
             'judul' => $validated['judul'],
             'deskripsi' => $validated['deskripsi'] ?? null,
+            'user_id' => Auth::id(),
         ];
-        $data['user_id'] = Auth::id();
 
         if ($request->hasFile('gambar')) {
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images/agroeduwisata'), $imageName);
-            $data['gambar'] = $imageName;
+            $data['gambar'] = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
         }
 
         Agroeduwisata::create($data);
@@ -41,7 +43,7 @@ class AdminAgroeduwisataController extends Controller
             'parent_id' => 'nullable|exists:agroeduwisata,id',
             'judul' => 'required|string|max:255',
             'deskripsi' => 'nullable|string|max:5000',
-            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'gambar' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
         $agro = Agroeduwisata::findOrFail($id);
@@ -59,12 +61,8 @@ class AdminAgroeduwisataController extends Controller
         ];
 
         if ($request->hasFile('gambar')) {
-            if ($agro->gambar && file_exists(public_path('images/agroeduwisata/' . $agro->gambar))) {
-                unlink(public_path('images/agroeduwisata/' . $agro->gambar));
-            }
-            $imageName = Str::uuid().'.'.$request->file('gambar')->extension();
-            $request->file('gambar')->move(public_path('images/agroeduwisata'), $imageName);
-            $data['gambar'] = $imageName;
+            $this->deletePublicImage($agro->gambar, self::IMAGE_DIRECTORY);
+            $data['gambar'] = $this->storePublicImage($request->file('gambar'), self::IMAGE_DIRECTORY);
         }
 
         $agro->update($data);
@@ -74,12 +72,10 @@ class AdminAgroeduwisataController extends Controller
     public function destroy($id)
     {
         $agro = Agroeduwisata::findOrFail($id);
-        
-        if ($agro->gambar && file_exists(public_path('images/agroeduwisata/' . $agro->gambar))) {
-            unlink(public_path('images/agroeduwisata/' . $agro->gambar));
-        }
 
+        $this->deletePublicImage($agro->gambar, self::IMAGE_DIRECTORY);
         $agro->delete();
+
         return redirect()->back()->with('success', 'Data Agroeduwisata berhasil dihapus!');
     }
 }

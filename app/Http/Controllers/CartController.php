@@ -241,10 +241,8 @@ class CartController extends Controller
                     'midtrans_order_id' => $midtransOrderId,
                 ]);
 
-                $profileOrdersUrl = route('customer.profile', [
-                    'panel' => 'orders',
-                    'order' => $order->id,
-                ]);
+                $profileOrdersUrl = route('ecommerce').'#produk-katalog';
+
 
                 $payload = [
                     'transaction_details' => [
@@ -272,10 +270,8 @@ class CartController extends Controller
 
             $snap = $this->midtransService->createSnapTransaction($payload);
 
-            $profileOrdersUrl = route('customer.profile', [
-                'panel' => 'orders',
-                'order' => $order->id,
-            ]);
+            $profileOrdersUrl = route('ecommerce').'#produk-katalog';
+
 
             if (empty($snap['redirect_url'])) {
                 throw new \RuntimeException('Redirect pembayaran Midtrans tidak tersedia.');

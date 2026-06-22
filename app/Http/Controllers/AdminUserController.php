@@ -16,7 +16,7 @@ class AdminUserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'string', PasswordRule::min(8)->letters()->numbers()],
-            'role' => 'required|in:super_admin,admin',
+            'role' => 'required|in:super_admin,admin,customer',
         ]);
 
         User::create([
@@ -35,7 +35,7 @@ class AdminUserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => ['required','string','email','max:255', Rule::unique('users')->ignore($user->id)],
-            'role' => 'required|in:super_admin,admin',
+            'role' => 'required|in:super_admin,admin,customer',
             'password' => ['nullable', 'string', PasswordRule::min(8)->letters()->numbers()],
         ]);
 

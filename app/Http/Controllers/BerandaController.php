@@ -3,14 +3,18 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Concerns\ManagesStoredImages;
 use App\Models\Testimoni;
 use App\Models\Agroeduwisata;
 use App\Models\Produk;
 use App\Models\KatalogDesa;
-use Illuminate\Support\Str;
 
-class BerandaController extends Controller  
+class BerandaController extends Controller
 {
+    use ManagesStoredImages;
+
+    private const TESTIMONI_IMAGE_DIRECTORY = 'testimoni';
+
     public function index(Request $request)
     {
           // Fetch 4 Menu Utama dari Agroeduwisata
@@ -72,19 +76,11 @@ class BerandaController extends Controller
             'nama' => 'required|string|max:255',
             'isi_testimoni' => 'required|string|max:2000',
             'rating' => 'nullable|integer|min:1|max:5',
-            'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:5120',
+            'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:5120',
         ]);
 
         if ($request->hasFile('foto')) {
-
-            $imageName = Str::uuid().'.'.$request->file('foto')->extension();
-
-            $request->file('foto')->move(
-                public_path('images/testimoni'),
-                $imageName
-            );
-
-            $data['foto'] = $imageName;
+            $data['foto'] = $this->storePublicImage($request->file('foto'), self::TESTIMONI_IMAGE_DIRECTORY);
         }
 
         Testimoni::create($data);
