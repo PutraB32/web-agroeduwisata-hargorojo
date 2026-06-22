@@ -319,7 +319,7 @@
                         <span>{{ $artikel->created_at->translatedFormat('d F Y') }}</span>
                         <span>•</span>
                         <i class="fa-regular fa-clock"></i>
-                        <span>{{ $artikel->created_at->format('H.i') }} WIB</span>
+                        <span>{{ $artikel->created_at->format('H:i') }} WIB</span>
                     </div>
 
                     <h3 class="mb-2 font-lora text-[18px] font-bold leading-snug text-[#173121] line-clamp-3 sm:min-h-[90px] sm:text-[20px]">
