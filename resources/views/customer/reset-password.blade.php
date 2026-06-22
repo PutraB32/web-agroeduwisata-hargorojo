@@ -3,7 +3,6 @@
 @section('title', 'Reset Password Customer - Desa Hargorojo')
 
 @section('content')
-@include('layouts.navbar')
 
 <section class="relative min-h-screen overflow-hidden bg-[#f8f6f1] pt-32 pb-16">
     <img
