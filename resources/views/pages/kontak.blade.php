@@ -7,7 +7,7 @@
 <!-- ===================================================== -->
 <!-- HERO SECTION -->
 <!-- ===================================================== -->
-<section class="
+<section class="contact-hero
     relative
     isolate
 
@@ -33,7 +33,7 @@ style="
 ">
 
     <!-- OVERLAY -->
-    <div class="
+    <div class="contact-hero__overlay
         absolute
         inset-0
 
@@ -43,7 +43,7 @@ style="
         to-black/50
     "></div>
     <!-- CONTENT -->
-    <div class="
+    <div class="contact-hero__content
         relative
         z-10
 
@@ -52,7 +52,7 @@ style="
     ">
 
         <!-- TITLE -->
-        <h1 class="
+        <h1 class="contact-hero__title
             font-lora
 
             text-white
@@ -80,7 +80,7 @@ style="
         </h1>
 
         <!-- DESCRIPTION -->
-        <p class="
+        <p class="contact-hero__lead
             text-white/80
             font-lora
 
@@ -112,7 +112,7 @@ style="
 <!-- ===================================================== -->
 <!-- INFORMASI KONTAK -->
 <!-- ===================================================== -->
-<section class="
+<section class="contact-section
     py-12
     sm:py-16
     lg:py-20
@@ -136,17 +136,18 @@ style="
             gap-8
             lg:gap-10
             items-start
+            lg:items-stretch
         ">
 
             <!-- ====================================== -->
             <!-- LEFT -->
             <!-- ====================================== -->
-            <div class="min-w-0 space-y-5 sm:space-y-6">
+            <div class="contact-info-stack min-w-0 flex h-full flex-col gap-5 sm:gap-6">
 
                 <!-- WHATSAPP -->
                 <a href="https://wa.me/6281234567890"
                     target="_blank"
-                    class="
+                    class="contact-reveal-card contact-whatsapp-card
                         group
 
                         block
@@ -256,7 +257,7 @@ style="
                 ">
 
                     <!-- EMAIL -->
-                    <div class="
+                    <div class="contact-reveal-card
                         p-5
                         sm:p-6
 
@@ -306,7 +307,7 @@ style="
                     </div>
 
                     <!-- INSTAGRAM -->
-                    <div class="
+                    <div class="contact-reveal-card
                         p-5
                         sm:p-6
 
@@ -356,7 +357,7 @@ style="
                     </div>
 
                     <!-- JAM -->
-                    <div class="
+                    <div class="contact-reveal-card
                         sm:col-span-2
 
                         p-5
@@ -437,7 +438,11 @@ style="
                 </div>
 
                 <!-- MAPS -->
-                <div class="
+                <div class="contact-reveal-card contact-map-card
+                    lg:flex
+                    lg:flex-1
+                    lg:flex-col
+
                     overflow-hidden
 
                     rounded-[22px]
@@ -447,7 +452,7 @@ style="
                     border-[#dfe5e1]
                 ">
 
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.0530874443425!2d110.04034548116041!3d-7.815595778079431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ae73c8ad22021%3A0x3f38846f3c7c85a4!2sKantor%20Balai%20Desa%20Hargorojo!5e1!3m2!1sen!2sid!4v1781547009835!5m2!1sen!2sid" class="h-[240px] w-full sm:h-[300px]" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3623.0530874443425!2d110.04034548116041!3d-7.815595778079431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e7ae73c8ad22021%3A0x3f38846f3c7c85a4!2sKantor%20Balai%20Desa%20Hargorojo!5e1!3m2!1sen!2sid!4v1781547009835!5m2!1sen!2sid" class="h-[240px] w-full sm:h-[300px] lg:min-h-[300px] lg:flex-1" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 
                     <div class="p-5 sm:p-6">
 
@@ -523,7 +528,9 @@ style="
             <!-- ====================================== -->
             <!-- FORM -->
             <!-- ====================================== -->
-            <div class="
+            <div class="contact-form-card
+                h-full
+
                 p-5
                 sm:p-6
                 md:p-8
@@ -576,7 +583,7 @@ style="
                     action="#"
                     method="POST"
 
-                    class="space-y-4 sm:space-y-5"
+                    class="contact-form space-y-4 sm:space-y-5"
                 >
 
                     @csrf
@@ -984,7 +991,7 @@ style="
 <!-- ===================================================== -->
 <!-- FAQ -->
 <!-- ===================================================== -->
-<section class="
+<section class="contact-faq-section
     relative
     py-12
     sm:py-14
@@ -1002,7 +1009,7 @@ style="
     ">
     
     {{-- Small Label --}}
-    <div class="
+    <div class="contact-faq-label
     flex
     items-center
     justify-center
@@ -1034,7 +1041,7 @@ style="
     </div>
 
         <!-- TITLE -->
-        <h2 class="
+        <h2 class="contact-faq-title
             text-center
 
             font-lora
@@ -1057,7 +1064,7 @@ style="
         </h2>
 
         <!-- DESC -->
-        <p class="
+        <p class="contact-faq-lead
             max-w-2xl
             mx-auto
             text-[#52605a]
@@ -1080,7 +1087,7 @@ style="
             <!-- FAQ ITEM -->
             <div
                 x-data="{ open: false }"
-                class="
+                class="contact-faq-item
                     bg-white
 
                     rounded-[20px]
@@ -1163,7 +1170,7 @@ style="
             <!-- FAQ ITEM -->
             <div
                 x-data="{ open: false }"
-                class="
+                class="contact-faq-item
                     bg-white
 
                     rounded-[20px]
@@ -1245,7 +1252,7 @@ style="
             <!-- FAQ ITEM -->
             <div
                 x-data="{ open: false }"
-                class="
+                class="contact-faq-item
                     bg-white
 
                     rounded-[20px]
@@ -1327,7 +1334,7 @@ style="
             <!-- FAQ ITEM -->
             <div
                 x-data="{ open: false }"
-                class="
+                class="contact-faq-item
                     bg-white
 
                     rounded-[20px]
@@ -1407,7 +1414,7 @@ style="
             </div>
 
         <!-- BOTTOM CTA -->
-        <div class="
+        <div class="contact-faq-cta
             mt-12
 
             bg-white
