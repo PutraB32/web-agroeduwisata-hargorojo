@@ -94,7 +94,7 @@
 
 
     {{-- =========================================================== --}}
-    {{-- PRODUK UNGGULAN                                               --}}
+    {{-- PRODUK UNGGULAN --}}
     {{-- =========================================================== --}}
     <section id="produk-unggulan" class="relative overflow-hidden bg-[#f8f6f1] py-14 sm:py-16 lg:py-20">
 
@@ -148,7 +148,7 @@
                     </div>
 
                     {{-- Product Title --}}
-                    <h1 class="mb-1 font-lora text-[30px] font-bold leading-[1.05] tracking-[-0.02em] text-[#173121] sm:text-[36px] lg:text-[40px]">
+                    <h1 class="mb-1 font-lora text-[30px] font-bold leading-[1.05] tracking-[-0.02em] text-[#173121] sm:text-[36px] lg:text-[36px]">
                         {{ $produk->nama }}
                     </h1>
 
