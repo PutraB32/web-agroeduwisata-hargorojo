@@ -13,16 +13,16 @@
                         </p>
                     </div>
 
-                    <div class="grid w-full grid-cols-1 overflow-hidden rounded-2xl border border-[#ead79a] bg-[#fffaf0] shadow-sm sm:grid-cols-2 lg:w-auto lg:min-w-[20rem]">
-                        <div class="px-4 py-3.5">
-                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-[#9f7b20]">Omzet Bulan Ini</p>
-                            <p class="mt-2 break-words font-serif text-2xl font-black leading-none text-primary">
+                    <div class="admin-omzet-card grid w-full grid-cols-1 overflow-hidden rounded-2xl border shadow-sm sm:grid-cols-2 lg:w-auto lg:min-w-[20rem]">
+                        <div class="admin-omzet-item px-4 py-3.5">
+                            <p class="admin-omzet-label text-[10px] font-black uppercase tracking-[0.18em]">Omzet Bulan Ini</p>
+                            <p class="admin-omzet-value mt-2 break-words font-serif text-2xl font-black leading-none">
                                 {{ $dashboardOverview['monthOmzet'] ?? 'Rp0' }}
                             </p>
                         </div>
-                        <div class="border-t border-[#ead79a] px-4 py-3.5 sm:border-l sm:border-t-0">
-                            <p class="text-[10px] font-black uppercase tracking-[0.18em] text-[#9f7b20]">Hari Ini</p>
-                            <p class="mt-2 break-words font-serif text-2xl font-black leading-none text-primary">
+                        <div class="admin-omzet-item border-t px-4 py-3.5 sm:border-l sm:border-t-0">
+                            <p class="admin-omzet-label text-[10px] font-black uppercase tracking-[0.18em]">Hari Ini</p>
+                            <p class="admin-omzet-value mt-2 break-words font-serif text-2xl font-black leading-none">
                                 {{ $dashboardOverview['todayOmzet'] ?? 'Rp0' }}
                             </p>
                         </div>
@@ -204,7 +204,7 @@
                     <h3 class="mt-2 font-serif text-xl font-black text-primary">Produk yang sudah terjual</h3>
                     <p class="mt-1 text-sm text-gray-500">Dihitung dari produk pada pesanan yang pembayarannya sudah dibayar.</p>
                 </div>
-                <span class="inline-flex rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-bold text-gray-500">Unit terjual</span>
+                <span class="inline-flex rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-xs font-bold text-gray-500">Unit Terjual</span>
             </div>
 
             @if($dashboardOverview['hasSalesData'] ?? false)
@@ -212,7 +212,19 @@
                     <div class="admin-sales-chart admin-chart-panel w-full rounded-2xl border border-gray-100 bg-[#fbfcfa] p-3">
                         <canvas id="salesChart"></canvas>
                     </div>
+                    <script type="application/json" id="admin-sales-chart-data">@json(['labels' => $chartLabels ?? [], 'values' => $chartData ?? [], 'colors' => $chartColors ?? []])</script>
                 </div>
+                @if(!empty($chartLabels ?? []))
+                    <div class="admin-chart-legend mt-4" aria-label="Keterangan warna titik produk">
+                        @foreach(($chartLabels ?? []) as $index => $label)
+                            <div class="admin-chart-legend-item">
+                                <span class="admin-chart-legend-dot" style="--admin-chart-dot: {{ $chartColors[$index] ?? '#004D40' }};"></span>
+                                <span class="min-w-0 truncate">{{ $label }}</span>
+                                <span class="admin-chart-legend-value">{{ number_format((int) (($chartData ?? [])[$index] ?? 0), 0, ',', '.') }} Terjual</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
             @else
                 <div class="mt-5 rounded-2xl border border-dashed border-[#d8d0bd] bg-[#fffdf8] px-4 py-12 text-center">
                     <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-white text-[#b28a24] shadow-sm">
