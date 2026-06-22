@@ -69,9 +69,9 @@
 
     </div>
 
-    <div class="hero-fade-up delay-500 absolute bottom-0 left-0 w-full overflow-hidden leading-none pointer-events-none z-20">
+    <div class="hero-fade-up delay-500 absolute -bottom-px left-0 w-full overflow-hidden leading-none pointer-events-none z-20">
         <svg
-            class="relative block w-full h-[70px] lg:h-[100px]"
+            class="relative block w-full h-[70px] translate-y-px lg:h-[100px]"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1440 120"
             preserveAspectRatio="none"
@@ -97,22 +97,18 @@
     <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
 
         <!-- HEADER -->
-        <div class="text-center max-w-[800px] mx-auto mb-15">
+        <div class="text-center max-w-[800px] mx-auto mb-[3.75rem]">
 
-            <div class="reveal reveal-delay-1 flex items-center justify-center gap-3 mb-2">
-                <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
+            <div class="reveal reveal-delay-1 flex items-center justify-center mb-2">
                 <span class="uppercase tracking-[0.2em] text-sm font-semibold text-yellow-600">
                     Proses Produksi Tradisional
                 </span>
-                <div class="line-expand h-[2px] bg-yellow-500 rounded-full"></div>
             </div>
 
             <h2 class="reveal reveal-delay-2 font-lora text-[#173121] text-[38px] md:text-[52px] tracking-[-0.04rem] leading-[1] font-bold mb-2">
                 Perjalanan Nira Menjadi <br>
                 <span class="text-[#ac8f40]">Gula Kelapa</span>
             </h2>
-
-            <div class="reveal reveal-delay-2 mx-auto w-30 h-[2px] bg-gradient-to-r from-transparent via-[#d4b254] to-transparent mb-1"></div>
 
             <p class="reveal reveal-delay-3 mx-auto text-gray-600 text-base md:text-xl lg:text-[18px] leading-[1.5] font-thin">
                 Di balik manisnya gula kelapa,
@@ -363,8 +359,8 @@
             </div>
 
             {{-- FOOTER QUOTE — quote-fade --}}
-            <div class="quote-fade mt-25 max-w-4xl mx-auto text-center">
-                <div class="w-18 h-18 mx-auto mb-5 rounded-full bg-[#173121]/5 flex items-center justify-center">
+            <div class="quote-fade mt-[6.25rem] max-w-4xl mx-auto text-center">
+                <div class="h-[4.5rem] w-[4.5rem] mx-auto mb-5 rounded-full bg-[#173121]/5 flex items-center justify-center">
                     <i class="fa-solid fa-heart text-[#ff0000] text-4xl"></i>
                 </div>
                 <blockquote class="quote-blockquote font-lora italic text-[#173121] leading-[1.7] text-[20px] md:text-[30px]">
@@ -380,7 +376,7 @@
 </section>
 
 {{-- Tambah edukasi-section --}}
-<section class="edukasi-section relative py-8 lg:py-15 overflow-hidden">
+<section class="edukasi-section relative py-8 lg:py-[3.75rem] overflow-hidden">
 
     <div class="absolute inset-0">
         <img
@@ -483,7 +479,7 @@
 </section>
 
 
-<section class="py-16 lg:py-18 bg-[#f8f6f1]">
+<section class="py-16 lg:py-[4.5rem] bg-[#f8f6f1]">
     <div class="max-w-[1400px] mx-auto px-4 md:px-6 lg:px-8">
 
         <!-- HEADER -->
@@ -766,7 +762,7 @@
     <div class="max-w-[1400px] mx-auto px-4 lg:px-8">
 
         <!-- HEADER -->
-        <div class="text-start mb-15">
+        <div class="text-start mb-[3.75rem]">
             <h2 class="reveal reveal-delay-1 font-lora text-[#173121] text-[30px] md:text-[42px] font-bold leading-[1.15] mb-3">
                 Mengapa Tradisional adalah
                 <span class="block text-[#d4b254]">Masa Depan?</span>
@@ -857,7 +853,7 @@
         </div>
 
         {{-- FOOTNOTE — tradisi-footnote --}}
-        <div class="tradisi-footnote mt-23 text-center">
+        <div class="tradisi-footnote mt-[5.75rem] text-center">
             <p class="font-lora text-[#173121] text-[22px] lg:text-[30px] italic leading-relaxed">
                 "Tradisi bukan tentang bertahan di masa lalu, tetapi tentang menjaga masa depan."
             </p>
@@ -872,7 +868,7 @@
 <!-- TESTIMONI PENGUNJUNG -->
 <!-- ===================================================== -->
 <section class="
-    py-18
+    py-[4.5rem]
     lg:py-10
 
     bg-[#F8F6F1]
@@ -897,7 +893,7 @@
 
             gap-5
 
-            mb-15
+            mb-[3.75rem]
         ">
 
             <div class="
@@ -986,7 +982,7 @@
 
             <!-- BUTTON -->
             <button
-                onclick="document.getElementById('modal-testimoni-public').classList.remove('hidden')"
+                onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;if(m.parentElement!==document.body){document.body.appendChild(m);}m.classList.remove('hidden');m.style.display='block';m.style.zIndex='99999';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';})()"
 
                 class="
                     inline-flex
@@ -1068,7 +1064,7 @@
             @if($testi->foto)
 
                 <img
-                    src="{{ asset('images/testimoni/' . $testi->foto) }}"
+                    src="{{ $testi->foto_url }}"
                     alt="{{ $testi->nama }}"
 
                     class="
@@ -1301,7 +1297,7 @@
     </p>
 
     <button
-        onclick="document.getElementById('modal-testimoni-public').classList.remove('hidden')"
+        onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;if(m.parentElement!==document.body){document.body.appendChild(m);}m.classList.remove('hidden');m.style.display='block';m.style.zIndex='99999';document.documentElement.style.overflow='hidden';document.body.style.overflow='hidden';})()"
 
         class="
             inline-flex
@@ -1343,7 +1339,7 @@
 <!-- ===================================================== -->
 <section class="
     relative
-    py-15
+    py-[3.75rem]
     bg-[#f8f6f1]
 ">
 
@@ -1773,179 +1769,111 @@
 
 </section>
 
-
-
 <!-- Modal Create Testimoni Public -->
-<div id="modal-testimoni-public" class="fixed z-50 inset-0 overflow-y-auto hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <!-- Latar Belakang Hitam Transparan & Efek Blur -->
-    <div class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity" aria-hidden="true" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')"></div>
-    
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    
-    <!-- Kontainer Putih Form (Sudah ditambahkan relative z-10) -->
-    <div class="relative z-10 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-2xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-      <form action="{{ route('public.testimoni.store') }}" method="POST" enctype="multipart/form-data">
-          @csrf
-          <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-            <h3 class="text-xl font-bold text-gray-900 mb-6 text-center border-b pb-4">Beri Kami Ulasan</h3>
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Nama Lengkap <span class="text-red-500">*</span></label>
-                <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" type="text" name="nama" required placeholder="Contoh: Budi Santoso">
+<div id="modal-testimoni-public" class="fixed inset-0 z-[99999] hidden overflow-y-auto" style="display: none;" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <div class="flex min-h-screen items-center justify-center px-4 py-6 sm:px-6 sm:py-10">
+        <button type="button" class="fixed inset-0 bg-[#07150f]/70 backdrop-blur-sm transition-opacity" aria-label="Tutup modal" onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;m.classList.add('hidden');m.style.display='none';document.documentElement.style.overflow='';document.body.style.overflow='';})()"></button>
+
+        <div class="relative z-[100000] w-full max-w-[520px] overflow-hidden rounded-lg border border-[#d5ad3d]/45 bg-[#12351f] text-left shadow-[0_28px_80px_rgba(15,45,27,0.45)]">
+            <button type="button" onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;m.classList.add('hidden');m.style.display='none';document.documentElement.style.overflow='';document.body.style.overflow='';})()" class="absolute right-4 top-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white transition hover:border-[#d5ad3d]/70 hover:bg-[#d5ad3d] hover:text-[#12351f]" aria-label="Tutup modal">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="relative overflow-hidden px-5 pb-6 pt-7 text-center sm:px-8 sm:pt-8">
+                <div class="absolute inset-0 opacity-70" style="background: radial-gradient(circle at 18% 8%, rgba(213, 173, 61, 0.22), transparent 30%), radial-gradient(circle at 90% 10%, rgba(255,255,255,0.16), transparent 28%);"></div>
+                <div class="relative">
+                    <img src="{{ asset('images/assets foto/logo hargorojo.png') }}" alt="Logo Desa Wisata Hargorojo" class="mx-auto h-auto w-24 object-contain drop-shadow-[0_16px_28px_rgba(0,0,0,0.34)] sm:w-28">
+                    <p class="mt-5 text-xs font-extrabold uppercase tracking-[0.22em] text-[#d5ad3d]">Testimoni Pengunjung</p>
+                    <h3 id="modal-title" class="mt-2 font-lora text-2xl font-bold text-white sm:text-3xl">Beri Kami Ulasan</h3>
+                    <p class="mt-2 text-sm leading-6 text-white/75">Bagikan pengalaman Anda saat menikmati Agroeduwisata Hargorojo.</p>
+                </div>
             </div>
 
-<!-- ===================================================== -->
-<!-- JENIS ULASAN -->
-<!-- ===================================================== -->
-<div
-    x-data="{ jenis: 'wisata' }"
-    class="mb-4"
->
+            <form action="{{ route('public.testimoni.store') }}" method="POST" enctype="multipart/form-data" class="border-t border-[#d5ad3d]/30 bg-[#12351f]/95">
+                @csrf
 
-    <label class="
-        block
-        text-gray-700
-        text-sm
-        font-bold
-        mb-3
-    ">
-        Jenis Ulasan
-    </label>
+                <div class="max-h-[calc(100vh-19rem)] space-y-4 overflow-y-auto px-5 py-5 sm:px-8">
+                    @if(session('success_testimoni'))
+                        <div class="rounded-md border border-[#d5ad3d]/45 bg-[#f7f3ea] px-4 py-3 text-center text-sm font-semibold text-[#12351f]">
+                            {{ session('success_testimoni') }}
+                        </div>
+                    @endif
 
-    <div class="
-        flex
-        gap-5
-        mb-4
-    ">
+                    @if ($errors->any())
+                        <div class="rounded-md border border-red-200 bg-red-50 px-4 py-3 text-sm font-medium text-red-700">
+                            <ul class="list-disc space-y-1 pl-4">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
 
-        <!-- WISATA -->
-        <label class="
-            flex
-            items-center
-            gap-2
-            cursor-pointer
-        ">
-            <input
-                type="radio"
-                name="jenis_ulasan"
-                value="wisata"
-                x-model="jenis"
-                checked
-            >
+                    <div>
+                        <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Nama Lengkap <span class="text-[#d5ad3d]">*</span></label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex w-11 items-center justify-center text-[#8c9488]"><i class="fa-regular fa-user text-sm"></i></span>
+                            <input type="text" name="nama" required placeholder="Contoh: Budi Santoso" class="h-12 w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] pl-11 pr-4 text-sm text-[#12351f] placeholder:text-[#9b978e] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25">
+                        </div>
+                    </div>
 
-            <span>
-                Ulasan Umum
-            </span>
-        </label>
+                    <div x-data="{ jenis: 'wisata' }">
+                        <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Jenis Ulasan</label>
+                        <div class="grid gap-3 sm:grid-cols-2">
+                            <label class="flex cursor-pointer items-center gap-3 rounded-md border border-[#d5ad3d]/35 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#d5ad3d] hover:bg-white/15">
+                                <input type="radio" name="jenis_ulasan" value="wisata" x-model="jenis" checked class="border-[#e5dcc8] text-[#d5ad3d] focus:ring-[#d5ad3d]">
+                                <span>Ulasan Umum</span>
+                            </label>
+                            <label class="flex cursor-pointer items-center gap-3 rounded-md border border-[#d5ad3d]/35 bg-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:border-[#d5ad3d] hover:bg-white/15">
+                                <input type="radio" name="jenis_ulasan" value="produk" x-model="jenis" class="border-[#e5dcc8] text-[#d5ad3d] focus:ring-[#d5ad3d]">
+                                <span>Produk Desa</span>
+                            </label>
+                        </div>
 
-        <!-- PRODUK -->
-        <label class="
-            flex
-            items-center
-            gap-2
-            cursor-pointer
-        ">
-            <input
-                type="radio"
-                name="jenis_ulasan"
-                value="produk"
-                x-model="jenis"
-            >
+                        <div x-show="jenis === 'produk'" x-transition class="mt-4">
+                            <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Pilih Produk</label>
+                            <select name="produk_id" class="h-12 w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] px-4 text-sm text-[#12351f] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25">
+                                <option value="">-- Pilih Produk --</option>
+                                @foreach($produkUnggulan as $p)
+                                    <option value="{{ $p->id }}">{{ $p->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
 
-            <span>
-                Produk Desa
-            </span>
-        </label>
+                    <div>
+                        <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Rating</label>
+                        <select name="rating" class="h-12 w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] px-4 text-sm text-[#12351f] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25">
+                            <option value="5">5 - Sangat Memuaskan</option>
+                            <option value="4">4 - Memuaskan</option>
+                            <option value="3">3 - Cukup</option>
+                            <option value="2">2 - Kurang</option>
+                            <option value="1">1 - Sangat Kurang</option>
+                        </select>
+                    </div>
 
+                    <div>
+                        <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Komentar <span class="text-[#d5ad3d]">*</span></label>
+                        <textarea name="isi_testimoni" rows="4" required placeholder="Ceritakan pengalaman Anda..." class="w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] px-4 py-3 text-sm leading-6 text-[#12351f] placeholder:text-[#9b978e] shadow-inner shadow-white/60 transition focus:border-[#d5ad3d] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="mb-2 block text-[0.68rem] font-extrabold uppercase tracking-[0.2em] text-white/85">Foto Profil <span class="text-white/45">Opsional</span></label>
+                        <input type="file" name="foto" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" class="w-full rounded-md border border-[#e5dcc8] bg-[#f7f3ea] px-3 py-2 text-sm text-[#12351f] file:mr-4 file:rounded-full file:border-0 file:bg-[#d5ad3d] file:px-4 file:py-2 file:text-xs file:font-extrabold file:uppercase file:tracking-[0.12em] file:text-[#12351f] hover:file:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/25">
+                        <p class="mt-2 text-xs text-white/55">Maksimal 5MB. Format JPG, JPEG, PNG, atau WEBP.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col-reverse gap-3 border-t border-[#d5ad3d]/30 bg-[#0f2d1b]/70 px-5 py-4 sm:flex-row sm:justify-end sm:px-8">
+                    <button type="button" onclick="(function(){var m=document.getElementById('modal-testimoni-public');if(!m)return;m.classList.add('hidden');m.style.display='none';document.documentElement.style.overflow='';document.body.style.overflow='';})()" class="inline-flex h-11 w-full items-center justify-center rounded-md border border-white/20 px-5 text-xs font-extrabold uppercase tracking-[0.14em] text-white/80 transition hover:border-[#d5ad3d] hover:text-[#d5ad3d] sm:w-auto">Batal</button>
+                    <button type="submit" class="inline-flex h-11 w-full items-center justify-center gap-3 rounded-md bg-[#d5ad3d] px-5 text-xs font-extrabold uppercase tracking-[0.14em] text-[#12351f] shadow-[0_14px_28px_rgba(0,0,0,0.22)] transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-[#d5ad3d]/55 sm:w-auto">
+                        Kirim Ulasan
+                        <i class="fa-solid fa-arrow-right text-[#12351f]"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-
-    <!-- DROPDOWN PRODUK -->
-    <div
-        x-show="jenis === 'produk'"
-        x-transition
-    >
-
-        <label class="
-            block
-            text-gray-700
-            text-sm
-            font-bold
-            mb-2
-        ">
-            Pilih Produk
-        </label>
-
-        <select
-            name="produk_id"
-            class="
-                w-full
-                px-4
-                py-3
-
-                rounded-lg
-
-                bg-gray-50
-
-                border
-                border-gray-300
-
-                focus:border-green-500
-                focus:bg-white
-                focus:outline-none
-
-                transition
-            "
-        >
-
-            <option value="">
-                -- Pilih Produk --
-            </option>
-
-            @foreach($produkUnggulan as $p)
-
-                <option value="{{ $p->id }}">
-                    {{ $p->nama }}
-                </option>
-
-            @endforeach
-
-        </select>
-
-    </div>
-
-</div>
-
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Rating <span class="text-xs text-gray-500">(Wajib)</span></label>
-                <select name="rating" class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500">
-                    <option value="5">★★★★★ Sangat Memuaskan</option>
-                    <option value="4">★★★★ Memuaskan</option>
-                    <option value="3">★★★ Cukup</option>
-                    <option value="2">★★ Kurang</option>
-                    <option value="1">★ Sangat Kurang</option>
-                </select>
-            </div>
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Komentar / Ulasan <span class="text-red-500">*</span></label>
-                <textarea class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2.5 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" name="isi_testimoni" rows="4" required placeholder="Ceritakan pengalaman Anda..."></textarea>
-            </div>
-
-            <div class="form-group mb-2">
-                <label class="block text-gray-700 text-sm font-bold mb-2">Pilih Foto Profil Cepat <span class="text-xs text-gray-500">(Opsional)</span></label>
-                <input class="shadow-sm appearance-none border border-gray-300 rounded-lg w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-green-500" type="file" name="foto" accept="image/*">
-                <p class="text-[10px] text-gray-500 mt-1">Maksimal 5MB. Mendukung format standar JPG, PNG, WEBP.</p>
-            </div>
-          </div>
-          <div class="bg-gray-50 px-4 py-4 sm:px-6 flex flex-col-reverse sm:flex-row sm:justify-end gap-2 border-t">
-            <button type="button" onclick="document.getElementById('modal-testimoni-public').classList.add('hidden')" class="w-full sm:w-auto px-5 py-2.5 bg-white border border-gray-300 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-50 focus:outline-none transition-colors">Batal</button>
-            <button type="submit" class="w-full sm:w-auto px-5 py-2.5 bg-green-600 text-white text-sm font-bold rounded-lg hover:bg-green-700 focus:outline-none transition-colors shadow-sm">Kirim Ulasan</button>
-          </div>
-      </form>
-    </div>
-  </div>
 </div>
 
 @endsection
