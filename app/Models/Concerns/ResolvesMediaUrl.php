@@ -14,14 +14,20 @@ trait ResolvesMediaUrl
             return $fallback;
         }
 
-        if (Storage::disk('public')->exists($directory.'/'.$filename)) {
-            return asset('storage/'.$directory.'/'.$filename);
+        $normalizedPath = ltrim(str_replace('\\', '/', $filename), '/');
+        $storagePath = str_contains($normalizedPath, '/')
+            ? $normalizedPath
+            : $directory.'/'.$normalizedPath;
+
+        if (Storage::disk('public')->exists($storagePath)) {
+            return asset('storage/'.$storagePath);
         }
 
-        if (file_exists(public_path('images/'.$directory.'/'.$filename))) {
-            return asset('images/'.$directory.'/'.$filename);
+        $legacyFilename = basename($normalizedPath);
+        if (file_exists(public_path('images/'.$directory.'/'.$legacyFilename))) {
+            return asset('images/'.$directory.'/'.$legacyFilename);
         }
 
-        return asset('images/'.$filename);
+        return asset('images/'.$normalizedPath);
     }
 }

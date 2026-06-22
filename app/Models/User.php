@@ -81,4 +81,24 @@ class User extends Authenticatable
     {
         $this->notify(new ResetPasswordNotification($token));
     }
+
+    public function getRoleLabelAttribute()
+    {
+        return match ($this->role) {
+            'super_admin' => 'Super Admin',
+            'admin' => 'Admin',
+            'customer' => 'Customer',
+            default => str_replace('_', ' ', (string) $this->role),
+        };
+    }
+
+    public function getRoleBadgeClassAttribute()
+    {
+        return match ($this->role) {
+            'super_admin' => 'bg-red-50 text-red-700 border-red-200',
+            'admin' => 'bg-green-50 text-green-700 border-green-200',
+            'customer' => 'bg-[#fff8e1] text-[#9f7b20] border-[#ead79a]',
+            default => 'bg-gray-50 text-gray-700 border-gray-200',
+        };
+    }
 }

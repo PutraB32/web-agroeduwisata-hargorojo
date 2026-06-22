@@ -35,6 +35,11 @@ class KatalogDesa extends Model
         return $this->resolveImageUrl($this->gambar, 'katalog');
     }
 
+    public function getExternalUrlAttribute(): ?string
+    {
+        return filled($this->Url) ? $this->Url : null;
+    }
+
     public function getKategoriLabelAttribute(): string
     {
         return $this->kategoriKatalog->nama_kategori ?? 'Informasi Desa';

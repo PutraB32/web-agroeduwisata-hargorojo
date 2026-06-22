@@ -128,7 +128,7 @@ class Order extends Model
     public function getStatusOrderLabelAttribute(): string
     {
         return match ($this->status_order ?? 'pending') {
-            'pending' => 'Pending',
+            'pending' => 'Menunggu Proses',
             'diproses' => 'Diproses',
             'dikirim' => 'Dikirim',
             'selesai' => 'Selesai',
@@ -161,7 +161,7 @@ class Order extends Model
     {
         return match ($this->payment_status ?? 'pending') {
             'paid' => 'Dibayar',
-            'pending' => 'Pending',
+            'pending' => 'Menunggu Pembayaran',
             default => ucfirst((string) $this->payment_status),
         };
     }
