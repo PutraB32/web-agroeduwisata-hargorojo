@@ -5,7 +5,7 @@
 @section('content')
 
 
-<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
+<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
     <section class="relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
         <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="absolute inset-0 h-full w-full object-cover">
         <div class="absolute inset-0 bg-[#07150f]/45"></div>
@@ -18,22 +18,189 @@
             <p class="font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[88px]">Asli Hargorojo</p>
             <p class="mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg sm:leading-8">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
 
+            @if(! $activeCustomer)
+                <div class="mt-7 flex w-full flex-col items-center justify-center gap-3 sm:flex-row">
+                    <a href="{{ route('customer.login') }}" class="inline-flex h-12 w-full max-w-[13rem] items-center justify-center rounded-xl bg-[#173121] px-6 text-sm font-extrabold uppercase tracking-[0.14em] text-white shadow-[0_16px_35px_rgba(23,49,33,0.22)] transition hover:-translate-y-0.5 hover:bg-[#244832]">Masuk</a>
+                    <a href="{{ route('customer.register') }}" class="inline-flex h-12 w-full max-w-[13rem] items-center justify-center rounded-xl border border-[#173121]/25 bg-white/70 px-6 text-sm font-extrabold uppercase tracking-[0.14em] text-[#173121] shadow-[0_16px_35px_rgba(23,49,33,0.12)] transition hover:-translate-y-0.5 hover:bg-white">Daftar</a>
+                </div>
+            @endif
+
         </div>
     </section>
 
     <section id="produk-katalog" class="relative -mt-20 px-4 pb-14 sm:-mt-24 sm:px-6 sm:pb-16 lg:px-10 lg:pb-20">
-        <div class="relative z-10 mx-auto max-w-[1350px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
+        <div class="relative z-10 mx-auto max-w-[1400px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
             @if(session('success') || session('error'))
                 <div class="mb-5 rounded-lg border {{ session('success') ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800' }} px-4 py-3 text-sm font-semibold">
                     {{ session('success') ?? session('error') }}
                 </div>
             @endif
 
-            <div class="mx-auto mb-9 flex items-center gap-2 max-w-5xl">
-                <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10"><i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i><input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-9 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none"><button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">Cari</button></form>
-                <button type="button" @click="cartOpen = true" class="relative w-13 h-13 shrink-0 flex items-center justify-center rounded-full bg-[#173121] text-white shadow-[0_10px_25px_rgba(23,49,33,0.25)] hover:bg-[#204732] hover:-translate-y-1 transition-all duration-300"><i class="fa-solid fa-cart-shopping text-lg"></i><span x-text="cart.reduce((total, item) => total + item.qty, 0)" class="absolute -top-2 -right-1 w-7 h-7 rounded-full bg-[#d8b15a] text-[#173121] text-[14px] font-bold flex items-center justify-center border-2 border-white"></span></button>
-            </div>
+            <div class="mx-auto mb-9 max-w-[1400px]">
+                <div class="grid gap-3 xl:grid-cols-[minmax(18rem,1fr)_auto] xl:items-center">
+                    <div class="flex min-w-0 items-center gap-3">
+                        <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="relative flex min-w-0 flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
+                            <i class="fa-solid fa-magnifying-glass ml-3 text-[#173121]"></i>
+                            <input type="search" name="q" value="{{ request('q') }}" placeholder="Cari produk..." class="h-9 min-w-0 flex-1 bg-transparent px-3 text-sm outline-none">
+                            <button type="submit" class="inline-flex h-10 shrink-0 items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] sm:px-6">
+                                Cari
+                            </button>
+                        </form>
 
+
+                        <button type="button" @click="cartOpen = true; notifOpen = false; totalOrdersOpen = false; profileOpen = false" aria-label="Buka keranjang" class="relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#2f6f1f] shadow-[0_10px_24px_rgba(23,49,33,0.12)] ring-1 ring-[#e6dece] transition-all duration-300 hover:-translate-y-0.5 hover:text-[#173121] sm:h-14 sm:w-14">
+                            <i class="fa-solid fa-cart-shopping text-base sm:text-lg"></i>
+                            <span x-text="cart.reduce((total, item) => total + item.qty, 0)" class="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#d8b15a] px-1 text-xs font-bold text-white"></span>
+                        </button>
+                    </div>
+
+                    <div class="ecommerce-customer-actions">
+                    @if($page['customerActions'])
+                        <div class="relative" @click.outside="notifOpen = false">
+                            <button type="button" @click="notifOpen = !notifOpen; totalOrdersOpen = false; profileOpen = false; cartOpen = false" data-order-notification-trigger class="ecommerce-customer-action">
+                                <i class="fa-regular fa-bell text-sm text-[#2f6f1f]"></i><span>Notifikasi</span>
+                                <span data-order-notification-badge data-show-zero="true" class="ecommerce-customer-action__badge">0</span>
+                            </button>
+
+                            @include('customer.partials.order-notification-popup', ['navbarOrders' => $page['customerActions']['notificationOrders']])
+                        </div>
+
+                        <div class="relative" @click.outside="totalOrdersOpen = false">
+                            <button type="button" @click="totalOrdersOpen = !totalOrdersOpen; notifOpen = false; profileOpen = false; cartOpen = false" class="ecommerce-customer-action">
+                                <i class="fa-regular fa-clipboard text-sm text-[#2f6f1f]"></i>
+                                <span>Riwayat Pesanan</span>
+                            </button>
+
+                            <div x-cloak x-show="totalOrdersOpen" x-transition class="fixed left-4 right-4 top-[9.75rem] z-[140] flex max-h-[min(620px,calc(100vh-11.25rem))] w-auto max-w-none flex-col overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-3 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] sm:max-h-[min(620px,calc(100vh-7.5rem))] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[30rem] lg:max-w-[calc(100vw-2rem)] lg:p-4">
+                                <div class="flex shrink-0 items-center justify-between px-1 pb-3">
+                                    <div>
+                                        <h4 class="font-lora text-lg font-bold leading-none">Detail Pesanan</h4>
+                                        <p class="text-xs text-[#6b736d]">{{ $page['customerActions']['totalOrders'] }} pesanan tersimpan</p>
+                                    </div>
+                                    <span class="rounded-full bg-[#fff4df] px-3 py-1.5 text-xs font-bold text-[#b47a22]">Invoice</span>
+                                </div>
+
+                                <div class="cart-panel-scroll mt-3 min-h-0 flex-1 overflow-y-auto pr-1">
+                                    <div class="space-y-3">
+                                        @forelse($page['customerActions']['orders'] as $order)
+                                            <article id="{{ $order['domId'] }}" data-customer-order-row="{{ $order['id'] }}" class="customer-order-history-item rounded-xl bg-[#f8f6f1] p-3.5">
+                                                <div class="flex items-start justify-between gap-3">
+                                                    <div class="min-w-0 flex-1">
+                                                        <p class="break-words text-sm font-bold leading-snug">Pesanan {{ $order['displayId'] }}</p>
+                                                        <p class="text-[11px] text-[#6b736d]">{{ $order['createdAtLabel'] }}</p>
+                                                    </div>
+                                                    <span class="shrink-0 rounded-full bg-white px-2.5 py-1 text-[10px] font-bold text-[#173121]">{{ $order['statusOrderLabel'] }}</span>
+                                                </div>
+
+                                                <div class="mt-3 grid gap-2 rounded-xl bg-white/70 px-3 py-2 text-xs text-[#516057] sm:grid-cols-2">
+                                                    <p><span class="font-bold text-[#173121]">Penerima:</span> {{ $order['customerName'] }}</p>
+                                                    <p><span class="font-bold text-[#173121]">Metode:</span> {{ $order['metodePenerimaanLabel'] }}</p>
+                                                    <p><span class="font-bold text-[#173121]">Pembayaran:</span> {{ $order['paymentStatusLabel'] }}</p>
+                                                    <p><span class="font-bold text-[#173121]">Total:</span> {{ $order['formattedTotal'] }}</p>
+                                                </div>
+
+                                                @if($order['hasDetails'])
+                                                    <div class="mt-3 overflow-hidden rounded-xl bg-white">
+                                                        <div class="px-3 py-2 text-xs font-bold uppercase tracking-[0.12em] text-[#6b736d]">Detail Produk</div>
+                                                        <div class="divide-y divide-[#f1eadf]">
+                                                            @foreach($order['details'] as $detail)
+                                                                <div class="flex items-center gap-3 px-3 py-3">
+                                                                    <img src="{{ $detail['imageUrl'] }}" alt="{{ $detail['name'] }}" class="h-11 w-11 shrink-0 rounded-lg object-cover" onerror="this.src='{{ $page['assets']['fallbackProductImage'] ?? asset('images/beranda.bg.jpeg') }}'">
+                                                                    <div class="min-w-0 flex-1">
+                                                                        <p class="truncate text-sm font-semibold text-[#173121]">{{ $detail['name'] }}</p>
+                                                                        <p class="mt-0.5 text-xs text-[#6b736d]">{{ $detail['quantity'] }} x {{ $detail['formattedUnitPrice'] }}</p>
+                                                                    </div>
+                                                                    <p class="shrink-0 text-right text-xs font-bold text-[#173121]">{{ $detail['formattedSubtotal'] }}</p>
+                                                                </div>
+                                                            @endforeach
+                                                        </div>
+                                                    </div>
+                                                @endif
+
+                                                <div class="mt-3 flex flex-col gap-2 text-xs text-[#516057] sm:flex-row sm:items-center sm:justify-between">
+                                                    @if($order['shipment']['available'])
+                                                        <span class="rounded-full bg-green-50 px-3 py-1 font-semibold text-green-800">{{ $order['shipment']['kurir'] }} - {{ $order['shipment']['nomorResi'] }}</span>
+                                                    @else
+                                                        <span class="rounded-full bg-amber-50 px-3 py-1 font-semibold text-amber-700">Menunggu pengiriman</span>
+                                                    @endif
+                                                    <button type="button" onclick="window.printCustomerInvoice('customer-invoice-order-{{ $order['id'] }}')" class="font-bold text-[#b47a22] transition hover:text-[#173121]">Simpan Invoice</button>
+                                                </div>
+                                            </article>
+                                            @include('customer.partials.order-invoice-print', ['order' => $order, 'invoiceId' => 'customer-invoice-order-'.$order['id']])
+                                        @empty
+                                            <div class="rounded-xl bg-[#f8f6f1] p-5 text-center">
+                                                <i class="fa-solid fa-bag-shopping mb-2 text-[#d8b15a]"></i>
+                                                <p class="text-sm font-semibold">Belum ada pesanan.</p>
+                                            </div>
+                                        @endforelse
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="relative" @click.outside="profileOpen = false">
+                            <button type="button" @click="profileOpen = !profileOpen; notifOpen = false; totalOrdersOpen = false; cartOpen = false" class="ecommerce-customer-action">
+                                <i class="fa-regular fa-user text-sm text-[#2f6f1f]"></i>
+                                <span>Profil</span>
+                            </button>
+
+                            <div x-cloak x-show="profileOpen" x-transition class="fixed left-4 right-4 top-[9.75rem] z-[140] w-auto max-w-none overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-4 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[26rem] lg:max-w-[calc(100vw-2rem)]">
+                                <div class="flex items-start gap-3">
+                                    <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#d8b15a]/60 bg-white">
+                                        @if($page['customerActions']['profilePhotoUrl'])
+                                            <img src="{{ $page['customerActions']['profilePhotoUrl'] }}" alt="Foto {{ $page['customerActions']['profileLabel'] }}" class="h-full w-full object-cover" onerror="this.style.display='none';">
+                                        @endif
+                                    </span>
+                                    <div class="min-w-0 flex-1">
+                                        <h4 class="truncate font-lora text-xl font-bold leading-none">{{ $page['customerActions']['profileName'] }}</h4>
+                                        <p class="mt-1 truncate text-sm text-[#6b736d]">{{ $page['customerActions']['profileEmail'] }}</p>
+                                    </div>
+                                </div>
+
+                                <form action="{{ route('customer.profile.update') }}" method="POST" enctype="multipart/form-data" class="mt-4 space-y-3">
+                                    @csrf
+                                    @method('PUT')
+
+                                    <div>
+                                        <label class="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#173121]">Foto Profil</label>
+                                        <input type="file" name="foto" accept="image/*" class="w-full rounded-xl border border-[#ece6da] bg-white px-3 py-2 text-xs text-[#6b736d] file:mr-3 file:rounded-full file:border-0 file:bg-[#173121] file:px-3 file:py-1.5 file:text-xs file:font-bold file:text-white focus:outline-none focus:ring-2 focus:ring-[#173121]/20">
+                                    </div>
+
+                                    <div class="grid gap-3 sm:grid-cols-2">
+                                        <div>
+                                            <label class="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#173121]">Nama</label>
+                                            <input type="text" name="name" value="{{ old('name', $checkoutCustomer->name) }}" class="h-10 w-full rounded-xl border border-[#ece6da] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#173121]/20" required>
+                                        </div>
+                                        <div>
+                                            <label class="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#173121]">Email</label>
+                                            <input type="email" name="email" value="{{ old('email', $checkoutCustomer->email) }}" class="h-10 w-full rounded-xl border border-[#ece6da] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#173121]/20" required>
+                                        </div>
+                                    </div>
+
+                                    <div>
+                                        <label class="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#173121]">No. HP</label>
+                                        <input type="text" name="no_hp" value="{{ old('no_hp', $checkoutCustomer->no_hp) }}" class="h-10 w-full rounded-xl border border-[#ece6da] px-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#173121]/20" placeholder="08123456789">
+                                    </div>
+
+                                    <div>
+                                        <label class="mb-1.5 block text-[11px] font-bold uppercase tracking-[0.12em] text-[#173121]">Alamat</label>
+                                        <textarea name="alamat" rows="3" class="w-full rounded-xl border border-[#ece6da] px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#173121]/20" placeholder="Alamat pengiriman utama">{{ old('alamat', $checkoutCustomer->alamat) }}</textarea>
+                                    </div>
+
+                                    <button type="submit" class="inline-flex h-10 w-full items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832]">
+                                        Simpan Profil
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    @else
+                        <a href="{{ route('customer.login') }}" class="ecommerce-customer-action"><i class="fa-regular fa-bell text-sm text-[#2f6f1f]"></i><span>Notifikasi</span></a>
+                        <a href="{{ route('customer.login') }}" class="ecommerce-customer-action"><i class="fa-regular fa-clipboard text-sm text-[#2f6f1f]"></i><span>Riwayat Pesanan</span></a>
+                        <a href="{{ route('customer.login') }}" class="ecommerce-customer-action"><i class="fa-regular fa-user text-sm text-[#2f6f1f]"></i><span>Profil</span></a>
+                    @endif
+                    </div>
+                </div>
+            </div>
             @if($page['featuredProducts']->count())
                 <div class="mb-10">
                     <div class="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
