@@ -9,8 +9,7 @@
     <link rel="shortcut icon" type="image/png" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
     <link rel="apple-touch-icon" href="{{ asset('images/assets foto/logo hargorojo.png') }}?v=20260608-logo">
 
-    @vite(['resources/css/app.css'])
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/css/customer.css', 'resources/js/app.js'])
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +51,10 @@
 
 
     {{-- NAVBAR --}}
-    @include('layouts.navbar')
+    @hasSection('hideSiteChrome')
+    @else
+        @include('layouts.navbar')
+    @endif
 
     {{-- Main Content --}}
     <main class="min-h-screen">
@@ -60,7 +62,10 @@
     </main>
 
     {{-- Footer --}}
-    @include('layouts.footer')
+    @hasSection('hideSiteChrome')
+    @else
+        @include('layouts.footer')
+    @endif
 
 </body>
 
