@@ -3,6 +3,8 @@
     x-transition
     x-cloak
     class="
+        ecommerce-customer-popup
+        ecommerce-customer-popup--notif
         fixed
         left-4
         right-4
