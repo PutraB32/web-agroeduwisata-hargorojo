@@ -5,7 +5,7 @@
 @section('content')
 
 
-<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
+<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" x-effect="document.documentElement.style.overflow = cartOpen ? 'hidden' : ''; document.body.style.overflow = cartOpen ? 'hidden' : ''" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
     <section class="ecommerce-hero relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
         <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover">
         <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50"></div>
@@ -70,7 +70,7 @@
                                 <span>Riwayat Pesanan</span>
                             </button>
 
-                            <div x-cloak x-show="totalOrdersOpen" x-transition class="fixed left-4 right-4 top-[9.75rem] z-[140] flex max-h-[min(620px,calc(100vh-11.25rem))] w-auto max-w-none flex-col overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-3 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] sm:max-h-[min(620px,calc(100vh-7.5rem))] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[30rem] lg:max-w-[calc(100vw-2rem)] lg:p-4">
+                            <div x-cloak x-show="totalOrdersOpen" x-transition class="ecommerce-customer-popup ecommerce-customer-popup--orders fixed left-4 right-4 top-[9.75rem] z-[140] flex max-h-[min(620px,calc(100vh-11.25rem))] w-auto max-w-none flex-col overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-3 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] sm:max-h-[min(620px,calc(100vh-7.5rem))] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[30rem] lg:max-w-[calc(100vw-2rem)] lg:p-4">
                                 <div class="flex shrink-0 items-center justify-between px-1 pb-3">
                                     <div>
                                         <h4 class="font-lora text-lg font-bold leading-none">Detail Pesanan</h4>
@@ -143,7 +143,7 @@
                                 <span>Profil</span>
                             </button>
 
-                            <div x-cloak x-show="profileOpen" x-transition class="fixed left-4 right-4 top-[9.75rem] z-[140] w-auto max-w-none overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-4 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[26rem] lg:max-w-[calc(100vw-2rem)]">
+                            <div x-cloak x-show="profileOpen" x-transition class="ecommerce-customer-popup ecommerce-customer-popup--profile fixed left-4 right-4 top-[9.75rem] z-[140] w-auto max-w-none overflow-hidden rounded-[1.35rem] bg-[#fffdf8] p-4 text-[#173121] shadow-[0_28px_80px_rgba(0,0,0,0.28)] sm:top-[6.25rem] lg:absolute lg:left-auto lg:right-0 lg:top-[3rem] lg:w-[26rem] lg:max-w-[calc(100vw-2rem)]">
                                 <div class="flex items-start gap-3">
                                     <span class="inline-flex h-14 w-14 shrink-0 items-center justify-center overflow-hidden rounded-full border border-[#d8b15a]/60 bg-white">
                                         @if($page['customerActions']['profilePhotoUrl'])
@@ -276,14 +276,15 @@
         </div>
     </section>
 
-    <div x-cloak x-show="cartOpen" x-transition.opacity @click="cartOpen = false" class="fixed inset-0 z-[90] bg-black/45 backdrop-blur-sm"></div>
-    <aside x-cloak x-show="cartOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="fixed right-0 top-0 z-[100] flex h-dvh w-full max-w-[460px] flex-col bg-white shadow-[-20px_0_60px_rgba(0,0,0,.16)]">
-        <header class="flex items-center justify-between border-b border-[#ece6da] px-5 py-4">
+    <div x-cloak x-show="cartOpen" x-transition.opacity @click="cartOpen = false" @wheel.prevent @touchmove.prevent class="fixed inset-0 z-[90] bg-black/45 backdrop-blur-sm"></div>
+    <aside x-cloak x-show="cartOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-200" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="fixed right-0 top-0 z-[100] flex h-dvh w-full max-w-[460px] flex-col overflow-hidden bg-white shadow-[-20px_0_60px_rgba(0,0,0,.16)]">
+        <header class="flex shrink-0 items-center justify-between border-b border-[#ece6da] px-5 py-4">
             <div><h3 class="font-lora text-2xl font-bold text-[#173121]">Keranjang</h3><p class="text-sm text-[#6b736d]">Produk yang akan dibeli</p></div>
             <button type="button" @click="cartOpen = false" class="h-10 w-10 rounded-full bg-[#f8f6f1] transition hover:bg-[#ece6da]"><i class="fa-solid fa-xmark"></i></button>
         </header>
 
-        <div class="cart-panel-scroll flex-1 overflow-y-auto p-4 sm:p-5">
+        <div class="cart-panel-scroll min-h-0 flex-1 overflow-y-auto">
+            <div class="p-4 sm:p-5">
             <template x-if="cart.length === 0">
                 <div class="rounded-2xl border border-dashed border-[#d8d0bf] p-8 text-center">
                     <i class="fa-solid fa-basket-shopping text-3xl text-[#d8b15a]"></i>
@@ -315,7 +316,7 @@
                     </div>
                 </article>
             </template>
-        </div>
+            </div>
 
         <div class="border-t border-[#ece6da] p-4 sm:p-5">
             <div class="mb-3 flex items-center justify-between text-sm text-[#151515]"><span><b x-text="cart.reduce((total, item) => total + item.qty, 0)"></b> Item</span><b class="text-2xl text-[#173121]" x-text="'Rp' + subtotal().toLocaleString('id-ID')"></b></div>
@@ -338,6 +339,7 @@
             <button type="button" @click="checkout" :disabled="checkoutLoading || cart.length === 0" class="h-12 w-full rounded-xl bg-[#173121] font-bold text-white transition hover:bg-[#244832] disabled:cursor-not-allowed disabled:opacity-60">
                 <span x-text="checkoutLoading ? 'Memproses...' : 'Bayar via Midtrans'"></span>
             </button>
+        </div>
         </div>
 
         <div x-cloak x-show="confirmDeleteOpen" x-transition class="absolute inset-0 z-[200] flex items-center justify-center bg-white/80 p-6 backdrop-blur-sm">
