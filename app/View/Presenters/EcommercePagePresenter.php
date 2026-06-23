@@ -51,7 +51,7 @@ class EcommercePagePresenter
                 ],
                 'cart' => self::cartItemsForJavascript($cartItems, $fallbackImage),
             ],
-            'faqItems' => self::faqItems(asset('images/assets foto/alur_pemesanan_FAQ.png')),
+            'faqItems' => self::faqItems(asset('images/assets foto/alur_transaksi_ecommerce_FAQ.png')),
         ];
     }
 
