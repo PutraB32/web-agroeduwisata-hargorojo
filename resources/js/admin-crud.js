@@ -10,7 +10,7 @@ window.openEditModal = function (id, nama, harga, stok, deskripsi, manfaat, isUn
     const form = document.getElementById("form-edit");
     if (form) {
         form.reset();
-        form.action = /admin/produk/${id};
+        form.action = `/admin/produk/${id}`;
     }
 
     setValue("edit-nama", nama);
