@@ -12,8 +12,8 @@
             class="home-hero__image h-full w-full scale-100 object-cover object-center animate-kenburns"
         >
 
-        <div class="absolute inset-0 bg-black/45 animate-vignette"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/25 to-transparent animate-slide-gradient"></div>
+        <div class="absolute inset-0 bg-black/55 animate-vignette"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent animate-slide-gradient"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
         <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
     </div>
