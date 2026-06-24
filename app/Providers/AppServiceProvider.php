@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
+use App\Models\Order;
+use App\Observers\OrderObserver;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -41,6 +43,8 @@ class AppServiceProvider extends ServiceProvider
         }
 
         \Illuminate\Pagination\Paginator::useTailwind();
+
+        Order::observe(OrderObserver::class);
 
         View::composer('Admin.dashboard.overview', AdminDashboardOverviewComposer::class);
         View::composer('layouts.navbar', NavbarComposer::class);
