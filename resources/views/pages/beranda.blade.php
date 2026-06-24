@@ -550,9 +550,7 @@
                 <!-- IMAGE -->
                 <div class="relative overflow-hidden h-[240px]">
                     <img 
-                        src="{{ $produk->gambar 
-                            ? asset('images/produk/' . $produk->gambar) 
-                            : asset('images/beranda.bg.jpeg') }}"
+                        src="{{ $produk->gambar_url }}"
                         alt="{{ $produk->nama }}"
                         class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                     >
