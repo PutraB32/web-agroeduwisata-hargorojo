@@ -386,12 +386,11 @@
 
                 {{-- Title — slide-left delay 2 --}}
                 <h2 class="slide-left slide-left-delay-2 font-lora text-[38px] md:text-[52px] lg:text-[45px] leading-[0.95] tracking-[-0.03em] font-bold text-[#173121] mb-5">
-                    Lokasi Desa
-                    Hargorojo
+                    Lokasi Desa Hargorojo
                 </h2>
 
                 {{-- Subtitle — slide-left delay 3 --}}
-                <p class="slide-left slide-left-delay-3 font-sans max-w-xl text-[#52605a] text-[15px] md:text-[16px] leading-[1.5] font-thin mb-8">
+                <p class="slide-left slide-left-delay-3 font-sans max-w-xl text-[#52605a] text-[16px] md:text-[17px] leading-[1.5] font-light mb-8">
                     Terletak di Kecamatan Bagelen,
                     Kabupaten Purworejo, Jawa Tengah.
                     Dikelilingi keindahan alam

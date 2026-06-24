@@ -223,6 +223,7 @@
 </div>
 <script>
     function openEditModal(id, nama, harga, stok, deskripsi, manfaat, is_unggulan) {
+        document.getElementById('form-edit').reset();document.getElementById('form-edit').reset();
         openModal('modal-edit-produk');
         document.getElementById('form-edit').action = '/admin/produk/' + id;
         document.getElementById('edit-nama').value = nama;

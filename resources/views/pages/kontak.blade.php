@@ -7,12 +7,17 @@
 <!-- ===================================================== -->
 <!-- HERO SECTION -->
 <!-- ===================================================== -->
-<section class="contact-hero relative isolate min-h-[350px] sm:min-h-[430px] px-4 pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24 text-center overflow-hidden"
-style="
-    background-image: url('{{ asset('/images/assets foto/hero section_kontak.png') }}');
-    background-size: cover;
-    background-position: center;
-">
+<section class="contact-hero relative isolate min-h-[350px] sm:min-h-[430px] px-4 pt-32 pb-16 sm:pt-36 sm:pb-20 lg:pt-40 lg:pb-24 text-center overflow-hidden bg-black">
+    <div
+        class="absolute inset-0 animate-kenburns scale-115"
+        style="
+            background-image: url('{{ asset('/images/assets foto/hero section_kontak.png') }}');
+            background-size: cover;
+            background-position: center;
+        "
+    ></div>
+
+    <div class="absolute inset-0 bg-black animate-vignette"></div>
 
     <!-- OVERLAY -->
     <div class="contact-hero__overlay absolute inset-0 bg-gradient-to-r from-black/50 via-[#173121]/70 to-black/50"></div>
@@ -21,13 +26,13 @@ style="
     <div class="contact-hero__content relative z-10 max-w-3xl mx-auto">
 
         <!-- TITLE -->
-        <h1 class="contact-hero__title font-lora text-white text-[38px] sm:text-[48px] md:text-[60px] font-bold leading-[0.98] sm:leading-tight mb-3">
+        <h1 class="hero-fade-up delay-150 contact-hero__title font-lora text-white text-[38px] sm:text-[48px] md:text-[60px] font-bold leading-[0.98] sm:leading-tight mb-3">
             Hubungi
             <span class="text-[#d4b254]">Kami</span>
         </h1>
 
         <!-- DESCRIPTION -->
-        <p class="contact-hero__lead text-white/80 font-lora text-[15px] sm:text-[16px] md:text-[19px] leading-[1.65] sm:leading-relaxed max-w-3xl mx-auto">
+        <p class="hero-fade-up delay-300 contact-hero__lead text-white/80 font-lora text-[15px] sm:text-[16px] md:text-[19px] leading-[1.65] sm:leading-relaxed max-w-3xl mx-auto">
             Tertarik berkunjung atau ingin memesan produk
             gula kelapa asli Hargorojo?
 
@@ -93,7 +98,7 @@ style="
 
                         <i class="fa-solid fa-envelope text-[#d4b254] text-2xl mb-2"></i>
 
-                        <h4 class="font-bold text-[#173121] mb-2">
+                        <h4 class="font-bold text-[#173121] mb-1">
                             Email
                         </h4>
 
@@ -108,7 +113,7 @@ style="
 
                         <i class="fa-brands fa-instagram text-[#d4b254] text-2xl mb-2"></i>
 
-                        <h4 class="font-bold text-[#173121] mb-2">
+                        <h4 class="font-bold text-[#173121] mb-1">
                             Instagram
                         </h4>
 

@@ -8,7 +8,10 @@ function setValue(id, value) {
 window.openEditModal = function (id, nama, harga, stok, deskripsi, manfaat, isUnggulan) {
     window.openModal?.("modal-edit-produk");
     const form = document.getElementById("form-edit");
-    if (form) form.action = `/admin/produk/${id}`;
+    if (form) {
+        form.reset();
+        form.action = /admin/produk/${id};
+    }
 
     setValue("edit-nama", nama);
     setValue("edit-harga", harga);

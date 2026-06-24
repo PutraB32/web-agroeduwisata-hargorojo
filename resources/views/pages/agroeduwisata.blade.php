@@ -1072,9 +1072,9 @@
                 <h3 class="font-lora text-[#173121] font-bold text-2xl mb-2">Masih ada pertanyaan lain?</h3>
                 <p class="text-[#6b736d] font-lora text-light italic">Jangan ragu untuk menghubungi admin kami.</p>
             </div>
-            <a href="#" class="inline-flex items-center gap-3 px-7 py-4 rounded-2xl bg-[#173121] text-white font-medium hover:bg-[#204732] transition-all">
-                <i class="fa-brands fa-whatsapp"></i>
-                Hubungi Admin via WhatsApp
+            <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center justify-center gap-3 w-full lg:w-auto px-5 py-3.5 sm:px-7 sm:py-4 rounded-xl sm:rounded-2xl bg-[#173121] text-white font-medium hover:bg-[#204732] transition-all">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Hubungi Admin via WhatsApp
             </a>
         </div>
 
