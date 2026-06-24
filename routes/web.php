@@ -157,11 +157,3 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/order/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
     });
 });
-Route::get('/debug-storage', function () {
-    try {
-        \Illuminate\Support\Facades\Artisan::call('storage:link');
-        return 'Sukses! Jalur gambar (storage) berhasil diperbaiki di server. Silakan kembali ke website Anda dan coba lihat atau upload gambar.';
-    } catch (\Exception $e) {
-        return 'Gagal: ' . $e->getMessage();
-    }
-});
