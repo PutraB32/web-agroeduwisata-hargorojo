@@ -61,27 +61,29 @@ class AdminDashboardController extends Controller
     {
         return Produk::when($request->query('search_produk'), function ($query, $search) {
             return $query->where('nama', 'like', "%{$search}%");
-        })->get();
+        })->latest()->get();
     }
 
     private function agroeduwisatas(Request $request)
     {
-        return Agroeduwisata::when($request->query('search_agro'), function ($query, $search) {
-            return $query->where('Judul', 'like', "%{$search}%");
-        })->when($request->query('filter_kat_agro') === 'induk', function ($query) {
-            return $query->whereNull('parent_id');
-        })->when($request->query('filter_kat_agro') === 'anak', function ($query) {
-            return $query->whereNotNull('parent_id');
-        })->get();
+        return Agroeduwisata::with('parent')
+            ->when($request->query('search_agro'), function ($query, $search) {
+                return $query->where('Judul', 'like', "%{$search}%");
+            })->when($request->query('filter_kat_agro') === 'induk', function ($query) {
+                return $query->whereNull('parent_id');
+            })->when($request->query('filter_kat_agro') === 'anak', function ($query) {
+                return $query->whereNotNull('parent_id');
+            })->latest()->get();
     }
 
     private function katalogs(Request $request)
     {
-        return KatalogDesa::when($request->query('search_katalog'), function ($query, $search) {
-            return $query->where('Judul', 'like', "%{$search}%");
-        })->when($request->query('filter_kat_katalog'), function ($query, $filter) {
-            return $query->where('kategori_id', $filter);
-        })->get();
+        return KatalogDesa::with('kategoriKatalog')
+            ->when($request->query('search_katalog'), function ($query, $search) {
+                return $query->where('Judul', 'like', "%{$search}%");
+            })->when($request->query('filter_kat_katalog'), function ($query, $filter) {
+                return $query->where('kategori_id', $filter);
+            })->latest()->get();
     }
 
     private function users(Request $request)
@@ -92,7 +94,7 @@ class AdminDashboardController extends Controller
                     $q->where('name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%");
                 });
-            })->get();
+            })->latest()->get();
     }
 
     private function testimonials(Request $request)
@@ -100,7 +102,7 @@ class AdminDashboardController extends Controller
         return Testimoni::when($request->query('search_testimoni'), function ($query, $search) {
             return $query->where('nama', 'like', "%{$search}%")
                 ->orWhere('isi_testimoni', 'like', "%{$search}%");
-        })->get();
+        })->latest()->get();
     }
 
     private function orders(Request $request)
@@ -193,7 +195,7 @@ class AdminDashboardController extends Controller
             'empty_stock_count' => Produk::where('stok', '<=', 0)->count(),
             'status_counts' => collect(['pending', 'diproses', 'dikirim', 'selesai', 'dibatalkan'])
                 ->mapWithKeys(fn ($status) => [$status => (int) ($orderStatusCounts[$status] ?? 0)]),
-            'latest_orders' => Order::latest('created_at')->take(5)->get(),
+            'latest_orders' => Order::with('orderDetails.produk')->latest('created_at')->take(5)->get(),
             'low_stock_products' => Produk::where('stok', '<=', 5)
                 ->orderBy('stok')
                 ->orderBy('nama')

@@ -300,6 +300,13 @@ class CartController extends Controller
             return redirect()->away($snap['redirect_url']);
 
         } catch (\Throwable $e) {
+            if (isset($order) && $order->exists) {
+                $order->update([
+                    'status_order' => 'dibatalkan',
+                    'canceled_at' => now(),
+                ]);
+            }
+
             $message = $e instanceof \RuntimeException
                 ? $e->getMessage()
                 : 'Checkout gagal diproses. Silakan coba lagi.';
