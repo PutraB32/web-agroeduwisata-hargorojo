@@ -433,10 +433,9 @@
 
         <!-- BUTTON AREA -->
         <div class="ecommerce-bulk-cta__action flex flex-col lg:flex-row items-start lg:items-center gap-6">
-            <a href="https://wa.me/6280000000000" target="_blank" class="group inline-flex items-center gap-4 px-6 py-3 rounded-4xl bg-[#d8b15a] text-[#173121] font-semibold shadow-[0_20px_50px_rgba(216,177,90,0.30)] hover:scale-[1.02] transition-all duration-500">
-                <i class="fa-brands fa-whatsapp text-xl"></i>
-                Hubungi Admin
-                <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-all"></i>
+            <a href="https://wa.me/6281234567890" target="_blank" class="inline-flex items-center justify-center gap-3 w-full lg:w-auto px-5 py-3.5 sm:px-7 sm:py-4 rounded-xl sm:rounded-2xl bg-[#173121] text-white font-medium hover:bg-[#204732] transition-all">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Hubungi Admin via WhatsApp
             </a>
         </div>
 
