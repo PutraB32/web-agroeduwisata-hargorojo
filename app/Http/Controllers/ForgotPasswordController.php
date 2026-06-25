@@ -36,14 +36,15 @@ class ForgotPasswordController extends Controller
             'email.email' => 'Format email tidak valid.',
         ]);
 
-        Password::sendResetLink(
+        $status = Password::sendResetLink(
             $request->only('email')
         );
 
-        return back()->with(
-            'status',
-            'Jika email terdaftar, tautan ganti password akan dikirim. Silakan periksa kotak masuk Anda.'
-        );
+        if ($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', 'Berhasil dikirim! Silakan periksa kotak masuk atau folder spam Anda.');
+        }
+
+        return back()->withErrors(['email' => 'Maaf, email tersebut tidak terdaftar di sistem kami.']);
     }
 
     /**
@@ -58,7 +59,7 @@ class ForgotPasswordController extends Controller
             'email.email' => 'Format email tidak valid.',
         ]);
 
-        Password::sendResetLink(
+        $status = Password::sendResetLink(
             [
                 'email' => $request->email,
                 'role' => 'customer',
@@ -68,9 +69,10 @@ class ForgotPasswordController extends Controller
             }
         );
 
-        return back()->with(
-            'status',
-            'Jika email customer terdaftar, tautan ganti password akan dikirim. Silakan periksa kotak masuk Anda.'
-        );
+        if ($status == Password::RESET_LINK_SENT) {
+            return back()->with('status', 'Berhasil dikirim! Silakan periksa kotak masuk atau folder spam Anda.');
+        }
+
+        return back()->withErrors(['email' => 'Maaf, email tersebut tidak terdaftar di sistem kami.']);
     }
 }
