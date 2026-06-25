@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Ensure storage link exists (Useful for PaaS like Railway)
         if (!file_exists(public_path('storage'))) {
             try {
                 \Illuminate\Support\Facades\Artisan::call('storage:link');
