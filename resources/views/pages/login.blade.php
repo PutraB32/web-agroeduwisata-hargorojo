@@ -13,7 +13,7 @@
         <img
             src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
             alt="Produk Desa Hargorojo"
-            class="absolute inset-x-0 top-0 h-[76%] min-h-[34rem] w-full object-cover object-center"
+            class="absolute inset-0 h-full w-full object-cover object-center"
         >
         <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(18, 53, 31, 0.70) 0%, rgba(18, 53, 31, 0.48) 42%, rgba(18, 53, 31, 0.92) 78%, #12351f 100%);"></div>
         <div class="absolute inset-0" style="background: radial-gradient(circle at 20% 12%, rgba(213, 173, 61, 0.20), transparent 28%), radial-gradient(circle at 84% 22%, rgba(255, 255, 255, 0.20), transparent 30%);"></div>
@@ -110,9 +110,9 @@
                     </form>
 
                     <div class="mt-7 text-center">
-                        <a href="{{ route('beranda') }}" class="inline-flex items-center justify-center gap-2 text-xs font-bold text-white/70 transition hover:text-[#d5ad3d]">
+                        <a href="{{ route('kontak') }}" class="inline-flex items-center justify-center gap-2 text-xs font-bold text-white/70 transition hover:text-[#d5ad3d]">
                             <i class="fa-solid fa-arrow-left-long text-[#d5ad3d]"></i>
-                            Kembali ke Beranda
+                            Kembali ke Kontak
                         </a>
                     </div>
                 </div>

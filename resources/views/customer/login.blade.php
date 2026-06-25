@@ -1,16 +1,18 @@
 @extends('layouts.master')
 @section('title', 'Login Customer - Desa Hargorojo')
 @section('hideSiteChrome', true)
+@section('hideFooter')
 @section('content')
 
 <section class="relative min-h-screen overflow-hidden bg-[#12351f] px-3 py-6 sm:px-6 sm:py-10">
     <img
         src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
         alt="Produk Desa Hargorojo"
-        class="absolute inset-x-0 top-0 h-[76%] min-h-[34rem] w-full object-cover object-center"
+        class="absolute inset-0 h-full w-full object-cover object-center"
     >
     <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(18, 53, 31, 0.68) 0%, rgba(18, 53, 31, 0.46) 42%, rgba(18, 53, 31, 0.92) 78%, #12351f 100%);"></div>
     <div class="absolute inset-0" style="background: radial-gradient(circle at 20% 12%, rgba(213, 173, 61, 0.20), transparent 28%), radial-gradient(circle at 84% 22%, rgba(255, 255, 255, 0.20), transparent 30%);"></div>
+    
 
     <div class="relative z-10 flex min-h-[calc(100vh-3rem)] items-center sm:min-h-[calc(100vh-5rem)] justify-center">
         <div class="w-full max-w-[420px] rounded-lg border border-[#d5ad3d]/45 bg-[#12351f]/95 shadow-[0_28px_80px_rgba(15,45,27,0.34)] backdrop-blur-sm">
@@ -99,6 +101,14 @@
                         Belum punya akun?
                         <a href="{{ route('customer.register') }}" class="font-extrabold uppercase tracking-[0.12em] text-[#d5ad3d] hover:text-white">Daftar Sekarang</a>
                     </p>
+
+                    <div class="mt-2 text-center">
+                        <a href="{{ route('ecommerce') }}" class="inline-flex items-center justify-center gap-2 text-xs font-bold text-white/70 transition hover:text-[#d5ad3d]">
+                            <i class="fa-solid fa-arrow-left-long text-[#d5ad3d]"></i>
+                            Kembali ke E-Commerce
+                        </a>
+                    </div>
+                </div>
                 </form>
             </div>
         </div>

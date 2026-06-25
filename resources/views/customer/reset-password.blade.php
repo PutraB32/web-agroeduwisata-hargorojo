@@ -8,7 +8,7 @@
     <img
         src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
         alt="Produk Desa Hargorojo"
-        class="absolute inset-0 h-full w-full object-cover"
+        class="absolute inset-0 h-full w-full object-cover object-center"
     >
     <div class="absolute inset-0 bg-[#07150f]/70"></div>
 

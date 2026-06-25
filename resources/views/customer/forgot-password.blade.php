@@ -1,6 +1,7 @@
 @extends('layouts.master')
 
 @section('title', 'Lupa Password Customer - Desa Hargorojo')
+@section('hideSiteChrome', true)
 
 @section('content')
 

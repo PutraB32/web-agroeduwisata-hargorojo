@@ -6,6 +6,8 @@
 @section('content')
 <section class="relative min-h-screen overflow-hidden bg-[#12351f] px-3 py-5 sm:px-6 sm:py-8 lg:py-12">
     <div class="absolute inset-0" style="background: radial-gradient(circle at 10% 10%, rgba(213, 173, 61, 0.18), transparent 28%), radial-gradient(circle at 92% 16%, rgba(255, 255, 255, 0.10), transparent 30%), linear-gradient(180deg, #12351f 0%, #0f2d1b 56%, #12351f 100%);"></div>
+    
+    
 
     <div class="relative z-10 mx-auto flex min-h-[calc(100vh-2.5rem)] max-w-6xl sm:min-h-[calc(100vh-4rem)] items-center justify-center">
         <div class="grid w-full overflow-hidden rounded-lg border border-[#d5ad3d]/45 bg-[#12351f]/95 shadow-[0_28px_80px_rgba(0,0,0,0.30)] backdrop-blur-sm md:grid-cols-[0.96fr_1.04fr]">
