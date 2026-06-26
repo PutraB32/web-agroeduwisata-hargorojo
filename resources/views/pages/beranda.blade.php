@@ -1018,21 +1018,18 @@
                 <div class="grid grid-cols-2 gap-5">
 
                     {{-- Card 1 --}}
-                    <div class="stat-card stat-card-delay-1
-                        bg-white/80 backdrop-blur-xl border border-[#e3eadf]
-                        rounded-[28px] px-6 py-7 text-center
-                        hover:-translate-y-1 hover:shadow-lg transition-all duration-300
-                    ">
-                        <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        {{-- data-count untuk count-up JS --}}
-                        <div data-count="1.250+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
-                            1.250+
-                        </div>
-                        <p class="text-[#607066] text-sm leading-[1.6]">Pengunjung Web Aktif</p>
+                    <div class="stat-card stat-card-delay-1 bg-white/80 backdrop-blur-xl border border-[#e3eadf] rounded-[28px] px-4 py-6 sm:px-6 sm:py-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                        
+                    <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
+                        <i class="fa-solid fa-users"></i>
                     </div>
+                    
+                    <div data-count="1.250+" class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap" >1.250+ </div>
+                    
+                    <p class="text-[#607066] text-sm leading-[1.6]">
+                        Pengunjung Web Aktif
+                    </p>
+                </div>
 
                     {{-- Card 2 --}}
                     <div class="stat-card stat-card-delay-2
@@ -1043,10 +1040,8 @@
                         <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
                             <i class="fa-solid fa-file-circle-check"></i>
                         </div>
-                        <div data-count="1.480+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
-                            1.480+
-                        </div>
+                        <div data-count="1.480+" class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap""> 1.480+ </div>
+
                         <p class="text-[#607066] text-sm leading-[1.6]">Layanan Selesai</p>
                     </div>
 
@@ -1060,7 +1055,7 @@
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div data-count="120+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
+                            class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap">
                             120+
                         </div>
                         <p class="text-[#607066] text-sm leading-[1.6]">Informasi Terupdate</p>
@@ -1076,7 +1071,7 @@
                             <i class="fa-solid fa-heart"></i>
                         </div>
                         <div data-count="98%"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
+                            class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap">
                             98%
                         </div>
                         <p class="text-[#607066] text-sm leading-[1.6]">Kepuasan Pengunjung</p>
