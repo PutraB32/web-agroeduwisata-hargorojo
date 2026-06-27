@@ -34,12 +34,12 @@
     <div class="max-w-6xl mx-auto">
 
         <!-- TOP LABEL — fade-up seperti sebelumnya -->
-        <div class="hero-fade-up delay-100 flex items-center justify-center gap-3 mb-1">
-            <div class="w-14 h-[2px] bg-white/60"></div>
-            <span class="text-yellow-400 uppercase tracking-[0.35em] text-sm md:text-base font-medium">
+        <div class="hero-fade-up delay-100 flex items-center justify-center gap-2 sm:gap-3 mb-1">
+            <div class="h-[2px] w-10 sm:w-12 lg:sm-14 bg-white/60 rounded-full"></div>
+            <span class="text-yellow-400 uppercase tracking-[0.35em] text-xs sm:text-sm lg:text-base font-medium text-center">
                 Mengenal Lebih Dekat
             </span>
-            <div class="w-14 h-[2px] bg-white/60"></div>
+            <div class="h-[2px] w-10 sm:w-12 lg:sm-14 bg-white/60 rounded-full"></div>
         </div>
 
         <!-- MAIN TITLE — typewriter -->
