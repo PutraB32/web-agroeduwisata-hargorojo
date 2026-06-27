@@ -35,7 +35,7 @@
                 </div>
             @endif
 
-            <div class="ecommerce-catalog-toolbar mx-auto mb-9 max-w-[1400px]">
+            <div class="ecommerce-catalog-toolbar mx-auto mb-5 sm:mb-10 max-w-[1400px]">
                 <div class="grid gap-3 xl:grid-cols-[minmax(18rem,1fr)_auto] xl:items-center">
                     <div class="flex min-w-0 items-center gap-3">
                         <form action="{{ route('ecommerce') }}#produk-katalog" method="GET" class="ecommerce-search-form relative flex min-w-0 flex-1 items-center rounded-2xl border border-[#e6dece] bg-white p-1.5 shadow-sm transition focus-within:border-[#173121] focus-within:ring-2 focus-within:ring-[#173121]/10">
@@ -57,7 +57,7 @@
                     @if($page['customerActions'])
                         <div class="relative" @click.outside="notifOpen = false">
                             <button type="button" @click="notifOpen = !notifOpen; totalOrdersOpen = false; profileOpen = false; cartOpen = false" data-order-notification-trigger class="ecommerce-customer-action">
-                                <i class="fa-regular fa-bell text-sm text-[#2f6f1f]"></i><span>Notifikasi</span>
+                                <i class="fa-regular fa-bell text:lg sm:text-sm lg:text-md text-[#2f6f1f]"></i><span>Notifikasi</span>
                                 <span data-order-notification-badge data-show-zero="true" class="ecommerce-customer-action__badge">0</span>
                             </button>
 
