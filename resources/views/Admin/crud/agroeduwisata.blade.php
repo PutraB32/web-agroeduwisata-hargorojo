@@ -3,13 +3,14 @@
         @include('Admin.components.panel_toolbar_summary', [
             'icon' => 'fa-leaf',
             'label' => 'Konten Agroeduwisata',
-            'count' => $agroeduwisatas->count(),
+            'count' => $agroeduwisatas->total(),
             'unit' => 'konten',
             'meta' => 'Kelola menu utama dan tahapan aktivitas wisata.',
         ])
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="flex flex-col gap-2 w-full md:w-auto md:flex-row">
+                <input type="hidden" name="panel" value="agro">
                 <select name="filter_kat_agro" onchange="this.form.submit()" class="shadow-sm border rounded py-2 px-3 bg-white text-gray-800 leading-tight focus:outline-none focus:ring-1 focus:ring-green-800 md:w-[16rem]">
                     <option value="">Semua Data</option>
                     <option value="induk" {{ request('filter_kat_agro') == 'induk' ? 'selected' : '' }}>Induk</option>
@@ -95,6 +96,68 @@
             </tbody>
         </table>
     </div>
+
+    @if ($agroeduwisatas->hasPages())
+        @php
+            $currentPage = $agroeduwisatas->currentPage();
+            $lastPage = $agroeduwisatas->lastPage();
+            $paginationPages = collect([1, $currentPage - 1, $currentPage, $currentPage + 1, $lastPage])
+                ->filter(fn ($page) => $page >= 1 && $page <= $lastPage)
+                ->unique()
+                ->sort()
+                ->values();
+        @endphp
+
+        <div class="mt-4 flex flex-col gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm text-gray-600">
+                Menampilkan
+                <span class="font-bold text-gray-800">{{ $agroeduwisatas->firstItem() }}</span>
+                -
+                <span class="font-bold text-gray-800">{{ $agroeduwisatas->lastItem() }}</span>
+                dari
+                <span class="font-bold text-gray-800">{{ $agroeduwisatas->total() }}</span>
+                konten
+            </p>
+
+            <nav class="flex flex-wrap items-center gap-1" aria-label="Pagination Agroeduwisata">
+                @if ($agroeduwisatas->onFirstPage())
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                @else
+                    <a href="{{ $agroeduwisatas->previousPageUrl() }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800" aria-label="Halaman sebelumnya">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                @endif
+
+                @foreach ($paginationPages as $index => $page)
+                    @if ($index > 0 && $page - $paginationPages[$index - 1] > 1)
+                        <span class="inline-flex h-9 min-w-9 items-center justify-center px-2 text-sm font-bold text-gray-400">...</span>
+                    @endif
+
+                    @if ($page === $currentPage)
+                        <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-green-800 bg-green-800 px-3 text-sm font-bold text-white" aria-current="page">
+                            {{ $page }}
+                        </span>
+                    @else
+                        <a href="{{ $agroeduwisatas->url($page) }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                @if ($agroeduwisatas->hasMorePages())
+                    <a href="{{ $agroeduwisatas->nextPageUrl() }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800" aria-label="Halaman berikutnya">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                @else
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                @endif
+            </nav>
+        </div>
+    @endif
 </div>
 
 <!-- ========================================== -->
