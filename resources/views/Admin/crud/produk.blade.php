@@ -3,13 +3,14 @@
         @include('Admin.components.panel_toolbar_summary', [
             'icon' => 'fa-box',
             'label' => 'Data Produk',
-            'count' => $produks->count(),
+            'count' => $produks->total(),
             'unit' => 'produk',
             'meta' => 'Atur stok, harga, gambar, dan produk unggulan.',
         ])
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="admin-search-control w-full md:w-[19rem]">
+                <input type="hidden" name="panel" value="produk">
                 <input type="text" name="search_produk" value="{{ request('search_produk') }}" placeholder="Cari produk..." class="shadow-sm border rounded-l w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-1 focus:ring-green-800">
                 <button type="submit" class="bg-gray-200 hover:bg-gray-300 text-gray-700 px-3 py-2 rounded-r border border-l-0 border-gray-300"><i class="fas fa-search"></i></button>
             </form>
@@ -98,6 +99,68 @@
             </tbody>
         </table>
     </div>
+
+    @if ($produks->hasPages())
+        @php
+            $currentPage = $produks->currentPage();
+            $lastPage = $produks->lastPage();
+            $paginationPages = collect([1, $currentPage - 1, $currentPage, $currentPage + 1, $lastPage])
+                ->filter(fn ($page) => $page >= 1 && $page <= $lastPage)
+                ->unique()
+                ->sort()
+                ->values();
+        @endphp
+
+        <div class="mt-4 flex flex-col gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+            <p class="text-sm text-gray-600">
+                Menampilkan
+                <span class="font-bold text-gray-800">{{ $produks->firstItem() }}</span>
+                -
+                <span class="font-bold text-gray-800">{{ $produks->lastItem() }}</span>
+                dari
+                <span class="font-bold text-gray-800">{{ $produks->total() }}</span>
+                produk
+            </p>
+
+            <nav class="flex flex-wrap items-center gap-1" aria-label="Pagination Produk">
+                @if ($produks->onFirstPage())
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                        <i class="fas fa-chevron-left"></i>
+                    </span>
+                @else
+                    <a href="{{ $produks->previousPageUrl() }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800" aria-label="Halaman sebelumnya">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                @endif
+
+                @foreach ($paginationPages as $index => $page)
+                    @if ($index > 0 && $page - $paginationPages[$index - 1] > 1)
+                        <span class="inline-flex h-9 min-w-9 items-center justify-center px-2 text-sm font-bold text-gray-400">...</span>
+                    @endif
+
+                    @if ($page === $currentPage)
+                        <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-green-800 bg-green-800 px-3 text-sm font-bold text-white" aria-current="page">
+                            {{ $page }}
+                        </span>
+                    @else
+                        <a href="{{ $produks->url($page) }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800">
+                            {{ $page }}
+                        </a>
+                    @endif
+                @endforeach
+
+                @if ($produks->hasMorePages())
+                    <a href="{{ $produks->nextPageUrl() }}" class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800" aria-label="Halaman berikutnya">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                @else
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                        <i class="fas fa-chevron-right"></i>
+                    </span>
+                @endif
+            </nav>
+        </div>
+    @endif
 </div>
 
 <!-- ========================================== -->

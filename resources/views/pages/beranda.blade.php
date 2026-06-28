@@ -105,21 +105,19 @@
         </div>
 
         <!-- Small Label — reveal pertama, line-expand pada garis -->
-        <div class="reveal reveal-delay-1 flex items-center justify-center gap-3 mb-1">
-            <div class="line-expand h-[2px] bg-green-700 rounded-full"></div>
+        <div class="reveal reveal-delay-1 flex items-center justify-center gap-2 sm:gap-3 mb-2">
+            <div class="line-expand h-[2px] w-8 sm:w-12 bg-green-700 rounded-full"></div>
             <span class="
-                uppercase tracking-[0.28em] text-[15px]
-                font-semibold text-green-800
-            ">
+                uppercase tracking-[0.17em] sm:tracking-[0.19em] lg:tracking-[0.28em] text-sx sm:text-sm lg:text-[16px] font-semibold text-green-800 text-center">
                 Potensi Unggulan Desa
             </span>
-            <div class="line-expand h-[2px] bg-green-700 rounded-full"></div>
+            <div class="line-expand h-[2px] w-8 sm:w-12 bg-green-700 rounded-full"></div>
         </div>
 
         <!-- Main Title — reveal kedua -->
         <h2 class="reveal reveal-delay-2
-            font-display text-[38px] md:text-[56px] lg:text-[50px]
-            font-medium leading-[1] tracking-normal
+            font-display text-[36px] md:text-[56px] lg:text-[50px]
+            font-medium leading-[1.1] tracking-normal
             text-gray-900 drop-shadow-sm
         ">
             Potensi Agroeduwisata Kami
@@ -452,13 +450,12 @@
                 </div>
 
                 <!-- CTA BUTTON — reveal delay terakhir -->
-                <div class="reveal reveal-delay-3 flex lg:justify-end">
-                    <div>
+                <div class="reveal reveal-delay-3 flex justify-center lg:justify-end">
+                    <div class="text-center lg:text-left">
                         <p class="text-white/80 text-[20px] font-semibold leading-relaxed mb-6 max-w-xs">
                             Jelajahi lebih banyak potensi desa kami
                         </p>
 
-                        {{-- Tambah btn-glow --}}
                         <a href="{{ route('agro') }}"
                         class="
                             btn-glow
@@ -818,10 +815,11 @@
         </div>
 
         <!-- CTA -->
-        <div class="reveal reveal-delay-4 mt-16 text-center">
-            <a href="{{ route('katalog') }}" class="inline-flex items-center gap-5 rounded-full bg-gradient-to-r from-[#1d4d3a] to-[#2f7a5d] px-8 py-3 text-lg font-semibold text-white shadow-[0_15px_40px_rgba(29,77,58,0.25)] transition-all duration-500 hover:scale-[1.03]">
+        <div class="reveal reveal-delay-4 mt-16 flex justify-center">
+            <a href="{{ route('katalog') }}" class="inline-flex items-center justify-center gap-3 sm:gap-4 lg:gap-5 rounded-full bg-gradient-to-r from-[#1d4d3a] to-[#2f7a5d] px-5 py-3 sm:px-7 lg:px-8 text-sm sm:text-base lg:text-lg font-semibold text-white shadow-[0_15px_40px_rgba(29,77,58,0.25)] transition-all duration-500 hover:scale-[1.03]">
                 <i class="fa-solid fa-book-open"></i>
-                Lihat Selengkapnya di Katalog Desa
+
+                <span class="text-center"> Lihat Selengkapnya di Katalog Desa </span>
                 <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm text-black">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
@@ -957,8 +955,8 @@
     <div class="absolute -right-20 bottom-1 w-62 h-62 bg-yellow-100/40 blur-3xl rounded-full"></div>
 </section>
 
-<section class="relative overflow-hidden pt-1 pb-15 px-6">
 
+<section class="relative overflow-hidden pt-1 pb-15 px-6">
     <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-green-100/30 blur-3xl rounded-full"></div>
 
     <div class="max-w-[1400px] mx-auto relative z-10">
@@ -994,7 +992,7 @@
                     </h2>
 
                     <p class="reveal reveal-delay-3
-                        text-[#617066] text-[16px] leading-[1.9] mb-10 max-w-xl
+                        text-[#617066] text-[16px] leading-[1.9] mb-7 sm:mb-10 max-w-xl
                     ">
                         Lebih dari sekadar destinasi wisata, Desa Agroeduwisata Hargorojo menghadirkan pengalaman yang menghubungkan pengunjung dengan alam, budaya, serta kehidupan masyarakat lokal yang penuh kehangatan dan kearifan tradisional.
                     </p>
@@ -1018,21 +1016,18 @@
                 <div class="grid grid-cols-2 gap-5">
 
                     {{-- Card 1 --}}
-                    <div class="stat-card stat-card-delay-1
-                        bg-white/80 backdrop-blur-xl border border-[#e3eadf]
-                        rounded-[28px] px-6 py-7 text-center
-                        hover:-translate-y-1 hover:shadow-lg transition-all duration-300
-                    ">
-                        <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
-                            <i class="fa-solid fa-users"></i>
-                        </div>
-                        {{-- data-count untuk count-up JS --}}
-                        <div data-count="1.250+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
-                            1.250+
-                        </div>
-                        <p class="text-[#607066] text-sm leading-[1.6]">Pengunjung Web Aktif</p>
+                    <div class="stat-card stat-card-delay-1 bg-white/80 backdrop-blur-xl border border-[#e3eadf] rounded-[28px] px-4 py-6 sm:px-6 sm:py-7 text-center overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                        
+                    <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
+                        <i class="fa-solid fa-users"></i>
                     </div>
+                    
+                    <div data-count="1.250+" class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap" >1.250+ </div>
+                    
+                    <p class="text-[#607066] text-sm leading-[1.6]">
+                        Pengunjung Web Aktif
+                    </p>
+                </div>
 
                     {{-- Card 2 --}}
                     <div class="stat-card stat-card-delay-2
@@ -1043,10 +1038,8 @@
                         <div class="stat-icon-pop w-14 h-14 mx-auto mb-5 rounded-full bg-[#edf5e9] flex items-center justify-center text-[#4f8c64] text-xl">
                             <i class="fa-solid fa-file-circle-check"></i>
                         </div>
-                        <div data-count="1.480+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
-                            1.480+
-                        </div>
+                        <div data-count="1.480+" class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap""> 1.480+ </div>
+
                         <p class="text-[#607066] text-sm leading-[1.6]">Layanan Selesai</p>
                     </div>
 
@@ -1060,7 +1053,7 @@
                             <i class="fa-solid fa-bullhorn"></i>
                         </div>
                         <div data-count="120+"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
+                            class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap">
                             120+
                         </div>
                         <p class="text-[#607066] text-sm leading-[1.6]">Informasi Terupdate</p>
@@ -1076,7 +1069,7 @@
                             <i class="fa-solid fa-heart"></i>
                         </div>
                         <div data-count="98%"
-                            class="text-[#2e6b4d] text-[36px] font-bold leading-none mb-3">
+                            class="text-[#2e6b4d] text-2xl sm:text-3xl lg:text-[36px] font-bold leading-none mb-3 whitespace-nowrap">
                             98%
                         </div>
                         <p class="text-[#607066] text-sm leading-[1.6]">Kepuasan Pengunjung</p>

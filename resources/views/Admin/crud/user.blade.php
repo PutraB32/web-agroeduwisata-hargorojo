@@ -3,7 +3,7 @@
         @include('Admin.components.panel_toolbar_summary', [
             'icon' => 'fa-users-cog',
             'label' => 'Pengguna Sistem',
-            'count' => $users->count(),
+            'count' => $users->total(),
             'unit' => 'user',
             'meta' => 'Kelola akun admin, super admin, dan customer.',
         ])
@@ -67,6 +67,90 @@
             </tbody>
         </table>
     </div>
+
+    @if ($users->hasPages())
+    @php
+        $currentPage = $users->currentPage();
+        $lastPage = $users->lastPage();
+
+        $paginationPages = collect([
+            1,
+            $currentPage - 1,
+            $currentPage,
+            $currentPage + 1,
+            $lastPage,
+        ])
+            ->filter(fn ($page) => $page >= 1 && $page <= $lastPage)
+            ->unique()
+            ->sort()
+            ->values();
+    @endphp
+
+    <div class="mt-4 flex flex-col gap-3 rounded-lg border border-gray-200 bg-white px-4 py-3 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+
+        <p class="text-sm text-gray-600">
+            Menampilkan
+            <span class="font-bold text-gray-800">{{ $users->firstItem() }}</span>
+            -
+            <span class="font-bold text-gray-800">{{ $users->lastItem() }}</span>
+            dari
+            <span class="font-bold text-gray-800">{{ $users->total() }}</span>
+            akun pengguna
+        </p>
+
+        <nav class="flex flex-wrap items-center gap-1" aria-label="Navigasi Halaman Pengguna">
+
+            @if ($users->onFirstPage())
+                <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                    <i class="fas fa-chevron-left"></i>
+                </span>
+            @else
+                <a href="{{ $users->previousPageUrl() }}"
+                   class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800">
+                    <i class="fas fa-chevron-left"></i>
+                </a>
+            @endif
+
+            @foreach ($paginationPages as $index => $page)
+
+                @if ($index > 0 && $page - $paginationPages[$index - 1] > 1)
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center px-2 text-sm font-bold text-gray-400">
+                        ...
+                    </span>
+                @endif
+
+                @if ($page === $currentPage)
+
+                    <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-green-800 bg-green-800 px-3 text-sm font-bold text-white">
+                        {{ $page }}
+                    </span>
+
+                @else
+
+                    <a href="{{ $users->url($page) }}"
+                       class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800">
+                        {{ $page }}
+                    </a>
+
+                @endif
+
+            @endforeach
+
+            @if ($users->hasMorePages())
+
+                <a href="{{ $users->nextPageUrl() }}"
+                   class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-white px-3 text-sm font-bold text-gray-700 transition-colors hover:border-green-800 hover:bg-green-50 hover:text-green-800">
+
+                    <i class="fas fa-chevron-right"></i>
+                </a>
+            @else
+                <span class="inline-flex h-9 min-w-9 items-center justify-center rounded-md border border-gray-200 bg-gray-100 px-3 text-sm font-bold text-gray-400">
+                    <i class="fas fa-chevron-right"></i>
+                </span>
+            @endif
+        </nav>
+    </div>
+    @endif
 </div>
 
 <!-- MODAL CREATE USER -->
