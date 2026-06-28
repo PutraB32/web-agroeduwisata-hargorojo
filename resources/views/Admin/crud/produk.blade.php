@@ -43,6 +43,7 @@
             <x-admin.table.th>Gambar</x-admin.table.th>
             <x-admin.table.th>Nama Produk</x-admin.table.th>
             <x-admin.table.th>Harga</x-admin.table.th>
+            <x-admin.table.th>Satuan</x-admin.table.th>
             <x-admin.table.th>Stok</x-admin.table.th>
             <x-admin.table.th>Deskripsi</x-admin.table.th>
             <x-admin.table.th>Manfaat</x-admin.table.th>
@@ -61,6 +62,7 @@
             </x-admin.table.td>
             <x-admin.table.td class="font-bold">{{ $produk->nama }}</x-admin.table.td>
             <x-admin.table.td>{{ $produk->harga_rupiah }}</x-admin.table.td>
+            <x-admin.table.td>{{ $produk->satuan }}</x-admin.table.td>
             <x-admin.table.td>{{ $produk->stok }}</x-admin.table.td>
             <x-admin.table.td class="max-w-xs">
                 <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->deskripsi }}</p>
@@ -69,14 +71,14 @@
                 <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->manfaat }}</p>
             </x-admin.table.td>
             <x-admin.table.td class="text-center">
-                @if($produk->is_unggulan)
+                @if($produk->produk_unggulan)
                     <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-bold">Ya</span>
                 @else
                     <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">Tidak</span>
                 @endif
             </x-admin.table.td>
             <x-admin.table.td class="text-center min-w-[150px]">
-                <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->is_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">
+                <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, '{{ $produk->satuan }}', {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->produk_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">
                     <i class="fas fa-pen mr-1"></i> Edit
                 </button>
                 <form action="{{ route('admin.produk.destroy', $produk->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
@@ -186,7 +188,7 @@
                     <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-green-100 file:text-green-800 hover:file:bg-green-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp" required>
                 </div>
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2">Nama Produk <span class="text-red-500">*</span></label>
                         <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" type="text" name="nama" required>
@@ -194,6 +196,14 @@
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2">Harga (Rp) <span class="text-red-500">*</span></label>
                         <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" type="number" name="harga" min="0" required>
+                    </div>
+                    <div>
+                    <label class="block text-gray-700 text-sm font-bold mb-2">Satuan <span class="text-red-500">*</span></label>
+                    <select name="satuan" class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-green-800 outline-none" required>
+                        @foreach (\App\Models\Produk::SATUAN as $value => $label)
+                        <option value="{{ $value }}">{{ $label }}</option>
+                        @endforeach
+                    </select>
                     </div>
                 </div>
                 
@@ -213,7 +223,7 @@
                 </div>
                 
                 <div class="mb-6 flex items-center bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-                    <input type="checkbox" name="is_unggulan" value="1" id="create-unggulan" class="w-5 h-5 text-green-600 rounded">
+                    <input type="checkbox" name="produk_unggulan" value="1" id="create-unggulan" class="w-5 h-5 text-green-600 rounded">
                     <label for="create-unggulan" class="ml-3 text-sm font-bold text-gray-800 uppercase tracking-wide">Jadikan Produk Unggulan</label>
                 </div>
 
@@ -245,7 +255,7 @@
                     <label class="block text-gray-700 text-sm font-bold mb-2">Ganti Gambar Produk <span class="text-xs text-gray-500 font-normal">(Opsional)</span></label>
                     <input class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-bold file:bg-yellow-100 file:text-yellow-700 hover:file:bg-yellow-200 cursor-pointer" type="file" name="gambar" accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp">
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
                     <div>
                         <label class="block text-gray-700 text-sm font-bold mb-2">Nama Produk <span class="text-red-500">*</span></label>
                         <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-nama" type="text" name="nama" required>
@@ -254,7 +264,16 @@
                         <label class="block text-gray-700 text-sm font-bold mb-2">Harga (Rp) <span class="text-red-500">*</span></label>
                         <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-harga" type="number" name="harga" min="0" required>
                     </div>
+                    <div>
+                        <label class="block text-gray-700 text-sm font-bold mb-2">Satuan <span class="text-red-500">*</span></label>
+                        <select id="edit-satuan" name="satuan" class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" required>
+                            @foreach (\App\Models\Produk::SATUAN as $value => $label)
+                            <option value="{{ $value }}">{{ $label }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
+                
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Stok Tersedia <span class="text-red-500">*</span></label>
                     <input class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-stok" type="number" name="stok" min="0" required>
@@ -268,7 +287,7 @@
                     <textarea class="w-full border border-gray-300 rounded-lg py-2.5 px-3 focus:ring-2 focus:ring-yellow-500 outline-none" id="edit-manfaat" name="manfaat" rows="2"></textarea>
                 </div>
                 <div class="mb-6 flex items-center bg-yellow-50 p-3 rounded-lg border border-yellow-200">
-                    <input type="checkbox" id="edit-unggulan" name="is_unggulan" value="1" class="w-5 h-5 text-yellow-500 rounded focus:ring-yellow-500">
+                    <input type="checkbox" id="edit-unggulan" name="produk_unggulan" value="1" class="w-5 h-5 text-yellow-500 rounded focus:ring-yellow-500">
                     <label for="edit-unggulan" class="ml-3 text-sm font-bold text-gray-800 uppercase">Jadikan Produk Unggulan</label>
                 </div>
                 <div class="flex justify-end gap-3 border-t border-gray-100 pt-4">
@@ -280,15 +299,16 @@
     </div>
 </div>
 <script>
-    function openEditModal(id, nama, harga, stok, deskripsi, manfaat, is_unggulan) {
-        document.getElementById('form-edit').reset();document.getElementById('form-edit').reset();
+    function openEditModal(id, nama, harga, satuan, stok, deskripsi, manfaat, produk_unggulan) {
+        document.getElementById('form-edit').reset();
         openModal('modal-edit-produk');
         document.getElementById('form-edit').action = '/admin/produk/' + id;
         document.getElementById('edit-nama').value = nama;
         document.getElementById('edit-harga').value = harga;
+        document.getElementById('edit-satuan').value = satuan;
         document.getElementById('edit-stok').value = stok;
         document.getElementById('edit-deskripsi').value = deskripsi;
         document.getElementById('edit-manfaat').value = manfaat;
-        document.getElementById('edit-unggulan').checked = is_unggulan;
+        document.getElementById('edit-unggulan').checked = produk_unggulan;
     }
 </script>

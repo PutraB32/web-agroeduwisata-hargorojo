@@ -221,7 +221,7 @@
                                         <h3 class="font-lora text-xl font-bold min-h-[45px]">{{ $produk['name'] }}</h3>
                                         <p class="line-clamp-2 text-sm text-white/80">{{ $produk['featuredDescriptionExcerpt'] }}</p>
                                         <div class="mt-1 flex items-end justify-between gap-3">
-                                            <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['unit'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['unit'] }}</p></div>
+                                            <div><p class="text-xl font-bold">{{ $produk['priceFormatted'] }}<span class="text-sm font-medium text-[#dbdbdb]"> / {{ $produk['satuan'] }}</span></p><p class="text-xs text-white/70">Stok {{ $produk['stock'] }} {{ $produk['satuan'] }}</p></div>
                                             <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#d8b15a] px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold text-[#173121] whitespace-nowrap transition hover:bg-white disabled:cursor-not-allowed disabled:bg-gray-300"><i class="fa-solid fa-cart-plus text-lg"></i><span class="sm:hidden">+ Keranjang</span><span class="hidden sm:inline">Tambah ke Keranjang</span></button>
                                         </div>
                                     </div>
@@ -261,7 +261,7 @@
                             </div>
                             <div class="flex flex-1 flex-col p-6 text-left">
                                 <h3 class="font-lora text-center text-xl lg:text-[18px] font-extrabold text-[#173121] line-clamp-2 min-h-[54px] mb-1 ">{{ $produk['name']}}</h3>
-                                <p class=" text-xl text-center font-bold text-[#c6a949]">{{ $produk['priceFormatted'] }} <span class="text-sm font-medium text-[#717772]"> /{{ $produk['unit'] }}</span></p>
+                                <p class=" text-xl text-center font-bold text-[#c6a949]">{{ $produk['priceFormatted'] }} <span class="text-sm font-medium text-[#717772]"> /{{ $produk['satuan'] }}</span></p>
                                 <div class="text-center text-sm font-medium text-green-600"> ● Stok Tersedia </div>
                                 <button type="button" @click="addToCart({{ \Illuminate\Support\Js::from($produk['cartPayload']) }})" @disabled($produk['stock'] < 1) class="mt-4 inline-flex h-11 items-center justify-center gap-2 rounded-xl bg-[#173121] px-4 text-sm font-bold text-white transition hover:bg-[#244832] disabled:cursor-not-allowed disabled:bg-gray-300">
                                     <i class="fa-solid fa-cart-plus text-lg"></i> Tambah ke Keranjang
