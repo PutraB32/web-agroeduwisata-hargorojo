@@ -33,20 +33,20 @@
 
                 <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/30"></div>
 
-                <div class="relative z-10 flex min-h-[430px] flex-col justify-end p-5 sm:min-h-[500px] sm:p-8 lg:h-full lg:min-h-0 lg:p-12">
+                <div class="relative z-10 flex min-h-[430px] flex-col justify-center p-5 sm:min-h-[500px] sm:p-8 lg:h-full lg:min-h-0 lg:p-12">
 
                     <span class="hero-fade-up delay-100 mb-3 inline-flex w-fit rounded-[10px] bg-green-700 px-3 py-2 text-xs font-semibold text-white sm:px-4 sm:text-sm">
                         BERITA UTAMA
                     </span>
 
                     <div class="hero-fade-up delay-200 mb-2 flex flex-wrap gap-x-4 gap-y-2 text-xs text-white/80 sm:gap-x-5 sm:text-sm">
-                        <span><i class="fa-regular fa-calendar mr-1"></i>{{ $beritaUtama->created_at->translatedFormat('d F Y') }}</span>
+                        <span><i class="fa-regular fa-calendar mr-1"></i>{{ $beritaUtama->created_at->translatedFormat('d F Y') }} </span> 
                         <span><i class="fa-regular fa-folder mr-1"></i>{{ $beritaUtama->kategoriKatalog->nama_kategori }}</span>
                         <span><i class="fa-solid fa-award mr-1"></i>Berita Pilihan</span>
                     </div>
 
                     <h1 class="hero-fade-up delay-300 max-w-2xl font-lora text-[30px] font-medium leading-[1.08] text-white sm:text-[40px] lg:text-[50px] lg:leading-[1.05]">
-                        {{ $beritaUtama->judul }}
+                        {{ Str::limit($beritaUtama->judul, 90) }}
                     </h1>
 
                     <p class="hero-fade-up delay-450 mt-3 max-w-2xl text-sm font-light italic leading-relaxed text-white/80 sm:text-base lg:text-[17px]">
