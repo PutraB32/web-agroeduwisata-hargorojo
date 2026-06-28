@@ -10,6 +10,7 @@ use App\Models\Produk;
 use App\Models\Testimoni;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -17,7 +18,7 @@ class AdminDashboardController extends Controller
 {
     public function redirectByRole(): RedirectResponse
     {
-        if (auth()->user()->role === 'super_admin') {
+        if (Auth::user()->role === 'super_admin') {
             return redirect()->route('superadmin.dashboard');
         }
 
