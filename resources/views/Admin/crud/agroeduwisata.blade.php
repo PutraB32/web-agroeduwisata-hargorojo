@@ -1,12 +1,12 @@
 <div id="panel-agro" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-leaf',
-            'label' => 'Konten Agroeduwisata',
-            'count' => $agroeduwisatas->total(),
-            'unit' => 'konten',
-            'meta' => 'Kelola menu utama dan tahapan aktivitas wisata.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-leaf" 
+            label="Konten Agroeduwisata" 
+            :count="$agroeduwisatas->total()" 
+            unit="konten" 
+            meta="Kelola menu utama dan tahapan aktivitas wisata." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="flex flex-col gap-2 w-full md:w-auto md:flex-row">
@@ -45,57 +45,54 @@
     @endif
 
     <!-- Tabel Data Agro -->
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-agro min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gambar</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Judul</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Deskripsi</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($agroeduwisatas as $agro)
-                <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        @if($agro->gambar)
-                            <img src="{{ $agro->gambar_url }}" alt="Gambar" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
-                        @else
-                            <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
-                        @endif
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        @if($agro->parent_id)
-                            <span class="px-2 py-1 bg-yellow-50 text-yellow-700 border border-yellow-200 rounded-md font-bold text-xs">Tahapan dari: {{ $agro->parent->judul ?? 'Induk' }}</span>
-                        @else
-                            <span class="px-2 py-1 bg-green-50 text-green-700 border border-green-200 rounded-md font-bold text-xs">(Menu Utama)</span>
-                        @endif
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $agro->judul }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs">
-                        <p class="text-gray-600 text-xs truncate">{{ $agro->deskripsi }}</p>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModalAgro({{ $agro->id }}, '{{ $agro->parent_id ?? '' }}', '{{ addslashes($agro->judul) }}', '{{ addslashes($agro->deskripsi) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
-                            <i class="fas fa-pen mr-1"></i> Edit
-                        </button>
-                        <form action="{{ route('admin.agro.destroy', $agro->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">
-                                <i class="fas fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                @if($agroeduwisatas->isEmpty())
-                <tr><td colspan="5" class="px-5 py-10 text-center text-gray-500 italic">Belum ada data ditemukan.</td></tr>
+    <x-admin.table class="admin-table-agro">
+        <x-slot name="header">
+            <x-admin.table.th>Gambar</x-admin.table.th>
+            <x-admin.table.th>Status</x-admin.table.th>
+            <x-admin.table.th>Judul</x-admin.table.th>
+            <x-admin.table.th>Deskripsi</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @foreach($agroeduwisatas as $agro)
+        <tr>
+            <x-admin.table.td>
+                @if($agro->gambar)
+                    <img src="{{ $agro->gambar_url }}" alt="Gambar" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                @else
+                    <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
                 @endif
-            </tbody>
-        </table>
-    </div>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                @if($agro->parent_id)
+                    <span class="px-2 py-1 bg-yellow-50 text-yellow-700 border border-yellow-200 rounded-md font-bold text-xs">Tahapan dari: {{ $agro->parent->judul ?? 'Induk' }}</span>
+                @else
+                    <span class="px-2 py-1 bg-green-50 text-green-700 border border-green-200 rounded-md font-bold text-xs">(Menu Utama)</span>
+                @endif
+            </x-admin.table.td>
+            <x-admin.table.td class="font-bold">{{ $agro->judul }}</x-admin.table.td>
+            <x-admin.table.td class="max-w-xs">
+                <p class="text-gray-600 text-xs truncate">{{ $agro->deskripsi }}</p>
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center min-w-[150px]">
+                <button onclick="openEditModalAgro({{ $agro->id }}, '{{ $agro->parent_id ?? '' }}', '{{ addslashes($agro->judul) }}', '{{ addslashes($agro->deskripsi) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                    <i class="fas fa-pen mr-1"></i> Edit
+                </button>
+                <form action="{{ route('admin.agro.destroy', $agro->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">
+                        <i class="fas fa-trash mr-1"></i> Hapus
+                    </button>
+                </form>
+            </x-admin.table.td>
+        </tr>
+        @endforeach
+        @if($agroeduwisatas->isEmpty())
+        <tr>
+            <x-admin.table.td colspan="5" class="py-10 text-center text-gray-500 italic">Belum ada data ditemukan.</x-admin.table.td>
+        </tr>
+        @endif
+    </x-admin.table>
 
     @if ($agroeduwisatas->hasPages())
         @php

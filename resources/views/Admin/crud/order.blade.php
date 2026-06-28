@@ -1,12 +1,12 @@
 <div id="panel-order" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-shopping-cart',
-            'label' => 'Data Pesanan',
-            'count' => $orders->total(),
-            'unit' => 'pesanan',
-            'meta' => 'Pantau pembayaran, pengiriman, dan proses order.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-shopping-cart" 
+            label="Data Pesanan" 
+            :count="$orders->total()" 
+            unit="pesanan" 
+            meta="Pantau pembayaran, pengiriman, dan proses order." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="admin-search-control w-full md:w-[19rem]">
@@ -33,69 +33,63 @@
         </div>
     @endif
     
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-order min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-                <tr>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">ID</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Tanggal</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pembeli</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Kontak</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Total Harga</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status Pesanan</th>
-                    <th scope="col" class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pembayaran</th>
-                    <th scope="col" class="px-6 py-3 text-center text-xs font-bold text-gray-500 uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-                @forelse ($orders as $order)
-                <tr class="hover:bg-gray-50 transition-colors">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-bold">#{{ $order->id }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $order->created_at->format('d M Y, H:i') }}</td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-medium text-gray-900">{{ $order->nama_pemesan }}</div>
-                        <div class="text-xs text-gray-500">{{ $order->no_hp }}</div>
-                    </td>
-                    <td class="px-6 py-4">
-                        <div class="text-sm text-gray-900 line-clamp-2" title="{{ $order->alamat }}">{{ $order->alamat }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm font-bold text-green-600">{{ $order->formatted_total }}</div>
-                        <div class="text-xs text-gray-500">{{ $order->metode_penerimaan_label }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full border {{ $order->status_order_badge_class }}">
-                            {{ $order->status_order_label }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full border {{ $order->payment_status_badge_class }}">
-                            {{ $order->payment_status_badge_label }}
-                        </span>
-                        <div class="mt-1 text-xs text-gray-500">{{ $order->payment_type_label }}</div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
-                        <button onclick="bukaModalDetailOrder({{ $order->id }})" class="text-primary hover:text-green-900 bg-green-50 border border-green-200 hover:bg-green-100 p-2 rounded mr-2 transition-colors" title="Lihat Detail & Update Status">
-                            <i class="fas fa-eye"></i> Detail
-                        </button>
-                        
-                        <form action="{{ route('admin.order.destroy', $order->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan ini secara permanen?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-900 bg-red-50 border border-red-200 hover:bg-red-100 p-2 rounded transition-colors" title="Hapus">
-                                <i class="fas fa-trash"></i>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @empty
-                <tr>
-                    <td colspan="8" class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 text-center italic">Tidak ada data pesanan.</td>
-                </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
+    <x-admin.table class="admin-table-order">
+        <x-slot name="header">
+            <x-admin.table.th>ID</x-admin.table.th>
+            <x-admin.table.th>Tanggal</x-admin.table.th>
+            <x-admin.table.th>Pembeli</x-admin.table.th>
+            <x-admin.table.th>Kontak</x-admin.table.th>
+            <x-admin.table.th>Total Harga</x-admin.table.th>
+            <x-admin.table.th>Status Pesanan</x-admin.table.th>
+            <x-admin.table.th>Pembayaran</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @forelse ($orders as $order)
+        <tr>
+            <x-admin.table.td class="font-bold">#{{ $order->id }}</x-admin.table.td>
+            <x-admin.table.td class="text-gray-500">{{ $order->created_at->format('d M Y, H:i') }}</x-admin.table.td>
+            <x-admin.table.td>
+                <div class="font-medium text-gray-900">{{ $order->nama_pemesan }}</div>
+                <div class="text-xs text-gray-500">{{ $order->no_hp }}</div>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <div class="line-clamp-2" title="{{ $order->alamat }}">{{ $order->alamat }}</div>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <div class="font-bold text-green-600">{{ $order->formatted_total }}</div>
+                <div class="text-xs text-gray-500">{{ $order->metode_penerimaan_label }}</div>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <span class="px-2 inline-flex text-[10px] leading-5 font-bold uppercase rounded-full border {{ $order->status_order_badge_class }}">
+                    {{ $order->status_order_label }}
+                </span>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <span class="px-2 inline-flex text-[10px] leading-5 font-bold uppercase rounded-full border {{ $order->payment_status_badge_class }}">
+                    {{ $order->payment_status_badge_label }}
+                </span>
+                <div class="mt-1 text-xs text-gray-500">{{ $order->payment_type_label }}</div>
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center min-w-[120px]">
+                <button onclick="bukaModalDetailOrder({{ $order->id }})" class="text-primary hover:text-green-900 bg-green-50 border border-green-200 hover:bg-green-100 p-2 rounded mr-2 transition-colors" title="Lihat Detail & Update Status">
+                    <i class="fas fa-eye"></i> Detail
+                </button>
+                <form action="{{ route('admin.order.destroy', $order->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Apakah Anda yakin ingin menghapus pesanan ini secara permanen?');">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="text-red-600 hover:text-red-900 bg-red-50 border border-red-200 hover:bg-red-100 p-2 rounded transition-colors" title="Hapus">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </form>
+            </x-admin.table.td>
+        </tr>
+        @empty
+        <tr>
+            <x-admin.table.td colspan="8" class="text-center text-gray-500 italic py-10">Tidak ada data pesanan.</x-admin.table.td>
+        </tr>
+        @endforelse
+    </x-admin.table>
 
     @if ($orders->hasPages())
         @php

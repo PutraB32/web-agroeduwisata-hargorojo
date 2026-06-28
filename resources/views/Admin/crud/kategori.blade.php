@@ -1,12 +1,12 @@
 <div id="panel-kategori" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-tags',
-            'label' => 'Master Kategori',
-            'count' => $kategoriKatalogs->count(),
-            'unit' => 'kategori',
-            'meta' => 'Kelola kategori untuk pengelompokan katalog desa.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-tags" 
+            label="Master Kategori" 
+            :count="$kategoriKatalogs->count()" 
+            unit="kategori" 
+            meta="Kelola kategori untuk pengelompokan katalog desa." 
+        />
 
         <div class="admin-toolbar-actions">
             <button onclick="openModal('modal-create-kat-katalog')" class="bg-green-800 hover:bg-green-900 text-white font-bold py-2 px-4 rounded shadow transition-colors flex items-center whitespace-nowrap">
@@ -38,30 +38,25 @@
             <div class="flex items-center mb-3">
                 <h3 class="font-bold text-lg text-gray-700"><i class="fas fa-book-open text-yellow-600 mr-2"></i> Kategori Katalog Desa</h3>
             </div>
-            <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-                <table class="admin-data-table admin-table-kategori min-w-full leading-normal">
-                    <thead>
-                        <tr>
-                            <th class="px-5 py-3 border-b-2 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase">Nama Kategori</th>
-                            <th class="px-5 py-3 border-b-2 bg-gray-50 text-center text-xs font-semibold text-gray-600 uppercase w-32">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($kategoriKatalogs as $kat)
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="px-5 py-3 border-b border-gray-200 text-sm font-medium text-gray-900">{{ $kat->nama_kategori }}</td>
-                            <td class="px-5 py-3 border-b border-gray-200 text-sm text-center">
-                                <button onclick="openEditKatKatalog({{ $kat->id }}, '{{ addslashes($kat->nama_kategori) }}')" class="text-yellow-600 hover:text-yellow-700 mx-1" title="Edit kategori"><i class="fas fa-edit"></i></button>
-                                <form action="{{ route('admin.kategori_katalog.destroy', $kat->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus kategori ini?');">
-                                    @csrf @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:text-red-700 mx-1" title="Hapus kategori"><i class="fas fa-trash"></i></button>
-                                </form>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            <x-admin.table class="admin-table-kategori">
+                <x-slot name="header">
+                    <x-admin.table.th class="bg-gray-50">Nama Kategori</x-admin.table.th>
+                    <x-admin.table.th class="bg-gray-50 text-center w-32">Aksi</x-admin.table.th>
+                </x-slot>
+
+                @foreach($kategoriKatalogs as $kat)
+                <tr class="hover:bg-gray-50 transition-colors">
+                    <x-admin.table.td class="py-3 font-medium text-gray-900">{{ $kat->nama_kategori }}</x-admin.table.td>
+                    <x-admin.table.td class="py-3 text-center">
+                        <button onclick="openEditKatKatalog({{ $kat->id }}, '{{ addslashes($kat->nama_kategori) }}')" class="text-yellow-600 hover:text-yellow-700 mx-1" title="Edit kategori"><i class="fas fa-edit"></i></button>
+                        <form action="{{ route('admin.kategori_katalog.destroy', $kat->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus kategori ini?');">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="text-red-500 hover:text-red-700 mx-1" title="Hapus kategori"><i class="fas fa-trash"></i></button>
+                        </form>
+                    </x-admin.table.td>
+                </tr>
+                @endforeach
+            </x-admin.table>
         </div>
 
 

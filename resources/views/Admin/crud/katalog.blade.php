@@ -1,12 +1,12 @@
 <div id="panel-katalog" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-book-open',
-            'label' => 'Katalog Desa',
-            'count' => $katalogs->total(),
-            'unit' => 'katalog',
-            'meta' => 'Kelola kategori, dokumen, gambar, dan tautan.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-book-open" 
+            label="Katalog Desa" 
+            :count="$katalogs->total()" 
+            unit="katalog" 
+            meta="Kelola kategori, dokumen, gambar, dan tautan." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="flex flex-col gap-2 w-full md:w-auto md:flex-row">
@@ -46,57 +46,54 @@
     @endif
 
     <!-- Tabel Data Katalog -->
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-katalog min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gambar</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Kategori</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Judul</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Deskripsi</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">URL</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($katalogs as $katalog)
-                <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        @if($katalog->gambar)
-                            <img src="{{ $katalog->gambar_url }}" alt="Gambar" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
-                        @else
-                            <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
-                        @endif
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="px-2 py-1 bg-green-50 text-green-700 rounded-md font-bold text-xs">{{ $katalog->kategoriKatalog->nama_kategori ?? 'Tanpa Kategori' }}</span>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $katalog->judul }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs">
-                        <p class="text-gray-600 text-xs truncate">{{ $katalog->deskripsi }}</p>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <p class="text-green-600 text-xs truncate max-w-[100px]">{{ $katalog->Url ?: '-' }}</p>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModalKatalog({{ $katalog->id }}, '{{ $katalog->kategori_id }}', '{{ addslashes($katalog->judul) }}', '{{ addslashes($katalog->deskripsi) }}', '{{ addslashes($katalog->Url) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
-                            <i class="fas fa-pen mr-1"></i> Edit
-                        </button>
-                        <form action="{{ route('admin.katalog.destroy', $katalog->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">
-                                <i class="fas fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                @if($katalogs->isEmpty())
-                <tr><td colspan="6" class="px-5 py-10 text-center text-gray-500 italic">Belum ada data katalog.</td></tr>
+    <x-admin.table class="admin-table-katalog">
+        <x-slot name="header">
+            <x-admin.table.th>Gambar</x-admin.table.th>
+            <x-admin.table.th>Kategori</x-admin.table.th>
+            <x-admin.table.th>Judul</x-admin.table.th>
+            <x-admin.table.th>Deskripsi</x-admin.table.th>
+            <x-admin.table.th>URL</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @foreach($katalogs as $katalog)
+        <tr>
+            <x-admin.table.td>
+                @if($katalog->gambar)
+                    <img src="{{ $katalog->gambar_url }}" alt="Gambar" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                @else
+                    <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
                 @endif
-            </tbody>
-        </table>
-    </div>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <span class="px-2 py-1 bg-green-50 text-green-700 rounded-md font-bold text-xs">{{ $katalog->kategoriKatalog->nama_kategori ?? 'Tanpa Kategori' }}</span>
+            </x-admin.table.td>
+            <x-admin.table.td class="font-bold">{{ $katalog->judul }}</x-admin.table.td>
+            <x-admin.table.td class="max-w-xs">
+                <p class="text-gray-600 text-xs truncate">{{ $katalog->deskripsi }}</p>
+            </x-admin.table.td>
+            <x-admin.table.td>
+                <p class="text-green-600 text-xs truncate max-w-[100px]">{{ $katalog->Url ?: '-' }}</p>
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center min-w-[150px]">
+                <button onclick="openEditModalKatalog({{ $katalog->id }}, '{{ $katalog->kategori_id }}', '{{ addslashes($katalog->judul) }}', '{{ addslashes($katalog->deskripsi) }}', '{{ addslashes($katalog->Url) }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                    <i class="fas fa-pen mr-1"></i> Edit
+                </button>
+                <form action="{{ route('admin.katalog.destroy', $katalog->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs transition-colors">
+                        <i class="fas fa-trash mr-1"></i> Hapus
+                    </button>
+                </form>
+            </x-admin.table.td>
+        </tr>
+        @endforeach
+        @if($katalogs->isEmpty())
+        <tr>
+            <x-admin.table.td colspan="6" class="py-10 text-center text-gray-500 italic">Belum ada data katalog.</x-admin.table.td>
+        </tr>
+        @endif
+    </x-admin.table>
 
     @if ($katalogs->hasPages())
         @php

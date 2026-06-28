@@ -49,6 +49,6 @@
             </div>
         </main>
     </div>
-@include('Admin.components.toast')
+<x-admin.toast />
 </body>
 </html>

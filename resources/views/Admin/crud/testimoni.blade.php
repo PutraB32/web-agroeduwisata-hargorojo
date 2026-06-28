@@ -1,12 +1,12 @@
 <div id="panel-testimoni" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-comment-dots',
-            'label' => 'Testimoni',
-            'count' => $testimoni->total(),
-            'unit' => 'testimoni',
-            'meta' => 'Kelola rating dan cerita pengunjung.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-comments" 
+            label="Ulasan Pengunjung" 
+            :count="$testimoni->total()" 
+            unit="ulasan" 
+            meta="Kelola testimoni dan rating yang diberikan." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="admin-search-control w-full md:w-[19rem]">
@@ -26,53 +26,45 @@
         </div>
     @endif
 
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-testimoni min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Foto</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Nama</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Rating</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Isi Testimoni</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($testimoni as $itemTestimoni)
-                <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <img src="{{ $itemTestimoni->foto_url }}"
-                             class="h-12 w-12 object-cover rounded-full border shadow-sm"
-                             onerror="this.src='{{ $itemTestimoni->avatar_url }}'">
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $itemTestimoni->nama }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-yellow-500 font-bold">
-                        @for ($i = 1; $i <= 5; $i++)
-                            <i class="{{ $i <= $itemTestimoni->rating ? 'fas' : 'far' }} fa-star"></i>
-                        @endfor
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs truncate">{{ $itemTestimoni->isi_testimoni }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModalTestimoni({{ $itemTestimoni->id }}, '{{ addslashes($itemTestimoni->nama) }}', '{{ addslashes($itemTestimoni->isi_testimoni) }}', '{{ $itemTestimoni->rating }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
-                            <i class="fas fa-pen mr-1"></i> Edit
-                        </button>
-                        <form action="{{ route('admin.testimoni.destroy', $itemTestimoni->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus testimoni ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                <i class="fas fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                @if($testimoni->isEmpty())
-                <tr>
-                    <td colspan="5" class="px-5 py-10 text-center text-gray-500 italic">Belum ada data testimoni.</td>
-                </tr>
-                @endif
-            </tbody>
-        </table>
-    </div>
+    <x-admin.table class="admin-table-testimoni">
+        <x-slot name="header">
+            <x-admin.table.th>Foto</x-admin.table.th>
+            <x-admin.table.th>Nama</x-admin.table.th>
+            <x-admin.table.th>Rating</x-admin.table.th>
+            <x-admin.table.th>Isi Testimoni</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @foreach($testimoni as $itemTestimoni)
+        <tr>
+            <x-admin.table.td>
+                <img src="{{ $itemTestimoni->foto_url }}"
+                     class="h-12 w-12 object-cover rounded-full border shadow-sm"
+                     onerror="this.src='{{ $itemTestimoni->avatar_url }}'">
+            </x-admin.table.td>
+            <x-admin.table.td class="font-bold">{{ $itemTestimoni->nama }}</x-admin.table.td>
+            <x-admin.table.td class="text-yellow-500 font-bold">
+                @for ($i = 1; $i <= 5; $i++)
+                    <i class="{{ $i <= $itemTestimoni->rating ? 'fas' : 'far' }} fa-star"></i>
+                @endfor
+            </x-admin.table.td>
+            <x-admin.table.td class="max-w-xs truncate">{{ $itemTestimoni->isi_testimoni }}</x-admin.table.td>
+            <x-admin.table.td class="text-center min-w-[150px]">
+                <button onclick="openEditModalTestimoni({{ $itemTestimoni->id }}, '{{ addslashes($itemTestimoni->nama) }}', '{{ addslashes($itemTestimoni->isi_testimoni) }}', '{{ $itemTestimoni->rating }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                    <i class="fas fa-pen mr-1"></i> Edit
+                </button>
+                <button onclick="openDeleteModalTestimoni({{ $itemTestimoni->id }})" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs inline-block">
+                    <i class="fas fa-trash mr-1"></i> Hapus
+                </button>
+            </x-admin.table.td>
+        </tr>
+        @endforeach
+        @if($testimoni->isEmpty())
+        <tr>
+            <x-admin.table.td colspan="5" class="py-10 text-center text-gray-500 italic">Belum ada data testimoni.</x-admin.table.td>
+        </tr>
+        @endif
+    </x-admin.table>
 
     @if ($testimoni->hasPages())
         @php

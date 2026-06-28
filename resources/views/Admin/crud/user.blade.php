@@ -1,12 +1,12 @@
 <div id="panel-user" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-users-cog',
-            'label' => 'Pengguna Sistem',
-            'count' => $users->total(),
-            'unit' => 'user',
-            'meta' => 'Kelola akun admin, super admin, dan customer.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-users-cog" 
+            label="Pengguna Sistem" 
+            :count="$users->total()" 
+            unit="user" 
+            meta="Kelola akun admin, super admin, dan customer." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="admin-search-control w-full md:w-[19rem]">
@@ -25,48 +25,43 @@
         </div>
     @endif
 
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-user min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Nama</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Email</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Role</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase">Terdaftar</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($users as $user)
-                <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $user->name }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $user->email }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        <span class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase {{ $user->role_badge_class }}">
-                            {{ $user->role_label }}
-                        </span>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-gray-500">
-                        {{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                        <button onclick="openEditModalUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ addslashes($user->email) }}', '{{ $user->role }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
-                            <i class="fas fa-pen mr-1"></i> Edit
-                        </button>
-                        @if(auth()->id() !== $user->id)
-                        <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus user ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                <i class="fas fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
-                        @endif
-                    </td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-    </div>
+    <x-admin.table class="admin-table-user">
+        <x-slot name="header">
+            <x-admin.table.th>Nama</x-admin.table.th>
+            <x-admin.table.th>Email</x-admin.table.th>
+            <x-admin.table.th>Role</x-admin.table.th>
+            <x-admin.table.th>Terdaftar</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @foreach($users as $user)
+        <tr>
+            <x-admin.table.td class="font-bold">{{ $user->name }}</x-admin.table.td>
+            <x-admin.table.td>{{ $user->email }}</x-admin.table.td>
+            <x-admin.table.td>
+                <span class="inline-flex rounded-full border px-3 py-1 text-[10px] font-bold uppercase {{ $user->role_badge_class }}">
+                    {{ $user->role_label }}
+                </span>
+            </x-admin.table.td>
+            <x-admin.table.td class="text-gray-500">
+                {{ $user->created_at ? $user->created_at->format('d M Y') : '-' }}
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center">
+                <button onclick="openEditModalUser({{ $user->id }}, '{{ addslashes($user->name) }}', '{{ addslashes($user->email) }}', '{{ $user->role }}')" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2 transition-colors">
+                    <i class="fas fa-pen mr-1"></i> Edit
+                </button>
+                @if(auth()->id() !== $user->id)
+                <form action="{{ route('admin.user.destroy', $user->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Hapus user ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                        <i class="fas fa-trash mr-1"></i> Hapus
+                    </button>
+                </form>
+                @endif
+            </x-admin.table.td>
+        </tr>
+        @endforeach
+    </x-admin.table>
 
     @if ($users->hasPages())
     @php

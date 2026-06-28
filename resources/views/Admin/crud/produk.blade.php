@@ -1,12 +1,12 @@
 <div id="panel-produk" class="crud-panel mt-6 mb-6 hidden">
     <div class="admin-toolbar">
-        @include('Admin.components.panel_toolbar_summary', [
-            'icon' => 'fa-box',
-            'label' => 'Data Produk',
-            'count' => $produks->total(),
-            'unit' => 'produk',
-            'meta' => 'Atur stok, harga, gambar, dan produk unggulan.',
-        ])
+        <x-admin.panel-summary 
+            icon="fa-box" 
+            label="Data Produk" 
+            :count="$produks->total()" 
+            unit="produk" 
+            meta="Atur stok, harga, gambar, dan produk unggulan." 
+        />
 
         <div class="admin-toolbar-actions">
             <form action="{{ url()->current() }}" method="GET" class="admin-search-control w-full md:w-[19rem]">
@@ -38,67 +38,62 @@
     @endif
 
     <!-- TABEL LENGKAP -->
-    <div class="admin-table-scroll bg-white rounded-lg shadow border border-gray-200">
-        <table class="admin-data-table admin-table-produk min-w-full leading-normal">
-            <thead>
-                <tr>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Gambar</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Nama Produk</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Harga</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Stok</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Deskripsi</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Manfaat</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Unggulan</th>
-                    <th class="px-5 py-3 border-b-2 bg-gray-100 text-center text-xs font-semibold text-gray-600 uppercase tracking-wider">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($produks as $produk)
-                <tr>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                        @if($produk->gambar)
-                            <img src="{{ $produk->gambar_url }}" alt="{{ $produk->nama }}" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
-                        @else
-                            <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
-                        @endif
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm font-bold">{{ $produk->nama }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $produk->harga_rupiah }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">{{ $produk->stok }}</td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs">
-                        <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->deskripsi }}</p>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm max-w-xs">
-                        <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->manfaat }}</p>
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center">
-                        @if($produk->is_unggulan)
-                            <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-bold">Ya</span>
-                        @else
-                            <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">Tidak</span>
-                        @endif
-                    </td>
-                    <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center min-w-[150px]">
-                        <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->is_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">
-                            <i class="fas fa-pen mr-1"></i> Edit
-                        </button>
-                        <form action="{{ route('admin.produk.destroy', $produk->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
-                            @csrf @method('DELETE')
-                            <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
-                                <i class="fas fa-trash mr-1"></i> Hapus
-                            </button>
-                        </form>
-                    </td>
-                </tr>
-                @endforeach
-                @if($produks->isEmpty())
-                <tr>
-                    <td colspan="8" class="px-5 py-5 border-b border-gray-200 bg-white text-sm text-center text-gray-500">Belum ada data produk.</td>
-                </tr>
+    <x-admin.table class="admin-table-produk">
+        <x-slot name="header">
+            <x-admin.table.th>Gambar</x-admin.table.th>
+            <x-admin.table.th>Nama Produk</x-admin.table.th>
+            <x-admin.table.th>Harga</x-admin.table.th>
+            <x-admin.table.th>Stok</x-admin.table.th>
+            <x-admin.table.th>Deskripsi</x-admin.table.th>
+            <x-admin.table.th>Manfaat</x-admin.table.th>
+            <x-admin.table.th class="text-center">Unggulan</x-admin.table.th>
+            <x-admin.table.th class="text-center">Aksi</x-admin.table.th>
+        </x-slot>
+
+        @foreach($produks as $produk)
+        <tr>
+            <x-admin.table.td>
+                @if($produk->gambar)
+                    <img src="{{ $produk->gambar_url }}" alt="{{ $produk->nama }}" class="h-16 w-16 object-cover rounded border" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                @else
+                    <div class="h-16 w-16 bg-gray-100 text-gray-400 flex items-center justify-center text-xs rounded border">Kosong</div>
                 @endif
-            </tbody>
-        </table>
-    </div>
+            </x-admin.table.td>
+            <x-admin.table.td class="font-bold">{{ $produk->nama }}</x-admin.table.td>
+            <x-admin.table.td>{{ $produk->harga_rupiah }}</x-admin.table.td>
+            <x-admin.table.td>{{ $produk->stok }}</x-admin.table.td>
+            <x-admin.table.td class="max-w-xs">
+                <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->deskripsi }}</p>
+            </x-admin.table.td>
+            <x-admin.table.td class="max-w-xs">
+                <p class="text-gray-900 whitespace-no-wrap text-xs truncate">{{ $produk->manfaat }}</p>
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center">
+                @if($produk->is_unggulan)
+                    <span class="px-2 py-1 bg-green-100 text-green-800 rounded text-xs font-bold">Ya</span>
+                @else
+                    <span class="px-2 py-1 bg-gray-100 text-gray-600 rounded text-xs">Tidak</span>
+                @endif
+            </x-admin.table.td>
+            <x-admin.table.td class="text-center min-w-[150px]">
+                <button onclick="openEditModal({{ $produk->id }}, '{{ addslashes($produk->nama) }}', {{ $produk->harga }}, {{ $produk->stok }}, '{{ addslashes($produk->deskripsi) }}', '{{ addslashes($produk->manfaat) }}', {{ $produk->is_unggulan ? 'true' : 'false' }})" class="bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-1 px-3 rounded text-xs mr-2">
+                    <i class="fas fa-pen mr-1"></i> Edit
+                </button>
+                <form action="{{ route('admin.produk.destroy', $produk->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Yakin ingin menghapus produk ini?');">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="bg-red-600 hover:bg-red-700 text-white font-bold py-1 px-3 rounded text-xs">
+                        <i class="fas fa-trash mr-1"></i> Hapus
+                    </button>
+                </form>
+            </x-admin.table.td>
+        </tr>
+        @endforeach
+        @if($produks->isEmpty())
+        <tr>
+            <x-admin.table.td colspan="8" class="text-center text-gray-500">Belum ada data produk.</x-admin.table.td>
+        </tr>
+        @endif
+    </x-admin.table>
 
     @if ($produks->hasPages())
         @php
