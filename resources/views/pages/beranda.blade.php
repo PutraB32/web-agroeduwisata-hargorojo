@@ -599,7 +599,7 @@
 
                     <div class="text-[#d4af37] text-[18px] font-bold leading-none mb-5">
                         Rp{{ number_format($produk->harga, 0, ',', '.') }}
-                        <span class="text-[14px] font-medium text-[#7a7a7a]">/ pack</span>
+                        <span class="text-[14px] font-medium text-[#7a7a7a]">/ {{ $produk['satuan'] }}</span>
                     </div>
 
                     <a href="{{ route('ecommerce') }}"
