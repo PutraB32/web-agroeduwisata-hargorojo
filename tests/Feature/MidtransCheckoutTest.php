@@ -18,7 +18,7 @@ function makeProduk(array $attributes = []): Produk
         'satuan' => 'pcs',
         'manfaat' => 'Manis alami',
         'stok' => 10,
-        'is_unggulan' => false,
+        'produk_unggulan' => false,
     ], $attributes));
 }
 
