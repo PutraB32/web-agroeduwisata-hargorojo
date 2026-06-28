@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Agroeduwisata;
-use App\Models\KategoriKatalog;
 use App\Models\KatalogDesa;
+use App\Models\KategoriKatalog;
 use App\Models\Order;
 use App\Models\Produk;
 use App\Models\Testimoni;
@@ -61,7 +61,11 @@ class AdminDashboardController extends Controller
     {
         return Produk::when($request->query('search_produk'), function ($query, $search) {
             return $query->where('nama', 'like', "%{$search}%");
-        })->latest()->get();
+        })
+            ->latest()
+            ->paginate(10, ['*'], 'produk_page')
+            ->withQueryString()
+            ->appends(['panel' => 'produk']);
     }
 
     private function agroeduwisatas(Request $request)
@@ -73,7 +77,11 @@ class AdminDashboardController extends Controller
                 return $query->whereNull('parent_id');
             })->when($request->query('filter_kat_agro') === 'anak', function ($query) {
                 return $query->whereNotNull('parent_id');
-            })->latest()->get();
+            })
+            ->latest()
+            ->paginate(10, ['*'], 'agro_page')
+            ->withQueryString()
+            ->appends(['panel' => 'agro']);
     }
 
     private function katalogs(Request $request)
@@ -83,7 +91,11 @@ class AdminDashboardController extends Controller
                 return $query->where('Judul', 'like', "%{$search}%");
             })->when($request->query('filter_kat_katalog'), function ($query, $filter) {
                 return $query->where('kategori_id', $filter);
-            })->latest()->get();
+            })
+            ->latest()
+            ->paginate(10, ['*'], 'katalog_page')
+            ->withQueryString()
+            ->appends(['panel' => 'katalog']);
     }
 
     private function users(Request $request)
@@ -94,7 +106,11 @@ class AdminDashboardController extends Controller
                     $q->where('name', 'like', "%{$search}%")
                         ->orWhere('email', 'like', "%{$search}%");
                 });
-            })->latest()->get();
+            })
+            ->latest()
+            ->paginate(10, ['*'], 'user_page')
+            ->withQueryString()
+            ->appends(['panel' => 'users']);
     }
 
     private function testimonials(Request $request)
@@ -102,7 +118,11 @@ class AdminDashboardController extends Controller
         return Testimoni::when($request->query('search_testimoni'), function ($query, $search) {
             return $query->where('nama', 'like', "%{$search}%")
                 ->orWhere('isi_testimoni', 'like', "%{$search}%");
-        })->latest()->get();
+        })
+            ->latest()
+            ->paginate(10, ['*'], 'testimoni_page')
+            ->withQueryString()
+            ->appends(['panel' => 'testimoni']);
     }
 
     private function orders(Request $request)
@@ -113,7 +133,9 @@ class AdminDashboardController extends Controller
                     ->orWhere('no_hp', 'like', "%{$search}%");
             })
             ->latest('created_at')
-            ->get();
+            ->paginate(10, ['*'], 'order_page')
+            ->withQueryString()
+            ->appends(['panel' => 'order']);
     }
 
     private function salesChartData(): array
@@ -151,7 +173,7 @@ class AdminDashboardController extends Controller
 
         $colors = [];
 
-        for ($index = 0; $index < $count; $index++) {
+        for ($index = 0; $index < $count; ++$index) {
             $colors[] = $palette[$index % count($palette)];
         }
 
