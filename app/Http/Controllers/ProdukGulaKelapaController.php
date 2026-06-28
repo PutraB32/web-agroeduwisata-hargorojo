@@ -10,7 +10,7 @@ class ProdukGulaKelapaController extends Controller
     public function index(Request $request)
     {
         // Fetch Produk Unggulan
-         $produkUnggulan = Produk::where('is_unggulan', true)
+         $produkUnggulan = Produk::where('produk_unggulan', true)
                                 ->with('testimoni')
                                 ->get();
 

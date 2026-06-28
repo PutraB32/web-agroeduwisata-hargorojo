@@ -23,7 +23,7 @@ class BerandaController extends Controller
             ->get();
 
         // Fetch 4 Produk Unggulan
-        $produkUnggulan = Produk::where('is_unggulan', true)
+        $produkUnggulan = Produk::where('produk_unggulan', true)
             ->take(4)
             ->get();
 

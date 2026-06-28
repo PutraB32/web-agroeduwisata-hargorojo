@@ -16,7 +16,7 @@ class AgroeduwisataController extends Controller
             ->with('children')
             ->get();
 
-        $produkUnggulan = Produk::where('is_unggulan', true)
+        $produkUnggulan = Produk::where('produk_unggulan', true)
             ->take(4)
             ->get();
 
