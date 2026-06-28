@@ -694,12 +694,9 @@
 
         <!-- HEADER -->
         <div class="mb-14 text-center">
-
             <div class="reveal reveal-delay-1 mb-2 inline-flex items-center gap-2 rounded-full border border-[#dde7d7] bg-[#eef3ea] px-6 py-3">
                 <i class="fa-solid fa-book-open text-green-800"></i>
-                <span class="text-sm font-semibold tracking-wide text-green-900">
-                    Informasi & Dokumentasi Desa Hargorojo
-                </span>
+                <span class="text-sm font-semibold tracking-wide text-green-900">Informasi & Dokumentasi Desa Hargorojo</span>
             </div>
 
             <h2 class="reveal reveal-delay-2 mb-3 font-display text-[38px] leading-[0.95] tracking-normal text-[#000000] drop-shadow-sm md:text-[58px] lg:text-[55px]">
@@ -707,26 +704,16 @@
             </h2>
 
             <p class="reveal reveal-delay-3 mx-auto mt-3 max-w-3xl text-[18px] font-thin leading-[1.3] text-[#1f211f]">
-                Temukan berbagai informasi, berita, artikel, dan dokumentasi kegiatan yang mencerminkan
-                semangat serta perkembangan Desa Hargorojo
+                Temukan berbagai informasi, berita, artikel, dan dokumentasi kegiatan yang mencerminkan semangat serta perkembangan Desa Hargorojo
             </p>
-
         </div>
 
         <!-- CATEGORY MENU -->
         <div class="cat-menu mx-auto mb-8 mt-5 max-w-[1000px] rounded-[25px] border border-[#ebe7de] bg-white/90 shadow-[0_10px_40px_rgba(0,0,0,0.05)] backdrop-blur-xl lg:mt-10">
             <div class="grid grid-cols-1 gap-3 p-2 sm:grid-cols-2 lg:grid-cols-4">
                 @foreach($katalogTabs as $index => $tab)
-                    <button
-                        type="button"
-                        @click="activeKatalogTab = {{ \Illuminate\Support\Js::from($tab['key']) }}"
-                        :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-[#e4eddf] shadow-sm' : 'bg-white hover:bg-[#f7faf5]'"
-                        class="cat-item cat-item-delay-{{ $index + 1 }} flex min-w-0 items-center gap-4 rounded-2xl px-5 py-5 text-left transition-all duration-300"
-                    >
-                        <span
-                            :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-700'"
-                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg transition-colors duration-300"
-                        >
+                    <button type="button" @click="activeKatalogTab = {{ \Illuminate\Support\Js::from($tab['key']) }}" :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-[#e4eddf] shadow-sm' : 'bg-white hover:bg-[#f7faf5]'" class="cat-item cat-item-delay-{{ $index + 1 }} flex min-w-0 items-center gap-4 rounded-2xl px-5 py-5 text-left transition-all duration-300">
+                        <span :class="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }} ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-700'" class="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl text-lg transition-colors duration-300">
                             <i class="{{ $tab['icon'] }}"></i>
                         </span>
                         <span class="min-w-0">
@@ -741,75 +728,84 @@
         <!-- CONTENT -->
         <div class="space-y-5">
             @foreach($katalogTabs as $tab)
-                <div
-                    x-cloak
-                    x-show="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }}"
-                    x-transition.opacity.duration.200ms
-                    class="space-y-5"
-                >
-                    @forelse($tab['items']->sortByDesc('created_at')->take(3) as $loopIndex => $item)
-                        @php
-                            $kategori = $item->kategoriKatalog->nama_kategori ?? $tab['label'];
-                            $kategoriLabel = $kategori === 'Galeri' ? 'Galeri Desa' : $kategori;
-                            $externalUrl = $item->external_url ?? null;
-                        @endphp
+                <div x-cloak x-show="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }}" x-transition.opacity.duration.200ms class="space-y-5">
 
-                        <article class="katalog-card visible katalog-card-delay-{{ $loopIndex + 1 }} mx-auto grid min-h-[300px] max-w-[1100px] overflow-hidden rounded-[20px] border border-[#ece7de] bg-white shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] lg:grid-cols-[0.8fr_1.2fr]">
-
-                            <div class="group relative min-h-[220px] overflow-hidden lg:min-h-0">
-                                <img
-                                    src="{{ $item->gambar_url }}"
-                                    alt="{{ $item->judul }}"
-                                    class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                    onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'"
-                                >
-                                <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
-
-                                <div class="badge-reveal absolute left-5 top-5 flex items-center gap-3 rounded-full bg-green-800 px-4 py-2.5 text-sm font-semibold text-white shadow-xl sm:left-6 sm:top-6 sm:px-5 sm:py-3">
-                                    <i class="{{ $tab['icon'] }}"></i>
-                                    {{ $kategoriLabel }}
+                    @if($tab['key'] === 'Galeri')
+                        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                            @forelse($tab['items']->sortByDesc('created_at') as $item)
+                                @php $externalUrl = $item->external_url ?? null; @endphp
+                                <a href="{{ $externalUrl ?: '#' }}" @if($externalUrl) target="_blank" rel="noopener noreferrer" @endif class="group relative overflow-hidden rounded-[24px]">
+                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy" class="class="class="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-110""" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                                    <div class="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/15"></div>
+                                    <div class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                                        <i class="fa-solid fa-expand text-[#173121]"></i>
+                                    </div>
+                                </a>
+                            @empty
+                                <div class="col-span-full rounded-[24px] border border-dashed border-[#d9d9d9] bg-white py-20 text-center">
+                                    <i class="fa-regular fa-image text-5xl text-[#8aa88b]"></i>
+                                    <p class="mt-5 text-[#6b736d]">Belum ada galeri desa.</p>
                                 </div>
-                            </div>
-
-                            <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-
-                                <div class="mb-4 flex items-center gap-3 text-sm text-gray-500">
-                                    <i class="fa-regular fa-calendar"></i>
-                                    {{ $item->created_at->format('d M Y') }}
-                                </div>
-
-                                <h3 class="mb-5 line-clamp-2 font-display text-[24px] leading-[1.2] tracking-normal text-[#000000] md:text-[22px]">
-                                    {{ $item->judul }}
-                                </h3>
-
-                                <p class="mb-3 line-clamp-5 font-lora text-[14px] font-thin italic leading-[1.9] text-[#5f6d63]">
-                                    {{ Str::limit($item->deskripsi, 300) }}
-                                </p>
-
-                                @if($externalUrl)
-                                    <a href="{{ $externalUrl }}" target="_blank" rel="noopener noreferrer" class="read-more-link text-lg font-semibold text-[#2b4238]">
-                                        Baca Selengkapnya
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                @else
-                                    <a href="{{ route('katalog') }}" class="read-more-link text-lg font-semibold text-[#2b4238]">
-                                        Baca Selengkapnya
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                    </a>
-                                @endif
-
-                            </div>
-
-                        </article>
-                    @empty
-                        <div class="mx-auto max-w-[900px] rounded-[20px] border border-dashed border-[#d9d2c4] bg-white/80 px-6 py-12 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
-                            <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#eef3ea] text-green-800">
-                                <i class="{{ $tab['icon'] }} text-xl"></i>
-                            </div>
-                            <h3 class="text-xl font-bold text-[#173121]">{{ $tab['label'] }}</h3>
-                            <p class="mt-2 text-sm text-[#6b736d]">{{ $tab['empty'] }}</p>
+                            @endforelse
                         </div>
-                    @endforelse
+                    @else
+                        @forelse($tab['items']->sortByDesc('created_at')->take(3) as $loopIndex => $item)
+                            @php
+                                $kategori = $item->kategoriKatalog->nama_kategori ?? $tab['label'];
+                                $kategoriLabel = $kategori === 'Galeri' ? 'Galeri Desa' : $kategori;
+                                $externalUrl = $item->external_url ?? null;
+                            @endphp
+
+                            <article class="katalog-card visible katalog-card-delay-{{ $loopIndex + 1 }} mx-auto grid min-h-[300px] max-w-[1100px] overflow-hidden rounded-[20px] border border-[#ece7de] bg-white shadow-[0_10px_35px_rgba(0,0,0,0.05)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_60px_rgba(0,0,0,0.08)] lg:grid-cols-[0.8fr_1.2fr]">
+
+                                <div class="group relative min-h-[220px] overflow-hidden lg:min-h-0">
+                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent"></div>
+                                    <div class="badge-reveal absolute left-5 top-5 flex items-center gap-3 rounded-full bg-green-800 px-4 py-2.5 text-sm font-semibold text-white shadow-xl sm:left-6 sm:top-6 sm:px-5 sm:py-3">
+                                        <i class="{{ $tab['icon'] }}"></i>
+                                        {{ $kategoriLabel }}
+                                    </div>
+                                </div>
+
+                                <div class="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+                                    <div class="mb-4 flex items-center gap-3 text-sm text-gray-500">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        {{ $item->created_at->format('d M Y') }}
+                                    </div>
+
+                                    <h3 class="mb-5 line-clamp-2 font-display text-[24px] leading-[1.2] tracking-normal text-[#000000] md:text-[22px]">
+                                        {{ $item->judul }}
+                                    </h3>
+
+                                    <p class="mb-3 line-clamp-5 font-lora text-[14px] font-thin italic leading-[1.9] text-[#5f6d63]">
+                                        {{ Str::limit($item->deskripsi, 300) }}
+                                    </p>
+
+                                    @if($externalUrl)
+                                        <a href="{{ $externalUrl }}" target="_blank" rel="noopener noreferrer" class="read-more-link text-lg font-semibold text-[#2b4238]">
+                                            Baca Selengkapnya
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    @else
+                                        <a href="{{ route('katalog') }}" class="read-more-link text-lg font-semibold text-[#2b4238]">
+                                            Baca Selengkapnya
+                                            <i class="fa-solid fa-arrow-right"></i>
+                                        </a>
+                                    @endif
+                                </div>
+
+                            </article>
+                        @empty
+                            <div class="mx-auto max-w-[900px] rounded-[20px] border border-dashed border-[#d9d2c4] bg-white/80 px-6 py-12 text-center shadow-[0_10px_30px_rgba(0,0,0,0.04)]">
+                                <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-[#eef3ea] text-green-800">
+                                    <i class="{{ $tab['icon'] }} text-xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-[#173121]">{{ $tab['label'] }}</h3>
+                                <p class="mt-2 text-sm text-[#6b736d]">{{ $tab['empty'] }}</p>
+                            </div>
+                        @endforelse
+                    @endif
+
                 </div>
             @endforeach
         </div>
@@ -818,8 +814,7 @@
         <div class="reveal reveal-delay-4 mt-16 flex justify-center">
             <a href="{{ route('katalog') }}" class="inline-flex items-center justify-center gap-3 sm:gap-4 lg:gap-5 rounded-full bg-gradient-to-r from-[#1d4d3a] to-[#2f7a5d] px-5 py-3 sm:px-7 lg:px-8 text-sm sm:text-base lg:text-lg font-semibold text-white shadow-[0_15px_40px_rgba(29,77,58,0.25)] transition-all duration-500 hover:scale-[1.03]">
                 <i class="fa-solid fa-book-open"></i>
-
-                <span class="text-center"> Lihat Selengkapnya di Katalog Desa </span>
+                <span class="text-center">Lihat Selengkapnya di Katalog Desa</span>
                 <span class="flex h-8 w-8 items-center justify-center rounded-full bg-white text-sm text-black">
                     <i class="fa-solid fa-arrow-right"></i>
                 </span>
