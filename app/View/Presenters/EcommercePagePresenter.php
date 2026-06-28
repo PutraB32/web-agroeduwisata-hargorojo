@@ -68,10 +68,10 @@ class EcommercePagePresenter
                 'featuredDescriptionExcerpt' => Str::limit($description ?: 'Produk lokal pilihan Desa Hargorojo.', 70),
                 'price' => (float) $product->harga,
                 'priceFormatted' => self::rupiah($product->harga),
-                'unit' => $product->satuan ?: 'pcs',
+                'satuan' => $product->satuan ?: 'pcs',
                 'stock' => (int) $product->stok,
                 'imageUrl' => $imageUrl,
-                'isFeatured' => (bool) $product->is_unggulan,
+                'isFeatured' => (bool) $product->produk_unggulan,
                 'cartPayload' => [
                     'id' => (int) $product->id,
                     'nama' => $product->nama,

@@ -34,7 +34,7 @@ class EcommerceController extends Controller
                 return $produk;
             });
 
-        $produkUnggulan = $produks->where('is_unggulan', true);
+        $produkUnggulan = $produks->where('produk_unggulan', true);
 
         $cartItems = $this->prepareCartItems($request->session()->get('cart', []));
         $cartCount = $cartItems->sum('quantity');

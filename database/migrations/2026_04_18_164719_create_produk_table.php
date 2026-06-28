@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('satuan', 30)->default('pcs');
             $table->text('manfaat')->nullable();
             $table->string('gambar')->nullable();
-            $table->boolean('is_unggulan')->default(false);
+            $table->boolean('produk_unggulan')->default(false);
             $table->integer('stok')->default(0);
             $table->timestamps();
         });

@@ -38,7 +38,7 @@ class AdminProdukController extends Controller
             'stok' => $validated['stok'],
             'deskripsi' => $validated['deskripsi'] ?? null,
             'manfaat' => $validated['manfaat'] ?? null,
-            'is_unggulan' => $request->has('is_unggulan') ? true : false,
+            'produk_unggulan' => $request->has('produk_unggulan') ? true : false,
             'gambar' => $imagePath,
             'user_id' => Auth::id(),
         ]);
@@ -78,7 +78,7 @@ class AdminProdukController extends Controller
             'stok' => $validated['stok'],
             'deskripsi' => $validated['deskripsi'] ?? null,
             'manfaat' => $validated['manfaat'] ?? null,
-            'is_unggulan' => $request->has('is_unggulan') ? true : false,
+            'produk_unggulan' => $request->has('produk_unggulan') ? true : false,
             'gambar' => $imagePath,
         ]);
 

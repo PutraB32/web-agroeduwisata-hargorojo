@@ -18,7 +18,7 @@ class Produk extends Model
         'satuan',
         'manfaat',
         'gambar',
-        'is_unggulan',
+        'produk_unggulan',
         'stok',
         'user_id'
     ];

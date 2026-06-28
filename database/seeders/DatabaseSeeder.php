@@ -49,7 +49,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 45000,
                 'stok' => 50,
                 'gambar' => null,
-                'is_unggulan' => true,
+                'produk_unggulan' => true,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 25000,
                 'stok' => 100,
                 'gambar' => null,
-                'is_unggulan' => true,
+                'produk_unggulan' => true,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 55000,
                 'stok' => 30,
                 'gambar' => null,
-                'is_unggulan' => true,
+                'produk_unggulan' => true,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -79,7 +79,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 35000,
                 'stok' => 80,
                 'gambar' => null,
-                'is_unggulan' => true,
+                'produk_unggulan' => true,
                 'user_id' => $superAdmin->id
             ],
 
@@ -91,7 +91,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 15000,
                 'stok' => 150,
                 'gambar' => null,
-                'is_unggulan' => false,
+                'produk_unggulan' => false,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -101,7 +101,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 20000,
                 'stok' => 120,
                 'gambar' => null,
-                'is_unggulan' => false,
+                'produk_unggulan' => false,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -111,7 +111,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 12000,
                 'stok' => 200,
                 'gambar' => null,
-                'is_unggulan' => false,
+                'produk_unggulan' => false,
                 'user_id' => $superAdmin->id
             ],
             [
@@ -121,7 +121,7 @@ class DatabaseSeeder extends Seeder
                 'harga' => 8000,
                 'stok' => 300,
                 'gambar' => null,
-                'is_unggulan' => false,
+                'produk_unggulan' => false,
                 'user_id' => $superAdmin->id
             ]
         ];
