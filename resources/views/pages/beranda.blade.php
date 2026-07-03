@@ -13,7 +13,7 @@
         >
 
         <div class="absolute inset-0 bg-black/55 animate-vignette"></div>
-        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/35 to-transparent animate-slide-gradient"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent animate-slide-gradient"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
         <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
     </div>
@@ -70,21 +70,21 @@
                     </div>
                 </div>
 
-                <div class="home-hero__cta hero-fade-up delay-750 flex w-full flex-col gap-3 sm:max-w-md sm:flex-row lg:w-auto lg:min-w-[26rem] lg:max-w-none lg:flex-row xl:min-w-[30rem]">
+                <div class="home-hero__cta hero-fade-up delay-750 flex w-full flex-col gap-3 sm:max-w-fit sm:flex-row lg:w-auto lg:max-w-none lg:flex-row">
                     <a
                         href="{{ route('profil') }}"
-                        class="home-hero__button btn-pulse group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-yellow-300/50 bg-yellow-500 px-6 text-md font-bold text-[#152014] shadow-[0_16px_40px_rgba(212,175,55,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-200 hover:bg-yellow-300 hover:shadow-[0_22px_55px_rgba(212,175,55,0.46)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-6"
+                        class="home-hero__button btn-pulse group inline-flex min-h-[3.25rem] w-fit items-center justify-center gap-3 rounded-full border border-yellow-300/50 bg-yellow-500 px-6 text-md font-bold text-[#152014] shadow-[0_16px_40px_rgba(212,175,55,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-200 hover:bg-yellow-300 hover:shadow-[0_22px_55px_rgba(212,175,55,0.46)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-6"
                     >
-                        <span class="home-hero__button-text min-w-0 flex-1 text-center">Lihat Profil Desa</span>
-                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#173c2d] text-white transition-all duration-300 group-hover:bg-white group-hover:text-[#173c2d]"><i class="fa-solid fa-arrow-right text-md leading-none"></i></span>
+                        <span class="home-hero__button-text whitespace-nowrap text-center">Lihat Profil Desa</span>
+                        <span class="home-hero__button-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#173c2d] text-white/80 transition-all duration-300 group-hover:bg-white group-hover:text-[#173c2d]"><i class="fa-solid fa-arrow-right text-lg leading-none"></i></span>
                     </a>
 
                     <a
                         href="{{ route('kontak') }}"
-                        class="home-hero__button group flex min-h-[3.25rem] items-center justify-between gap-3 rounded-full border border-green-300/70 bg-green-800/90 px-4 text-md font-bold text-white shadow-[0_16px_40px_rgba(0,77,64,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-300 hover:bg-green-700 hover:shadow-[0_22px_55px_rgba(0,77,64,0.48)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-5"
+                        class="home-hero__button group inline-flex min-h-[3.25rem] w-fit items-center justify-center gap-3 rounded-full border border-green-300/70 bg-green-800/90 px-6 text-md font-bold text-white shadow-[0_16px_40px_rgba(0,77,64,0.35)] backdrop-blur-xl transition-all duration-300 hover:scale-[1.02] hover:border-yellow-300 hover:bg-green-700 hover:shadow-[0_22px_55px_rgba(0,77,64,0.48)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-yellow-300 sm:px-6"
                     >
-                        <span class="home-hero__button-text min-w-0 flex-1 text-center">Hubungi Kami</span>
-                        <span class="home-hero__button-icon flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-green-900 transition-all duration-300 group-hover:bg-yellow-400 group-hover:text-black"><i class="fa-solid fa-arrow-right text-md leading-none"></i></span>
+                        <span class="home-hero__button-text whitespace-nowrap text-center">Hubungi Kami</span>
+                        <span class="home-hero__button-icon flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white/60 text-green-900 transition-all duration-300 group-hover:bg-yellow-400 group-hover:text-black"><i class="fa-solid fa-arrow-right text-lg leading-none"></i></span>
                     </a>
                 </div>
             </div>
@@ -734,7 +734,7 @@
                         <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
                             @forelse($tab['items']->sortByDesc('created_at') as $item)
                                 @php $externalUrl = $item->external_url ?? null; @endphp
-                                <a href="{{ $externalUrl ?: '#' }}" @if($externalUrl) target="_blank" rel="noopener noreferrer" @endif class="group relative overflow-hidden rounded-[24px]">
+                                <a href="{{ $externalUrl ?: '#' }}" @if($externalUrl) target="_blank" rel="noopener noreferrer" @endif class="group relative overflow-hidden rounded-[10px]">
                                     <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy" class="class="class="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-110""" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
                                     <div class="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/15"></div>
                                     <div class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
