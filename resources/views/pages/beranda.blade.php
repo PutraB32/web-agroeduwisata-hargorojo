@@ -731,16 +731,21 @@
                 <div x-cloak x-show="activeKatalogTab === {{ \Illuminate\Support\Js::from($tab['key']) }}" x-transition.opacity.duration.200ms class="space-y-5">
 
                     @if($tab['key'] === 'Galeri')
-                        <div class="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4">
+                        <div class="mx-auto grid max-w-[1200px] grid-cols-2 gap-2 sm:gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4">
                             @forelse($tab['items']->sortByDesc('created_at') as $item)
                                 @php $externalUrl = $item->external_url ?? null; @endphp
-                                <a href="{{ $externalUrl ?: '#' }}" @if($externalUrl) target="_blank" rel="noopener noreferrer" @endif class="group relative overflow-hidden rounded-[10px]">
-                                    <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy" class="class="class="aspect-[3/4] w-full object-cover transition duration-700 group-hover:scale-110""" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
-                                    <div class="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/15"></div>
-                                    <div class="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 backdrop-blur-md opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
-                                        <i class="fa-solid fa-expand text-[#173121]"></i>
+                                <div class="group relative overflow-hidden rounded-[18px] border border-[#ece7de] bg-white p-1.5 shadow-[0_10px_25px_rgba(0,0,0,0.04)] transition duration-300 hover:-translate-y-1 hover:shadow-[0_16px_35px_rgba(0,0,0,0.08)]">
+                                    <div class="overflow-hidden rounded-[14px]">
+                                        <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy" class="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
                                     </div>
-                                </a>
+                                    <div class="absolute inset-x-3 top-3 flex items-center justify-between">
+                                        <span class="rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-sm">Galeri</span>
+                                    </div>
+                                    <div class="absolute inset-0 rounded-[18px] bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
+                                    <div class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#173121] shadow-lg opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
+                                        <i class="fa-solid fa-expand text-sm"></i>
+                                    </div>
+                                </div>
                             @empty
                                 <div class="col-span-full rounded-[24px] border border-dashed border-[#d9d9d9] bg-white py-20 text-center">
                                     <i class="fa-regular fa-image text-5xl text-[#8aa88b]"></i>
