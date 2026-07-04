@@ -4,16 +4,17 @@
 
         <div class="absolute inset-0 bg-[#08140d]/50"></div>
         <div class="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(212,175,55,.12),transparent_28%),radial-gradient(circle_at_85%_18%,rgba(255,255,255,.05),transparent_24%),radial-gradient(circle_at_50%_100%,rgba(212,175,55,.08),transparent_38%)]"></div>
+
         <div class="relative mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-2 md:py-12 lg:grid-cols-[1.25fr_1fr_1fr_.9fr] lg:gap-12">
 
-            <section class="self-start lg:-mt-10 lg:pr-8">
+            <section class="reveal reveal-delay-1 self-start lg:-mt-10 lg:pr-8">
                 <img src="{{ asset('images/assets foto/logo hargorojo.png') }}" alt="Logo Desa Wisata Hargorojo" class="-translate-x-3 -mt-9 lg:-mt-2 h-auto w-40 object-contain drop-shadow-[0_0_30px_rgba(212,175,55,.18)] md:w-52">
                 <p class="-mt-2 max-w-xl text-sm leading-6 text-white/85 drop-shadow-[0_2px_8px_rgba(0,0,0,.8)] lg:-mt-6">
                     Menelusuri jejak alam, tradisi, dan inovasi yang membangun kemandirian sejati dari lereng bukit Menoreh.
                 </p>
             </section>
 
-            <section>
+            <section class="reveal reveal-delay-2">
                 <h3 class="text-sm font-lora font-bold uppercase tracking-[.08em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,.7)] lg:text-[17px]">Informasi Desa</h3>
                 <div class="mt-3">
                     <p class="font-lora text-md font-semibold text-white">Alamat</p>
@@ -21,7 +22,7 @@
                 </div>
             </section>
 
-            <section>
+            <section class="reveal reveal-delay-3">
                 <h3 class="text-sm font-lora font-bold uppercase tracking-[.08em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,.7)] lg:text-[17px]">Kontak Kami</h3>
                 <div class="mt-3 grid gap-5">
                     <div>
@@ -39,7 +40,7 @@
                 </div>
             </section>
 
-            <section>
+            <section class="reveal reveal-delay-4">
                 <h3 class="text-sm font-lora font-bold uppercase tracking-[.08em] text-white drop-shadow-[0_2px_10px_rgba(0,0,0,.7)] lg:text-[17px]">Sosial Media</h3>
                 <div class="mt-3 flex items-center gap-3">
                     <a href="#" aria-label="Instagram Desa Hargorojo" class="flex h-11 w-11 items-center justify-center rounded-full bg-[#2c4a36] text-white shadow-md transition hover:-translate-y-1 hover:bg-[#d5ad3d] hover:text-[#12351f]">
@@ -56,6 +57,7 @@
             </section>
 
         </div>
+
         <div class="relative border-t border-white/10">
             <div class="absolute inset-0 bg-black/15 backdrop-blur-[2px]"></div>
             <div class="absolute inset-0 bg-[#08140d]/35"></div>
