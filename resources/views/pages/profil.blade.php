@@ -15,7 +15,7 @@
         <!-- IMAGE — tambah id + animate-kenburns + scale-110 -->
         <img
             id="hero-profil-bg"
-            src="{{ asset('images/assets foto/hero_profil desa.png') }}"
+            src="{{ asset('images/assets foto/hero_profil desa.webp') }}"
             alt="Hero Desa"
             class="w-full h-full object-cover object-center scale-110 animate-kenburns">
 

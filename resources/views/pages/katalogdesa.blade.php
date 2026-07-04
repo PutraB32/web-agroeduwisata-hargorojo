@@ -10,7 +10,7 @@
 <section class="katalog-hero relative overflow-hidden bg-black pt-28 pb-10 sm:pt-32 lg:h-[700px] lg:pb-0">
 
     <div class="absolute inset-0">
-        <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.png') }}" alt="" class="katalog-hero__bg w-full h-full object-cover">
+        <img id="hero-katalog-bg" src="{{ asset('images/assets foto/content_pendampingan petani.webp') }}" alt="" class="katalog-hero__bg w-full h-full object-cover">
         <div class="katalog-hero__shade absolute inset-0"></div>
         <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/55 to-transparent"></div>
     </div>

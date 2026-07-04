@@ -7,18 +7,19 @@
 
 <main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" x-effect="document.documentElement.style.overflow = cartOpen ? 'hidden' : ''; document.body.style.overflow = cartOpen ? 'hidden' : ''" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
     <section class="ecommerce-hero relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
-        <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover">
-        <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50"></div>
-        <div class="ecommerce-hero__soft-light absolute inset-0"></div>
+        <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover object-center scale-105 animate-kenburns">
+        <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50 animate-vignette"></div>
+        <div class="ecommerce-hero__soft-light absolute inset-0 animate-slide-gradient"></div>
         <div class="ecommerce-hero__bottom-fade absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
+        <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
 
         <div class="ecommerce-hero__content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
-            <h1 class="mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[60px]">Belanja Produk Desa</h1>
-            <p class="font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[77px]">Asli Hargorojo</p>
-            <p class="mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg sm:leading-8">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
+            <h1 class="hero-fade-up delay-100 mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[60px]">Belanja Produk Desa</h1>
+            <p class="hero-fade-up delay-200 font-lobster mt-1 text-[48px] leading-none text-[#c89a44] drop-shadow-sm sm:text-7xl lg:text-[77px]">Asli Hargorojo</p>
+            <p class="hero-fade-up delay-300 mt-5 max-w-3xl text-sm leading-7 text-[#251f1f] sm:text-lg sm:leading-8">Temukan produk pilihan dari kekayaan alam dan kearifan lokal Desa Hargorojo, lalu bayar praktis melalui Midtrans.</p>
 
             @if(! $activeCustomer)
-                <div class="mt-7 flex w-full flex-row items-center justify-center gap-3">
+                <div class="hero-fade-up delay-450 mt-7 flex w-full flex-row items-center justify-center gap-3">
                     <a href="{{ route('customer.login') }}" class="inline-flex h-12 min-w-0 flex-1 max-w-[10.5rem] items-center justify-center rounded-xl bg-[#173121] px-4 text-sm font-extrabold uppercase tracking-[0.12em] text-white shadow-[0_16px_35px_rgba(23,49,33,0.22)] transition hover:-translate-y-0.5 hover:bg-[#244832] sm:max-w-[13rem] sm:px-6 sm:tracking-[0.14em]">Masuk</a>
                     <a href="{{ route('customer.register') }}" class="inline-flex h-12 min-w-0 flex-1 max-w-[10.5rem] items-center justify-center rounded-xl border border-[#173121]/25 bg-white/70 px-4 text-sm font-extrabold uppercase tracking-[0.12em] text-[#173121] shadow-[0_16px_35px_rgba(23,49,33,0.12)] transition hover:-translate-y-0.5 hover:bg-white sm:max-w-[13rem] sm:px-6 sm:tracking-[0.14em]">Daftar</a>
                 </div>

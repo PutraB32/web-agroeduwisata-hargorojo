@@ -7,7 +7,7 @@
 <section class="home-hero relative min-h-[100svh] w-full overflow-hidden bg-black">
     <div class="absolute inset-0 h-full w-full">
         <img
-            src="{{ asset('images/assets foto/hero section.png') }}"
+            src="{{ asset('images/assets foto/hero section.webp') }}"
             alt="Pemandangan Desa Wisata Hargorojo"
             class="home-hero__image h-full w-full scale-100 object-cover object-center animate-kenburns"
         >

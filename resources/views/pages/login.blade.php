@@ -11,7 +11,7 @@
 <body class="admin-auth-page overflow-x-hidden bg-[#12351f] antialiased text-[#12351f] selection:bg-[#12351f] selection:text-white">
     <section class="relative min-h-screen overflow-hidden bg-[#12351f] px-3 py-6 sm:px-6 sm:py-10">
         <img
-            src="{{ asset('images/assets foto/hero section-ecommerce.png') }}"
+            src="{{ asset('images/assets foto/hero section-ecommerce.webp') }}"
             alt="Produk Desa Hargorojo"
             class="absolute inset-0 h-full w-full object-cover object-center"
         >

@@ -12,14 +12,14 @@
 
         <img
             id="hero-agro-bg"
-            src="{{ asset('images/assets foto/hero section_agroeduwisata1.png') }}"
+            src="{{ asset('images/assets foto/hero section_agroeduwisata1.webp') }}"
             alt="Petani penyadap nira"
-            class="w-full h-full object-cover scale-110 animate-kenburns"
+            class="w-full h-full object-cover scale-105 animate-kenburns"
         >
 
         <div class="absolute inset-0 bg-black animate-vignette"></div>
 
-        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-black/30"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/65 to-black/30"></div>
 
     </div>
 
