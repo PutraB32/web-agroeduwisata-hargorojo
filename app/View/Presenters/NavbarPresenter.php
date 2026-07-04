@@ -11,11 +11,11 @@ class NavbarPresenter
     {
         return [
             'brandUrl' => route('beranda'),
-            'logoUrl' => asset('images/assets foto/logo hargorojo.png'),
+            'logoUrl' => asset('images/assets foto/logo hargorojo.webp'),
             'contactUrl' => route('kontak'),
             'dashboardUrl' => route('dashboard'),
             'adminLoginUrl' => route('login'),
-            'showAdminLoginButton' => $request->routeIs('kontak') && ! $customer,
+            'showAdminLoginButton' => $request->routeIs('kontak') && !$customer,
             'items' => self::items($request),
             'customerProfileUrl' => null,
             'customerProfileOrdersUrl' => null,
@@ -54,6 +54,7 @@ class NavbarPresenter
     {
         return 'hargo-navbar__icon-btn hargo-navbar__profile-btn hidden lg:inline-flex';
     }
+
     private static function shouldShowAdminReturnButton(mixed $authUser): bool
     {
         return in_array($authUser->role ?? null, ['admin', 'super_admin'], true);
