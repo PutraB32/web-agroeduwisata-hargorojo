@@ -213,7 +213,7 @@
                                     <p class="font-sans text-[16px] font-bold text-[#173121] lg:text-[17px]">
                                         Halo, <span class="font-lora text-lg font-bold text-[#c89a44]">{{ $checkoutCustomer->name }}</span> 👋
                                     </p>
-                                    <p class="mt-1 font-sans text-[15px] text-[#5f675f]">Senang bertemu lagi. Yuk, mulai belanja!</p>
+                                    <p class="mt-1 font-sans text-[15px] text-[#5f675f]">Senang bertemu dengan Anda. Yuk, mulai belanja!</p>
                                 </div>
                             </div>
                         </div>
