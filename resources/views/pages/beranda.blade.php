@@ -738,8 +738,7 @@
                                     <div class="overflow-hidden rounded-[14px]">
                                         <img src="{{ $item->gambar_url }}" alt="{{ $item->judul }}" loading="lazy" class="aspect-[4/5] w-full object-cover transition duration-700 group-hover:scale-110" onerror="this.src='{{ asset('images/beranda.bg.jpeg') }}'">
                                     </div>
-                                    <div class="absolute inset-x-3 top-3 flex items-center justify-between">
-                                        <span class="rounded-full bg-black/45 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur-sm">Galeri</span>
+                                    <div class="absolute inset-x-3 top-3 flex items-center justify-between">     
                                     </div>
                                     <div class="absolute inset-0 rounded-[18px] bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100"></div>
                                     <div class="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 text-[#173121] shadow-lg opacity-0 scale-75 transition-all duration-300 group-hover:opacity-100 group-hover:scale-100">
