@@ -55,7 +55,17 @@ class CustomerAuthController extends Controller
             'alamat' => ['nullable', 'string', 'max:1000'],
             'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()],
         ], [
+            'name.required' => 'Nama lengkap harus diisi.',
+            'name.max' => 'Nama lengkap maksimal 255 karakter.',
+            'email.required' => 'Alamat email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email maksimal 255 karakter.',
+            'email.unique' => 'Email ini sudah terdaftar. Silakan gunakan email lain atau login.',
+            'no_hp.max' => 'Nomor HP tidak boleh lebih dari 20 karakter.',
             'no_hp.regex' => 'Nomor HP hanya boleh berisi angka, spasi, tanda +, tanda -, dan tanda kurung.',
+            'alamat.max' => 'Alamat maksimal 1000 karakter.',
+            'password.required' => 'Password harus diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
         ]);
 
         $user = User::create([
@@ -100,7 +110,15 @@ class CustomerAuthController extends Controller
             'alamat' => ['nullable', 'string', 'max:1000'],
             'foto' => ['nullable', 'file', 'mimes:jpg,jpeg,png,gif,webp', 'max:5120'],
         ], [
+            'name.required' => 'Nama lengkap harus diisi.',
+            'name.max' => 'Nama lengkap maksimal 255 karakter.',
+            'email.required' => 'Alamat email harus diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.max' => 'Email maksimal 255 karakter.',
+            'email.unique' => 'Email ini sudah terdaftar.',
+            'no_hp.max' => 'Nomor HP tidak boleh lebih dari 20 karakter.',
             'no_hp.regex' => 'Nomor HP hanya boleh berisi angka, spasi, tanda +, tanda -, dan tanda kurung.',
+            'alamat.max' => 'Alamat maksimal 1000 karakter.',
             'foto.file' => 'Foto profil harus berupa file gambar.',
             'foto.mimes' => 'Foto profil harus berupa file JPG, JPEG, PNG, GIF, atau WEBP.',
             'foto.max' => 'Ukuran foto profil maksimal 5 MB.',
