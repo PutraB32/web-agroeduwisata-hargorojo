@@ -22,6 +22,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->validateCsrfTokens(except: [
             'payment/midtrans/notification',
+            'payment/midtrans/notification*',
         ]);
 
         $middleware->alias([
