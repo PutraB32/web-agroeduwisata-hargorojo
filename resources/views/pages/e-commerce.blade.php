@@ -5,7 +5,7 @@
 @section('content')
 
 
-<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" x-effect="document.documentElement.style.overflow = cartOpen ? 'hidden' : ''; document.body.style.overflow = cartOpen ? 'hidden' : ''" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
+<main x-data="cartApp({{ \Illuminate\Support\Js::from($page['cartConfig']) }})" x-effect="document.documentElement.style.overflow = cartOpen ? 'hidden' : ''; document.body.style.overflow = cartOpen ? 'hidden' : ''" @keydown.escape.window="cartOpen = false; notifOpen = false; totalOrdersOpen = false; profileOpen = false; confirmDeleteOpen = false" @if(session('toast_message')) x-init="$nextTick(() => notify(@js(session('toast_message'))))" @endif class="overflow-hidden bg-[#f8f6f1] text-[#173121]">
     <section class="ecommerce-hero relative min-h-[520px] overflow-hidden px-4 pb-28 pt-28 sm:min-h-[620px] sm:px-6 sm:pb-32 sm:pt-36 lg:px-10 lg:pb-40 lg:pt-40">
         <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover object-center scale-105 animate-kenburns">
         <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50 animate-vignette"></div>
@@ -203,6 +203,22 @@
             </div>
             @if($page['featuredProducts']->count())
                 <div class="ecommerce-featured-block mb-10">
+                    @if($activeCustomer)
+                        <div class="relative mb-5 overflow-hidden rounded-[24px] border border-[#ece6da] bg-transparent px-4 py-4 shadow-none sm:px-5">
+                            <div class="absolute inset-0 rounded-[24px] border border-[#f2e0bd]/70"></div>
+                            <div class="absolute -left-5 top-3 h-16 w-16 rounded-full bg-[#f2c96e]/20 blur-2xl"></div>
+                            <div class="absolute bottom-1 right-3 h-16 w-16 rounded-full bg-[#173121]/8 blur-2xl"></div>
+                            <div class="relative z-10">
+                                <div>
+                                    <p class="font-sans text-[16px] font-bold text-[#173121] lg:text-[17px]">
+                                        Halo, <span class="font-lora text-lg font-bold text-[#c89a44]">{{ $checkoutCustomer->name }}</span> 👋
+                                    </p>
+                                    <p class="mt-1 font-sans text-[15px] text-[#5f675f]">Senang bertemu lagi. Yuk, mulai belanja!</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+
                     <div class="ecommerce-section-heading mb-5 flex flex-col gap-1">
                         <div>
                             <h2 class="font-lora text-2xl font-bold text-[#173121] sm:text-3xl">Produk Unggulan</h2>

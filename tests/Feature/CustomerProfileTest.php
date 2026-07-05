@@ -2,7 +2,38 @@
 
 use App\Models\User;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+
+it('customer login menyimpan notifikasi sambutan untuk popup toast', function () {
+    $customer = User::factory()->create([
+        'role' => 'customer',
+        'email' => 'welcome.customer@example.com',
+        'password' => Hash::make('Password1'),
+    ]);
+
+    $this->post(route('customer.login.post'), [
+        'email' => $customer->email,
+        'password' => 'Password1',
+    ])->assertRedirect(route('ecommerce'))
+        ->assertSessionHas('toast_message', 'Selamat datang, '.$customer->name.'!');
+
+    $this->assertAuthenticatedAs($customer);
+});
+
+it('customer logout menyimpan notifikasi penutupan akun untuk popup toast', function () {
+    $customer = User::factory()->create([
+        'role' => 'customer',
+        'email' => 'logout.customer@example.com',
+    ]);
+
+    $this->actingAs($customer)
+        ->post(route('customer.logout'))
+        ->assertRedirect(route('ecommerce'))
+        ->assertSessionHas('toast_message', 'Berhasil keluar. Terima kasih telah berbelanja bersama kami.');
+
+    $this->assertGuest();
+});
 
 it('customer bisa memperbarui nama email nomor hp dan alamat profil dari pop up', function () {
     $customer = User::factory()->create([

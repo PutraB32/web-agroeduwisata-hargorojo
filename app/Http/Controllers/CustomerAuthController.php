@@ -35,7 +35,10 @@ class CustomerAuthController extends Controller
         if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
 
-            return redirect()->intended(route('ecommerce'));
+            $customer = Auth::user();
+
+            return redirect()->intended(route('ecommerce'))
+                ->with('toast_message', 'Selamat datang, '.$customer->name.'!');
         }
 
         return back()->withErrors([
@@ -67,14 +70,16 @@ class CustomerAuthController extends Controller
         Auth::login($user);
         $request->session()->regenerate();
 
-        return redirect()->route('ecommerce')->with('success', 'Registrasi berhasil. Silakan lanjut berbelanja.');
+        return redirect()->route('ecommerce')
+            ->with('success', 'Registrasi berhasil. Silakan lanjut berbelanja.')
+            ->with('toast_message', 'Selamat datang, '.$user->name.'!');
     }
 
     public function updateProfile(Request $request)
     {
         $customer = $request->user();
 
-        if (! $customer) {
+        if (!$customer) {
             return redirect()->route('customer.login')
                 ->with('error', 'Silakan login customer terlebih dahulu.');
         }
@@ -110,7 +115,7 @@ class CustomerAuthController extends Controller
             $imageName = Str::uuid().'.'.$request->file('foto')->extension();
             $storedPath = $request->file('foto')->storeAs('customer', $imageName, 'public');
 
-            if (! $storedPath) {
+            if (!$storedPath) {
                 return back()
                     ->withErrors(['foto' => 'Foto profil gagal diunggah. Silakan coba lagi.'])
                     ->withInput();
@@ -135,6 +140,7 @@ class CustomerAuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('ecommerce');
+        return redirect()->route('ecommerce')
+            ->with('toast_message', 'Berhasil keluar. Terima kasih telah berbelanja bersama kami.');
     }
 }

@@ -64,7 +64,7 @@ window.printCustomerInvoice = function (invoiceId) {
 
     setTimeout(() => {
         window.print();
-    }, 80);
+    }, 120);
 };
 
 window.cartApp = function (config = {}) {
