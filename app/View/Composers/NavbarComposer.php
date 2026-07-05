@@ -23,12 +23,12 @@ class NavbarComposer
         $navbarPreviewOrders = collect();
         $navbarOrderCount = 0;
         $navbarCustomerPhotoUrl = null;
-        $navbarOrderIds = [];
+        $navbarOrderUpdates = [];
 
         if ($navbarCustomer) {
             $latestOrders = $navbarCustomer->orders()
                 ->with('orderDetails.produk')
-                ->latest('created_at')
+                ->latest('updated_at')
                 ->take(5)
                 ->get();
             $navbarOrders = CustomerOrderPresenter::collection($latestOrders, 2);
@@ -36,7 +36,9 @@ class NavbarComposer
 
             $navbarOrderCount = $navbarCustomer->orders()->count();
             $navbarCustomerPhotoUrl = CustomerProfilePresenter::photoUrl($navbarCustomer);
-            $navbarOrderIds = $latestOrders->pluck('id')->values()->all();
+            $navbarOrderUpdates = $latestOrders->mapWithKeys(function ($order) {
+                return [$order->id => $order->updated_at->timestamp];
+            })->all();
         }
 
         $view->with(compact(
@@ -46,7 +48,7 @@ class NavbarComposer
             'navbarPreviewOrders',
             'navbarOrderCount',
             'navbarCustomerPhotoUrl',
-            'navbarOrderIds'
+            'navbarOrderUpdates'
         ));
     }
 }
