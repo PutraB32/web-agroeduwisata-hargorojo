@@ -10,8 +10,8 @@
         <img src="{{ $page['assets']['heroImage'] }}" alt="Produk Desa Hargorojo" class="ecommerce-hero__image absolute inset-0 h-full w-full object-cover object-center scale-105 animate-kenburns">
         <div class="ecommerce-hero__scrim absolute inset-0 bg-[#07150f]/50 animate-vignette"></div>
         <div class="ecommerce-hero__soft-light absolute inset-0 animate-slide-gradient"></div>
-        <div class="ecommerce-hero__bottom-fade absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
         <div class="absolute inset-0 bg-yellow-900/10 mix-blend-overlay animate-pulse-warm"></div>
+        <div class="ecommerce-hero__bottom-fade absolute inset-x-0 bottom-0 h-40 z-10 bg-gradient-to-t from-[#f8f6f1] to-transparent"></div>
 
         <div class="ecommerce-hero__content relative z-10 mx-auto flex max-w-5xl flex-col items-center text-center">
             <h1 class="hero-fade-up delay-100 mt-5 max-w-4xl font-lora text-[42px] font-bold leading-[1.08] text-[#173121] drop-shadow-sm sm:text-6xl lg:text-[60px]">Belanja Produk Desa</h1>
@@ -28,8 +28,11 @@
         </div>
     </section>
 
+    <!-- Block to cover iOS subpixel anti-aliasing line on the sides, rendered BEHIND the panel (z-0 vs z-10) -->
+    <div class="h-4 w-full bg-[#f8f6f1] -mt-2 relative z-0" aria-hidden="true"></div>
+
     <section id="produk-katalog" class="ecommerce-catalog-section relative -mt-20 px-4 pb-14 sm:-mt-24 sm:px-6 sm:pb-16 lg:px-10 lg:pb-20">
-        <div class="ecommerce-catalog-panel relative z-10 mx-auto max-w-[1400px] rounded-[26px] border border-[#ece6da] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:p-7 lg:rounded-[34px] lg:p-10">
+        <div class="ecommerce-catalog-panel relative z-10 mx-auto max-w-[1400px] rounded-[26px] bg-white p-4 shadow-[0_18px_55px_rgba(23,49,33,.10)] sm:border sm:border-[#ece6da] sm:p-7 lg:rounded-[34px] lg:p-10">
             @if(session('success') || session('error'))
                 <div class="mb-5 rounded-lg border {{ session('success') ? 'border-green-200 bg-green-50 text-green-800' : 'border-red-200 bg-red-50 text-red-800' }} px-4 py-3 text-sm font-semibold">
                     {{ session('success') ?? session('error') }}

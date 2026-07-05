@@ -2737,17 +2737,6 @@
         padding-bottom: 8.5rem;
     }
 
-    .ecommerce-hero::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: -1px;
-        z-index: 1;
-        height: 2px;
-        background: #f8f6f1;
-        pointer-events: none;
-    }
 
     .ecommerce-hero__image {
         object-position: 58% center;
@@ -2762,7 +2751,7 @@
     }
 
     .ecommerce-hero__bottom-fade {
-        bottom: -1px;
+        bottom: 0;
         height: 11rem;
         background: linear-gradient(
             to top,
