@@ -2,7 +2,7 @@
     <div
         data-order-notification-config
         data-storage-key="{{ $navbar['notificationStorageKey'] }}"
-        data-order-ids='@json($navbarOrderIds)'
+        data-order-updates='@json($navbarOrderUpdates)'
         data-new-order-id="{{ $navbar['newOrderId'] }}"
         hidden
     ></div>

@@ -1,12 +1,9 @@
-function parseOrderIds(value) {
+function parseOrderUpdates(value) {
     try {
-        const parsed = JSON.parse(value || "[]");
-
-        return Array.isArray(parsed)
-            ? parsed.map((id) => Number(id)).filter((id) => Number.isFinite(id))
-            : [];
+        const parsed = JSON.parse(value || "{}");
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
     } catch {
-        return [];
+        return {};
     }
 }
 
@@ -21,17 +18,18 @@ function setBadgeCount(badges, count) {
     });
 }
 
-function getSeenOrderId(storageKey) {
+function getSeenUpdates(storageKey) {
     try {
-        return Number(localStorage.getItem(storageKey) || 0);
+        const parsed = JSON.parse(localStorage.getItem(storageKey + '_updates') || "{}");
+        return parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? parsed : {};
     } catch {
-        return 0;
+        return {};
     }
 }
 
-function setSeenOrderId(storageKey, orderId) {
+function setSeenUpdates(storageKey, updates) {
     try {
-        localStorage.setItem(storageKey, String(orderId));
+        localStorage.setItem(storageKey + '_updates', JSON.stringify(updates));
     } catch {
         // Badge tetap berjalan walaupun storage browser diblokir.
     }
@@ -42,8 +40,7 @@ function initOrderNotification() {
     if (!config) return;
 
     const storageKey = config.dataset.storageKey;
-    const orderIds = parseOrderIds(config.dataset.orderIds);
-    const latestOrderId = orderIds.length ? Math.max(...orderIds) : 0;
+    const currentUpdates = parseOrderUpdates(config.dataset.orderUpdates);
     const newOrderId = Number(config.dataset.newOrderId || 0);
     const badges = document.querySelectorAll("[data-order-notification-badge]");
     const triggers = document.querySelectorAll(
@@ -52,32 +49,23 @@ function initOrderNotification() {
 
     if (!storageKey) return;
 
-    const seenOrderId = getSeenOrderId(storageKey);
-    const safeSeenOrderId = seenOrderId > latestOrderId ? 0 : seenOrderId;
-
+    const seenUpdates = getSeenUpdates(storageKey);
     let unreadCount = 0;
 
-    if (!latestOrderId) {
-        unreadCount = 0;
-    } else if (newOrderId > 0 && orderIds.includes(newOrderId)) {
-        unreadCount = Math.max(
-            1,
-            orderIds.filter((id) => id > safeSeenOrderId && id >= newOrderId).length,
-        );
-    } else if (safeSeenOrderId > 0) {
-        unreadCount = orderIds.filter((id) => id > safeSeenOrderId).length;
-    } else {
-        setSeenOrderId(storageKey, latestOrderId);
+    // Hitung jumlah order yang memiliki timestamp update LEBIH BARU dari yang pernah dilihat
+    for (const [id, timestamp] of Object.entries(currentUpdates)) {
+        if (!seenUpdates[id] || timestamp > seenUpdates[id] || (newOrderId > 0 && id == newOrderId)) {
+            unreadCount++;
+        }
     }
 
     setBadgeCount(badges, unreadCount);
 
     triggers.forEach((trigger) => {
         trigger.addEventListener("click", () => {
-            if (latestOrderId) {
-                setSeenOrderId(storageKey, latestOrderId);
-            }
-
+            // Gabungkan update yang baru dilihat dengan yang sudah ada di localStorage
+            const newSeenUpdates = { ...getSeenUpdates(storageKey), ...currentUpdates };
+            setSeenUpdates(storageKey, newSeenUpdates);
             setBadgeCount(badges, 0);
         });
     });
