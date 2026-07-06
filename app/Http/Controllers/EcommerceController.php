@@ -147,6 +147,7 @@ class EcommerceController extends Controller
             return response()->json(['status' => 'unauthorized'], 401);
         }
 
+        /** @var \App\Models\User $customer */
         $customer = Auth::user();
         
         // Ambil timestamp update_at terbaru dari semua pesanan customer
