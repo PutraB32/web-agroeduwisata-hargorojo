@@ -109,7 +109,7 @@ class EcommerceController extends Controller
 
         $latestOrders = $customer->orders()
             ->with('orderDetails.produk')
-            ->latest('created_at')
+            ->latest('updated_at')
             ->take(5)
             ->get();
 
