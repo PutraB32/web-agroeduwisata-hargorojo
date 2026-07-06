@@ -46,7 +46,7 @@
         hover:opacity-80
         transition-opacity
     ">
-    @click.stop="openOrderHistoryFromNotification({{ $navbarOrders->count() > 0 ? \Illuminate\Support\Js::from($navbarOrders->first()['domId']) : 'null' }})"
+
         <div>
             <h4 class="font-lora text-lg font-bold leading-none">Notifikasi Pesanan</h4>
             <p class="text-xs text-[#6b736d]">Klik untuk melihat riwayat pesanan</p>
@@ -60,7 +60,7 @@
     <div class="cart-panel-scroll mt-3 min-h-0 flex-1 overflow-y-auto pr-1">
         <div class="space-y-2.5">
             @forelse($navbarOrders as $order)
-            <button type="button" @click.stop="openOrderHistoryFromNotification({{ \Illuminate\Support\Js::from($order['domId']) }})" data-order-notification-link class="w-full text-left rounded-xl
+            <button type="button" @click.stop='openOrderHistoryFromNotification({{ \Illuminate\Support\Js::from($order['domId']) }})' data-order-notification-link class="w-full text-left rounded-xl
                 border
                 border-[#ece6da]
                 bg-[#f8f6f1]
