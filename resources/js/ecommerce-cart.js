@@ -147,7 +147,7 @@ window.cartApp = function (config = {}) {
 
                 window.setTimeout(() => {
                     window.focusCustomerOrder(orderDomId);
-                }, 40);
+                }, 350);
             }, 0);
         },
 

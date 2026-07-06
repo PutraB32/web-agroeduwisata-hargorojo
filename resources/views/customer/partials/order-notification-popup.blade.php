@@ -42,7 +42,11 @@
         pb-3
         border-b
         border-[#ece6da]
+        cursor-pointer
+        hover:opacity-80
+        transition-opacity
     ">
+    @click.stop="openOrderHistoryFromNotification({{ $navbarOrders->count() > 0 ? \Illuminate\Support\Js::from($navbarOrders->first()['domId']) : 'null' }})"
         <div>
             <h4 class="font-lora text-lg font-bold leading-none">Notifikasi Pesanan</h4>
             <p class="text-xs text-[#6b736d]">Klik untuk melihat riwayat pesanan</p>
