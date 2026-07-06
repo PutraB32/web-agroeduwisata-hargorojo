@@ -376,7 +376,7 @@
     </aside>
 
     <div x-cloak x-show="showToast" x-transition class="fixed right-4 top-24 z-[9999] flex max-w-[calc(100vw-2rem)] items-center gap-3 rounded-2xl bg-[#173121] px-5 py-4 text-white shadow-xl sm:right-6">
-        <span class="flex h-8 w-8 items-center justify-center rounded-full bg-green-500"><i class="fa-solid fa-check"></i></span>
+        <span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-green-500"><i class="fa-solid fa-check"></i></span>
         <div><b class="text-sm">Info</b><p x-text="toastMessage" class="text-sm text-white/80"></p></div>
     </div>
 
