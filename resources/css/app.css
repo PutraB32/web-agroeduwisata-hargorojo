@@ -39,26 +39,21 @@
 /* ===================================================== */
 /* <-- Global base: body/html default project style --> */
 @layer base {
-    html {
-        overflow-x: hidden;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
-    }
-
-    html::-webkit-scrollbar {
-        display: none; /* Chrome, Safari and Opera */
-    }
-
-    body {
+    html, body {
         font-family: "Public Sans", sans-serif;
         background-color: #fdfaf3;
         overflow-x: hidden;
-        -ms-overflow-style: none;
-        scrollbar-width: none;
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
     }
 
-    body::-webkit-scrollbar {
-        display: none;
+    /* Sembunyikan scrollbar  */
+    *::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+        background: transparent !important;
+        -webkit-appearance: none !important;
     }
 }
 
