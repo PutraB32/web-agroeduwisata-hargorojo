@@ -41,7 +41,7 @@ function initOrderNotification() {
 
     const storageKey = config.dataset.storageKey;
     const currentUpdates = parseOrderUpdates(config.dataset.orderUpdates);
-    const newOrderId = Number(config.dataset.newOrderId || 0);
+    let newOrderId = Number(config.dataset.newOrderId || 0);
     const badges = document.querySelectorAll("[data-order-notification-badge]");
     const triggers = document.querySelectorAll(
         "[data-order-notification-trigger], [data-order-notification-link]",
