@@ -41,12 +41,24 @@
 @layer base {
     html {
         overflow-x: hidden;
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+
+    html::-webkit-scrollbar {
+        display: none; /* Chrome, Safari and Opera */
     }
 
     body {
         font-family: "Public Sans", sans-serif;
         background-color: #fdfaf3;
         overflow-x: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
     }
 }
 
