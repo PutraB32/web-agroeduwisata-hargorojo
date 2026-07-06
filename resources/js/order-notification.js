@@ -68,10 +68,16 @@ function initOrderNotification() {
 
     triggers.forEach((trigger) => {
         trigger.addEventListener("click", () => {
+            const hasUnread = Number(badges[0]?.innerText || 0) > 0;
             const newSeenUpdates = { ...getSeenUpdates(storageKey), ...currentUpdates };
             setSeenUpdates(storageKey, newSeenUpdates);
-            newOrderId = 0; 
+            newOrderId = 0; // Clear the forced badge so it doesn't return on next poll
             setBadgeCount(badges, 0);
+
+            // Jika ada notifikasi baru, refresh halaman agar UI menampilkan data resi terbaru dari server
+            if (hasUnread) {
+                window.location.href = window.location.pathname + "?notifOpen=1";
+            }
         });
     });
 

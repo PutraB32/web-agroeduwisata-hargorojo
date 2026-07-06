@@ -97,7 +97,7 @@ window.cartApp = function (config = {}) {
         showToast: false,
         toastMessage: "",
         cartOpen: false,
-        notifOpen: false,
+        notifOpen: new URLSearchParams(window.location.search).has('notifOpen'),
         totalOrdersOpen: false,
         profileOpen: false,
         confirmDeleteOpen: false,
