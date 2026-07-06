@@ -49,26 +49,53 @@ function initOrderNotification() {
 
     if (!storageKey) return;
 
-    const seenUpdates = getSeenUpdates(storageKey);
-    let unreadCount = 0;
+    // Update function untuk merefresh jumlah badge
+    const updateBadgeUI = (updatesFromServer) => {
+        const seenUpdates = getSeenUpdates(storageKey);
+        let unreadCount = 0;
 
-    // Hitung jumlah order yang memiliki timestamp update LEBIH BARU dari yang pernah dilihat
-    for (const [id, timestamp] of Object.entries(currentUpdates)) {
-        if (!seenUpdates[id] || timestamp > seenUpdates[id] || (newOrderId > 0 && id == newOrderId)) {
-            unreadCount++;
+        for (const [id, timestamp] of Object.entries(updatesFromServer)) {
+            if (!seenUpdates[id] || timestamp > seenUpdates[id] || (newOrderId > 0 && id == newOrderId)) {
+                unreadCount++;
+            }
         }
-    }
 
-    setBadgeCount(badges, unreadCount);
+        setBadgeCount(badges, unreadCount);
+    };
+
+    // Jalankan pengecekan awal dari data HTML
+    updateBadgeUI(currentUpdates);
 
     triggers.forEach((trigger) => {
         trigger.addEventListener("click", () => {
-            // Gabungkan update yang baru dilihat dengan yang sudah ada di localStorage
             const newSeenUpdates = { ...getSeenUpdates(storageKey), ...currentUpdates };
             setSeenUpdates(storageKey, newSeenUpdates);
             setBadgeCount(badges, 0);
         });
     });
+
+    // AJAX Polling setiap 5 detik
+    setInterval(async () => {
+        try {
+            const response = await fetch('/customer/api/order-updates', {
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'Accept': 'application/json'
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.orderUpdates) {
+                    // Update currentUpdates agar sinkron jika diklik nanti
+                    Object.assign(currentUpdates, data.orderUpdates);
+                    updateBadgeUI(data.orderUpdates);
+                }
+            }
+        } catch (error) {
+            // Abaikan error jaringan agar tidak mengganggu UI
+        }
+    }, 5000);
 }
 
 if (document.readyState === "loading") {
