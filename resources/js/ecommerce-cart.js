@@ -34,36 +34,62 @@ window.printCustomerInvoice = function (invoiceId) {
         return;
     }
 
-    const previousTitle = document.title;
-    const previousMount = document.querySelector(".customer-invoice-print__mount");
-    previousMount?.remove();
+    // Buat iframe tersembunyi
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    document.body.appendChild(iframe);
 
-    const printMount = document.createElement("div");
-    printMount.className = "customer-invoice-print__mount";
+    // Ambil isi HTML dari invoice
+    const invoiceHtml = invoice.outerHTML;
 
-    const printInvoice = invoice.cloneNode(true);
-    printInvoice.removeAttribute("id");
-    printInvoice.classList.add("is-printing");
-    printMount.appendChild(printInvoice);
-    document.body.appendChild(printMount);
+    // Ambil semua style dari parent document agar CSS Tailwind tetap berfungsi
+    let stylesHtml = '';
+    document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => {
+        stylesHtml += el.outerHTML;
+    });
 
-    let cleaned = false;
-    const cleanup = () => {
-        if (cleaned) return;
+    const title = invoice.dataset.invoiceTitle || document.title;
 
-        cleaned = true;
-        printMount.remove();
-        document.body.classList.remove("customer-invoice-printing");
-        document.title = previousTitle;
-        window.removeEventListener("afterprint", cleanup);
-    };
+    // Tulis dokumen baru khusus untuk iframe
+    const doc = iframe.contentWindow.document;
+    doc.open();
+    doc.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>${title}</title>
+            ${stylesHtml}
+            <style>
+                @page { size: A4; margin: 10mm; }
+                body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
+                /* Paksa invoice agar terlihat (karena aslinya display: none di screen parent) */
+                #${invoiceId} { display: block !important; position: relative !important; width: 100% !important; }
+                .customer-invoice-print { display: block !important; }
+            </style>
+        </head>
+        <body class="bg-white">
+            <div class="customer-invoice-print__mount" style="width: 100%; display: block;">
+                ${invoiceHtml}
+            </div>
+        </body>
+        </html>
+    `);
+    doc.close();
 
-    document.title = invoice.dataset.invoiceTitle || previousTitle;
-    document.body.classList.add("customer-invoice-printing");
-    window.addEventListener("afterprint", cleanup, { once: true });
-
+    // Tunggu sebentar agar browser selesai merender CSS di dalam iframe
     setTimeout(() => {
-        window.print();
+        iframe.contentWindow.focus();
+        iframe.contentWindow.print();
+        
+        // Hapus iframe beberapa detik setelah print dipanggil
+        setTimeout(() => {
+            iframe.remove();
+        }, 2000);
     }, 500);
 };
 
