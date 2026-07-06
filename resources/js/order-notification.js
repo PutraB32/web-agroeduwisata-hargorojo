@@ -70,6 +70,7 @@ function initOrderNotification() {
         trigger.addEventListener("click", () => {
             const newSeenUpdates = { ...getSeenUpdates(storageKey), ...currentUpdates };
             setSeenUpdates(storageKey, newSeenUpdates);
+            newOrderId = 0;
             setBadgeCount(badges, 0);
         });
     });
