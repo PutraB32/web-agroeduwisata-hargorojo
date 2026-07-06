@@ -37,7 +37,7 @@ Route::get('/katalog', [KatalogDesaController::class, 'index'])->name('katalog')
 Route::get('/kontak', [KontakController::class, 'index'])->name('kontak');
 
 // --- ROUTE PUBLIC FORM ---
-Route::post('/beranda/testimoni', [BerandaController::class, 'storeTestimoni'])
+Route::post('/testimoni', [BerandaController::class, 'storeTestimoni'])
     ->middleware('throttle:public-form')
     ->name('public.testimoni.store');
 
