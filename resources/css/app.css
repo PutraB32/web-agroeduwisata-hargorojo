@@ -1,37 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap");
 @import "tailwindcss";
 
 @theme {
     /* Custom Colors */
-    --color-primary: #004D40;
-    --color-secondary: #D4AF37;
-    --color-tertiary: #FDFAF3;
-    --color-neutral: #2C2C2C;
-    --color-sidebar: #F5F1EF;
-    --color-sidebar-hover: #EADAE0;
+    --color-primary: #004d40;
+    --color-secondary: #d4af37;
+    --color-tertiary: #fdfaf3;
+    --color-neutral: #2c2c2c;
+    --color-sidebar: #f5f1ef;
+    --color-sidebar-hover: #eadae0;
 
     --color-green-800: #006655;
-    --color-green-900: #004D40;
+    --color-green-900: #004d40;
 
     --color-yellow-400: #e5c04b;
-    --color-yellow-500: #D4AF37;
+    --color-yellow-500: #d4af37;
 
     --color-gray-800: #3a3a3a;
-    --color-gray-900: #2C2C2C;
+    --color-gray-900: #2c2c2c;
 
     /* Custom Fonts */
-    --font-sans: 'Public Sans', sans-serif;
-    --font-serif: 'Noto Serif', serif;
-    --font-playfair: 'Playfair Display', serif;
-    --font-inter: 'Inter', sans-serif;
-    --font-display: 'DM Serif Display', serif;
-    --font-spartan: 'League Spartan', sans-serif;
-    --font-lora: 'Lora', serif;
-    --font-lobster: 'Lobster', cursive;
+    --font-sans: "Public Sans", sans-serif;
+    --font-serif: "Noto Serif", serif;
+    --font-playfair: "Playfair Display", serif;
+    --font-inter: "Inter", sans-serif;
+    --font-display: "DM Serif Display", serif;
+    --font-spartan: "League Spartan", sans-serif;
+    --font-lora: "Lora", serif;
+    --font-lobster: "Lobster", cursive;
 }
 
 /* ===================================================== */
@@ -44,8 +44,8 @@
     }
 
     body {
-        font-family: 'Public Sans', sans-serif;
-        background-color: #FDFAF3;
+        font-family: "Public Sans", sans-serif;
+        background-color: #fdfaf3;
         overflow-x: hidden;
     }
 }
@@ -53,7 +53,7 @@
 /* <-- Global utilities: helper class yang dipakai lintas halaman --> */
 @layer utilities {
     .premium-shadow {
-        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+        box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.08);
     }
     .image-hover-zoom {
         transition: transform 0.4s ease;
@@ -71,7 +71,7 @@
 }
 
 .font-hero {
-    font-family: 'League Spartan', sans-serif;
+    font-family: "League Spartan", sans-serif;
 }
 
 /* <-- Global scrollbar helpers --> */
@@ -104,7 +104,10 @@
     background: transparent;
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-    transition: top 320ms ease, background 260ms ease, padding-inline 320ms ease;
+    transition:
+        top 320ms ease,
+        background 260ms ease,
+        padding-inline 320ms ease;
 }
 
 .hargo-navbar__bar {
@@ -121,14 +124,23 @@
     border: 1px solid rgba(255, 255, 255, 0.22);
     border-radius: 1.5rem;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03)),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.12),
+            rgba(255, 255, 255, 0.03)
+        ),
         rgba(12, 16, 15, 0.58);
     box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.16),
         0 18px 45px rgba(0, 0, 0, 0.18);
     -webkit-backdrop-filter: blur(26px) saturate(145%);
     backdrop-filter: blur(26px) saturate(145%);
-    transition: width 320ms ease, min-height 320ms ease, border-radius 320ms ease, background 320ms ease, box-shadow 320ms ease;
+    transition:
+        width 320ms ease,
+        min-height 320ms ease,
+        border-radius 320ms ease,
+        background 320ms ease,
+        box-shadow 320ms ease;
 }
 
 .hargo-navbar.is-scrolled {
@@ -140,7 +152,11 @@
     top: 0;
     padding-inline: 0;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.055),
+            rgba(255, 255, 255, 0.018)
+        ),
         rgba(12, 16, 15, 0.76);
     -webkit-backdrop-filter: blur(24px) saturate(145%);
     backdrop-filter: blur(24px) saturate(145%);
@@ -229,7 +245,9 @@
     background: #d8b15a;
     opacity: 0;
     transform: scaleX(0.5);
-    transition: opacity 180ms ease, transform 180ms ease;
+    transition:
+        opacity 180ms ease,
+        transform 180ms ease;
 }
 
 .hargo-navbar__link:hover,
@@ -262,12 +280,16 @@
 .hargo-navbar__logout,
 .hargo-navbar__icon-btn,
 .hargo-navbar__toggle {
-    border: 1px solid rgba(255, 255, 255, 0.20);
-    background: rgba(255, 255, 255, 0.10);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    transition: background 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms ease;
+    transition:
+        background 180ms ease,
+        color 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
 }
 
 .hargo-navbar__contact,
@@ -352,8 +374,12 @@
     border: 0;
     border-radius: 1.35rem;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-        rgba(12, 16, 15, 0.70);
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.06),
+            rgba(255, 255, 255, 0.02)
+        ),
+        rgba(12, 16, 15, 0.7);
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
     -webkit-backdrop-filter: blur(26px) saturate(145%);
     backdrop-filter: blur(26px) saturate(145%);
@@ -376,7 +402,11 @@
     outline: 0;
     border-radius: 0;
     background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
+        linear-gradient(
+            135deg,
+            rgba(255, 255, 255, 0.05),
+            rgba(255, 255, 255, 0.015)
+        ),
         rgba(12, 16, 15, 0.78);
 }
 
@@ -410,7 +440,10 @@
     font-size: 0.98rem;
     font-weight: 750;
     text-decoration: none;
-    transition: background 180ms ease, color 180ms ease, padding-left 180ms ease;
+    transition:
+        background 180ms ease,
+        color 180ms ease,
+        padding-left 180ms ease;
 }
 
 .hargo-navbar__panel-link:hover,
@@ -419,7 +452,6 @@
     background: rgba(255, 255, 255, 0.12);
     color: #d8b15a;
 }
-
 
 .hargo-navbar__panel-contact,
 .hargo-navbar__panel-logout {
@@ -435,11 +467,14 @@
 
 .hargo-navbar__panel-contact {
     border: 1px solid rgba(255, 255, 255, 0.28);
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     color: #ffffff;
     -webkit-backdrop-filter: blur(14px);
     backdrop-filter: blur(14px);
-    transition: background 180ms ease, border-color 180ms ease, transform 180ms ease;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        transform 180ms ease;
 }
 
 .hargo-navbar__panel-contact:hover {
@@ -459,7 +494,10 @@
     .hargo-navbar {
         top: 1rem;
         padding-inline: 1rem;
-        transition: top 500ms ease, padding-inline 500ms ease, background 500ms ease;
+        transition:
+            top 500ms ease,
+            padding-inline 500ms ease,
+            background 500ms ease;
     }
 
     .hargo-navbar__bar {
@@ -468,9 +506,9 @@
         height: 5rem;
         min-height: 5rem;
         padding-inline: 2rem;
-        border: 1px solid rgba(255, 255, 255, 0.20);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 1.5625rem;
-        background: rgba(255, 255, 255, 0.10);
+        background: rgba(255, 255, 255, 0.1);
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
         -webkit-backdrop-filter: blur(40px) saturate(145%);
         backdrop-filter: blur(40px) saturate(145%);
@@ -498,9 +536,9 @@
         max-width: 100%;
         height: 5rem;
         min-height: 5rem;
-        border: 1px solid rgba(255, 255, 255, 0.20);
+        border: 1px solid rgba(255, 255, 255, 0.2);
         border-radius: 0;
-        background: rgba(36, 48, 36, 0.30);
+        background: rgba(36, 48, 36, 0.3);
         box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.28);
         -webkit-backdrop-filter: blur(40px) saturate(145%);
         backdrop-filter: blur(40px) saturate(145%);
@@ -604,7 +642,6 @@
     }
 }
 
-
 /* <-- Navbar khusus halaman Kontak: tombol Login Admin --> */
 .hargo-navbar__admin-login {
     display: inline-flex;
@@ -619,7 +656,11 @@
     text-decoration: none;
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
-    transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
 }
 
 .hargo-navbar__admin-login i {
@@ -650,7 +691,9 @@
     color: #173121;
     font-weight: 900;
     text-decoration: none;
-    transition: background 180ms ease, transform 180ms ease;
+    transition:
+        background 180ms ease,
+        transform 180ms ease;
 }
 
 .hargo-navbar__panel-admin-login:hover {
@@ -876,8 +919,12 @@
 
 /* 1. Ken Burns — zoom perlahan saat load */
 @keyframes kenburns {
-    0%   { transform: scale(1.12); }
-    100% { transform: scale(1.0);  }
+    0% {
+        transform: scale(1.12);
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 .animate-kenburns {
     animation: kenburns 2s ease-out forwards;
@@ -885,8 +932,12 @@
 
 /* 2. Vignette — dark overlay fade saat load */
 @keyframes vignette-open {
-    0%   { opacity: 1;   }
-    100% { opacity: 0.3; }
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.3;
+    }
 }
 .animate-vignette {
     animation: vignette-open 1.8s ease-out forwards;
@@ -894,8 +945,14 @@
 
 /* 3. Left gradient slide in saat load */
 @keyframes slide-gradient {
-    0%   { transform: translateX(-100%); opacity: 0; }
-    100% { transform: translateX(0);     opacity: 1; }
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
 }
 .animate-slide-gradient {
     animation: slide-gradient 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -903,8 +960,13 @@
 
 /* 4. Warm tone pulse loop */
 @keyframes pulse-warm {
-    0%, 100% { opacity: 0.10; }
-    50%       { opacity: 0.20; }
+    0%,
+    100% {
+        opacity: 0.1;
+    }
+    50% {
+        opacity: 0.2;
+    }
 }
 .animate-pulse-warm {
     animation: pulse-warm 5s ease-in-out infinite;
@@ -916,8 +978,14 @@
 
 /* Fade Up — dasar untuk stagger */
 @keyframes fade-up {
-    0%   { opacity: 0; transform: translateY(28px); }
-    100% { opacity: 1; transform: translateY(0);    }
+    0% {
+        opacity: 0;
+        transform: translateY(28px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .hero-fade-up {
@@ -926,28 +994,50 @@
 }
 
 /* Delay utilities untuk stagger */
-.delay-100 { animation-delay: 0.1s; }
-.delay-200 { animation-delay: 0.2s; }
-.delay-300 { animation-delay: 0.3s; }
-.delay-450 { animation-delay: 0.45s; }
-.delay-600 { animation-delay: 0.6s; }
-.delay-750 { animation-delay: 0.75s; }
-.delay-700 { animation-delay: 0.7s; }
-.delay-800 { animation-delay: 0.8s; }
-.delay-900 { animation-delay: 0.9s; }
+.delay-100 {
+    animation-delay: 0.1s;
+}
+.delay-200 {
+    animation-delay: 0.2s;
+}
+.delay-300 {
+    animation-delay: 0.3s;
+}
+.delay-450 {
+    animation-delay: 0.45s;
+}
+.delay-600 {
+    animation-delay: 0.6s;
+}
+.delay-750 {
+    animation-delay: 0.75s;
+}
+.delay-700 {
+    animation-delay: 0.7s;
+}
+.delay-800 {
+    animation-delay: 0.8s;
+}
+.delay-900 {
+    animation-delay: 0.9s;
+}
 
 /* Tag shimmer saat hover */
 @keyframes shimmer {
-    0%   { background-position: -200% center; }
-    100% { background-position:  200% center; }
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
 }
 
 .tag-shimmer:hover {
     background: linear-gradient(
         90deg,
-        rgba(255,255,255,0.05) 0%,
-        rgba(255,255,255,0.15) 50%,
-        rgba(255,255,255,0.05) 100%
+        rgba(255, 255, 255, 0.05) 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        rgba(255, 255, 255, 0.05) 100%
     );
     background-size: 200% auto;
     animation: shimmer 1.2s linear infinite;
@@ -955,8 +1045,14 @@
 
 /* Circular images — scale in berurutan */
 @keyframes scale-in {
-    0%   { opacity: 0; transform: scale(0.6); }
-    100% { opacity: 1; transform: scale(1);   }
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 .avatar-in {
@@ -966,8 +1062,13 @@
 
 /* Button pulse halus */
 @keyframes pulse-soft {
-    0%, 100% { box-shadow: 0 0 0 0   rgba(255,255,255,0.25); }
-    50%       { box-shadow: 0 0 0 8px rgba(255,255,255,0);    }
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.25);
+    }
+    50% {
+        box-shadow: 0 0 0 8px rgba(255, 255, 255, 0);
+    }
 }
 
 .btn-pulse {
@@ -980,8 +1081,9 @@
 .reveal {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .reveal.visible {
@@ -989,10 +1091,18 @@
     transform: translateY(0);
 }
 
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.35s; }
-.reveal-delay-4 { transition-delay: 0.5s; }
+.reveal-delay-1 {
+    transition-delay: 0.1s;
+}
+.reveal-delay-2 {
+    transition-delay: 0.2s;
+}
+.reveal-delay-3 {
+    transition-delay: 0.35s;
+}
+.reveal-delay-4 {
+    transition-delay: 0.5s;
+}
 
 /* ===================================================== */
 /* LINE EXPAND — garis label melebar dari tengah */
@@ -1010,13 +1120,23 @@
 /* LEAF FLOAT — dekoratif naik turun halus */
 /* ===================================================== */
 @keyframes leaf-float {
-    0%, 100% { transform: translateY(0)    rotate(-20deg); }
-    50%       { transform: translateY(-12px) rotate(-20deg); }
+    0%,
+    100% {
+        transform: translateY(0) rotate(-20deg);
+    }
+    50% {
+        transform: translateY(-12px) rotate(-20deg);
+    }
 }
 
 @keyframes leaf-float-right {
-    0%, 100% { transform: translateY(0)    rotate(25deg); }
-    50%       { transform: translateY(-10px) rotate(25deg); }
+    0%,
+    100% {
+        transform: translateY(0) rotate(25deg);
+    }
+    50% {
+        transform: translateY(-10px) rotate(25deg);
+    }
 }
 
 .leaf-float-left {
@@ -1033,15 +1153,17 @@
 .card-slide-left {
     opacity: 0;
     transform: translateX(-40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-slide-right {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-slide-left.visible,
@@ -1056,8 +1178,9 @@
 .badge-pop {
     opacity: 0;
     transform: scale(0.5);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.3s;
 }
 
@@ -1086,10 +1209,18 @@
 /* FEATURE ICON — bounce halus saat visible */
 /* ===================================================== */
 @keyframes icon-bounce {
-    0%   { transform: translateY(0);    }
-    40%  { transform: translateY(-6px); }
-    70%  { transform: translateY(-2px); }
-    100% { transform: translateY(0);    }
+    0% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-6px);
+    }
+    70% {
+        transform: translateY(-2px);
+    }
+    100% {
+        transform: translateY(0);
+    }
 }
 
 .icon-bounce {
@@ -1102,9 +1233,18 @@
     animation: icon-bounce 0.6s ease forwards;
 }
 
-.icon-bounce-delay-1 { transition-delay: 0.4s; animation-delay: 0.4s; }
-.icon-bounce-delay-2 { transition-delay: 0.55s; animation-delay: 0.55s; }
-.icon-bounce-delay-3 { transition-delay: 0.7s; animation-delay: 0.7s; }
+.icon-bounce-delay-1 {
+    transition-delay: 0.4s;
+    animation-delay: 0.4s;
+}
+.icon-bounce-delay-2 {
+    transition-delay: 0.55s;
+    animation-delay: 0.55s;
+}
+.icon-bounce-delay-3 {
+    transition-delay: 0.7s;
+    animation-delay: 0.7s;
+}
 
 /* ===================================================== */
 /* CTA SECTION ANIMATIONS */
@@ -1112,22 +1252,41 @@
 
 /* Stats icon float */
 @keyframes stat-float {
-    0%, 100% { transform: translateY(0);   }
-    50%       { transform: translateY(-5px); }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
 }
 
 .stat-icon-float {
     animation: stat-float 3s ease-in-out infinite;
 }
 
-.stat-icon-float-2 { animation-duration: 3.5s; animation-delay: 0.3s; }
-.stat-icon-float-3 { animation-duration: 4s;   animation-delay: 0.6s; }
-.stat-icon-float-4 { animation-duration: 3.8s; animation-delay: 0.9s; }
+.stat-icon-float-2 {
+    animation-duration: 3.5s;
+    animation-delay: 0.3s;
+}
+.stat-icon-float-3 {
+    animation-duration: 4s;
+    animation-delay: 0.6s;
+}
+.stat-icon-float-4 {
+    animation-duration: 3.8s;
+    animation-delay: 0.9s;
+}
 
 /* CTA button glow pulse */
 @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 0 0   rgba(234, 179, 8, 0.4); }
-    50%       { box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);  }
+    0%,
+    100% {
+        box-shadow: 0 0 0 0 rgba(234, 179, 8, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 0 10px rgba(234, 179, 8, 0);
+    }
 }
 
 .btn-glow {
@@ -1140,7 +1299,7 @@
 }
 
 .stat-border-grow::after {
-    content: '';
+    content: "";
     position: absolute;
     right: 0;
     top: 50%;
@@ -1162,8 +1321,9 @@
 .product-card {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .product-card.visible {
@@ -1171,10 +1331,18 @@
     transform: translateY(0);
 }
 
-.product-card-delay-1 { transition-delay: 0.05s; }
-.product-card-delay-2 { transition-delay: 0.15s; }
-.product-card-delay-3 { transition-delay: 0.25s; }
-.product-card-delay-4 { transition-delay: 0.35s; }
+.product-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.product-card-delay-2 {
+    transition-delay: 0.15s;
+}
+.product-card-delay-3 {
+    transition-delay: 0.25s;
+}
+.product-card-delay-4 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* FLOATING ICON DROP-IN */
@@ -1182,8 +1350,9 @@
 .float-icon-drop {
     opacity: 0;
     transform: translateY(-20px) scale(0.7);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.35s;
 }
 
@@ -1196,8 +1365,12 @@
 /* DECORATIVE STAR SPIN */
 /* ===================================================== */
 @keyframes spin-slow {
-    0%   { transform: rotate(0deg);   }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .star-spin {
@@ -1211,8 +1384,9 @@
 .cat-item {
     opacity: 0;
     transform: translateY(16px);
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .cat-item.visible {
@@ -1220,10 +1394,18 @@
     transform: translateY(0);
 }
 
-.cat-item-delay-1 { transition-delay: 0.05s; }
-.cat-item-delay-2 { transition-delay: 0.15s; }
-.cat-item-delay-3 { transition-delay: 0.25s; }
-.cat-item-delay-4 { transition-delay: 0.35s; }
+.cat-item-delay-1 {
+    transition-delay: 0.05s;
+}
+.cat-item-delay-2 {
+    transition-delay: 0.15s;
+}
+.cat-item-delay-3 {
+    transition-delay: 0.25s;
+}
+.cat-item-delay-4 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* KATALOG CARD SLIDE-UP */
@@ -1231,8 +1413,9 @@
 .katalog-card {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .katalog-card.visible {
@@ -1240,9 +1423,15 @@
     transform: translateY(0);
 }
 
-.katalog-card-delay-1 { transition-delay: 0.0s;  }
-.katalog-card-delay-2 { transition-delay: 0.15s; }
-.katalog-card-delay-3 { transition-delay: 0.30s; }
+.katalog-card-delay-1 {
+    transition-delay: 0s;
+}
+.katalog-card-delay-2 {
+    transition-delay: 0.15s;
+}
+.katalog-card-delay-3 {
+    transition-delay: 0.3s;
+}
 
 /* ===================================================== */
 /* BADGE POP-IN */
@@ -1250,8 +1439,9 @@
 .badge-reveal {
     opacity: 0;
     transform: scale(0.75) translateY(-6px);
-    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.4s;
 }
 
@@ -1288,8 +1478,9 @@
 .testi-card {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .testi-card.visible {
@@ -1297,9 +1488,15 @@
     transform: translateY(0);
 }
 
-.testi-card-delay-1 { transition-delay: 0.05s; }
-.testi-card-delay-2 { transition-delay: 0.20s; }
-.testi-card-delay-3 { transition-delay: 0.35s; }
+.testi-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.testi-card-delay-2 {
+    transition-delay: 0.2s;
+}
+.testi-card-delay-3 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* AVATAR SCALE-IN */
@@ -1307,8 +1504,9 @@
 .avatar-scale {
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.2s;
 }
 
@@ -1337,15 +1535,36 @@
     opacity: 0;
     transform: scale(0.5);
     display: inline-block;
-    transition: opacity 0.3s ease,
-                transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-.testi-card.visible .star-item:nth-child(1) { opacity: 1; transform: scale(1); transition-delay: 0.50s; }
-.testi-card.visible .star-item:nth-child(2) { opacity: 1; transform: scale(1); transition-delay: 0.58s; }
-.testi-card.visible .star-item:nth-child(3) { opacity: 1; transform: scale(1); transition-delay: 0.66s; }
-.testi-card.visible .star-item:nth-child(4) { opacity: 1; transform: scale(1); transition-delay: 0.74s; }
-.testi-card.visible .star-item:nth-child(5) { opacity: 1; transform: scale(1); transition-delay: 0.82s; }
+.testi-card.visible .star-item:nth-child(1) {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.5s;
+}
+.testi-card.visible .star-item:nth-child(2) {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.58s;
+}
+.testi-card.visible .star-item:nth-child(3) {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.66s;
+}
+.testi-card.visible .star-item:nth-child(4) {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.74s;
+}
+.testi-card.visible .star-item:nth-child(5) {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.82s;
+}
 
 /* ===================================================== */
 /* MAIN BOX SCALE-IN */
@@ -1353,8 +1572,9 @@
 .box-scale-in {
     opacity: 0;
     transform: scale(0.97) translateY(20px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .box-scale-in.visible {
@@ -1368,8 +1588,9 @@
 .stat-card {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .stat-card.visible {
@@ -1377,18 +1598,35 @@
     transform: translateY(0);
 }
 
-.stat-card-delay-1 { transition-delay: 0.10s; }
-.stat-card-delay-2 { transition-delay: 0.22s; }
-.stat-card-delay-3 { transition-delay: 0.34s; }
-.stat-card-delay-4 { transition-delay: 0.46s; }
+.stat-card-delay-1 {
+    transition-delay: 0.1s;
+}
+.stat-card-delay-2 {
+    transition-delay: 0.22s;
+}
+.stat-card-delay-3 {
+    transition-delay: 0.34s;
+}
+.stat-card-delay-4 {
+    transition-delay: 0.46s;
+}
 
 /* ===================================================== */
 /* STAT ICON BOUNCE */
 /* ===================================================== */
 @keyframes stat-icon-pop {
-    0%   { transform: scale(0.5); opacity: 0; }
-    60%  { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(1);   opacity: 1; }
+    0% {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.15);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
 
 .stat-icon-pop {
@@ -1404,13 +1642,22 @@
 /* TYPEWRITER — mengetik dari tengah - HERO PROFIL DESA */
 /* ===================================================== */
 @keyframes typing {
-    0%   { width: 0; }
-    100% { width: 100%; }
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 100%;
+    }
 }
 
 @keyframes blink-caret {
-    0%, 100% { border-color: transparent; }
-    50%       { border-color: rgba(255,255,255,0.7); }
+    0%,
+    100% {
+        border-color: transparent;
+    }
+    50% {
+        border-color: rgba(255, 255, 255, 0.7);
+    }
 }
 
 .typewriter {
@@ -1418,10 +1665,10 @@
     overflow: hidden;
     white-space: nowrap;
     width: 0;
-    border-right: 2px solid rgba(255,255,255,0.7);
+    border-right: 2px solid rgba(255, 255, 255, 0.7);
     animation:
-        typing      2.0s steps(22, end)  0.8s forwards,
-        blink-caret 0.75s step-end       infinite;
+        typing 2s steps(22, end) 0.8s forwards,
+        blink-caret 0.75s step-end infinite;
 }
 
 /* Setelah selesai mengetik, cursor berhenti berkedip */
@@ -1436,8 +1683,9 @@
 .slide-left {
     opacity: 0;
     transform: translateX(-35px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .slide-left.visible {
@@ -1445,9 +1693,15 @@
     transform: translateX(0);
 }
 
-.slide-left-delay-1 { transition-delay: 0.05s; }
-.slide-left-delay-2 { transition-delay: 0.20s; }
-.slide-left-delay-3 { transition-delay: 0.35s; }
+.slide-left-delay-1 {
+    transition-delay: 0.05s;
+}
+.slide-left-delay-2 {
+    transition-delay: 0.2s;
+}
+.slide-left-delay-3 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* FLOATING CARD POP-IN */
@@ -1455,8 +1709,9 @@
 .float-card-pop {
     opacity: 0;
     transform: scale(0.88) translateY(16px);
-    transition: opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.7s;
 }
 
@@ -1469,8 +1724,13 @@
 /* DOT DECOR FLOAT */
 /* ===================================================== */
 @keyframes dot-float {
-    0%, 100% { transform: translateY(0);    }
-    60%       { transform: translateY(-8px); }
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    60% {
+        transform: translateY(-8px);
+    }
 }
 
 .dot-float {
@@ -1480,8 +1740,9 @@
 .img-slide-right {
     opacity: 0;
     transform: translateX(50px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.2s;
 }
 
@@ -1496,16 +1757,18 @@
 .visi-card {
     opacity: 0;
     transform: translateX(-45px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
 .misi-card {
     opacity: 0;
     transform: translateX(45px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
@@ -1548,15 +1811,36 @@
 .misi-item {
     opacity: 0;
     transform: translateX(20px);
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.misi-card.visible .misi-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.35s; }
-.misi-card.visible .misi-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.48s; }
-.misi-card.visible .misi-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.61s; }
-.misi-card.visible .misi-item:nth-child(4) { opacity: 1; transform: translateX(0); transition-delay: 0.74s; }
-.misi-card.visible .misi-item:nth-child(5) { opacity: 1; transform: translateX(0); transition-delay: 0.87s; }
+.misi-card.visible .misi-item:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.35s;
+}
+.misi-card.visible .misi-item:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.48s;
+}
+.misi-card.visible .misi-item:nth-child(3) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.61s;
+}
+.misi-card.visible .misi-item:nth-child(4) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.74s;
+}
+.misi-card.visible .misi-item:nth-child(5) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.87s;
+}
 
 /* ===================================================== */
 /* FONDASI CARD STAGGER */
@@ -1564,8 +1848,9 @@
 .fondasi-card {
     opacity: 0;
     transform: translateY(32px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .fondasi-card.visible {
@@ -1573,9 +1858,15 @@
     transform: translateY(0);
 }
 
-.fondasi-card-delay-1 { transition-delay: 0.05s; }
-.fondasi-card-delay-2 { transition-delay: 0.20s; }
-.fondasi-card-delay-3 { transition-delay: 0.35s; }
+.fondasi-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.fondasi-card-delay-2 {
+    transition-delay: 0.2s;
+}
+.fondasi-card-delay-3 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* FONDASI FLOATING ICON DROP-IN */
@@ -1583,8 +1874,9 @@
 .fondasi-icon {
     opacity: 0;
     transform: translateY(-18px) scale(0.7);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.45s;
 }
 
@@ -1623,8 +1915,9 @@
 .map-slide {
     opacity: 0;
     transform: translateX(45px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.3s;
 }
 
@@ -1637,24 +1930,31 @@
 /* MAP FRAME GLOW */
 /* ===================================================== */
 .map-glow {
-    box-shadow: 0 30px 100px rgba(0,0,0,0.08);
+    box-shadow: 0 30px 100px rgba(0, 0, 0, 0.08);
     transition: box-shadow 1s ease;
     transition-delay: 0.8s;
 }
 
 .map-glow.visible {
     box-shadow:
-        0 30px 100px rgba(0,0,0,0.08),
-        0 0 0 2px rgba(200,176,109,0.25),
-        0 0 40px rgba(200,176,109,0.12);
+        0 30px 100px rgba(0, 0, 0, 0.08),
+        0 0 0 2px rgba(200, 176, 109, 0.25),
+        0 0 40px rgba(200, 176, 109, 0.12);
 }
 
 /* ===================================================== */
 /* LOCATION DOT PULSE */
 /* ===================================================== */
 @keyframes location-pulse {
-    0%, 100% { color: #d8c08a; transform: scale(1);    }
-    50%       { color: #f0d878; transform: scale(1.2);  }
+    0%,
+    100% {
+        color: #d8c08a;
+        transform: scale(1);
+    }
+    50% {
+        color: #f0d878;
+        transform: scale(1.2);
+    }
 }
 
 .location-pulse {
@@ -1667,8 +1967,9 @@
 .galeri-large {
     opacity: 0;
     transform: scale(0.95);
-    transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 1s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
@@ -1683,8 +1984,9 @@
 .galeri-item {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .galeri-item.visible {
@@ -1692,15 +1994,21 @@
     transform: translateY(0);
 }
 
-.galeri-item-delay-1 { transition-delay: 0.20s; }
-.galeri-item-delay-2 { transition-delay: 0.35s; }
-.galeri-item-delay-3 { transition-delay: 0.50s; }
+.galeri-item-delay-1 {
+    transition-delay: 0.2s;
+}
+.galeri-item-delay-2 {
+    transition-delay: 0.35s;
+}
+.galeri-item-delay-3 {
+    transition-delay: 0.5s;
+}
 
 /* ===================================================== */
 /* GALERI — HOVER OVERLAY TINT */
 /* ===================================================== */
 .galeri-tint::after {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
     background: rgba(23, 49, 33, 0);
@@ -1725,16 +2033,18 @@
 .produk-content-left {
     opacity: 0;
     transform: translateX(-40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
 .produk-content-right {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
@@ -1768,13 +2078,25 @@
 }
 
 @keyframes slideInRight {
-    0%   { opacity: 0; transform: translateX(30px); }
-    100% { opacity: 1; transform: translateX(0);    }
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 @keyframes slideInLeft {
-    0%   { opacity: 0; transform: translateX(-30px); }
-    100% { opacity: 1; transform: translateX(0);     }
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 /* ===================================================== */
@@ -1833,8 +2155,9 @@
 .produk-img-reveal {
     opacity: 0;
     transform: scale(1.03);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.25s;
 }
 
@@ -1849,8 +2172,9 @@
 .badge-organic {
     opacity: 0;
     transform: scale(0.7);
-    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.4s;
 }
 
@@ -1866,8 +2190,9 @@
 .benefit-item {
     opacity: 0;
     transform: translateX(16px);
-    transition: opacity 0.4s ease,
-                transform 0.4s ease;
+    transition:
+        opacity 0.4s ease,
+        transform 0.4s ease;
 }
 
 .produk-content-left.visible .benefit-item,
@@ -1876,18 +2201,35 @@
     transform: translateX(0);
 }
 
-.benefit-item:nth-child(1) { transition-delay: 0.5s; }
-.benefit-item:nth-child(2) { transition-delay: 0.62s; }
-.benefit-item:nth-child(3) { transition-delay: 0.74s; }
-.benefit-item:nth-child(4) { transition-delay: 0.86s; }
-.benefit-item:nth-child(5) { transition-delay: 0.98s; }
+.benefit-item:nth-child(1) {
+    transition-delay: 0.5s;
+}
+.benefit-item:nth-child(2) {
+    transition-delay: 0.62s;
+}
+.benefit-item:nth-child(3) {
+    transition-delay: 0.74s;
+}
+.benefit-item:nth-child(4) {
+    transition-delay: 0.86s;
+}
+.benefit-item:nth-child(5) {
+    transition-delay: 0.98s;
+}
 
 /* ===================================================== */
 /* GLOW PULSE — belakang gambar */
 /* ===================================================== */
 @keyframes glow-green {
-    0%, 100% { opacity: 0.10; transform: scale(0.90); }
-    50%       { opacity: 0.18; transform: scale(0.95); }
+    0%,
+    100% {
+        opacity: 0.1;
+        transform: scale(0.9);
+    }
+    50% {
+        opacity: 0.18;
+        transform: scale(0.95);
+    }
 }
 
 .produk-glow {
@@ -1900,8 +2242,9 @@
 .keunggulan-card {
     opacity: 0;
     transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .keunggulan-card.visible {
@@ -1909,10 +2252,18 @@
     transform: translateY(0);
 }
 
-.keunggulan-card-delay-1 { transition-delay: 0.05s; }
-.keunggulan-card-delay-2 { transition-delay: 0.18s; }
-.keunggulan-card-delay-3 { transition-delay: 0.31s; }
-.keunggulan-card-delay-4 { transition-delay: 0.44s; }
+.keunggulan-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.keunggulan-card-delay-2 {
+    transition-delay: 0.18s;
+}
+.keunggulan-card-delay-3 {
+    transition-delay: 0.31s;
+}
+.keunggulan-card-delay-4 {
+    transition-delay: 0.44s;
+}
 
 /* ===================================================== */
 /* ICON CIRCLE POP-IN */
@@ -1920,8 +2271,9 @@
 .icon-pop {
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.35s;
 }
 
@@ -1949,8 +2301,9 @@
 .sidebar-item {
     opacity: 0;
     transform: translateX(20px);
-    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .sidebar-item.visible {
@@ -1958,9 +2311,15 @@
     transform: translateX(0);
 }
 
-.sidebar-item:nth-child(1) { transition-delay: 0.7s; }
-.sidebar-item:nth-child(2) { transition-delay: 0.85s; }
-.sidebar-item:nth-child(3) { transition-delay: 1.0s; }
+.sidebar-item:nth-child(1) {
+    transition-delay: 0.7s;
+}
+.sidebar-item:nth-child(2) {
+    transition-delay: 0.85s;
+}
+.sidebar-item:nth-child(3) {
+    transition-delay: 1s;
+}
 
 /* ===================================================== */
 /* HERO KATALOG — BERITA UTAMA & SIDEBAR ENTRANCE */
@@ -1968,8 +2327,9 @@
 .hero-slide-left {
     opacity: 0;
     transform: translateX(-45px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.2s;
 }
 
@@ -1980,25 +2340,32 @@
 
 /* Button naik saat hover — sudah via Tailwind, tambah glow */
 @keyframes btn-rise {
-    0%, 100% { box-shadow: 0 4px 15px rgba(23,49,33,0.2); }
-    50%       { box-shadow: 0 8px 25px rgba(23,49,33,0.35); }
+    0%,
+    100% {
+        box-shadow: 0 4px 15px rgba(23, 49, 33, 0.2);
+    }
+    50% {
+        box-shadow: 0 8px 25px rgba(23, 49, 33, 0.35);
+    }
 }
 
 .btn-rise {
-    transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.4s ease;
+    transition:
+        transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.4s ease;
 }
 
 .btn-rise:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(23,49,33,0.3);
+    box-shadow: 0 10px 30px rgba(23, 49, 33, 0.3);
 }
 
 .sidebar-slide {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.5s;
 }
 
@@ -2013,8 +2380,9 @@
 .pengumuman-card {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pengumuman-card.visible {
@@ -2022,11 +2390,21 @@
     transform: translateY(0);
 }
 
-.pengumuman-card:nth-child(1) { transition-delay: 0.05s; }
-.pengumuman-card:nth-child(2) { transition-delay: 0.15s; }
-.pengumuman-card:nth-child(3) { transition-delay: 0.25s; }
-.pengumuman-card:nth-child(4) { transition-delay: 0.35s; }
-.pengumuman-card:nth-child(5) { transition-delay: 0.45s; }
+.pengumuman-card:nth-child(1) {
+    transition-delay: 0.05s;
+}
+.pengumuman-card:nth-child(2) {
+    transition-delay: 0.15s;
+}
+.pengumuman-card:nth-child(3) {
+    transition-delay: 0.25s;
+}
+.pengumuman-card:nth-child(4) {
+    transition-delay: 0.35s;
+}
+.pengumuman-card:nth-child(5) {
+    transition-delay: 0.45s;
+}
 
 /* ===================================================== */
 /* DATE BADGE POP */
@@ -2034,8 +2412,9 @@
 .date-badge-pop {
     opacity: 0;
     transform: scale(0.6);
-    transition: opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.3s;
 }
 
@@ -2050,8 +2429,9 @@
 .pengumuman-icon {
     opacity: 0;
     transform: scale(0.5) translateY(-8px);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.35s;
 }
 
@@ -2066,8 +2446,9 @@
 .artikel-card {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .artikel-card.visible {
@@ -2075,12 +2456,24 @@
     transform: translateY(0);
 }
 
-.artikel-card:nth-child(1) { transition-delay: 0.05s; }
-.artikel-card:nth-child(2) { transition-delay: 0.18s; }
-.artikel-card:nth-child(3) { transition-delay: 0.31s; }
-.artikel-card:nth-child(4) { transition-delay: 0.44s; }
-.artikel-card:nth-child(5) { transition-delay: 0.57s; }
-.artikel-card:nth-child(6) { transition-delay: 0.90s; }
+.artikel-card:nth-child(1) {
+    transition-delay: 0.05s;
+}
+.artikel-card:nth-child(2) {
+    transition-delay: 0.18s;
+}
+.artikel-card:nth-child(3) {
+    transition-delay: 0.31s;
+}
+.artikel-card:nth-child(4) {
+    transition-delay: 0.44s;
+}
+.artikel-card:nth-child(5) {
+    transition-delay: 0.57s;
+}
+.artikel-card:nth-child(6) {
+    transition-delay: 0.9s;
+}
 
 /* ===================================================== */
 /* ARTIKEL IMAGE CLIP-UP */
@@ -2112,13 +2505,13 @@
 /* ARTIKEL HOVER BORDER TOP */
 /* ===================================================== */
 .artikel-card::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 3px;
-    background: #2563EB;
+    background: #2563eb;
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -2134,8 +2527,9 @@
 .perpus-card {
     opacity: 0;
     transform: translateY(26px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .perpus-card.visible {
@@ -2143,10 +2537,18 @@
     transform: translateY(0);
 }
 
-.perpus-card-delay-1 { transition-delay: 0.05s; }
-.perpus-card-delay-2 { transition-delay: 0.18s; }
-.perpus-card-delay-3 { transition-delay: 0.31s; }
-.perpus-card-delay-4 { transition-delay: 0.44s; }
+.perpus-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.perpus-card-delay-2 {
+    transition-delay: 0.18s;
+}
+.perpus-card-delay-3 {
+    transition-delay: 0.31s;
+}
+.perpus-card-delay-4 {
+    transition-delay: 0.44s;
+}
 
 /* ===================================================== */
 /* ICON BOX POP-IN */
@@ -2154,8 +2556,9 @@
 .perpus-icon {
     opacity: 0;
     transform: scale(0.6) rotate(-10deg);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
     transition-delay: 0.35s;
 }
 
@@ -2194,8 +2597,9 @@
 .galeri-katalog-hero {
     opacity: 0;
     transform: scale(0.96);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.1s;
 }
 
@@ -2210,8 +2614,9 @@
 .galeri-katalog-item {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .galeri-katalog-item.visible {
@@ -2219,10 +2624,18 @@
     transform: translateY(0);
 }
 
-.galeri-katalog-item:nth-child(1) { transition-delay: 0.20s; }
-.galeri-katalog-item:nth-child(2) { transition-delay: 0.32s; }
-.galeri-katalog-item:nth-child(3) { transition-delay: 0.44s; }
-.galeri-katalog-item:nth-child(4) { transition-delay: 0.56s; }
+.galeri-katalog-item:nth-child(1) {
+    transition-delay: 0.2s;
+}
+.galeri-katalog-item:nth-child(2) {
+    transition-delay: 0.32s;
+}
+.galeri-katalog-item:nth-child(3) {
+    transition-delay: 0.44s;
+}
+.galeri-katalog-item:nth-child(4) {
+    transition-delay: 0.56s;
+}
 
 /* ===================================================== */
 /* CAPTION SLIDE-UP */
@@ -2230,8 +2643,9 @@
 .galeri-caption {
     transform: translateY(12px);
     opacity: 0;
-    transition: opacity 0.5s ease,
-                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.4s;
 }
 
@@ -2247,15 +2661,17 @@
 .timeline-row-left {
     opacity: 0;
     transform: translateX(-40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .timeline-row-right {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.25s;
 }
 
@@ -2271,8 +2687,9 @@
 .timeline-dot {
     opacity: 0;
     transform: scale(0.5);
-    transition: opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
-                transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transition:
+        opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .timeline-dot.visible {
@@ -2299,8 +2716,9 @@
 .word-fade {
     opacity: 0;
     transform: translateY(6px);
-    transition: opacity 0.4s ease,
-                transform 20s ease;
+    transition:
+        opacity 0.4s ease,
+        transform 20s ease;
     display: inline;
 }
 
@@ -2315,8 +2733,9 @@
 .quote-fade {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .quote-fade.visible {
@@ -2330,8 +2749,9 @@
 .edukasi-left {
     opacity: 0;
     transform: translateX(-45px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .edukasi-left.visible {
@@ -2342,8 +2762,9 @@
 .edukasi-right {
     opacity: 0;
     transform: translateX(45px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.3s;
 }
 
@@ -2356,13 +2777,26 @@
 .tips-item {
     opacity: 0;
     transform: translateX(-20px);
-    transition: opacity 0.5s ease,
-                transform 0.5s ease;
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
 }
 
-.edukasi-left.visible .tips-item:nth-child(1) { opacity: 1; transform: translateX(0); transition-delay: 0.5s; }
-.edukasi-left.visible .tips-item:nth-child(2) { opacity: 1; transform: translateX(0); transition-delay: 0.65s; }
-.edukasi-left.visible .tips-item:nth-child(3) { opacity: 1; transform: translateX(0); transition-delay: 0.80s; }
+.edukasi-left.visible .tips-item:nth-child(1) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.5s;
+}
+.edukasi-left.visible .tips-item:nth-child(2) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.65s;
+}
+.edukasi-left.visible .tips-item:nth-child(3) {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.8s;
+}
 
 /* ===================================================== */
 /* WISATA ALAM CARDS */
@@ -2370,8 +2804,9 @@
 .wisata-card-left {
     opacity: 0;
     transform: translateX(-35px) scale(0.97);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .wisata-card-left.visible {
@@ -2382,8 +2817,9 @@
 .wisata-card-right {
     opacity: 0;
     transform: translateX(35px) scale(0.97);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.2s;
 }
 
@@ -2395,8 +2831,9 @@
 .wisata-card-full {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.3s;
 }
 
@@ -2411,8 +2848,9 @@
 .wisata-caption {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s ease,
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s ease,
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.5s;
 }
 
@@ -2429,8 +2867,9 @@
 .budaya-item {
     opacity: 0;
     transform: translateX(-30px);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .budaya-item.visible {
@@ -2438,9 +2877,15 @@
     transform: translateX(0);
 }
 
-.budaya-item-delay-1 { transition-delay: 0.05s; }
-.budaya-item-delay-2 { transition-delay: 0.25s; }
-.budaya-item-delay-3 { transition-delay: 0.45s; }
+.budaya-item-delay-1 {
+    transition-delay: 0.05s;
+}
+.budaya-item-delay-2 {
+    transition-delay: 0.25s;
+}
+.budaya-item-delay-3 {
+    transition-delay: 0.45s;
+}
 
 /* ===================================================== */
 /* BUDAYA DESA — KOLASE IMAGE STAGGER */
@@ -2448,8 +2893,9 @@
 .kolase-hero {
     opacity: 0;
     transform: scale(0.96);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .kolase-hero.visible {
@@ -2460,8 +2906,9 @@
 .kolase-item {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .kolase-item.visible {
@@ -2469,8 +2916,12 @@
     transform: translateY(0);
 }
 
-.kolase-item-delay-1 { transition-delay: 0.2s; }
-.kolase-item-delay-2 { transition-delay: 0.35s; }
+.kolase-item-delay-1 {
+    transition-delay: 0.2s;
+}
+.kolase-item-delay-2 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* BUDAYA DESA — NILAI CARD STAGGER */
@@ -2478,8 +2929,9 @@
 .nilai-card {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .nilai-card.visible {
@@ -2487,10 +2939,18 @@
     transform: translateY(0);
 }
 
-.nilai-card-delay-1 { transition-delay: 0.05s; }
-.nilai-card-delay-2 { transition-delay: 0.18s; }
-.nilai-card-delay-3 { transition-delay: 0.31s; }
-.nilai-card-delay-4 { transition-delay: 0.44s; }
+.nilai-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.nilai-card-delay-2 {
+    transition-delay: 0.18s;
+}
+.nilai-card-delay-3 {
+    transition-delay: 0.31s;
+}
+.nilai-card-delay-4 {
+    transition-delay: 0.44s;
+}
 
 /* ===================================================== */
 /* MENGAPA TRADISIONAL — LEFT CARD STAGGER */
@@ -2498,8 +2958,9 @@
 .tradisi-card {
     opacity: 0;
     transform: translateX(-30px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tradisi-card.visible {
@@ -2507,9 +2968,15 @@
     transform: translateX(0);
 }
 
-.tradisi-card-delay-1 { transition-delay: 0.05s; }
-.tradisi-card-delay-2 { transition-delay: 0.20s; }
-.tradisi-card-delay-3 { transition-delay: 0.35s; }
+.tradisi-card-delay-1 {
+    transition-delay: 0.05s;
+}
+.tradisi-card-delay-2 {
+    transition-delay: 0.2s;
+}
+.tradisi-card-delay-3 {
+    transition-delay: 0.35s;
+}
 
 /* ===================================================== */
 /* MENGAPA TRADISIONAL — QUOTE PANEL SLIDE KANAN */
@@ -2517,8 +2984,9 @@
 .tradisi-quote-panel {
     opacity: 0;
     transform: translateX(40px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     transition-delay: 0.3s;
 }
 
@@ -2533,8 +3001,9 @@
 .tradisi-footnote {
     opacity: 0;
     transform: translateY(20px);
-    transition: opacity 4s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 6s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 4s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tradisi-footnote.visible {
@@ -2548,10 +3017,11 @@
 .testi-pengunjung-card {
     opacity: 0;
     transform: translate3d(0, 24px, 0);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 0.45s ease,
-                box-shadow 0.45s ease;
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.45s ease,
+        box-shadow 0.45s ease;
     will-change: transform, opacity;
 }
 
@@ -2571,10 +3041,11 @@
 .faq-cta {
     opacity: 0;
     transform: translate3d(0, 22px, 0);
-    transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
+    transition:
+        opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
     will-change: opacity, transform;
 }
 
@@ -2583,7 +3054,6 @@
     opacity: 1;
     transform: translate3d(0, 0, 0);
 }
-
 
 /* ==========================================================================
    <-- PUBLIC ADMIN BRIDGE -->
@@ -2607,17 +3077,20 @@
     font-weight: 800;
     letter-spacing: 0.01em;
     box-shadow: 0 18px 45px rgba(23, 49, 33, 0.25);
-    transition: transform 180ms ease, background-color 180ms ease, box-shadow 180ms ease;
+    transition:
+        transform 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
 }
 
 .admin-return-button:hover {
-    background: #004D40;
+    background: #004d40;
     box-shadow: 0 22px 55px rgba(23, 49, 33, 0.32);
     transform: translateY(-2px);
 }
 
 .admin-return-button i {
-    color: #D4AF37;
+    color: #d4af37;
 }
 
 @media (min-width: 768px) {
@@ -2658,7 +3131,8 @@
 .ecommerce-hero__content > div {
     opacity: 0;
     transform: translate3d(0, 22px, 0);
-    animation: ecommerceHeroContentIn 0.78s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation: ecommerceHeroContentIn 0.78s cubic-bezier(0.16, 1, 0.3, 1)
+        forwards;
 }
 
 .ecommerce-hero__content > h1 {
@@ -2736,7 +3210,6 @@
         padding-top: 7.5rem;
         padding-bottom: 8.5rem;
     }
-
 
     .ecommerce-hero__image {
         object-position: 58% center;
@@ -2838,10 +3311,11 @@
 .ecommerce-product-card {
     opacity: 0;
     transform: translate3d(0, 26px, 0);
-    transition: opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-                border-color 0.35s ease,
-                box-shadow 0.35s ease;
+    transition:
+        opacity 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.35s ease,
+        box-shadow 0.35s ease;
     will-change: opacity, transform;
 }
 
@@ -2857,15 +3331,82 @@
 
 .ecommerce-search-form,
 .ecommerce-cart-shortcut {
-    transition: transform 0.28s ease,
-                border-color 0.28s ease,
-                box-shadow 0.28s ease,
-                background-color 0.28s ease;
+    transition:
+        transform 0.28s ease,
+        border-color 0.28s ease,
+        box-shadow 0.28s ease,
+        background-color 0.28s ease;
 }
 
 .ecommerce-search-form:hover {
     box-shadow: 0 16px 38px rgba(23, 49, 33, 0.09);
     transform: translate3d(0, -0.08rem, 0);
+}
+
+/* Make the cart shortcut more eye-catching: gold gradient, stronger shadow, bounce on hover */
+.ecommerce-cart-shortcut {
+    background: linear-gradient(135deg, #fff7e6 0%, #f8e6b7 40%, #d8b15a 100%);
+    color: #173121;
+    border: none;
+    box-shadow:
+        0 14px 40px rgba(23, 49, 33, 0.18),
+        0 4px 10px rgba(216, 177, 90, 0.12) inset;
+    transition:
+        transform 260ms cubic-bezier(0.2, 0.9, 0.3, 1),
+        box-shadow 260ms;
+    will-change: transform;
+}
+
+.ecommerce-cart-shortcut:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow:
+        0 22px 54px rgba(23, 49, 33, 0.22),
+        0 6px 18px rgba(216, 177, 90, 0.16) inset;
+}
+
+.ecommerce-cart-shortcut i {
+    font-size: 1.15rem; /* make icon larger */
+    transition: transform 200ms ease;
+}
+
+.ecommerce-cart-shortcut:hover i {
+    transform: translateY(-2px) scale(1.06);
+}
+
+/* Style the small badge inside cart button to be more prominent */
+.ecommerce-cart-shortcut > span {
+    position: absolute;
+    right: -0.2rem;
+    top: -0.35rem;
+    display: flex;
+    min-width: 1.6rem;
+    height: 1.6rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 999px;
+    background: #173121; /* dark badge for contrast */
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 900;
+    line-height: 1;
+    padding-inline: 0.35rem;
+    box-shadow:
+        0 6px 18px rgba(23, 49, 33, 0.25),
+        0 2px 6px rgba(216, 177, 90, 0.12) inset;
+    border: 2px solid #d8b15a;
+}
+
+@media (min-width: 640px) {
+    .ecommerce-cart-shortcut i {
+        font-size: 1.35rem;
+    }
+    .ecommerce-cart-shortcut > span {
+        min-width: 1.8rem;
+        height: 1.8rem;
+        font-size: 0.8rem;
+        right: -0.3rem;
+        top: -0.45rem;
+    }
 }
 
 .ecommerce-feature-card.visible:hover,
@@ -2907,8 +3448,9 @@
 .ecommerce-bulk-cta__badge {
     opacity: 0;
     transform: translate3d(0, 24px, 0);
-    transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
     will-change: opacity, transform;
 }
 
@@ -2930,9 +3472,10 @@
 }
 
 .ecommerce-bulk-cta__feature > div:first-child {
-    transition: transform 0.35s ease,
-                background-color 0.35s ease,
-                border-color 0.35s ease;
+    transition:
+        transform 0.35s ease,
+        background-color 0.35s ease,
+        border-color 0.35s ease;
 }
 
 .ecommerce-bulk-cta__feature:hover > div:first-child {
@@ -2950,7 +3493,12 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.34) 45%, transparent 62%);
+    background: linear-gradient(
+        110deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.34) 45%,
+        transparent 62%
+    );
     transform: translateX(-120%);
     transition: transform 0.65s ease;
 }
@@ -3053,7 +3601,9 @@
     font-weight: 800;
     text-decoration: none;
     white-space: nowrap;
-    transition: color 180ms ease, transform 180ms ease;
+    transition:
+        color 180ms ease,
+        transform 180ms ease;
 }
 
 .ecommerce-customer-action:hover {
@@ -3075,7 +3625,7 @@
 .ecommerce-customer-action__badge {
     position: absolute;
     right: -0.55rem;
-    top: -0.25rem;
+    top: -0.35rem;
     display: flex;
     min-width: 1.15rem;
     height: 1.15rem;
@@ -3084,7 +3634,7 @@
     border-radius: 999px;
     background: #d8b15a;
     color: #ffffff;
-    font-size: 0.62rem;
+    font-size: clamp(0.68rem, 2.2vw, 0.82rem);
     font-weight: 800;
     line-height: 1;
     padding-inline: 0.25rem;
@@ -3144,13 +3694,19 @@
 
 .customer-order-history-item {
     border: 1px solid transparent;
-    transition: background-color 180ms ease, border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        transform 180ms ease;
 }
 
 .customer-order-history-item.is-focused {
     border-color: #d8b15a !important;
     background: #fffdf8 !important;
-    box-shadow: 0 0 0 3px rgba(216, 177, 90, 0.22), 0 16px 36px rgba(23, 49, 33, 0.14);
+    box-shadow:
+        0 0 0 3px rgba(216, 177, 90, 0.22),
+        0 16px 36px rgba(23, 49, 33, 0.14);
     transform: translateY(-1px);
 }
 .customer-invoice-print,
@@ -3158,48 +3714,50 @@
     display: none;
 }
 
-    body.customer-invoice-printing {
-        width: 100% !important;
-        min-height: auto !important;
-        margin: 0 !important;
-        background: #ffffff !important;
-        overflow: visible !important;
-    }
+body.customer-invoice-printing {
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    background: #ffffff !important;
+    overflow: visible !important;
+}
 
-    body.customer-invoice-printing > :not(.customer-invoice-print__mount) {
-        display: none !important;
-    }
+body.customer-invoice-printing > :not(.customer-invoice-print__mount) {
+    display: none !important;
+}
 
-    body.customer-invoice-printing .customer-invoice-print__mount {
-        display: block !important;
-        width: 100% !important;
-        min-height: 0 !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        overflow: visible !important;
-    }
+body.customer-invoice-printing .customer-invoice-print__mount {
+    display: block !important;
+    width: 100% !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+}
 
-    body.customer-invoice-printing .customer-invoice-print__mount .customer-invoice-print.is-printing {
-        display: block !important;
-        position: static !important;
-        width: 100% !important;
-        min-height: auto !important;
-        margin: 0 !important;
-        color: #173121 !important;
-        background: #ffffff !important;
-        font-family: Arial, sans-serif !important;
-        font-size: 10px !important;
-        line-height: 1.3 !important;
-        break-after: avoid-page !important;
-        page-break-after: avoid !important;
-    }
+body.customer-invoice-printing
+    .customer-invoice-print__mount
+    .customer-invoice-print.is-printing {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    min-height: auto !important;
+    margin: 0 !important;
+    color: #173121 !important;
+    background: #ffffff !important;
+    font-family: Arial, sans-serif !important;
+    font-size: 10px !important;
+    line-height: 1.3 !important;
+    break-after: avoid-page !important;
+    page-break-after: avoid !important;
+}
 
-    @media print {
+@media print {
     @page {
         size: A4;
         margin: 10mm;
     }
-    
+
     .customer-invoice-print__sheet {
         width: 100%;
         padding: 0;
@@ -3413,7 +3971,12 @@
 }
 
 .katalog-hero__shade {
-    background: linear-gradient(115deg, rgba(5, 15, 10, 0.92) 0%, rgba(23, 49, 33, 0.72) 44%, rgba(23, 49, 33, 0.38) 100%);
+    background: linear-gradient(
+        115deg,
+        rgba(5, 15, 10, 0.92) 0%,
+        rgba(23, 49, 33, 0.72) 44%,
+        rgba(23, 49, 33, 0.38) 100%
+    );
 }
 
 .katalog-hero-card,
@@ -3424,10 +3987,11 @@
 .hero-slide-left,
 .sidebar-slide {
     transform: translate3d(0, 24px, 0);
-    transition: opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.78s cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 0.35s ease,
-                border-color 0.35s ease;
+    transition:
+        opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.78s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.35s ease,
+        border-color 0.35s ease;
 }
 
 .hero-slide-left.visible,
@@ -3443,10 +4007,11 @@
 .sidebar-item {
     opacity: 0;
     transform: translate3d(0, 12px, 0);
-    transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-                background-color 0.25s ease,
-                color 0.25s ease;
+    transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        background-color 0.25s ease,
+        color 0.25s ease;
 }
 
 .sidebar-slide.visible .sidebar-item,
@@ -3455,11 +4020,21 @@
     transform: translate3d(0, 0, 0);
 }
 
-.sidebar-slide.visible .sidebar-item:nth-child(1) { transition-delay: 0.18s; }
-.sidebar-slide.visible .sidebar-item:nth-child(2) { transition-delay: 0.28s; }
-.sidebar-slide.visible .sidebar-item:nth-child(3) { transition-delay: 0.38s; }
-.sidebar-slide.visible .sidebar-item:nth-child(4) { transition-delay: 0.48s; }
-.sidebar-slide.visible .sidebar-item:nth-child(5) { transition-delay: 0.58s; }
+.sidebar-slide.visible .sidebar-item:nth-child(1) {
+    transition-delay: 0.18s;
+}
+.sidebar-slide.visible .sidebar-item:nth-child(2) {
+    transition-delay: 0.28s;
+}
+.sidebar-slide.visible .sidebar-item:nth-child(3) {
+    transition-delay: 0.38s;
+}
+.sidebar-slide.visible .sidebar-item:nth-child(4) {
+    transition-delay: 0.48s;
+}
+.sidebar-slide.visible .sidebar-item:nth-child(5) {
+    transition-delay: 0.58s;
+}
 
 .pengumuman-card,
 .artikel-card,
@@ -3467,10 +4042,11 @@
 .galeri-katalog-hero,
 .galeri-katalog-item {
     transform: translate3d(0, 22px, 0);
-    transition: opacity 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.68s cubic-bezier(0.22, 1, 0.36, 1),
-                box-shadow 0.32s ease,
-                border-color 0.32s ease;
+    transition:
+        opacity 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.68s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.32s ease,
+        border-color 0.32s ease;
 }
 
 .pengumuman-card.visible,
@@ -3494,8 +4070,9 @@
 .pengumuman-icon,
 .perpus-icon {
     transform: translate3d(0, 10px, 0) scale(0.96);
-    transition: opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
-                transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+        transform 0.52s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pengumuman-card.visible .date-badge-pop,
@@ -3509,8 +4086,9 @@
     clip-path: none;
     opacity: 0.88;
     transform: scale(1.025);
-    transition: opacity 0.7s ease,
-                transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .artikel-card.visible .artikel-img {
@@ -3531,8 +4109,9 @@
 
 .galeri-caption {
     transform: translate3d(0, 14px, 0);
-    transition: opacity 0.58s ease,
-                transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+    transition:
+        opacity 0.58s ease,
+        transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .galeri-katalog-hero.visible .galeri-caption,
@@ -3566,7 +4145,12 @@
     }
 
     .katalog-hero__shade {
-        background: linear-gradient(180deg, rgba(5, 15, 10, 0.78) 0%, rgba(23, 49, 33, 0.72) 48%, rgba(5, 15, 10, 0.92) 100%);
+        background: linear-gradient(
+            180deg,
+            rgba(5, 15, 10, 0.78) 0%,
+            rgba(23, 49, 33, 0.72) 48%,
+            rgba(5, 15, 10, 0.92) 100%
+        );
     }
 }
 
@@ -3605,8 +4189,17 @@
     z-index: 1;
     pointer-events: none;
     background:
-        linear-gradient(115deg, transparent 8%, rgba(212, 178, 84, 0.18) 38%, transparent 62%),
-        radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.14), transparent 42%);
+        linear-gradient(
+            115deg,
+            transparent 8%,
+            rgba(212, 178, 84, 0.18) 38%,
+            transparent 62%
+        ),
+        radial-gradient(
+            circle at 50% 42%,
+            rgba(255, 255, 255, 0.14),
+            transparent 42%
+        );
     opacity: 0.65;
     transform: translate3d(-18%, 0, 0);
     animation: contactLightSweep 8s ease-in-out infinite alternate;
@@ -3639,7 +4232,11 @@
     inset: auto 0 0;
     height: 48%;
     pointer-events: none;
-    background: linear-gradient(180deg, rgba(248, 246, 241, 0), rgba(248, 246, 241, 0.82));
+    background: linear-gradient(
+        180deg,
+        rgba(248, 246, 241, 0),
+        rgba(248, 246, 241, 0.82)
+    );
 }
 
 .contact-section > div {
@@ -3751,12 +4348,24 @@
     transform: translate3d(0, 0, 0);
 }
 
-.contact-form-card.visible .contact-form > div:nth-of-type(1) { transition-delay: 0.12s; }
-.contact-form-card.visible .contact-form > div:nth-of-type(2) { transition-delay: 0.2s; }
-.contact-form-card.visible .contact-form > div:nth-of-type(3) { transition-delay: 0.28s; }
-.contact-form-card.visible .contact-form > div:nth-of-type(4) { transition-delay: 0.36s; }
-.contact-form-card.visible .contact-form > div:nth-of-type(5) { transition-delay: 0.44s; }
-.contact-form-card.visible .contact-form > button { transition-delay: 0.52s; }
+.contact-form-card.visible .contact-form > div:nth-of-type(1) {
+    transition-delay: 0.12s;
+}
+.contact-form-card.visible .contact-form > div:nth-of-type(2) {
+    transition-delay: 0.2s;
+}
+.contact-form-card.visible .contact-form > div:nth-of-type(3) {
+    transition-delay: 0.28s;
+}
+.contact-form-card.visible .contact-form > div:nth-of-type(4) {
+    transition-delay: 0.36s;
+}
+.contact-form-card.visible .contact-form > div:nth-of-type(5) {
+    transition-delay: 0.44s;
+}
+.contact-form-card.visible .contact-form > button {
+    transition-delay: 0.52s;
+}
 
 .contact-form-card.visible .contact-form > button:hover,
 .contact-faq-cta.visible a:hover,
@@ -3776,8 +4385,18 @@
     inset: 0;
     pointer-events: none;
     background:
-        linear-gradient(90deg, rgba(255, 255, 255, 0.42), transparent 24%, transparent 76%, rgba(255, 255, 255, 0.42)),
-        radial-gradient(circle at 50% 0%, rgba(212, 178, 84, 0.13), transparent 34%);
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.42),
+            transparent 24%,
+            transparent 76%,
+            rgba(255, 255, 255, 0.42)
+        ),
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(212, 178, 84, 0.13),
+            transparent 34%
+        );
 }
 
 .contact-faq-section > div {
@@ -3825,7 +4444,11 @@
 @media (max-width: 640px) {
     .contact-hero::after {
         opacity: 0.34;
-        background: radial-gradient(circle at 50% 35%, rgba(255, 255, 255, 0.14), transparent 44%);
+        background: radial-gradient(
+            circle at 50% 35%,
+            rgba(255, 255, 255, 0.14),
+            transparent 44%
+        );
         animation-duration: 10s;
     }
 

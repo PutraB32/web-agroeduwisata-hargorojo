@@ -53,7 +53,7 @@
 
                         <button type="button" @click="cartOpen = true; notifOpen = false; totalOrdersOpen = false; profileOpen = false" aria-label="Buka keranjang" class="ecommerce-cart-shortcut relative flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white text-[#2f6f1f] shadow-[0_10px_24px_rgba(23,49,33,0.12)] ring-1 ring-[#e6dece] transition-all duration-300 hover:-translate-y-0.5 hover:text-[#173121] sm:h-14 sm:w-14">
                             <i class="fa-solid fa-cart-shopping text-base sm:text-lg"></i>
-                            <span x-text="cart.reduce((total, item) => total + item.qty, 0)" class="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#d8b15a] px-1 text-xs font-bold text-white"></span>
+                            <span x-text="cart.length" aria-hidden="false" aria-label="Jumlah item di keranjang" class="absolute -right-1 -top-1 flex h-6 min-w-6 items-center justify-center rounded-full bg-[#d8b15a] px-1 text-xs font-bold text-white"></span>
                         </button>
                     </div>
 
@@ -61,7 +61,7 @@
                     @if($page['customerActions'])
                         <div class="relative" @click.outside="notifOpen = false">
                             <button type="button" @click="notifOpen = !notifOpen; totalOrdersOpen = false; profileOpen = false; cartOpen = false" data-order-notification-trigger class="ecommerce-customer-action">
-                                <i class="fa-regular fa-bell text:lg sm:text-sm lg:text-md text-[#2f6f1f]"></i><span>Notifikasi</span>
+                                <i class="fa-regular fa-bell text:lg sm:text-sm lg:text-lg text-[#2f6f1f]"></i><span>Notifikasi</span>
                                 <span data-order-notification-badge data-show-zero="true" class="ecommerce-customer-action__badge">0</span>
                             </button>
 

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Produk;
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\Produk;
 use App\Services\MidtransService;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -71,14 +71,18 @@ class CartController extends Controller
         $cart[$produk->id] = $cartItem;
         session()->put('cart', $cart);
 
+        $message = isset($cart[$produk->id]) && $cart[$produk->id]['quantity'] > $validated['quantity']
+            ? "Jumlah produk {$produk->nama} berhasil ditambah ke keranjang."
+            : "Produk {$produk->nama} berhasil ditambahkan ke keranjang.";
+
         if ($request->expectsJson()) {
             return response()->json([
-                'message' => 'Produk berhasil dimasukkan ke keranjang.',
+                'message' => $message,
                 'cart' => $this->cartItemsForJson($cart),
             ]);
         }
 
-        return redirect()->back()->with('success', 'Produk berhasil dimasukkan ke keranjang.');
+        return redirect()->back()->with('success', $message);
     }
 
     public function remove(Request $request)
@@ -134,7 +138,7 @@ class CartController extends Controller
 
         $cart = session()->get('cart', []);
 
-        if (! isset($cart[$produk->id])) {
+        if (!isset($cart[$produk->id])) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'Produk tidak ditemukan di keranjang.',
@@ -174,7 +178,7 @@ class CartController extends Controller
         ]);
 
         $cart = session()->get('cart', []);
-        if(count($cart) == 0) {
+        if (count($cart) == 0) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'Keranjang belanja Anda kosong.',
@@ -220,7 +224,7 @@ class CartController extends Controller
                         'order_id' => $order->id,
                         'produk_id' => $produk->id,
                         'jumlah' => $quantity,
-                        'harga_satuan' => $hargaSatuan
+                        'harga_satuan' => $hargaSatuan,
                     ]);
 
                     $produk->decrement('stok', $quantity);
@@ -242,7 +246,6 @@ class CartController extends Controller
                 ]);
 
                 $profileOrdersUrl = route('ecommerce').'#produk-katalog';
-
 
                 $payload = [
                     'transaction_details' => [
@@ -272,7 +275,6 @@ class CartController extends Controller
 
             $profileOrdersUrl = route('ecommerce').'#produk-katalog';
 
-
             if (empty($snap['redirect_url'])) {
                 throw new \RuntimeException('Redirect pembayaran Midtrans tidak tersedia.');
             }
@@ -298,7 +300,6 @@ class CartController extends Controller
             }
 
             return redirect()->away($snap['redirect_url']);
-
         } catch (\Throwable $e) {
             if (isset($order) && $order->exists) {
                 $order->update([
@@ -331,7 +332,7 @@ class CartController extends Controller
 
     private function redirectIfNotCustomer(Request $request)
     {
-        if (! Auth::check()) {
+        if (!Auth::check()) {
             if ($request->expectsJson()) {
                 return response()->json([
                     'message' => 'Silakan login sebagai customer sebelum berbelanja.',

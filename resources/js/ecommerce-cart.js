@@ -4,7 +4,6 @@ window.scrollProduk = function (amount) {
         ?.scrollBy({ left: amount, behavior: "smooth" });
 };
 
-
 window.focusCustomerOrder = function (orderDomId) {
     if (!orderDomId) return;
 
@@ -35,21 +34,21 @@ window.printCustomerInvoice = function (invoiceId) {
     }
 
     // Buat iframe tersembunyi
-    const iframe = document.createElement('iframe');
-    iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
-    iframe.style.border = '0';
+    const iframe = document.createElement("iframe");
+    iframe.style.position = "fixed";
+    iframe.style.right = "0";
+    iframe.style.bottom = "0";
+    iframe.style.width = "0";
+    iframe.style.height = "0";
+    iframe.style.border = "0";
     document.body.appendChild(iframe);
 
     // Ambil isi HTML dari invoice
     const invoiceHtml = invoice.outerHTML;
 
     // Ambil semua style dari parent document agar CSS Tailwind tetap berfungsi
-    let stylesHtml = '';
-    document.querySelectorAll('style, link[rel="stylesheet"]').forEach(el => {
+    let stylesHtml = "";
+    document.querySelectorAll('style, link[rel="stylesheet"]').forEach((el) => {
         stylesHtml += el.outerHTML;
     });
 
@@ -85,7 +84,7 @@ window.printCustomerInvoice = function (invoiceId) {
     setTimeout(() => {
         iframe.contentWindow.focus();
         iframe.contentWindow.print();
-        
+
         // Hapus iframe beberapa detik setelah print dipanggil
         setTimeout(() => {
             iframe.remove();
@@ -115,7 +114,10 @@ window.cartApp = function (config = {}) {
         cart: config.cart || [],
 
         subtotal() {
-            return this.cart.reduce((total, item) => total + item.harga * item.qty, 0);
+            return this.cart.reduce(
+                (total, item) => total + item.harga * item.qty,
+                0,
+            );
         },
 
         notify(message) {
@@ -150,7 +152,9 @@ window.cartApp = function (config = {}) {
         },
 
         async sendCartRequest(url, method, payload = {}) {
-            const requestMethod = ["PUT", "PATCH", "DELETE"].includes(method) ? "POST" : method;
+            const requestMethod = ["PUT", "PATCH", "DELETE"].includes(method)
+                ? "POST"
+                : method;
             const formData = new URLSearchParams();
 
             if (requestMethod !== method) formData.append("_method", method);
@@ -170,7 +174,9 @@ window.cartApp = function (config = {}) {
                 body: formData,
             });
             const contentType = response.headers.get("content-type") || "";
-            const data = contentType.includes("application/json") ? await response.json() : {};
+            const data = contentType.includes("application/json")
+                ? await response.json()
+                : {};
 
             if (!response.ok) {
                 if (data.redirect_url) window.location.href = data.redirect_url;
@@ -182,13 +188,36 @@ window.cartApp = function (config = {}) {
 
         async addToCart(product) {
             try {
-                const data = await this.sendCartRequest(this.routes.add, "POST", {
-                    produk_id: product.id,
-                    quantity: 1,
-                });
-                this.cart = Array.isArray(data.cart) ? data.cart : this.upsertLocalCart(product, 1);
+                const existing = this.cart.find(
+                    (item) => item.id === product.id,
+                );
+
+                const data = await this.sendCartRequest(
+                    this.routes.add,
+                    "POST",
+                    {
+                        produk_id: product.id,
+                        quantity: 1,
+                    },
+                );
+
+                this.cart = Array.isArray(data.cart)
+                    ? data.cart
+                    : this.upsertLocalCart(product, 1);
                 this.persistCart();
-                this.notify(data.message || `${product.nama} berhasil ditambahkan ke keranjang`);
+
+                // Jika server mengirim pesan, utamakan pesan server. Jika tidak, tampilkan pesan lokal.
+                if (data.message) {
+                    this.notify(data.message);
+                } else if (existing) {
+                    this.notify(
+                        `Jumlah "${product.nama}" berhasil ditambahkan.`,
+                    );
+                } else {
+                    this.notify(
+                        `"${product.nama}" berhasil ditambahkan ke keranjang.`,
+                    );
+                }
             } catch (error) {
                 this.notify(error.message);
             }
@@ -196,7 +225,9 @@ window.cartApp = function (config = {}) {
 
         upsertLocalCart(product, addQty) {
             const existing = this.cart.find((item) => item.id === product.id);
-            existing ? (existing.qty += addQty) : this.cart.push({ ...product, qty: addQty });
+            existing
+                ? (existing.qty += addQty)
+                : this.cart.push({ ...product, qty: addQty });
 
             return this.cart;
         },
@@ -212,18 +243,26 @@ window.cartApp = function (config = {}) {
             const item = this.cart.find((item) => item.id === id);
             if (!item) return;
 
-            item.qty > 1 ? await this.updateQty(id, item.qty - 1) : await this.removeItem(id);
+            item.qty > 1
+                ? await this.updateQty(id, item.qty - 1)
+                : await this.removeItem(id);
         },
 
         async updateQty(id, quantity) {
             try {
-                const data = await this.sendCartRequest(this.routes.update, "PUT", {
-                    produk_id: id,
-                    quantity,
-                });
+                const data = await this.sendCartRequest(
+                    this.routes.update,
+                    "PUT",
+                    {
+                        produk_id: id,
+                        quantity,
+                    },
+                );
                 this.cart = Array.isArray(data.cart)
                     ? data.cart
-                    : this.cart.map((item) => (item.id === id ? { ...item, qty: quantity } : item));
+                    : this.cart.map((item) =>
+                          item.id === id ? { ...item, qty: quantity } : item,
+                      );
                 this.persistCart();
             } catch (error) {
                 this.notify(error.message);
@@ -234,8 +273,14 @@ window.cartApp = function (config = {}) {
             const item = this.cart.find((item) => item.id === id);
 
             try {
-                const data = await this.sendCartRequest(this.routes.remove, "DELETE", { produk_id: id });
-                this.cart = Array.isArray(data.cart) ? data.cart : this.cart.filter((item) => item.id !== id);
+                const data = await this.sendCartRequest(
+                    this.routes.remove,
+                    "DELETE",
+                    { produk_id: id },
+                );
+                this.cart = Array.isArray(data.cart)
+                    ? data.cart
+                    : this.cart.filter((item) => item.id !== id);
                 this.persistCart();
                 if (item) this.notify(`${item.nama} dihapus dari keranjang`);
             } catch (error) {
@@ -244,17 +289,27 @@ window.cartApp = function (config = {}) {
         },
 
         async checkout() {
-            if (this.cart.length === 0) return this.notify("Keranjang belanja Anda kosong.");
-            if (!this.checkoutForm.nama || !this.checkoutForm.no_telepon || !this.checkoutForm.alamat) {
+            if (this.cart.length === 0)
+                return this.notify("Keranjang belanja Anda kosong.");
+            if (
+                !this.checkoutForm.nama ||
+                !this.checkoutForm.no_telepon ||
+                !this.checkoutForm.alamat
+            ) {
                 return this.notify("Lengkapi data pengiriman terlebih dahulu.");
             }
 
             this.checkoutLoading = true;
 
             try {
-                const data = await this.sendCartRequest(this.routes.checkout, "POST", this.checkoutForm);
+                const data = await this.sendCartRequest(
+                    this.routes.checkout,
+                    "POST",
+                    this.checkoutForm,
+                );
 
-                if (data.snap_token && window.snap) return this.openMidtransPopup(data);
+                if (data.snap_token && window.snap)
+                    return this.openMidtransPopup(data);
 
                 this.cart = [];
                 removeStoredCart();
@@ -275,9 +330,20 @@ window.cartApp = function (config = {}) {
             removeStoredCart();
 
             window.snap.pay(data.snap_token, {
-                onSuccess: () => this.finishMidtransCheckout(data, "Pembayaran berhasil. Status pesanan akan diperbarui."),
-                onPending: () => this.finishMidtransCheckout(data, "Transaksi dibuat. Silakan selesaikan pembayaran."),
-                onError: () => this.notify("Pembayaran gagal diproses. Silakan coba lagi."),
+                onSuccess: () =>
+                    this.finishMidtransCheckout(
+                        data,
+                        "Pembayaran berhasil. Status pesanan akan diperbarui.",
+                    ),
+                onPending: () =>
+                    this.finishMidtransCheckout(
+                        data,
+                        "Transaksi dibuat. Silakan selesaikan pembayaran.",
+                    ),
+                onError: () =>
+                    this.notify(
+                        "Pembayaran gagal diproses. Silakan coba lagi.",
+                    ),
                 onClose: () => this.notify("Pop-up pembayaran ditutup."),
             });
         },
@@ -286,7 +352,10 @@ window.cartApp = function (config = {}) {
             this.notify(message);
 
             setTimeout(() => {
-                window.location.href = data.profile_orders_url || data.ecommerce_url || window.location.href;
+                window.location.href =
+                    data.profile_orders_url ||
+                    data.ecommerce_url ||
+                    window.location.href;
             }, 900);
         },
     };
