@@ -141,4 +141,23 @@ class EcommerceController extends Controller
         return $label !== '' ? $label : 'customer';
     }
 
+    public function checkOrderUpdates()
+    {
+        if (!Auth::guard('customer')->check()) {
+            return response()->json(['status' => 'unauthorized'], 401);
+        }
+
+        $customer = Auth::guard('customer')->user();
+        
+        // Ambil timestamp update_at terbaru dari semua pesanan customer
+        $updates = $customer->orders()
+            ->latest('updated_at')
+            ->pluck('updated_at', 'id')
+            ->map(fn($date) => $date->timestamp)
+            ->toArray();
+
+        return response()->json([
+            'orderUpdates' => $updates
+        ]);
+    }
 }

@@ -76,6 +76,7 @@ Route::post('/customer/reset-password', [ResetPasswordController::class, 'resetC
     ->name('customer.password.update');
 Route::put('/customer/profile', [CustomerAuthController::class, 'updateProfile'])->name('customer.profile.update');
 Route::post('/customer/logout', [CustomerAuthController::class, 'logout'])->middleware('auth')->name('customer.logout');
+Route::get('/customer/api/order-updates', [EcommerceController::class, 'checkOrderUpdates'])->name('customer.api.order-updates');
 
 // Rute Lupa Password & Reset Password
 Route::get('/forgot-password', [ForgotPasswordController::class, 'showLinkRequestForm'])->name('password.request');
