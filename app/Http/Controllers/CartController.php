@@ -72,8 +72,8 @@ class CartController extends Controller
         session()->put('cart', $cart);
 
         $message = isset($cart[$produk->id]) && $cart[$produk->id]['quantity'] > $validated['quantity']
-            ? "Jumlah produk {$produk->nama} berhasil ditambah ke keranjang."
-            : "Produk {$produk->nama} berhasil ditambahkan ke keranjang.";
+            ? "Jumlah {$produk->nama} berhasil ditambah ke keranjang."
+            : "{$produk->nama} berhasil ditambahkan ke keranjang.";
 
         if ($request->expectsJson()) {
             return response()->json([
