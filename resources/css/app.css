@@ -3158,12 +3158,6 @@
     display: none;
 }
 
-@media print {
-    @page {
-        size: A4;
-        margin: 10mm;
-    }
-
     body.customer-invoice-printing {
         width: 100% !important;
         min-height: auto !important;
@@ -3199,6 +3193,13 @@
         break-after: avoid-page !important;
         page-break-after: avoid !important;
     }
+
+    @media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+    
     .customer-invoice-print__sheet {
         width: 100%;
         padding: 0;
