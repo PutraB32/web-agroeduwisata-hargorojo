@@ -155,6 +155,7 @@ Route::middleware(['auth'])->group(function () {
         // Order
         Route::put('/admin/order/{id}/status', [AdminOrderController::class, 'updateStatus'])->name('admin.order.update_status');
         Route::put('/admin/order/{id}/pengiriman', [AdminOrderController::class, 'updatePengiriman'])->name('admin.order.update_pengiriman');
+        Route::put('/admin/order/{id}/jadwal-ambil', [AdminOrderController::class, 'updateJadwalAmbil'])->name('admin.order.update_jadwal_ambil');
         Route::delete('/admin/order/{id}', [AdminOrderController::class, 'destroy'])->name('admin.order.destroy');
     });
 });
