@@ -121,12 +121,30 @@
                                                 @endif
 
                                                 <div class="mt-3 flex flex-col gap-2 text-xs text-[#516057] sm:flex-row sm:items-center sm:justify-between">
-                                                    @if($order['shipment']['available'])
-                                                        <span class="rounded-full bg-green-50 px-3 py-1 font-semibold text-green-800">{{ $order['shipment']['kurir'] }} - {{ $order['shipment']['nomorResi'] }}</span>
-                                                    @else
-                                                        <span class="rounded-full bg-amber-50 px-3 py-1 font-semibold text-amber-700">Menunggu pengiriman</span>
-                                                    @endif
-                                                    <button type="button" onclick="window.printCustomerInvoice('customer-invoice-order-{{ $order['id'] }}')" class="font-bold text-[#b47a22] transition hover:text-[#173121]">Simpan Invoice</button>
+                                                    <div class="flex-1">
+                                                        @if($order['isAmbilDiTempat'])
+                                                            @if($order['pickup']['available'])
+                                                                <div class="rounded-xl border border-amber-200 bg-amber-50/70 p-2.5 shadow-sm inline-block">
+                                                                    <p class="font-semibold text-amber-900"><i class="fa-solid fa-calendar-check mr-1 text-amber-700"></i> Jadwal: {{ $order['pickup']['tanggalAmbilLabel'] }}</p>
+                                                                    @if($order['pickup']['hasCatatanAdmin'])
+                                                                        <div class="mt-1.5 rounded-lg bg-white/80 p-2 text-[11px] text-amber-900 border border-amber-200/50">
+                                                                            <span class="font-bold block mb-0.5"><i class="fa-solid fa-message mr-1"></i> Pesan:</span>
+                                                                            {!! $order['pickup']['catatanAdmin'] !!}
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            @else
+                                                                <span class="rounded-full bg-amber-50 px-3 py-1 font-semibold text-amber-700 inline-block"><i class="fa-solid fa-clock mr-1"></i> Menunggu jadwal admin</span>
+                                                            @endif
+                                                        @else
+                                                            @if($order['shipment']['available'])
+                                                                <span class="rounded-full bg-green-50 px-3 py-1 font-semibold text-green-800 inline-block"><i class="fa-solid fa-truck-fast mr-1"></i> {{ $order['shipment']['kurir'] }} - {{ $order['shipment']['nomorResi'] }}</span>
+                                                            @else
+                                                                <span class="rounded-full bg-amber-50 px-3 py-1 font-semibold text-amber-700 inline-block">Menunggu pengiriman</span>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                    <button type="button" onclick="window.printCustomerInvoice('customer-invoice-order-{{ $order['id'] }}')" class="font-bold text-[#b47a22] transition hover:text-[#173121] self-start sm:self-auto shrink-0 mt-2 sm:mt-0">Simpan Invoice</button>
                                                 </div>
                                             </article>
                                             @include('customer.partials.order-invoice-print', ['order' => $order, 'invoiceId' => 'customer-invoice-order-'.$order['id']])
