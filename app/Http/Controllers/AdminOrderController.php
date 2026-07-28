@@ -22,9 +22,13 @@ class AdminOrderController extends Controller
             ]);
         }
 
-        if ($validated['status_order'] === 'dikirim' && ! $order->sudahDikirim()) {
+        if ($validated['status_order'] === 'dikirim' && ! $order->siapDiambilAtauDikirim()) {
+            $msg = $order->isAmbilDiTempat()
+                ? 'Atur tanggal dan waktu pengambilan terlebih dahulu sebelum mengubah status menjadi siap diambil.'
+                : 'Isi kurir dan nomor resi transaksi sebelum mengubah status menjadi dikirim.';
+
             return redirect()->back()->withErrors([
-                'status_order' => 'Isi kurir dan nomor resi transaksi sebelum mengubah status menjadi dikirim.',
+                'status_order' => $msg,
             ]);
         }
 
@@ -90,6 +94,47 @@ class AdminOrderController extends Controller
 
         return redirect()->back()
             ->with('order_success', 'Kurir dan nomor resi transaksi berhasil disimpan.');
+    }
+
+    public function updateJadwalAmbil(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'tanggal_ambil' => ['required', 'date'],
+            'catatan_admin' => ['nullable', 'string', 'max:1000'],
+        ], [
+            'tanggal_ambil.required' => 'Tanggal dan waktu pengambilan wajib diisi.',
+            'tanggal_ambil.date' => 'Format tanggal dan waktu pengambilan tidak valid.',
+            'catatan_admin.max' => 'Catatan maksimal 1000 karakter.',
+        ]);
+
+        $order = Order::findOrFail($id);
+
+        if (! $order->isOfflinePayment() && $order->payment_status !== 'paid') {
+            return redirect()->back()->withErrors([
+                'jadwal_ambil' => 'Menunggu konfirmasi pembayaran online sebelum jadwal pengambilan bisa diinput.',
+            ]);
+        }
+
+        if ($order->status_order === 'dibatalkan') {
+            return redirect()->back()->withErrors([
+                'jadwal_ambil' => 'Pesanan yang sudah dibatalkan tidak bisa diatur jadwal pengambilannya.',
+            ]);
+        }
+
+        $order->update([
+            'tanggal_ambil' => $validated['tanggal_ambil'],
+            'catatan_admin' => filled($validated['catatan_admin']) ? trim($validated['catatan_admin']) : null,
+            'admin_pengiriman_id' => Auth::id(),
+        ]);
+
+        if (! in_array($order->status_order, ['selesai', 'dibatalkan'], true)) {
+            $order->update([
+                'status_order' => 'dikirim',
+            ]);
+        }
+
+        return redirect()->back()
+            ->with('order_success', 'Jadwal pengambilan dan catatan berhasil disimpan.');
     }
 
     public function destroy($id)

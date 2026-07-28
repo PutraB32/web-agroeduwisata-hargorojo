@@ -33,6 +33,8 @@ class Order extends Model
         'nomor_resi',
         'status_pengiriman',
         'tanggal_dikirim',
+        'tanggal_ambil',
+        'catatan_admin',
         'admin_pengiriman_id',
         'payment_status',
         'payment_type',
@@ -51,6 +53,7 @@ class Order extends Model
         'expired_at' => 'datetime',
         'canceled_at' => 'datetime',
         'tanggal_dikirim' => 'datetime',
+        'tanggal_ambil' => 'datetime',
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
@@ -130,7 +133,7 @@ class Order extends Model
         return match ($this->status_order ?? 'pending') {
             'pending' => 'Menunggu Proses',
             'diproses' => 'Diproses',
-            'dikirim' => 'Dikirim',
+            'dikirim' => $this->isAmbilDiTempat() ? 'Siap Diambil' : 'Dikirim',
             'selesai' => 'Selesai',
             'dibatalkan' => 'Dibatalkan',
             default => ucfirst((string) $this->status_order),
@@ -188,6 +191,30 @@ class Order extends Model
     public function sudahDikirim(): bool
     {
         return filled($this->kurir) && filled($this->nomor_resi);
+    }
+
+    public function isAmbilDiTempat(): bool
+    {
+        return $this->metode_penerimaan === self::METODE_AMBIL_DI_TEMPAT;
+    }
+
+    public function isCod(): bool
+    {
+        return $this->metode_penerimaan === self::METODE_COD_BAYAR_DI_TEMPAT;
+    }
+
+    public function punyaJadwalAmbil(): bool
+    {
+        return filled($this->tanggal_ambil);
+    }
+
+    public function siapDiambilAtauDikirim(): bool
+    {
+        if ($this->isAmbilDiTempat()) {
+            return $this->punyaJadwalAmbil();
+        }
+
+        return $this->sudahDikirim();
     }
 
     public function orderDetails()
