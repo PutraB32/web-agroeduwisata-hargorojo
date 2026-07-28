@@ -212,61 +212,124 @@
                     </div>
                 </div>
 
-                <div class="mb-6 rounded-xl border border-green-200/70 bg-green-50/60 p-4">
-                    <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
-                        <div>
-                            <p class="text-primary font-bold text-sm"><i class="fas fa-truck mr-1"></i> Pengiriman Transaksi</p>
-                            <p class="mt-1 text-xs text-green-800/80">Satu kurir dan satu nomor resi berlaku untuk semua barang di pesanan ini.</p>
-                            @if($order->punya_resi)
-                                <div class="mt-3 flex flex-wrap gap-2 text-xs">
-                                    <span class="inline-flex rounded-full border border-green-200/80 bg-white/80 px-3 py-1 font-bold text-green-700">{{ $order->kurir }}</span>
-                                    <span class="inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 font-bold text-green-700">{{ $order->status_pengiriman_label }}</span>
-                                    @if($order->tanggal_dikirim)
-                                        <span class="inline-flex rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-500">{{ $order->tanggal_dikirim->format('d M Y, H:i') }}</span>
-                                    @endif
-                                </div>
-                            @endif
+                @if($order->isAmbilDiTempat())
+                    <div class="mb-6 rounded-xl border border-amber-200/70 bg-amber-50/60 p-4">
+                        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                            <div>
+                                <p class="text-amber-900 font-bold text-sm"><i class="fas fa-store mr-1"></i> Jadwal & Komunikasi Pengambilan</p>
+                                <p class="mt-1 text-xs text-amber-800/80">Tentukan tanggal dan waktu pengambilan serta catatan instruksi untuk pembeli.</p>
+                                @if($order->punya_jadwal_ambil)
+                                    <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                                        <span class="inline-flex rounded-full border border-amber-200 bg-amber-100 px-3 py-1 font-bold text-amber-900">
+                                            <i class="fas fa-calendar-check mr-1"></i>
+                                            {{ $order->tanggal_ambil->format('d M Y, H:i') }} WIB
+                                        </span>
+                                        @if($order->catatan_admin)
+                                            <span class="inline-flex rounded-full border border-amber-200 bg-white px-3 py-1 text-amber-800">
+                                                {{ $order->catatan_admin }}
+                                            </span>
+                                        @endif
+                                    </div>
+                                @endif
+                            </div>
                         </div>
-                    </div>
 
-                    @if($order->boleh_input_pengiriman && ($order->status_order ?? 'pending') !== 'dibatalkan')
-                        <form action="{{ route('admin.order.update_pengiriman', $order->id) }}" method="POST" class="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_auto] md:items-end">
-                            @csrf
-                            @method('PUT')
-                            <div>
-                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Kurir</label>
-                                <input
-                                    type="text"
-                                    name="kurir"
-                                    value="{{ old('kurir', $order->kurir) }}"
-                                    placeholder="Contoh: JNE, J&T, Pos Indonesia, SiCepat"
-                                    class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
-                                    required
-                                >
+                        @if($order->boleh_input_pengiriman && ($order->status_order ?? 'pending') !== 'dibatalkan')
+                            <form action="{{ route('admin.order.update_jadwal_ambil', $order->id) }}" method="POST" class="mt-4 grid gap-3">
+                                @csrf
+                                @method('PUT')
+                                <div class="grid gap-3 md:grid-cols-2">
+                                    <div>
+                                        <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-amber-900">Tanggal & Waktu Pengambilan</label>
+                                        <input
+                                            type="datetime-local"
+                                            name="tanggal_ambil"
+                                            value="{{ old('tanggal_ambil', $order->tanggal_ambil?->format('Y-m-d\TH:i')) }}"
+                                            class="w-full rounded-lg border border-amber-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-800"
+                                            required
+                                        >
+                                    </div>
+                                    <div>
+                                        <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-amber-900">Catatan untuk Pembeli (Opsional)</label>
+                                        <textarea
+                                            name="catatan_admin"
+                                            rows="2"
+                                            placeholder="Contoh: Ambil di Rumah Produksi, Maps: https://... atau Hub WA: 0812..."
+                                            class="w-full rounded-lg border border-amber-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-amber-800 focus:outline-none focus:ring-2 focus:ring-amber-800 resize-none"
+                                        >{{ old('catatan_admin', $order->catatan_admin) }}</textarea>
+                                    </div>
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="submit" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-amber-800 px-4 text-sm font-bold text-white shadow transition-colors hover:bg-amber-900">
+                                        <i class="fas fa-save"></i>
+                                        {{ $order->punya_jadwal_ambil ? 'Update Jadwal' : 'Simpan Jadwal' }}
+                                    </button>
+                                </div>
+                            </form>
+                        @else
+                            <div class="mt-4 rounded-lg border border-yellow-100 bg-yellow-50 px-3 py-2 text-sm text-yellow-800">
+                                <i class="fas fa-clock mr-1"></i>
+                                {{ ($order->status_order ?? 'pending') === 'dibatalkan' ? 'Pesanan dibatalkan.' : 'Menunggu pembayaran sebelum input jadwal.' }}
                             </div>
+                        @endif
+                    </div>
+                @else
+                    <div class="mb-6 rounded-xl border border-green-200/70 bg-green-50/60 p-4">
+                        <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
                             <div>
-                                <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Nomor Resi</label>
-                                <input
-                                    type="text"
-                                    name="nomor_resi"
-                                    value="{{ old('nomor_resi', $order->nomor_resi) }}"
-                                    placeholder="Masukkan nomor resi"
-                                    class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
-                                    required
-                                >
+                                <p class="text-primary font-bold text-sm"><i class="fas fa-truck mr-1"></i> Pengiriman Transaksi</p>
+                                <p class="mt-1 text-xs text-green-800/80">Satu kurir dan satu nomor resi berlaku untuk semua barang di pesanan ini.</p>
+                                @if($order->punya_resi)
+                                    <div class="mt-3 flex flex-wrap gap-2 text-xs">
+                                        <span class="inline-flex rounded-full border border-green-200/80 bg-white/80 px-3 py-1 font-bold text-green-700">{{ $order->kurir }}</span>
+                                        <span class="inline-flex rounded-full border border-green-200 bg-green-50 px-3 py-1 font-bold text-green-700">{{ $order->status_pengiriman_label }}</span>
+                                        @if($order->tanggal_dikirim)
+                                            <span class="inline-flex rounded-full border border-gray-200 bg-white px-3 py-1 text-gray-500">{{ $order->tanggal_dikirim->format('d M Y, H:i') }}</span>
+                                        @endif
+                                    </div>
+                                @endif
                             </div>
-                            <button type="submit" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-green-800 px-4 text-sm font-bold text-white shadow transition-colors hover:bg-green-900">
-                                <i class="fas fa-save"></i>
-                                {{ $order->punya_resi ? 'Update Resi' : 'Simpan Resi' }}
-                            </button>
-                        </form>
-                    @else
-                        <div class="mt-4 rounded-lg border border-yellow-100 bg-yellow-50 px-3 py-2 text-sm text-yellow-800">
-                            <i class="fas fa-clock mr-1"></i>
-                            {{ ($order->status_order ?? 'pending') === 'dibatalkan' ? 'Pesanan dibatalkan.' : 'Menunggu pembayaran sebelum input resi.' }}
                         </div>
-                    @endif
-                </div>
+
+                        @if($order->boleh_input_pengiriman && ($order->status_order ?? 'pending') !== 'dibatalkan')
+                            <form action="{{ route('admin.order.update_pengiriman', $order->id) }}" method="POST" class="mt-4 grid gap-3 md:grid-cols-[1fr_1fr_auto] md:items-end">
+                                @csrf
+                                @method('PUT')
+                                <div>
+                                    <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Kurir</label>
+                                    <input
+                                        type="text"
+                                        name="kurir"
+                                        value="{{ old('kurir', $order->kurir) }}"
+                                        placeholder="Contoh: JNE, J&T, Pos Indonesia, SiCepat"
+                                        class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+                                        required
+                                    >
+                                </div>
+                                <div>
+                                    <label class="mb-1 block text-[11px] font-bold uppercase tracking-widest text-green-900">Nomor Resi</label>
+                                    <input
+                                        type="text"
+                                        name="nomor_resi"
+                                        value="{{ old('nomor_resi', $order->nomor_resi) }}"
+                                        placeholder="Masukkan nomor resi"
+                                        class="w-full rounded-lg border border-green-200/80 bg-white/80 px-3 py-2 text-sm text-gray-800 focus:border-green-800 focus:outline-none focus:ring-2 focus:ring-green-800"
+                                        required
+                                    >
+                                </div>
+                                <button type="submit" class="inline-flex h-10 items-center justify-center gap-2 rounded-lg bg-green-800 px-4 text-sm font-bold text-white shadow transition-colors hover:bg-green-900">
+                                    <i class="fas fa-save"></i>
+                                    {{ $order->punya_resi ? 'Update Resi' : 'Simpan Resi' }}
+                                </button>
+                            </form>
+                        @else
+                            <div class="mt-4 rounded-lg border border-yellow-100 bg-yellow-50 px-3 py-2 text-sm text-yellow-800">
+                                <i class="fas fa-clock mr-1"></i>
+                                {{ ($order->status_order ?? 'pending') === 'dibatalkan' ? 'Pesanan dibatalkan.' : 'Menunggu pembayaran sebelum input resi.' }}
+                            </div>
+                        @endif
+                    </div>
+                @endif
 
                 <!-- Item List -->
                 <p class="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Daftar Barang</p>
@@ -309,8 +372,8 @@
                         <div class="flex flex-col sm:flex-row gap-3">
                             <select name="status_order" class="flex-1 bg-white text-gray-800 border border-green-200 rounded-lg py-2 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-green-800">
                                 <option value="diproses" {{ ($order->status_order ?? 'pending') === 'diproses' ? 'selected' : '' }}>Diproses</option>
-                                <option value="dikirim" {{ ($order->status_order ?? 'pending') === 'dikirim' ? 'selected' : '' }} {{ ! $order->punya_resi && ($order->status_order ?? 'pending') !== 'dikirim' ? 'disabled' : '' }}>
-                                    Dikirim{{ ! $order->punya_resi ? ' (isi resi dulu)' : '' }}
+                                <option value="dikirim" {{ ($order->status_order ?? 'pending') === 'dikirim' ? 'selected' : '' }} {{ ! $order->siapDiambilAtauDikirim() && ($order->status_order ?? 'pending') !== 'dikirim' ? 'disabled' : '' }}>
+                                    {{ $order->isAmbilDiTempat() ? 'Siap Diambil' : 'Dikirim' }}{{ ! $order->siapDiambilAtauDikirim() ? ($order->isAmbilDiTempat() ? ' (atur jadwal dulu)' : ' (isi resi dulu)') : '' }}
                                 </option>
                                 <option value="selesai" {{ ($order->status_order ?? 'pending') === 'selesai' ? 'selected' : '' }}>Selesai</option>
                                 <option value="dibatalkan" {{ ($order->status_order ?? 'pending') === 'dibatalkan' ? 'selected' : '' }}>Dibatalkan</option>
@@ -319,8 +382,10 @@
                                 <i class="fas fa-save mr-1"></i> Simpan
                             </button>
                         </div>
-                        @unless($order->punya_resi)
-                            <p class="mt-2 text-xs text-green-800">Status Dikirim akan otomatis aktif setelah transaksi memiliki kurir dan nomor resi.</p>
+                        @unless($order->siapDiambilAtauDikirim())
+                            <p class="mt-2 text-xs text-green-800">
+                                {{ $order->isAmbilDiTempat() ? 'Status Siap Diambil akan otomatis aktif setelah tanggal dan waktu pengambilan disimpan.' : 'Status Dikirim akan otomatis aktif setelah transaksi memiliki kurir dan nomor resi.' }}
+                            </p>
                         @endunless
                     </form>
                 @else
