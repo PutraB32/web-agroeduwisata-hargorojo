@@ -34,28 +34,56 @@
                 </p>
             </div>
 
-            @if($order['shipment']['available'])
-                <div class="mt-4 w-full max-w-md rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm text-sky-800 shadow-sm">
-                    <div class="flex flex-wrap items-center gap-2">
-                        <span class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-bold text-sky-700">
-                            <i class="fa-solid fa-truck-fast"></i>
-                            {{ $order['shipment']['kurir'] }}
-                        </span>
-                    </div>
-                    <p class="mt-3 break-all">
-                        <span class="font-bold">Nomor resi:</span>
-                        {{ $order['shipment']['nomorResi'] }}
-                    </p>
-                    @if($order['shipment']['hasTanggalDikirim'])
-                        <p class="mt-1 text-xs text-sky-700/80">
-                            Dikirim pada {{ $order['shipment']['tanggalDikirimLabel'] }}
+            @if($order['isAmbilDiTempat'])
+                @if($order['pickup']['available'])
+                    <div class="mt-4 w-full max-w-md rounded-2xl border border-amber-200 bg-amber-50/70 px-4 py-3 text-sm text-amber-900 shadow-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-1 text-xs font-bold text-amber-800 border border-amber-200/80">
+                                <i class="fa-solid fa-store"></i>
+                                Siap Diambil
+                            </span>
+                        </div>
+                        <p class="mt-3 font-semibold text-amber-950">
+                            <i class="fa-solid fa-calendar-check mr-1.5 text-amber-700"></i>
+                            Jadwal: {{ $order['pickup']['tanggalAmbilLabel'] }}
                         </p>
-                    @endif
-                </div>
+                        @if($order['pickup']['hasCatatanAdmin'])
+                            <div class="mt-2 rounded-xl bg-white/90 p-2.5 text-xs text-amber-900 border border-amber-200/60 leading-relaxed">
+                                <span class="font-bold block mb-0.5 text-amber-950"><i class="fa-solid fa-message mr-1"></i> Pesan dari Admin:</span>
+                                {!! $order['pickup']['catatanAdmin'] !!}
+                            </div>
+                        @endif
+                    </div>
+                @else
+                    <p class="mt-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-800">
+                        <i class="fa-solid fa-clock mr-1.5"></i>
+                        Jadwal pengambilan sedang disiapkan oleh Admin
+                    </p>
+                @endif
             @else
-                <p class="mt-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-700">
-                    Resi transaksi belum tersedia
-                </p>
+                @if($order['shipment']['available'])
+                    <div class="mt-4 w-full max-w-md rounded-2xl border border-sky-100 bg-sky-50 px-4 py-3 text-sm text-sky-800 shadow-sm">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <span class="inline-flex items-center gap-1 rounded-full bg-white px-3 py-1 text-xs font-bold text-sky-700">
+                                <i class="fa-solid fa-truck-fast"></i>
+                                {{ $order['shipment']['kurir'] }}
+                            </span>
+                        </div>
+                        <p class="mt-3 break-all">
+                            <span class="font-bold">Nomor resi:</span>
+                            {{ $order['shipment']['nomorResi'] }}
+                        </p>
+                        @if($order['shipment']['hasTanggalDikirim'])
+                            <p class="mt-1 text-xs text-sky-700/80">
+                                Dikirim pada {{ $order['shipment']['tanggalDikirimLabel'] }}
+                            </p>
+                        @endif
+                    </div>
+                @else
+                    <p class="mt-4 inline-flex rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-[11px] font-bold text-amber-700">
+                        Resi transaksi belum tersedia
+                    </p>
+                @endif
             @endif
         </div>
 
